@@ -1,5 +1,7 @@
 import java.net.URLEncoder;
 import org.json.*;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 public class Directions
 {
@@ -17,11 +19,27 @@ public class Directions
 	private	byte[] directionsRaw = {};
 	private JSONObject directionsJSON;
 
+	private JSONArray  routes;
+	private JSONObject route;
+	private JSONArray  legs;
+	private JSONObject leg;
+	private JSONArray  steps;
+	
+	private JSONObject step;
+	private String	   html;
+	private Document   doc;
+
+	private int	   currentDirection;
+	private String	   directions[];
+
+
 	/*
 	 * Constructor
 	 */
 	public Directions()
-	{}
+	{
+		currentDirection=0;
+	}
 
 	/*
 	 * setOrigin
@@ -74,10 +92,37 @@ public class Directions
 			
 			directionsRaw = HttpConnect.httpConnect( METHOD, url, headers, body );
 			directionsJSON = new JSONObject(new String(directionsRaw));
+			routes = (JSONArray)directionsJSON.get("routes");
+			route  = routes.getJSONObject(0);
+			legs   = (JSONArray)route.get("legs");
+			leg    = legs.getJSONObject(0);
+			steps  = (JSONArray)leg.get("steps");
+			
+			directions = new String[steps.length()];
+
+			for (int i=0; i<steps.length(); i++)
+			{
+				step = steps.getJSONObject(i);
+				html = (String)step.get("html_instructions");
+				doc = Jsoup.parse(html);
+				directions[i] = doc.text();
+				//System.out.println(doc.text());
+				//System.out.println(step.get("html_instructions"));
+			}
 
 		} catch (Exception ex)
 		{
 			System.out.println( ex ); System.exit( 1 );
+		}
+	}
+
+	public String getDirection()
+	{
+		if (currentDirection<directions.length)
+		{
+			return directions[currentDirection++];
+		} else {
+			return "You have reached your destination";
 		}
 	}
 
@@ -99,20 +144,12 @@ public class Directions
 		}
 		
 		System.out.println("Origin="+origin);
+		for (String d : directions)
+		{
+			System.out.println(d);
+		}
 		System.out.println("Destination="+destination);
 		
-		JSONArray  routes = (JSONArray)directionsJSON.get("routes");
-		JSONObject route  = routes.getJSONObject(0);
-		JSONArray  legs   = (JSONArray)route.get("legs");
-		JSONObject leg    = legs.getJSONObject(0);
-		JSONArray  steps  = (JSONArray)leg.get("steps");
-		JSONObject step;
-
-		for (int i=0; i<steps.length(); i++)
-		{
-			step = steps.getJSONObject(i);
-			System.out.println(step.get("html_instructions"));
-		}
 	
 	}
 
