@@ -1,4 +1,5 @@
 import java.net.URLEncoder;
+import org.json.*;
 
 public class Directions
 {
@@ -12,8 +13,9 @@ public class Directions
 	/* Navigation Variables */
 	private	String origin;
 	private	String destination;
-	private	byte[] rawDirections = {};
-	//private      String region;
+	private JSONObject myJSON;
+	private	byte[] directionsRaw = {};
+	private JSONObject directionsJSON;
 
 	/*
 	 * Constructor
@@ -48,6 +50,9 @@ public class Directions
 		destination = newDest;
 	}
 
+	/* refreshDirections
+	 * Connects to Google and updates route with latest origin and destination
+	 */
 	public void refreshDirections()
 	{
 		try
@@ -67,9 +72,9 @@ public class Directions
 			final byte[] body = {};
 			final String[][] headers = {};
 			
-			rawDirections = HttpConnect.httpConnect( METHOD, url, headers, body );
-			System.out.println(rawDirections);
-		
+			directionsRaw = HttpConnect.httpConnect( METHOD, url, headers, body );
+			directionsJSON = new JSONObject(new String(directionsRaw));
+
 		} catch (Exception ex)
 		{
 			System.out.println( ex ); System.exit( 1 );
@@ -77,20 +82,38 @@ public class Directions
 	}
 
 	public void printOut()
-	{
-		System.out.println("Origin="+origin);
-		System.out.println("Destination="+destination);
-		System.out.println("Directions:");
-		if (rawDirections.length == 0)
+	{	
+		if (false)
 		{
-			System.out.println("No directions");
-		} else
-		{
-			for (int i=0; i < rawDirections.length; i++)
+			System.out.println("Full Directions:");
+			if (directionsRaw.length == 0)
 			{
-				System.out.print( (char) rawDirections[i]);
+				System.out.println("No directions");
+			} else
+			{
+				for (int i=0; i < directionsRaw.length; i++)
+				{
+					System.out.print( (char) directionsRaw[i]);
+				}
 			}
 		}
+		
+		System.out.println("Origin="+origin);
+		System.out.println("Destination="+destination);
+		
+		JSONArray  routes = (JSONArray)directionsJSON.get("routes");
+		JSONObject route  = routes.getJSONObject(0);
+		JSONArray  legs   = (JSONArray)route.get("legs");
+		JSONObject leg    = legs.getJSONObject(0);
+		JSONArray  steps  = (JSONArray)leg.get("steps");
+		JSONObject step;
+
+		for (int i=0; i<steps.length(); i++)
+		{
+			step = steps.getJSONObject(i);
+			System.out.println(step.get("html_instructions"));
+		}
+	
 	}
 
 	public static void main(String args[])
