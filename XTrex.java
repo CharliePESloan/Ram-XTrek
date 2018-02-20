@@ -21,12 +21,12 @@ public class XTrex extends JFrame {
     ImageIcon mapIconSelected = new ImageIcon("MapButtonSelected.png");
   ImageIcon satelliteIcon = new ImageIcon("SatelliteButton.png");
     ImageIcon satelliteIconSelected = new ImageIcon("SatelliteButtonSelected.png");
-  ImageIcon tripCompIcon = new ImageIcon("TripComputerButton.png");
-    ImageIcon tripCompIconSelected = new ImageIcon("TripComputerButtonSelected.png");
+  ImageIcon tripCompIcon = new ImageIcon("TripCompButton.png");
+    ImageIcon tripCompIconSelected = new ImageIcon("TripCompButtonSelected.png");
   ImageIcon speechIcon = new ImageIcon("SpeechButton.png");
     ImageIcon speechIconSelected = new ImageIcon("SpeechButtonSelected.png");
-  ImageIcon aboutIcon = new ImageIcon("AboutButton.png");
-    ImageIcon aboutIconSelected = new ImageIcon("AboutButtonSelected.png");
+  ImageIcon aboutIcon = new ImageIcon("InfoButton.png");
+    ImageIcon aboutIconSelected = new ImageIcon("InfoButtonSelected.png");
 
   final DisplayButton WhereToButton      = new DisplayButton();
   final DisplayButton MapButton          = new DisplayButton();
@@ -80,20 +80,20 @@ public class XTrex extends JFrame {
 
   public XTrex() {
     setTitle( "XTrex" );
-    setContentPane( new JLabel( new ImageIcon( "Capture_edit.jpeg" ) ) );
+    setContentPane( new JLabel( new ImageIcon( "XTrex Background.png" ) ) );
     setLayout( null );
       
-    WhereToButton.setBounds(105, 310, 120, 100); add(WhereToButton);
+    WhereToButton.setBounds(95, 312, 125, 93); add(WhereToButton);
       WhereToButton.setIcon(whereToIcon);
-    MapButton.setBounds(105,410,120,100);add(MapButton);
+    MapButton.setBounds(95,415,125,93);add(MapButton);
       MapButton.setIcon(mapIconSelected);
-    SatelliteButton.setBounds(105,510,120,100); add(SatelliteButton);
+    SatelliteButton.setBounds(95,518,125,93); add(SatelliteButton);
       SatelliteButton.setIcon(satelliteIcon);
-    TripComputerButton.setBounds(229, 310, 120, 100); add(TripComputerButton);
+    TripComputerButton.setBounds(226, 312, 125, 93); add(TripComputerButton);
       TripComputerButton.setIcon(tripCompIcon);
-    SpeechButton.setBounds(231,411,116,97); add(SpeechButton);
+    SpeechButton.setBounds(226,415,125,93); add(SpeechButton);
       SpeechButton.setIcon(speechIcon);
-    AboutButton.setBounds(231,510,117,98); add(AboutButton);
+    AboutButton.setBounds(226,518,125,93); add(AboutButton);
       AboutButton.setIcon(aboutIcon);
     
     PlusButton.setBounds(9, 102, 30, 68);add(PlusButton);
