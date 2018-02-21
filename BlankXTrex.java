@@ -39,7 +39,7 @@ import java.awt.Dimension;
       
       public BlankXTrex() {
         setTitle( "XTrex" );
-        setContentPane( new JLabel( new ImageIcon( "XTrex Background.png" ) ) );
+        //setContentPane( new JLabel( new ImageIcon( "XTrex Background.png" ) ) );
         setLayout( null );
         
         /**  

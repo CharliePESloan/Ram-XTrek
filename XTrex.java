@@ -104,11 +104,15 @@ public class XTrex extends BlankXTrex {
             if(MapButton.getIcon() == mapIconSelected){
                 System.out.println("Redirecting to Map page");
                 dispose();
+        
                 new MapFrame();
+                
+                
             } else if(WhereToButton.getIcon() == whereToIconSelected){
                 System.out.println("Redirecting to Where To page");
                 dispose();
                 new WhereToFrame();
+                
             } else if(TripComputerButton.getIcon() == tripCompIconSelected){
                 System.out.println("Redirecting to Trip Computer page");
             } else if(SpeechButton.getIcon() == speechIconSelected){
