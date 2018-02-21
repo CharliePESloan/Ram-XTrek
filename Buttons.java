@@ -6,72 +6,17 @@ import javax.swing.*;
  * @author User
  */
 
-//iterate over an array list full of letters to move highlighted keyboard
-//highlight are buttons only rest are images
-//ignore the images
 public class Buttons extends JFrame {
     
     public String textDisplay = "";
     //array of buttons
-    ImageIcon[] letter = new ImageIcon[28]; 
+    ImageIcon[] letter = new ImageIcon[26];
+    ImageIcon[] hLetter = new ImageIcon[26];
     static String abcd = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-/*
-    ImageIcon A = new ImageIcon("TestA.png");
-    ImageIcon B = new ImageIcon("TestB.png");
-    ImageIcon C = new ImageIcon("TestC.png");
-    ImageIcon D = new ImageIcon("TestD.png");
-    ImageIcon E = new ImageIcon("TestE.png");
-    ImageIcon F = new ImageIcon("TestF.png");
-    ImageIcon G = new ImageIcon("TestG.png");
-    ImageIcon H = new ImageIcon("TestH.png");
-    ImageIcon I = new ImageIcon("TestI.png");
-    ImageIcon J = new ImageIcon("TestJ.png");
-    ImageIcon K = new ImageIcon("TestK.png");
-    ImageIcon L = new ImageIcon("TestL.png");
-    ImageIcon M = new ImageIcon("TestM.png");
-    ImageIcon N = new ImageIcon("TestN.png");
-    ImageIcon O = new ImageIcon("TestO.png");
-    ImageIcon P = new ImageIcon("TestP.png");
-    ImageIcon Q = new ImageIcon("TestQ.png");
-    ImageIcon R = new ImageIcon("TestR.png");
-    ImageIcon S = new ImageIcon("TestS.png");
-    ImageIcon T = new ImageIcon("TestT.png");
-    ImageIcon U = new ImageIcon("TestU.png");
-    ImageIcon V = new ImageIcon("TestV.png");
-    ImageIcon W = new ImageIcon("TestW.png");
-    ImageIcon X = new ImageIcon("TestX.png");
-    ImageIcon Y = new ImageIcon("TestY.png");
-    ImageIcon Z = new ImageIcon("TestZ.png");
-  */  
+    
+    
     ImageIcon SPACE = new ImageIcon("Space.png");
     ImageIcon RIGHT = new ImageIcon("Right.png");
-    
-    ImageIcon HA = new ImageIcon("HTestA.png");
-    ImageIcon HB = new ImageIcon("HTestB.png");
-    ImageIcon HC = new ImageIcon("HTestC.png");
-    ImageIcon HD = new ImageIcon("HTestD.png");
-    ImageIcon HE = new ImageIcon("HTestE.png");
-    ImageIcon HF = new ImageIcon("HTestF.png");
-    ImageIcon HG = new ImageIcon("HTestG.png");
-    ImageIcon HH = new ImageIcon("HTestH.png");
-    ImageIcon HI = new ImageIcon("HTestI.png");
-    ImageIcon HJ = new ImageIcon("HTestJ.png");
-    ImageIcon HK = new ImageIcon("HTestK.png");
-    ImageIcon HL = new ImageIcon("HTestL.png");
-    ImageIcon HM = new ImageIcon("HTestM.png");
-    ImageIcon HN = new ImageIcon("HTestN.png");
-    ImageIcon HO = new ImageIcon("HTestO.png");
-    ImageIcon HP = new ImageIcon("HTestP.png");
-    ImageIcon HQ = new ImageIcon("HTestQ.png");
-    ImageIcon HR = new ImageIcon("HTestR.png");
-    ImageIcon HS = new ImageIcon("HTestS.png");
-    ImageIcon HT = new ImageIcon("HTestT.png");
-    ImageIcon HU = new ImageIcon("HTestU.png");
-    ImageIcon HV = new ImageIcon("HTestV.png");
-    ImageIcon HW = new ImageIcon("HTestW.png");
-    ImageIcon HX = new ImageIcon("HTestX.png");
-    ImageIcon HY = new ImageIcon("HTestY.png");
-    ImageIcon HZ = new ImageIcon("HTestZ.png");
     
     ImageIcon HSPACE = new ImageIcon("HSpace.png");
     ImageIcon HRIGHT = new ImageIcon("HRight.png");
@@ -178,6 +123,9 @@ public class Buttons extends JFrame {
         for(int i=0; i<26; i++) {
             letter[i] = new ImageIcon("Test" + abcd.charAt(i) + ".png");
         }
+        for(int i=0; i<26; i++) {
+            hLetter[i] = new ImageIcon("HTest" + abcd.charAt(i) + ".png");
+        }
         
         setTitle("GPS");
         setContentPane(new JLabel( new ImageIcon("border.png") ) );
@@ -227,107 +175,107 @@ public class Buttons extends JFrame {
         
         buttonPlus.addMouseListener(new MouseAdapter() {
         public void mouseClicked( MouseEvent me) {
-            if (buttonB.getIcon() == HB){
+            if (buttonB.getIcon() == hLetter[1]){
                 buttonB.setIcon(letter[1]);
-                buttonC.setIcon(HC);
+                buttonC.setIcon(hLetter[2]);
             }
-            else if(buttonA.getIcon() == HA) {
+            else if(buttonA.getIcon() == hLetter[0]) {
                 buttonA.setIcon(letter[0]);
-                buttonB.setIcon(HB);
+                buttonB.setIcon(hLetter[1]);
             }
-            else if(buttonC.getIcon() == HC) {
+            else if(buttonC.getIcon() == hLetter[2]) {
                 buttonC.setIcon(letter[2]);
-                buttonD.setIcon(HD);
+                buttonD.setIcon(hLetter[3]);
             }
-            else if(buttonD.getIcon() == HD) {
+            else if(buttonD.getIcon() == hLetter[3]) {
                 buttonD.setIcon(letter[3]);
-                buttonE.setIcon(HE);
+                buttonE.setIcon(hLetter[4]);
             }
-            else if(buttonE.getIcon() == HE) {
+            else if(buttonE.getIcon() == hLetter[4]) {
                 buttonE.setIcon(letter[4]);
-                buttonF.setIcon(HF);
+                buttonF.setIcon(hLetter[5]);
             }
-            else if(buttonF.getIcon() == HF) {
+            else if(buttonF.getIcon() == hLetter[5]) {
                 buttonF.setIcon(letter[5]);
-                buttonG.setIcon(HG);
+                buttonG.setIcon(hLetter[6]);
             }
-            else if(buttonG.getIcon() == HG) {
+            else if(buttonG.getIcon() == hLetter[6]) {
                 buttonG.setIcon(letter[6]);
-                buttonH.setIcon(HH);
+                buttonH.setIcon(hLetter[7]);
             }
-            else if(buttonH.getIcon() == HH) {
+            else if(buttonH.getIcon() == hLetter[7]) {
                 buttonH.setIcon(letter[7]);
-                buttonI.setIcon(HI);
+                buttonI.setIcon(hLetter[8]);
             }
-            else if(buttonI.getIcon() == HI) {
+            else if(buttonI.getIcon() == hLetter[8]) {
                 buttonI.setIcon(letter[8]);
-                buttonJ.setIcon(HJ);
+                buttonJ.setIcon(hLetter[9]);
             }
-            else if(buttonJ.getIcon() == HJ) {
+            else if(buttonJ.getIcon() == hLetter[9]) {
                 buttonJ.setIcon(letter[9]);
-                buttonK.setIcon(HK);
+                buttonK.setIcon(hLetter[10]);
             }
-            else if(buttonK.getIcon() == HK) {
+            else if(buttonK.getIcon() == hLetter[10]) {
                 buttonK.setIcon(letter[10]);
-                buttonL.setIcon(HL);
+                buttonL.setIcon(hLetter[11]);
             }
-            else if(buttonL.getIcon() == HL) {
+            else if(buttonL.getIcon() == hLetter[11]) {
                 buttonL.setIcon(letter[11]);
-                buttonM.setIcon(HM);
+                buttonM.setIcon(hLetter[12]);
             }
-            else if(buttonM.getIcon() == HM) {
+            else if(buttonM.getIcon() == hLetter[12]) {
                 buttonM.setIcon(letter[12]);
-                buttonN.setIcon(HN);
+                buttonN.setIcon(hLetter[13]);
             }
-            else if(buttonN.getIcon() == HN) {
+            else if(buttonN.getIcon() == hLetter[13]) {
                 buttonN.setIcon(letter[13]);
-                buttonO.setIcon(HO);
+                buttonO.setIcon(hLetter[14]);
             }
-            else if(buttonO.getIcon() == HO) {
+            else if(buttonO.getIcon() == hLetter[14]) {
                 buttonO.setIcon(letter[14]);
-                buttonP.setIcon(HP);
+                buttonP.setIcon(hLetter[15]);
             }
-            else if(buttonP.getIcon() == HP) {
+            else if(buttonP.getIcon() == hLetter[15]) {
                 buttonP.setIcon(letter[15]);
-                buttonQ.setIcon(HQ);
+                buttonQ.setIcon(hLetter[16]);
             }
-            else if(buttonQ.getIcon() == HQ) {
+            else if(buttonQ.getIcon() == hLetter[16]) {
                 buttonQ.setIcon(letter[16]);
-                buttonR.setIcon(HR);
+                buttonR.setIcon(hLetter[17]);
             }
-            else if(buttonR.getIcon() == HR) {
+            else if(buttonR.getIcon() == hLetter[17]) {
                 buttonR.setIcon(letter[17]);
-                buttonS.setIcon(HS);
+                buttonS.setIcon(hLetter[18]);
             }
-            else if(buttonS.getIcon() == HS) {
+            else if(buttonS.getIcon() == hLetter[18]) {
                 buttonS.setIcon(letter[18]);
-                buttonT.setIcon(HT);
+                buttonT.setIcon(hLetter[19]);
             }
-            else if(buttonT.getIcon() == HT) {
+            else if(buttonT.getIcon() == hLetter[19]) {
                 buttonT.setIcon(letter[19]);
-                buttonU.setIcon(HU);
+                buttonU.setIcon(hLetter[20]);
             }
-            else if(buttonU.getIcon() == HU) {
+            else if(buttonU.getIcon() == hLetter[20]) {
                 buttonU.setIcon(letter[20]);
-                buttonV.setIcon(HV);
+                buttonV.setIcon(hLetter[21]);
             }
-            else if(buttonV.getIcon() == HV) {
+            else if(buttonV.getIcon() == hLetter[21]) {
                 buttonV.setIcon(letter[21]);
-                buttonW.setIcon(HW);
+                buttonW.setIcon(hLetter[22]);
             }
-            else if(buttonW.getIcon() == HW) {
+            else if(buttonW.getIcon() == hLetter[22]) {
                 buttonW.setIcon(letter[22]);
-                buttonX.setIcon(HX);
+                buttonX.setIcon(hLetter[23]);
             }
-            else if(buttonX.getIcon() == HX) {
+            else if(buttonX.getIcon() == hLetter[23]) {
                 buttonX.setIcon(letter[23]);
-                buttonY.setIcon(HY);
+                buttonY.setIcon(hLetter[24]);
             }
-            else if(buttonY.getIcon() == HY) {
+            else if(buttonY.getIcon() == hLetter[24]) {
                 buttonY.setIcon(letter[24]);
-                buttonZ.setIcon(HZ);
+                buttonZ.setIcon(hLetter[25]);
             }
-            else if(buttonZ.getIcon() == HZ) {
+            else if(buttonZ.getIcon() == hLetter[25]) {
                 buttonZ.setIcon(letter[25]);
                 buttonSpace.setIcon(HSPACE);
             }
@@ -337,123 +285,123 @@ public class Buttons extends JFrame {
             }
             else if(buttonRight.getIcon() == HRIGHT) {
                 buttonRight.setIcon(RIGHT);
-                buttonA.setIcon(HA);
+                buttonA.setIcon(hLetter[0]);
             }
             else {
-                buttonA.setIcon(HA);
+                buttonA.setIcon(hLetter[0]);
             }
         }
     });
         
         buttonMinus.addMouseListener( new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                if (buttonB.getIcon() == HB){
+                if (buttonB.getIcon() == hLetter[1]){
                 buttonB.setIcon(letter[1]);
-                buttonA.setIcon(HA);
+                buttonA.setIcon(hLetter[0]);
             }
-                else if(buttonA.getIcon() == HA) {
+                else if(buttonA.getIcon() == hLetter[0]) {
                 buttonA.setIcon(letter[0]);
                 buttonRight.setIcon(HRIGHT);
             }
-                else if(buttonC.getIcon() == HC) {
+                else if(buttonC.getIcon() == hLetter[2]) {
                 buttonC.setIcon(letter[2]);
-                buttonB.setIcon(HB);
+                buttonB.setIcon(hLetter[1]);
             }
-            else if(buttonD.getIcon() == HD) {
+            else if(buttonD.getIcon() == hLetter[3]) {
                 buttonD.setIcon(letter[3]);
-                buttonC.setIcon(HC);
+                buttonC.setIcon(hLetter[2]);
             }
-            else if(buttonE.getIcon() == HE) {
+            else if(buttonE.getIcon() == hLetter[4]) {
                 buttonE.setIcon(letter[4]);
-                buttonD.setIcon(HD);
+                buttonD.setIcon(hLetter[3]);
             }
-            else if(buttonF.getIcon() == HF) {
+            else if(buttonF.getIcon() == hLetter[5]) {
                 buttonF.setIcon(letter[5]);
-                buttonE.setIcon(HE);
+                buttonE.setIcon(hLetter[4]);
             }
-            else if(buttonG.getIcon() == HG) {
+            else if(buttonG.getIcon() == hLetter[6]) {
                 buttonG.setIcon(letter[6]);
-                buttonF.setIcon(HF);
+                buttonF.setIcon(hLetter[5]);
             }
-            else if(buttonH.getIcon() == HH) {
+            else if(buttonH.getIcon() == hLetter[7]) {
                 buttonH.setIcon(letter[7]);
-                buttonG.setIcon(HG);
+                buttonG.setIcon(hLetter[6]);
             }
-            else if(buttonI.getIcon() == HI) {
+            else if(buttonI.getIcon() == hLetter[8]) {
                 buttonI.setIcon(letter[8]);
-                buttonH.setIcon(HH);
+                buttonH.setIcon(hLetter[7]);
             }
-            else if(buttonJ.getIcon() == HJ) {
+            else if(buttonJ.getIcon() == hLetter[9]) {
                 buttonJ.setIcon(letter[9]);
-                buttonI.setIcon(HI);
+                buttonI.setIcon(hLetter[8]);
             }
-            else if(buttonK.getIcon() == HK) {
+            else if(buttonK.getIcon() == hLetter[10]) {
                 buttonK.setIcon(letter[10]);
-                buttonJ.setIcon(HJ);
+                buttonJ.setIcon(hLetter[9]);
             }
-            else if(buttonL.getIcon() == HL) {
+            else if(buttonL.getIcon() == hLetter[11]) {
                 buttonL.setIcon(letter[11]);
-                buttonK.setIcon(HK);
+                buttonK.setIcon(hLetter[10]);
             }
-            else if(buttonM.getIcon() == HM) {
+            else if(buttonM.getIcon() == hLetter[12]) {
                 buttonM.setIcon(letter[12]);
-                buttonL.setIcon(HL);
+                buttonL.setIcon(hLetter[11]);
             }
-            else if(buttonN.getIcon() == HN) {
+            else if(buttonN.getIcon() == hLetter[13]) {
                 buttonN.setIcon(letter[13]);
-                buttonM.setIcon(HM);
+                buttonM.setIcon(hLetter[12]);
             }
-            else if(buttonO.getIcon() == HO) {
+            else if(buttonO.getIcon() == hLetter[14]) {
                 buttonO.setIcon(letter[14]);
-                buttonN.setIcon(HN);
+                buttonN.setIcon(hLetter[13]);
             }
-            else if(buttonP.getIcon() == HP) {
+            else if(buttonP.getIcon() == hLetter[15]) {
                 buttonP.setIcon(letter[15]);
-                buttonO.setIcon(HO);
+                buttonO.setIcon(hLetter[14]);
             }
-            else if(buttonQ.getIcon() == HQ) {
+            else if(buttonQ.getIcon() == hLetter[16]) {
                 buttonQ.setIcon(letter[16]);
-                buttonP.setIcon(HP);
+                buttonP.setIcon(hLetter[15]);
             }
-            else if(buttonR.getIcon() == HR) {
+            else if(buttonR.getIcon() == hLetter[17]) {
                 buttonR.setIcon(letter[17]);
-                buttonQ.setIcon(HQ);
+                buttonQ.setIcon(hLetter[16]);
             }
-            else if(buttonS.getIcon() == HS) {
+            else if(buttonS.getIcon() == hLetter[18]) {
                 buttonS.setIcon(letter[18]);
-                buttonR.setIcon(HR);
+                buttonR.setIcon(hLetter[17]);
             }
-            else if(buttonT.getIcon() == HT) {
+            else if(buttonT.getIcon() == hLetter[19]) {
                 buttonT.setIcon(letter[19]);
-                buttonS.setIcon(HS);
+                buttonS.setIcon(hLetter[18]);
             }
-            else if(buttonU.getIcon() == HU) {
+            else if(buttonU.getIcon() == hLetter[20]) {
                 buttonU.setIcon(letter[20]);
-                buttonT.setIcon(HT);
+                buttonT.setIcon(hLetter[19]);
             }
-            else if(buttonV.getIcon() == HV) {
+            else if(buttonV.getIcon() == hLetter[21]) {
                 buttonV.setIcon(letter[21]);
-                buttonU.setIcon(HU);
+                buttonU.setIcon(hLetter[20]);
             }
-            else if(buttonW.getIcon() == HW) {
+            else if(buttonW.getIcon() == hLetter[22]) {
                 buttonW.setIcon(letter[22]);
-                buttonV.setIcon(HV);
+                buttonV.setIcon(hLetter[21]);
             }
-            else if(buttonX.getIcon() == HX) {
+            else if(buttonX.getIcon() == hLetter[23]) {
                 buttonX.setIcon(letter[23]);
-                buttonW.setIcon(HW);
+                buttonW.setIcon(hLetter[22]);
             }
-            else if(buttonY.getIcon() == HY) {
+            else if(buttonY.getIcon() == hLetter[24]) {
                 buttonY.setIcon(letter[24]);
-                buttonX.setIcon(HX);
+                buttonX.setIcon(hLetter[23]);
             }
-            else if(buttonZ.getIcon() == HZ) {
+            else if(buttonZ.getIcon() == hLetter[25]) {
                 buttonZ.setIcon(letter[25]);
-                buttonY.setIcon(HY);
+                buttonY.setIcon(hLetter[24]);
             }
             else if(buttonSpace.getIcon() == HSPACE) {
                 buttonSpace.setIcon(SPACE);
-                buttonZ.setIcon(HZ);
+                buttonZ.setIcon(hLetter[25]);
             }
             else if(buttonRight.getIcon() == HRIGHT) {
                 buttonRight.setIcon(RIGHT);
@@ -467,105 +415,105 @@ public class Buttons extends JFrame {
         
         buttonSelect.addMouseListener(new MouseAdapter(){
            public void mouseClicked(MouseEvent me) {
-               if (buttonA.getIcon() == HA) {
+               if (buttonA.getIcon() == hLetter[0]) {
                textDisplay += "A";
                display.setText("" + textDisplay);
                }
-               else if(buttonB.getIcon() == HB) {
+               else if(buttonB.getIcon() == hLetter[1]) {
                textDisplay += "B";
                display.setText("" + textDisplay);
                }
-               else if(buttonC.getIcon() == HC) {
+               else if(buttonC.getIcon() == hLetter[2]) {
                textDisplay += "C";
                display.setText("" + textDisplay);
                }
-               else if(buttonD.getIcon() == HD) {
+               else if(buttonD.getIcon() == hLetter[3]) {
                textDisplay += "D";
                display.setText("" + textDisplay);
                }
-               else if(buttonE.getIcon() == HE) {
+               else if(buttonE.getIcon() == hLetter[4]) {
                textDisplay += "E";
                display.setText("" + textDisplay);
                }
-               else if(buttonF.getIcon() == HF) {
+               else if(buttonF.getIcon() == hLetter[5]) {
                textDisplay += "F";
                display.setText("" + textDisplay);
                }
-               else if(buttonG.getIcon() == HG) {
+               else if(buttonG.getIcon() == hLetter[6]) {
                textDisplay += "G";
                display.setText("" + textDisplay);
-               }else if(buttonH.getIcon() == HH) {
+               }else if(buttonH.getIcon() == hLetter[7]) {
                textDisplay += "H";
                display.setText("" + textDisplay);
                }
-               else if(buttonI.getIcon() == HI) {
+               else if(buttonI.getIcon() == hLetter[8]) {
                textDisplay += "I";
                display.setText("" + textDisplay);
                }
-               else if(buttonJ.getIcon() == HJ) {
+               else if(buttonJ.getIcon() == hLetter[9]) {
                textDisplay += "J";
                display.setText("" + textDisplay);
                }
-               else if(buttonK.getIcon() == HK) {
+               else if(buttonK.getIcon() == hLetter[10]) {
                textDisplay += "K";
                display.setText("" + textDisplay);
                }
-               else if(buttonL.getIcon() == HL) {
+               else if(buttonL.getIcon() == hLetter[11]) {
                textDisplay += "L";
                display.setText("" + textDisplay);
                }
-               else if(buttonM.getIcon() == HM) {
+               else if(buttonM.getIcon() == hLetter[12]) {
                textDisplay += "M";
                display.setText("" + textDisplay);
                }
-               else if(buttonN.getIcon() == HN) {
+               else if(buttonN.getIcon() == hLetter[13]) {
                textDisplay += "N";
                display.setText("" + textDisplay);
                }
-               else if(buttonO.getIcon() == HO) {
+               else if(buttonO.getIcon() == hLetter[14]) {
                textDisplay += "O";
                display.setText("" + textDisplay);
                }
-               else if(buttonP.getIcon() == HP) {
+               else if(buttonP.getIcon() == hLetter[15]) {
                textDisplay += "P";
                display.setText("" + textDisplay);
                }
-               else if(buttonQ.getIcon() == HQ) {
+               else if(buttonQ.getIcon() == hLetter[16]) {
                textDisplay += "Q";
                display.setText("" + textDisplay);
                }
-               else if(buttonR.getIcon() == HR) {
+               else if(buttonR.getIcon() == hLetter[17]) {
                textDisplay += "R";
                display.setText("" + textDisplay);
                }
-               else if(buttonS.getIcon() == HS) {
+               else if(buttonS.getIcon() == hLetter[18]) {
                textDisplay += "S";
                display.setText("" + textDisplay);
                }
-               else if(buttonT.getIcon() == HT) {
+               else if(buttonT.getIcon() == hLetter[19]) {
                textDisplay += "T";
                display.setText("" + textDisplay);
                }
-               else if(buttonU.getIcon() == HU) {
+               else if(buttonU.getIcon() == hLetter[20]) {
                textDisplay += "U";
                display.setText("" + textDisplay);
                }
-               else if(buttonV.getIcon() == HV) {
+               else if(buttonV.getIcon() == hLetter[21]) {
                textDisplay += "V";
                display.setText("" + textDisplay);
                }
-               else if(buttonW.getIcon() == HW) {
+               else if(buttonW.getIcon() == hLetter[22]) {
                textDisplay += "W";
                display.setText("" + textDisplay);
-               }else if(buttonX.getIcon() == HX) {
+               }else if(buttonX.getIcon() == hLetter[23]) {
                textDisplay += "X";
                display.setText("" + textDisplay);
                }
-               else if(buttonY.getIcon() == HY) {
+               else if(buttonY.getIcon() == hLetter[24]) {
                textDisplay += "Y";
                display.setText("" + textDisplay);
                }
-               else if(buttonZ.getIcon() == HZ) {
+               else if(buttonZ.getIcon() == hLetter[25]) {
                textDisplay += "Z";
                display.setText("" + textDisplay);
                }
