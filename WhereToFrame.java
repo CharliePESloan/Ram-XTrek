@@ -125,14 +125,6 @@ public class WhereToFrame extends BlankXTrex {
         TextButton (String s) {
             setIcon( new ImageIcon("Test" + s + ".png"));
             setBorder(null);
-            addMouseListener (new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent me){
-            setIcon (new ImageIcon("HTest" + s + ".png"));
-            }
-            public void mouseExited(java.awt.event.MouseEvent me) {
-               setIcon(new ImageIcon ("Test" + s + ".png"));
-            }
-            });
         }
     }
     
@@ -153,6 +145,13 @@ public class WhereToFrame extends BlankXTrex {
         MinusButton.setBounds(11, 175, 27, 64);add(MinusButton);
         SelectButton.setBounds(5, 268, 34, 97); add(SelectButton);
         MenuButton.setBounds(409, 113, 30,84); add(MenuButton);
+        
+        MenuButton.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseClicked(java.awt.event.MouseEvent evt){
+                dispose();
+                new XTrex();
+            }
+        });
         
         for(int i=0; i<26; i++) {
             letter[i] = new ImageIcon("Test" + abcd.charAt(i) + ".png");
@@ -203,7 +202,7 @@ public class WhereToFrame extends BlankXTrex {
         
         //change the button icon 
         
-        buttonPlus.addMouseListener(new MouseAdapter() {
+        PlusButton.addMouseListener(new MouseAdapter() {
         public void mouseClicked( MouseEvent me) {
             if (buttonB.getIcon() == hLetter[1]){
                 buttonB.setIcon(letter[1]);
@@ -323,7 +322,7 @@ public class WhereToFrame extends BlankXTrex {
         }
     });
         
-        buttonMinus.addMouseListener( new MouseAdapter() {
+        MinusButton.addMouseListener( new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 if (buttonB.getIcon() == hLetter[1]){
                 buttonB.setIcon(letter[1]);
@@ -443,7 +442,7 @@ public class WhereToFrame extends BlankXTrex {
             }
         });
         
-        buttonSelect.addMouseListener(new MouseAdapter(){
+        SelectButton.addMouseListener(new MouseAdapter(){
            public void mouseClicked(MouseEvent me) {
                if (buttonA.getIcon() == hLetter[0]) {
                textDisplay += "A";
