@@ -146,6 +146,13 @@ public class WhereToFrame extends BlankXTrex {
         SelectButton.setBounds(5, 268, 34, 97); add(SelectButton);
         MenuButton.setBounds(409, 113, 30,84); add(MenuButton);
         
+        MenuButton.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseClicked(java.awt.event.MouseEvent evt){
+                dispose();
+                new XTrex();
+            }
+        });
+        
         for(int i=0; i<26; i++) {
             letter[i] = new ImageIcon("Test" + abcd.charAt(i) + ".png");
         }
