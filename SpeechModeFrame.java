@@ -11,7 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.BorderFactory;
 
 public class SpeechModeFrame extends BlankXTrex {
-
 	final LanguageButton noLanguageButton	= new LanguageButton("Off");
 	final LanguageButton englishButton		= new LanguageButton("English");
 	final LanguageButton frenchButton		= new LanguageButton("French");
@@ -83,8 +82,9 @@ public class SpeechModeFrame extends BlankXTrex {
 		germanButton.setPrevNext(frenchButton,italianButton);
 		italianButton.setPrevNext(germanButton,spanishButton);
 		spanishButton.setPrevNext(italianButton,noLanguageButton);
-		selected = noLanguageButton;
+
 		noLanguageButton.select();
+		selected = noLanguageButton;
 
 		/* Set position and size of buttons and add to frame */
 		noLanguageButton.setBounds(95, 312, 255, 45); add(noLanguageButton);
@@ -104,6 +104,7 @@ public class SpeechModeFrame extends BlankXTrex {
 		{
 			public void mouseClicked(java.awt.event.MouseEvent evt)
 			{
+				/* Cycle backwards through language list */
 				selected = selected.prev();
 			}
 		});
@@ -111,6 +112,7 @@ public class SpeechModeFrame extends BlankXTrex {
 		{
 			public void mouseClicked(java.awt.event.MouseEvent evt)
 			{
+				/* Cycle forwards down language list*/
 				selected = selected.next();
 			}
 		});
@@ -118,6 +120,7 @@ public class SpeechModeFrame extends BlankXTrex {
 		{
 			public void mouseClicked(java.awt.event.MouseEvent evt)
 			{
+				/* Select language */
 				System.out.println(selected.getText());
 			}
 		});
@@ -125,6 +128,7 @@ public class SpeechModeFrame extends BlankXTrex {
 		{
 			public void mouseClicked(java.awt.event.MouseEvent evt)
 			{
+				/* Return to main page when menu button pressed */
 				dispose();
 				new XTrex();
 			}

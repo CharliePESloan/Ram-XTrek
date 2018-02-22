@@ -1,5 +1,5 @@
-public class TextToVoice
+public class Speaker
 {
-	public TextToVoice()
+	public Speaker()
 	{}
 }

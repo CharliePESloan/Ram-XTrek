@@ -3,7 +3,7 @@ import org.json.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class Directions
+public class Navigator
 {
 	/* Constant Values */
 	final static String URLBASE = "https://maps.googleapis.com/maps/api/directions/json";
@@ -24,7 +24,7 @@ public class Directions
 	private JSONArray  legs;
 	private JSONObject leg;
 	private JSONArray  steps;
-	
+
 	private JSONObject step;
 	private String	   html;
 	private Document   doc;
@@ -36,7 +36,7 @@ public class Directions
 	/*
 	 * Constructor
 	 */
-	public Directions()
+	public Navigator()
 	{
 		currentDirection=0;
 	}
@@ -54,7 +54,7 @@ public class Directions
 	{
 		origin = newOrigin;
 	}
-	
+
 	/*
 	 * setDest
 	 * Sets the destination of the route
@@ -78,7 +78,7 @@ public class Directions
 			System.out.println("Attempting to fetch directions");
 			final String encOrigin =	URLEncoder.encode(origin,"UTF-8");
 			final String encDestination =	URLEncoder.encode(destination,"UTF-8");
-			
+
 			final String url = (URLBASE
 					   +"?origin="	   +encOrigin
 					   +"&destination="+encDestination
@@ -86,10 +86,10 @@ public class Directions
 					   +"&mode="	   +MODE
 					   +"&key="	   +KEY);
 			System.out.println(url);
-			
+
 			final byte[] body = {};
 			final String[][] headers = {};
-			
+
 			directionsRaw = HttpConnect.httpConnect( METHOD, url, headers, body );
 			directionsJSON = new JSONObject(new String(directionsRaw));
 			routes = (JSONArray)directionsJSON.get("routes");
@@ -97,7 +97,7 @@ public class Directions
 			legs   = (JSONArray)route.get("legs");
 			leg    = legs.getJSONObject(0);
 			steps  = (JSONArray)leg.get("steps");
-			
+
 			directions = new String[steps.length()];
 
 			for (int i=0; i<steps.length(); i++)
@@ -127,7 +127,7 @@ public class Directions
 	}
 
 	public void printOut()
-	{	
+	{
 		if (false)
 		{
 			System.out.println("Full Directions:");
@@ -142,20 +142,20 @@ public class Directions
 				}
 			}
 		}
-		
+
 		System.out.println("Origin="+origin);
 		for (String d : directions)
 		{
 			System.out.println(d);
 		}
 		System.out.println("Destination="+destination);
-		
-	
+
+
 	}
 
 	public static void main(String args[])
 	{
-		Directions myDir = new Directions();
+		Navigator myDir = new Navigator();
 		//myDir.setOrigin	(50.7236f, -3.52751f);
 		//myDir.setDest	(51.3758f,  2.3599f);
 		myDir.setOrigin("Exeter");
