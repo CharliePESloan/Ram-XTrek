@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.TextField;
+import java.awt.Toolkit;
+import java.awt.Dimension; 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
@@ -11,7 +13,7 @@ import javax.swing.BorderFactory;
 /*
  * Simple calculator. David Wakeling, 03/01/2016.
  */
-public class SpeechMode extends BlankXTrex {
+public class SpeechModeFrame extends BlankXTrex {
 
 	final LanguageButton noLanguageButton	= new LanguageButton("Off");
 	final LanguageButton englishButton	= new LanguageButton("English");
@@ -89,10 +91,18 @@ public class SpeechMode extends BlankXTrex {
 	}
 
 
-	public SpeechMode() {
+	public SpeechModeFrame() {
 		setTitle( "XTrex" );
 		setContentPane( new JLabel( new ImageIcon( "XTrex Background.png" ) ) );
 		setLayout( null );
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
+        setSize( 450, 835 ); /* title bar! */
+        setResizable( false );
+        setVisible( true );
 
 		/* Setup languageButtons */
 		noLanguageButton.setPrevNext(spanishButton,englishButton);
@@ -151,7 +161,7 @@ public class SpeechMode extends BlankXTrex {
 
 
 	public static void main( String[] argv ) {
-		JFrame frame = new SpeechMode();
+		JFrame frame = new SpeechModeFrame();
 		frame.setLocationRelativeTo( null );
 		frame.setSize( 450, 835 ); /* title bar! */
 		frame.setResizable( false );
