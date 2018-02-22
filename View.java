@@ -23,7 +23,7 @@ class View extends JPanel implements Observer {
 
     try {
       image = ImageIO.read( new File( "XTrex Background.png" ) );
-	  image1 = ImageIO.read( new File( "Output.png"));
+	  image1 = ImageIO.read( new File( "output.png"));
 
     } catch ( Exception ex ) {
       System.out.println( ex ); System.exit( 1 );
