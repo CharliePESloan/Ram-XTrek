@@ -12,14 +12,15 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.awt.Toolkit;
 import java.awt.Dimension;
-//import Assessment.BlankXTrex;
+
 
 public class XTrex extends BlankXTrex {
   private static int    d  = 0;
   private static int    e  = 0;
   private static String op = "?";
 
-  // Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
+  /* Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
+  */
 
   public Toolkit tk = Toolkit.getDefaultToolkit();
   public Dimension screenSize = tk.getScreenSize();
@@ -27,7 +28,7 @@ public class XTrex extends BlankXTrex {
   public int screenWidth = screenSize.width;
 
 
-
+  // Creating the icons for the menu buttons 
   ImageIcon whereToIcon = new ImageIcon("WhereToButton.png");
     ImageIcon whereToIconSelected = new ImageIcon("WhereToButtonSelected.png");
   ImageIcon mapIcon = new ImageIcon("MapButton.png");
@@ -41,6 +42,8 @@ public class XTrex extends BlankXTrex {
   ImageIcon aboutIcon = new ImageIcon("InfoButton.png");
     ImageIcon aboutIconSelected = new ImageIcon("InfoButtonSelected.png");
 
+
+  // Creating the menu buttons
   final DisplayButton WhereToButton      = new DisplayButton();
   final DisplayButton MapButton          = new DisplayButton();
   final DisplayButton SatelliteButton    = new DisplayButton();
@@ -48,31 +51,22 @@ public class XTrex extends BlankXTrex {
   final DisplayButton SpeechButton       = new DisplayButton();
   final DisplayButton AboutButton        = new DisplayButton();
 
+  // Creating the side/navigation buttons    
   final SideButton    PlusButton    = new BlankXTrex.SideButton("PlusButton");
   final SideButton    MinusButton   = new BlankXTrex.SideButton("MinusButton");
   final SideButton    SelectButton  = new BlankXTrex.SideButton("SelectButton");
   final SideButton    MenuButton    = new BlankXTrex.SideButton("MenuButton");
 
+  // A separate class for menu buttons, that could be useful later 
      private class DisplayButton extends JButton{
-         DisplayButton(String s){
-             setIcon( new ImageIcon(s + ".png"));
-             setBorder( null );
-             addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseEntered(java.awt.event.MouseEvent evt) {
-                    setIcon(new ImageIcon(s + "Selected.png"));
-            }
-             public void mouseExited(java.awt.event.MouseEvent evt) {
-                setIcon(new ImageIcon(s + ".png"));
-            }
-            });
-         }
          DisplayButton(){
              setBorder( null );
          }
      }
 
-
+  // What is constructed when XTrex() is called
   public XTrex() {
+    // The frame specifications
     setTitle( "XTrex" );
     setContentPane( new JLabel( new ImageIcon( "XTrex Background.png" ) ) );
     setLayout( null );
@@ -81,6 +75,7 @@ public class XTrex extends BlankXTrex {
     setResizable( false );
     setVisible( true );
 
+    // Placing the menu buttons   
     WhereToButton.setBounds(95, 312, 125, 93); add(WhereToButton);
       WhereToButton.setIcon(whereToIcon);
     MapButton.setBounds(95,415,125,93);add(MapButton);
@@ -94,11 +89,17 @@ public class XTrex extends BlankXTrex {
     AboutButton.setBounds(226,518,125,93); add(AboutButton);
       AboutButton.setIcon(aboutIcon);
 
+    // Placing the navigation buttons
     PlusButton.setBounds(9, 102, 30, 68);add(PlusButton);
     MinusButton.setBounds(11, 175, 27, 64);add(MinusButton);
     SelectButton.setBounds(5, 260, 34, 97); add(SelectButton);
     MenuButton.setBounds(409, 113, 30,84); add(MenuButton);
 
+    /**
+    Adding functionality to the select navigation button
+    The prints statements are there to ensure that the code is working,
+    even if the new frame is not yet created (temporary).
+    */
     SelectButton.addMouseListener(new java.awt.event.MouseAdapter(){
         public void mouseClicked(java.awt.event.MouseEvent evt){
             if(MapButton.getIcon() == mapIconSelected){
@@ -123,6 +124,7 @@ public class XTrex extends BlankXTrex {
         }
     });
 
+    // Adding functionality to the plus navigation button  
     PlusButton.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             if(MapButton.getIcon() == mapIconSelected){
@@ -146,6 +148,8 @@ public class XTrex extends BlankXTrex {
             }
         }
     });
+      
+    // Adding functionality to the minus navigation button
     MinusButton.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             if(WhereToButton.getIcon() == whereToIconSelected){
@@ -170,16 +174,15 @@ public class XTrex extends BlankXTrex {
         }
     });
   }
-
+ 
   public static void main( String[] argv ) {
 
     // Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
-
-    //setLocation(screenWidth / 4, screenHeight / 4);
     Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension screenSize = tk.getScreenSize();
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
+    
     JFrame menuFrame = new XTrex();
     menuFrame.setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
     menuFrame.setSize( 450, 835 ); /* title bar! */
