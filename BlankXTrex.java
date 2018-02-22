@@ -13,7 +13,14 @@ import java.net.URL;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 
+/** 
+This class is the superclass to all frames.
+It is meant to contain all of the things common to all frames, 
+to reduce duplicate code. 
+*/
+
 public class BlankXTrex extends JFrame{
+    // The class for navigation buttons
     public class SideButton extends JButton
     {
         SideButton(String s)
