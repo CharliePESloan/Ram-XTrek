@@ -50,6 +50,7 @@ public class MapFrame extends BlankXTrex {
                 new XTrex();
             }
         });
+		
 
     }
 
