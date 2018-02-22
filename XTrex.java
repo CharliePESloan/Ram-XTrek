@@ -96,7 +96,7 @@ public class XTrex extends BlankXTrex {
 
     PlusButton.setBounds(9, 102, 30, 68);add(PlusButton);
     MinusButton.setBounds(11, 175, 27, 64);add(MinusButton);
-    SelectButton.setBounds(5, 268, 34, 97); add(SelectButton);
+    SelectButton.setBounds(5, 260, 34, 97); add(SelectButton);
     MenuButton.setBounds(409, 113, 30,84); add(MenuButton);
 
     SelectButton.addMouseListener(new java.awt.event.MouseAdapter(){
