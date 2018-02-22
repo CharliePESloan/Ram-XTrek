@@ -17,6 +17,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class MapFrame extends BlankXTrex {
+	int c =10;
 
     public MapFrame(){
         setTitle( "XTrex" );
@@ -50,6 +51,21 @@ public class MapFrame extends BlankXTrex {
                 new XTrex();
             }
         });
+		
+		PlusButton.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseClicked(java.awt.event.MouseEvent evt){
+				c ++; 
+				System.out.println(c); 
+             
+            }
+        });
+		
+		MinusButton.addMouseListener(new java.awt.event.MouseAdapter(){
+			public void mouseClicked(java.awt.event.MouseEvent evt){
+				c --;
+				System.out.println(c); 
+			}
+		}); 
 		
 
     }
