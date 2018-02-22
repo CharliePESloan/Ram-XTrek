@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.TextField;
 import java.awt.Toolkit;
-import java.awt.Dimension; 
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
@@ -10,44 +10,16 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.BorderFactory;
 
-/*
- * Simple calculator. David Wakeling, 03/01/2016.
- */
 public class SpeechModeFrame extends BlankXTrex {
 
 	final LanguageButton noLanguageButton	= new LanguageButton("Off");
-	final LanguageButton englishButton	= new LanguageButton("English");
-	final LanguageButton frenchButton	= new LanguageButton("French");
-	final LanguageButton germanButton	= new LanguageButton("German");
-	final LanguageButton italianButton	= new LanguageButton("Italian");
-	final LanguageButton spanishButton	= new LanguageButton("Spanish");
+	final LanguageButton englishButton		= new LanguageButton("English");
+	final LanguageButton frenchButton		= new LanguageButton("French");
+	final LanguageButton germanButton		= new LanguageButton("German");
+	final LanguageButton italianButton		= new LanguageButton("Italian");
+	final LanguageButton spanishButton		= new LanguageButton("Spanish");
 
 	LanguageButton selected = null;
-
-	/*final SideButton    PlusButton    = new SideButton("PlusButton");
-	final SideButton    MinusButton   = new SideButton("MinusButton");
-	final SideButton    SelectButton  = new SideButton("SelectButton");
-	final SideButton    MenuButton    = new SideButton("MenuButton");
-
-
-	private class SideButton extends JButton{
-		SideButton(String s){
-			setBorder( null );
-			addMouseListener(new java.awt.event.MouseAdapter()
-			{
-				public void mouseEntered(java.awt.event.MouseEvent evt)
-				{
-					setIcon(new ImageIcon(s + "Selected" + ".png"));
-				}
-				public void mouseExited(java.awt.event.MouseEvent evt)
-				{
-					setIcon(new ImageIcon(s + ".png"));
-				}
-			});
-		}
-	}*/
-
-
 
 	private class LanguageButton extends JButton{
 		boolean selected;
@@ -168,21 +140,3 @@ public class SpeechModeFrame extends BlankXTrex {
 		frame.setVisible( true );
 	}
 }
-				/*if(englishButton.getIcon() == mapIconSelected){
-					englishButton.setIcon(mapIcon);
-					noLanguageButton.setIcon(whereToIconSelected);
-				} else if(noLanguageButton.getIcon() == whereToIconSelected){
-		    noLanguageButton.setIcon(whereToIcon);
-		    germanButton.setIcon(tripCompIconSelected);
-				} else if(germanButton.getIcon() == tripCompIconSelected){
-		    germanButton.setIcon(tripCompIcon);
-		    italianButton.setIcon(speechIconSelected);
-				} else if(italianButton.getIcon() == speechIconSelected){
-		    italianButton.setIcon(speechIcon);
-		    spanishButton.setIcon(aboutIconSelected);
-				} else if(spanishButton.getIcon() == aboutIconSelected){
-					spanishButton.setIcon(aboutIcon);
-					frenchButton.setIcon(satelliteIconSelected);
-				} else if (frenchButton.getIcon() == satelliteIconSelected){
-		    frenchButton.setIcon(satelliteIcon);
-		    englishButton.setIcon(mapIconSelected);*/
