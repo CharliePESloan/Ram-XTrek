@@ -24,11 +24,11 @@ public class WhereToFrame extends BlankXTrex {
     static String abcd = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
     
-    ImageIcon SPACE = new ImageIcon("Images/Space.png");
-    ImageIcon RIGHT = new ImageIcon("Images/Right.png");
+    ImageIcon SPACE = new ImageIcon("Space.png");
+    ImageIcon RIGHT = new ImageIcon("Right.png");
     
-    ImageIcon HSPACE = new ImageIcon("Images/HSpace.png");
-    ImageIcon HRIGHT = new ImageIcon("Images/HRight.png");
+    ImageIcon HSPACE = new ImageIcon("HSpace.png");
+    ImageIcon HRIGHT = new ImageIcon("HRight.png");
     
     final TextField display = new TextField();
     
@@ -76,14 +76,14 @@ public class WhereToFrame extends BlankXTrex {
     
     public class SideButton extends JButton {
         SideButton(String s) {
-            setIcon( new ImageIcon("Images/"+ s + ".png"));
+            setIcon( new ImageIcon(s + ".png"));
             setBorder(null);
             addMouseListener (new MouseAdapter() {
                 public void mouseEntered(MouseEvent me) {
-                  setIcon(new ImageIcon("Images/" + s + "Selected.png"));  
+                  setIcon(new ImageIcon(s + "Selected.png"));  
                 }
                 public void mouseExited(MouseEvent me) {
-                    setIcon(new ImageIcon("Images/" + s + ".png"));
+                    setIcon(new ImageIcon(s + ".png"));
                 }
             });
         }
@@ -92,14 +92,14 @@ public class WhereToFrame extends BlankXTrex {
     
     public class SelectButton extends JButton {
         SelectButton (String s) {
-            setIcon( new ImageIcon("Images/"+ s + ".png"));
+            setIcon( new ImageIcon(s + ".png"));
             setBorder(null);
             addMouseListener (new java.awt.event.MouseAdapter() {
                 public void mouseEntered(MouseEvent me) {
-                  setIcon(new ImageIcon("Images/" + s + "Selected.png"));
+                  setIcon(new ImageIcon(s + "Selected.png"));
                 }
                 public void mouseExited(MouseEvent me) {
-                    setIcon(new ImageIcon("Images/" + s + ".png"));
+                    setIcon(new ImageIcon(s + ".png"));
                 }
             });
         }
@@ -107,14 +107,14 @@ public class WhereToFrame extends BlankXTrex {
     
     public class SpaceButton extends JButton {
         SpaceButton (String s) {
-            setIcon( new ImageIcon("Images/"+ s + ".png"));
+            setIcon( new ImageIcon(s + ".png"));
             setBorder(null);
         }
     }
     
     public class ArrowButton extends JButton {
         ArrowButton (String s) {
-            setIcon( new ImageIcon("Images/" + s + ".png"));
+            setIcon( new ImageIcon(s + ".png"));
             setBorder(null);
         }
     }
@@ -123,14 +123,14 @@ public class WhereToFrame extends BlankXTrex {
 
         public class TextButton extends JButton {
         TextButton (String s) {
-            setIcon( new ImageIcon("Images/Test" + s + ".png"));
+            setIcon( new ImageIcon("Test" + s + ".png"));
             setBorder(null);
         }
     }
     
     public WhereToFrame(){
         setTitle( "XTrex" );
-        setContentPane( new JLabel( new ImageIcon( "Images/XTrex Background.png" ) ) );
+        setContentPane( new JLabel( new ImageIcon( "XTrex Background.png" ) ) );
         setLayout( null );
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension screenSize = tk.getScreenSize();
@@ -143,7 +143,7 @@ public class WhereToFrame extends BlankXTrex {
         
         PlusButton.setBounds(9, 102, 30, 68);add(PlusButton);
         MinusButton.setBounds(11, 175, 27, 64);add(MinusButton);
-        SelectButton.setBounds(5, 260, 34, 97); add(SelectButton);
+        SelectButton.setBounds(5, 268, 34, 97); add(SelectButton);
         MenuButton.setBounds(409, 113, 30,84); add(MenuButton);
         
         MenuButton.addMouseListener(new java.awt.event.MouseAdapter(){
@@ -154,10 +154,10 @@ public class WhereToFrame extends BlankXTrex {
         });
         
         for(int i=0; i<26; i++) {
-            letter[i] = new ImageIcon("Images/Test" + abcd.charAt(i) + ".png");
+            letter[i] = new ImageIcon("Test" + abcd.charAt(i) + ".png");
         }
         for(int i=0; i<26; i++) {
-            hLetter[i] = new ImageIcon("Images/HTest" + abcd.charAt(i) + ".png");
+            hLetter[i] = new ImageIcon("HTest" + abcd.charAt(i) + ".png");
         }
         
         display.setBounds (95, 312, 260, 50); add(display);//length, width, stretch left/right, up/down
@@ -555,3 +555,4 @@ public class WhereToFrame extends BlankXTrex {
            } 
 });
   }}
+

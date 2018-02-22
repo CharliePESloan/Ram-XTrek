@@ -22,8 +22,8 @@ class View extends JPanel implements Observer {
   public View( Controller controller, Model model ) {
 
     try {
-      image = ImageIO.read( new File( "Images/XTrex Background.png" ) );
-	  image1 = ImageIO.read( new File( "Images/Output.png"));
+      image = ImageIO.read( new File( "XTrex Background.png" ) );
+	  image1 = ImageIO.read( new File( "Output.png"));
 
     } catch ( Exception ex ) {
       System.out.println( ex ); System.exit( 1 );
