@@ -25,9 +25,9 @@ public class MapFrame extends BlankXTrex {
     
     public MapFrame(){
         setTitle( "XTrex" );
-        JLabel content = new JLabel(new ImageIcon("XTrex Background.png"));
-        //content.add("XTrex Background.png");
-        setContentPane(content);
+        //JLabel content = new JLabel(new ImageIcon("XTrex Background.png"));
+        ///content.add("XTrex Background.png");
+        //setContentPane(content);
         setLayout( null );
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension screenSize = tk.getScreenSize();
@@ -36,30 +36,19 @@ public class MapFrame extends BlankXTrex {
         setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
         setSize( 450, 835 ); /* title bar! */ 
         setResizable( false );
-        
-        
+   
         Model model = new Model(0);
         Controller controller = new Controller(model);
         View view = new View(controller, model);
-        setVisible(true);
-        add(view);
-        
-        //setContentPane(view);
-        
-        //getContentPane().add(p, BorderLayout.CENTER);
-        System.out.println("Hey I worked");
-        
-        ImageIcon output = new ImageIcon("output.png");
-        //add(output);
-        /**
-        JButton mapImageButton = new JButton();
-       mapImageButton.setBounds(200,100, 200, 200); add(mapImageButton);
-        mapImageButton.setIcon(output);*/
-        
+		
+		JFrame frame = new JFrame(); 
+        frame.setVisible(true);
+        frame.add(view);
+		frame.setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
+        frame.setSize( 450, 835 ); /* title bar! */ 
+        frame.setResizable( false );
 
-        
-        
-        
+		
         PlusButton.setBounds(9, 102, 30, 68);add(PlusButton);
         MinusButton.setBounds(11, 175, 27, 64);add(MinusButton);
         SelectButton.setBounds(5, 268, 34, 97); add(SelectButton);

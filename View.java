@@ -21,8 +21,6 @@ class View extends JPanel implements Observer {
 
   public View( Controller controller, Model model ) {
 
-    
-  
     try {
       image = ImageIO.read( new File( "XTrex Background.png" ) );
 	  image1 = ImageIO.read( new File( "Output.png")); 
@@ -43,15 +41,9 @@ class View extends JPanel implements Observer {
     super.paintComponent( g );
     Graphics2D g2d = (Graphics2D) g;
 	g2d.drawImage( image, 0, 0, this );	
-	g2d.drawImage( image1, 0,0,this); 
+	g2d.drawImage( image1, 80,225,this); 
 	g2d.setColor(Color.RED);
-	g2d.fillOval(image.getWidth()/2, image.getHeight()/2, 15, 15);
-	//g2d.drawImage( image, 0, 0, this );					
-	g2d.translate(-image.getWidth(),-image.getHeight());
-	g2d.scale(zooming, zooming); 
-	//g2d.translate((-image.getWidth()/2),(-image.getHeight()/2));
-    g2d.clearRect( 0, 0, getWidth(), getHeight() );
-    g2d.drawImage( image, 0, 0, this );	
+	g2d.fillOval(219,426,15,15);		
   }
 
   
