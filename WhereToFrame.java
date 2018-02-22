@@ -68,13 +68,6 @@ public class WhereToFrame extends BlankXTrex {
         }
     }
     
-    /*public class SpaceButton extends ExtractButton {
-        SpaceButton (String s) {
-			super (s);
-            setIcon( new ImageIcon(s + ".png"));
-            setBorder(null);
-        }
-    }*/
 	 public class TextButton extends ExtractButton {
         TextButton (String s) {
 			super (s);
@@ -82,14 +75,6 @@ public class WhereToFrame extends BlankXTrex {
             setBorder(null);
         }
     }
-    
-    /*public class ArrowButton extends ExtractButton {
-        ArrowButton (String s) {
-            super (s);
-			setIcon( new ImageIcon(s + ".png"));
-            setBorder(null);
-        }
-    }*/
     
         public class ExtractButton extends JButton {
 		boolean selected;
@@ -149,6 +134,7 @@ public class WhereToFrame extends BlankXTrex {
         setSize( 450, 835 ); /* title bar! */ 
         setResizable( false );
         setVisible( true );
+		display.setEditable(false);
         
         PlusButton.setBounds(9, 102, 30, 68);add(PlusButton);
         MinusButton.setBounds(11, 175, 27, 64);add(MinusButton);
