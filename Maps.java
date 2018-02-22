@@ -10,7 +10,7 @@ import java.net.URL;
  * David Wakeling, 2018.
  */
 public class Maps {
-  final static String OUTPUT    = "output.png";  /* Ouput file        */
+  final static String OUTPUT    = "Images/output.png";  /* Ouput file        */
   final static String LATITUDE  = "50.7184";     /* Exeter, latitude  */
   final static String LONGITUDE = "-3.5339";     /* Exeter, longitude */
   final static String ZOOM      = "10";           /* 0 ... 21           */

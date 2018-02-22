@@ -18,16 +18,8 @@ import javax.swing.*;
 
 public class MapFrame extends BlankXTrex {
 
-    //final SideButton    PlusButton    = new BlankXTrex.SideButton("PlusButton");
-    //final SideButton    MinusButton   = new BlankXTrex.SideButton("MinusButton");
-    //final SideButton    SelectButton  = new BlankXTrex.SideButton("SelectButton");
-    //final SideButton    MenuButton    = new BlankXTrex.SideButton("MenuButton");
-
     public MapFrame(){
         setTitle( "XTrex" );
-        //JLabel content = new JLabel(new ImageIcon("XTrex Background.png"));
-        ///content.add("XTrex Background.png");
-        //setContentPane(content);
         setLayout( null );
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension screenSize = tk.getScreenSize();
@@ -43,22 +35,14 @@ public class MapFrame extends BlankXTrex {
         View view = new View(controller, model);
 
         view.setLayout( null );
+		view.setLocation((screenWidth / 3)+150, (screenHeight / 4)-150); 
         view.setBounds(0,0,450,835);
         add(view);
 
-		/*JPanel frame = new JPanel();
-        frame.setVisible(true);
-        frame.add(view);
-		//frame.setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
-        frame.setSize( 450, 835 ); /* title bar! */
-        //add(frame);
-        //frame.setResizable( false );
-
-
-        PlusButton.setBounds(9, 102, 30, 68);view.add(PlusButton);
-        MinusButton.setBounds(11, 175, 27, 64);view.add(MinusButton);
-        SelectButton.setBounds(5, 268, 34, 97); view.add(SelectButton);
+        PlusButton.setBounds(7, 102, 30, 68);view.add(PlusButton);
+        MinusButton.setBounds(8, 170, 27, 64);view.add(MinusButton);
         MenuButton.setBounds(409, 113, 30,84); view.add(MenuButton);
+		
 
         MenuButton.addMouseListener(new java.awt.event.MouseAdapter(){
             public void mouseClicked(java.awt.event.MouseEvent evt){
