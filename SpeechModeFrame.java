@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.BorderFactory;
 
 public class SpeechModeFrame extends BlankXTrex {
+	/* Create language buttons */
 	final LanguageButton noLanguageButton	= new LanguageButton("Off");
 	final LanguageButton englishButton		= new LanguageButton("English");
 	final LanguageButton frenchButton		= new LanguageButton("French");
@@ -28,7 +29,6 @@ public class SpeechModeFrame extends BlankXTrex {
 		LanguageButton(String s)
 		{
 			selected = false;
-			//setBorder( null );
 			setBorder( BorderFactory.createLineBorder(Color.black, 3 ) );
 			setBackground(Color.white);
 			setText(s);
