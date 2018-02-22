@@ -25,15 +25,15 @@ public class WhereToFrame extends BlankXTrex {
     static String abcd = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	ExtractButton selected;
       
-    ImageIcon SPACE = new ImageIcon("Space.png");
-    ImageIcon RIGHT = new ImageIcon("Right.png");
-    ImageIcon HSPACE = new ImageIcon("HSpace.png");
-    ImageIcon HRIGHT = new ImageIcon("HRight.png");
+    ImageIcon SPACE = new ImageIcon("TestSpace.png");
+    ImageIcon RIGHT = new ImageIcon("TestRight.png");
+    ImageIcon HSPACE = new ImageIcon("HTestSpace.png");
+    ImageIcon HRIGHT = new ImageIcon("HTestRight.png");
     
     final TextField display = new TextField();
     
-    final SpaceButton buttonSpace = new SpaceButton("SPACE");
-    final ArrowButton buttonRight = new ArrowButton("RIGHT");
+    final TextButton buttonSpace = new TextButton("SPACE");
+    final TextButton buttonRight = new TextButton("RIGHT");
     final SideButton buttonPlus = new SideButton("PLUS");
     final SideButton buttonMinus = new SideButton("MINUS");
     final SelectButton buttonSelect = new SelectButton("SEL");    
@@ -68,28 +68,28 @@ public class WhereToFrame extends BlankXTrex {
         }
     }
     
-    public class SpaceButton extends ExtractButton {
+    /*public class SpaceButton extends ExtractButton {
         SpaceButton (String s) {
 			super (s);
             setIcon( new ImageIcon(s + ".png"));
             setBorder(null);
         }
-    }
+    }*/
 	 public class TextButton extends ExtractButton {
         TextButton (String s) {
 			super (s);
-            setIcon( new ImageIcon(s + ".png"));
+            setIcon( new ImageIcon("Test" + s + ".png"));
             setBorder(null);
         }
     }
     
-    public class ArrowButton extends ExtractButton {
+    /*public class ArrowButton extends ExtractButton {
         ArrowButton (String s) {
             super (s);
 			setIcon( new ImageIcon(s + ".png"));
             setBorder(null);
         }
-    }
+    }*/
     
         public class ExtractButton extends JButton {
 		boolean selected;
@@ -101,7 +101,7 @@ public class WhereToFrame extends BlankXTrex {
 			setIcon( new ImageIcon("Test" + s + ".png"));
             setBorder(null);
 			setBorder( BorderFactory.createLineBorder(Color.black, 3 ) );
-			setBackground(Color.white);
+			setBackground(Color.black);
 			setText(s);
 		}
 		public void setPrevNext(ExtractButton prev,ExtractButton next)
@@ -112,12 +112,14 @@ public class WhereToFrame extends BlankXTrex {
 		public void select()
 		{
 			selected = true;
-			setBackground(Color.orange);
+			//setBackground(Color.orange);
+			setIcon(new ImageIcon("HTest" + getText() + ".png"));
 		}
 		public void deselect()
 		{
 			selected = false;
-			setBackground(Color.white);
+			//setBackground(Color.white);
+			setIcon(new ImageIcon("Test" + getText() + ".png"));
 		}
 		public ExtractButton prev()
 		{
