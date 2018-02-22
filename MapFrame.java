@@ -33,7 +33,7 @@ public class MapFrame extends BlankXTrex {
 
         Model model = new Model(0);
         Controller controller = new Controller(model);
-        View view = new View(controller, model);
+        View view = new View(controller, model); //Creating a view to display
 
         view.setLayout( null );
 		view.setLocation((screenWidth / 3)+150, (screenHeight / 4)-150); 
@@ -45,7 +45,7 @@ public class MapFrame extends BlankXTrex {
         MenuButton.setBounds(409, 113, 30,84); view.add(MenuButton);
 		
 
-        MenuButton.addMouseListener(new java.awt.event.MouseAdapter(){
+        MenuButton.addMouseListener(new java.awt.event.MouseAdapter(){ 
             public void mouseClicked(java.awt.event.MouseEvent evt){
                 dispose();
                 new XTrex();
