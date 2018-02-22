@@ -13,17 +13,17 @@ import javax.swing.ImageIcon;
  */
 public class ModelViewController{
 	
-	
-
-  
   public static void main( String[] argv ) {
+	
     Model      model      = new Model(0);
     Controller controller = new Controller( model );
     View       view       = new View( controller, model );
 
     JFrame frame = new JFrame();
+	frame.setVisible(true);
     frame.add( view );
-    frame.setVisible( true );
-	frame.setSize(1200,1200); 
+	frame.pack();
+	frame.setSize( 450, 835 ); /* title bar! */ 
+	frame.setResizable( false );
   }
 }
