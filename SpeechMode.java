@@ -11,26 +11,9 @@ import javax.swing.BorderFactory;
 /*
  * Simple calculator. David Wakeling, 03/01/2016.
  */
-public class SpeechMode extends JFrame {
-	
-	private static int    d  = 0;
-	private static int    e  = 0;
-	private static String op = "?";
-  
-	ImageIcon whereToIcon = new ImageIcon("noLanguageButton.png");
-	ImageIcon whereToIconSelected = new ImageIcon("noLanguageButtonSelected.png");
-	ImageIcon mapIcon = new ImageIcon("englishButton.png");
-	ImageIcon mapIconSelected = new ImageIcon("englishButtonSelected.png");
-	ImageIcon satelliteIcon = new ImageIcon("frenchButton.png");
-	ImageIcon satelliteIconSelected = new ImageIcon("frenchButtonSelected.png");
-	ImageIcon tripCompIcon = new ImageIcon("TripCompButton.png");
-	ImageIcon tripCompIconSelected = new ImageIcon("TripCompButtonSelected.png");
-	ImageIcon speechIcon = new ImageIcon("italianButton.png");
-	ImageIcon speechIconSelected = new ImageIcon("italianButtonSelected.png");
-	ImageIcon aboutIcon = new ImageIcon("InfoButton.png");
-	ImageIcon aboutIconSelected = new ImageIcon("InfoButtonSelected.png");
+public class SpeechMode extends BlankXTrex {
 
-	final LanguageButton noLanguageButton	= new LanguageButton("None");
+	final LanguageButton noLanguageButton	= new LanguageButton("Off");
 	final LanguageButton englishButton	= new LanguageButton("English");
 	final LanguageButton frenchButton	= new LanguageButton("French");
 	final LanguageButton germanButton	= new LanguageButton("German");
@@ -38,13 +21,13 @@ public class SpeechMode extends JFrame {
 	final LanguageButton spanishButton	= new LanguageButton("Spanish");
 
 	LanguageButton selected = null;
-  
-	final SideButton    PlusButton    = new SideButton("PlusButton");
+
+	/*final SideButton    PlusButton    = new SideButton("PlusButton");
 	final SideButton    MinusButton   = new SideButton("MinusButton");
 	final SideButton    SelectButton  = new SideButton("SelectButton");
 	final SideButton    MenuButton    = new SideButton("MenuButton");
 
-    
+
 	private class SideButton extends JButton{
 		SideButton(String s){
 			setBorder( null );
@@ -60,10 +43,10 @@ public class SpeechMode extends JFrame {
 				}
 			});
 		}
-	}
-    
-    
-    
+	}*/
+
+
+
 	private class LanguageButton extends JButton{
 		boolean selected;
 		LanguageButton prevButton;
@@ -104,62 +87,73 @@ public class SpeechMode extends JFrame {
 			return nextButton;
 		}
 	}
-  
+
 
 	public SpeechMode() {
 		setTitle( "XTrex" );
 		setContentPane( new JLabel( new ImageIcon( "XTrex Background.png" ) ) );
 		setLayout( null );
 
+		/* Setup languageButtons */
 		noLanguageButton.setPrevNext(spanishButton,englishButton);
 		englishButton.setPrevNext(noLanguageButton,frenchButton);
 		frenchButton.setPrevNext(englishButton,germanButton);
 		germanButton.setPrevNext(frenchButton,italianButton);
 		italianButton.setPrevNext(germanButton,spanishButton);
 		spanishButton.setPrevNext(italianButton,noLanguageButton);
-  
-		noLanguageButton.setBounds(95, 312, 250, 45); add(noLanguageButton);
-		//noLanguageButton.setIcon(whereToIcon);
-		englishButton.setBounds(95,362,250,45);add(englishButton);
-		//englishButton.setIcon(mapIconSelected);
-		frenchButton.setBounds(95,422,250,45); add(frenchButton);
-		//frenchButton.setIcon(satelliteIcon);
-		germanButton.setBounds(95, 472, 250, 45); add(germanButton);
-		//germanButton.setIcon(tripCompIcon);
-		italianButton.setBounds(95,522,250,45); add(italianButton);
-		//italianButton.setIcon(speechIcon);
-		spanishButton.setBounds(95,572,250,45); add(spanishButton);
-		//spanishButton.setIcon(aboutIcon);
-// x, y, length, width
-
 		selected = noLanguageButton;
 		noLanguageButton.select();
+
+		/* Set position and size of buttons and add to frame */
+		noLanguageButton.setBounds(95, 312, 255, 45); add(noLanguageButton);
+		englishButton.setBounds(95,362,255,45);add(englishButton);
+		frenchButton.setBounds(95,412,255,45); add(frenchButton);
+		germanButton.setBounds(95, 462, 255, 45); add(germanButton);
+		italianButton.setBounds(95,512,255,45); add(italianButton);
+		spanishButton.setBounds(95,562,255,45); add(spanishButton);
 
 		PlusButton.setBounds(9, 102, 30, 68);add(PlusButton);
 		MinusButton.setBounds(11, 175, 27, 64);add(MinusButton);
 		SelectButton.setBounds(8, 272, 29, 72); add(SelectButton);
-  
+        MenuButton.setBounds(409, 113, 30,84); add(MenuButton);
+
+		/* Click events for interactive buttons */
 		PlusButton.addMouseListener(new java.awt.event.MouseAdapter()
-		{
-			public void mouseClicked(java.awt.event.MouseEvent evt)
-			{
-				selected = selected.next();
-			}
-		});
-		MinusButton.addMouseListener(new java.awt.event.MouseAdapter()
 		{
 			public void mouseClicked(java.awt.event.MouseEvent evt)
 			{
 				selected = selected.prev();
 			}
 		});
+		MinusButton.addMouseListener(new java.awt.event.MouseAdapter()
+		{
+			public void mouseClicked(java.awt.event.MouseEvent evt)
+			{
+				selected = selected.next();
+			}
+		});
+		SelectButton.addMouseListener(new java.awt.event.MouseAdapter()
+		{
+			public void mouseClicked(java.awt.event.MouseEvent evt)
+			{
+				System.out.println(selected.getText());
+			}
+		});
+		MenuButton.addMouseListener(new java.awt.event.MouseAdapter()
+		{
+			public void mouseClicked(java.awt.event.MouseEvent evt)
+			{
+				dispose();
+				new XTrex();
+			}
+		});
 	}
-  
+
 
 	public static void main( String[] argv ) {
 		JFrame frame = new SpeechMode();
 		frame.setLocationRelativeTo( null );
-		frame.setSize( 450, 835 ); /* title bar! */ 
+		frame.setSize( 450, 835 ); /* title bar! */
 		frame.setResizable( false );
 		frame.setVisible( true );
 	}
