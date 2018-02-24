@@ -11,6 +11,7 @@ public class Navigator
 	final static String METHOD  = "GET";
 	final static String REGION  = "uk";
 	final static String MODE    = "TRANSIT";
+	final static Speaker mySpeaker = new Speaker();
 
 	/* Navigation Variables */
 	private	String		origin;
@@ -130,6 +131,7 @@ public class Navigator
 	{
 		if (currentDirection<directionsStr.length)
 		{
+			mySpeaker.saySomething(directionsStr[currentDirection]);
 			return directionsStr[currentDirection++];
 		} else {
 			return "You have reached your destination";
@@ -177,5 +179,8 @@ public class Navigator
 		myDir.setDest("Bath");
 		myDir.refreshdirections();
 		myDir.printOut();
+
+		while (myDir.getDirection()!="You have reached your destination")
+		{}
 	}
 }

@@ -65,17 +65,6 @@ public class SpeechModeFrame extends BlankXTrex {
 
 	public SpeechModeFrame() {
 		super();
-		/*setTitle( "XTrex" );
-		setContentPane( new JLabel( new ImageIcon( "XTrex Background.png" ) ) );
-		setLayout( null );
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Dimension screenSize = tk.getScreenSize();
-        int screenHeight = screenSize.height;
-        int screenWidth = screenSize.width;
-        setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
-        setSize( 450, 835 );
-        setResizable( false );
-        setVisible( true );*/
 
 		/* Setup languageButtons */
 		noLanguageButton.setPrevNext(spanishButton,englishButton);
