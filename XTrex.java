@@ -2,6 +2,9 @@ import java.awt.Color;
 import java.awt.TextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Toolkit;
+import java.awt.Dimension;
+import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,8 +13,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
-import java.awt.Toolkit;
-import java.awt.Dimension;
 
 
 public class XTrex extends BlankXTrex {
@@ -28,19 +29,19 @@ public class XTrex extends BlankXTrex {
   public int screenWidth = screenSize.width;
 
 
-  // Creating the icons for the menu buttons 
-  ImageIcon whereToIcon = new ImageIcon("WhereToButton.png");
-    ImageIcon whereToIconSelected = new ImageIcon("WhereToButtonSelected.png");
-  ImageIcon mapIcon = new ImageIcon("MapButton.png");
-    ImageIcon mapIconSelected = new ImageIcon("MapButtonSelected.png");
-  ImageIcon satelliteIcon = new ImageIcon("SatelliteButton.png");
-    ImageIcon satelliteIconSelected = new ImageIcon("SatelliteButtonSelected.png");
-  ImageIcon tripCompIcon = new ImageIcon("TripCompButton.png");
-    ImageIcon tripCompIconSelected = new ImageIcon("TripCompButtonSelected.png");
-  ImageIcon speechIcon = new ImageIcon("SpeechButton.png");
-    ImageIcon speechIconSelected = new ImageIcon("SpeechButtonSelected.png");
-  ImageIcon aboutIcon = new ImageIcon("InfoButton.png");
-    ImageIcon aboutIconSelected = new ImageIcon("InfoButtonSelected.png");
+  // Creating the icons for the menu buttons
+  ImageIcon whereToIcon = new ImageIcon("Images/WhereToButton.png");
+    ImageIcon whereToIconSelected = new ImageIcon("Images/WhereToButtonSelected.png");
+  ImageIcon mapIcon = new ImageIcon("Images/MapButton.png");
+    ImageIcon mapIconSelected = new ImageIcon("Images/MapButtonSelected.png");
+  ImageIcon satelliteIcon = new ImageIcon("Images/SatelliteButton.png");
+    ImageIcon satelliteIconSelected = new ImageIcon("Images/SatelliteButtonSelected.png");
+  ImageIcon tripCompIcon = new ImageIcon("Images/TripCompButton.png");
+    ImageIcon tripCompIconSelected = new ImageIcon("Images/TripCompButtonSelected.png");
+  ImageIcon speechIcon = new ImageIcon("Images/SpeechButton.png");
+    ImageIcon speechIconSelected = new ImageIcon("Images/SpeechButtonSelected.png");
+  ImageIcon aboutIcon = new ImageIcon("Images/InfoButton.png");
+    ImageIcon aboutIconSelected = new ImageIcon("Images/InfoButtonSelected.png");
 
 
   // Creating the menu buttons
@@ -51,13 +52,13 @@ public class XTrex extends BlankXTrex {
   final DisplayButton SpeechButton       = new DisplayButton();
   final DisplayButton AboutButton        = new DisplayButton();
 
-  // Creating the side/navigation buttons    
+  // Creating the side/navigation buttons
   final SideButton    PlusButton    = new BlankXTrex.SideButton("PlusButton");
   final SideButton    MinusButton   = new BlankXTrex.SideButton("MinusButton");
   final SideButton    SelectButton  = new BlankXTrex.SideButton("SelectButton");
   final SideButton    MenuButton    = new BlankXTrex.SideButton("MenuButton");
 
-  // A separate class for menu buttons, that could be useful later 
+  // A separate class for menu buttons, that could be useful later
      private class DisplayButton extends JButton{
          DisplayButton(){
              setBorder( null );
@@ -68,14 +69,14 @@ public class XTrex extends BlankXTrex {
   public XTrex() {
     // The frame specifications
     setTitle( "XTrex" );
-    setContentPane( new JLabel( new ImageIcon( "XTrex Background.png" ) ) );
+    setContentPane( new JLabel( new ImageIcon( "Images/XTrex Background.png" ) ) );
     setLayout( null );
     setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
     setSize( 450, 835 ); /* title bar! */
     setResizable( false );
     setVisible( true );
 
-    // Placing the menu buttons   
+    // Placing the menu buttons
     WhereToButton.setBounds(95, 312, 125, 93); add(WhereToButton);
       WhereToButton.setIcon(whereToIcon);
     MapButton.setBounds(95,415,125,93);add(MapButton);
@@ -124,7 +125,7 @@ public class XTrex extends BlankXTrex {
         }
     });
 
-    // Adding functionality to the plus navigation button  
+    // Adding functionality to the plus navigation button
     PlusButton.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             if(MapButton.getIcon() == mapIconSelected){
@@ -148,7 +149,7 @@ public class XTrex extends BlankXTrex {
             }
         }
     });
-      
+
     // Adding functionality to the minus navigation button
     MinusButton.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -174,7 +175,7 @@ public class XTrex extends BlankXTrex {
         }
     });
   }
- 
+
   public static void main( String[] argv ) {
 
     // Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
@@ -182,7 +183,7 @@ public class XTrex extends BlankXTrex {
     Dimension screenSize = tk.getScreenSize();
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
-    
+
     JFrame menuFrame = new XTrex();
     menuFrame.setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
     menuFrame.setSize( 450, 835 ); /* title bar! */

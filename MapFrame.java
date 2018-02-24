@@ -20,53 +20,56 @@ public class MapFrame extends BlankXTrex {
 	int c =10;
 
     public MapFrame(){
-        setTitle( "XTrex" );
+		super();
+        /*setTitle( "XTrex" );
         setLayout( null );
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Dimension screenSize = tk.getScreenSize();
-        int screenHeight = screenSize.height;
-        int screenWidth = screenSize.width;
+
         setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
-        setSize( 450, 835 ); /* title bar! */
+        setSize( 450, 835 );
         setResizable( false );
-        setVisible(true);
+        setVisible(true);*/
+
+		Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+		int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
 
         Model model = new Model(0);
         Controller controller = new Controller(model);
         View view = new View(controller, model); //Creating a view to display
 
         view.setLayout( null );
-		view.setLocation((screenWidth / 3)+150, (screenHeight / 4)-150); 
+		view.setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
         view.setBounds(0,0,450,835);
         add(view);
 
         PlusButton.setBounds(7, 102, 30, 68);view.add(PlusButton);
         MinusButton.setBounds(8, 170, 27, 64);view.add(MinusButton);
         MenuButton.setBounds(409, 113, 30,84); view.add(MenuButton);
-		
 
-        MenuButton.addMouseListener(new java.awt.event.MouseAdapter(){ 
+
+        MenuButton.addMouseListener(new java.awt.event.MouseAdapter(){
             public void mouseClicked(java.awt.event.MouseEvent evt){
                 dispose();
                 new XTrex();
             }
         });
-		
+
 		PlusButton.addMouseListener(new java.awt.event.MouseAdapter(){
             public void mouseClicked(java.awt.event.MouseEvent evt){
-				c ++; 
-				System.out.println(c); 
-             
+				c ++;
+				System.out.println(c);
+
             }
         });
-		
+
 		MinusButton.addMouseListener(new java.awt.event.MouseAdapter(){
 			public void mouseClicked(java.awt.event.MouseEvent evt){
 				c --;
-				System.out.println(c); 
+				System.out.println(c);
 			}
-		}); 
-		
+		});
+
 
     }
 

@@ -5,12 +5,12 @@ import java.net.URL;
 /*
  * Maps obtained using the Google Mapping Service.
  *
- * See https://developers.google.com/maps/documentation/static-maps/intro 
+ * See https://developers.google.com/maps/documentation/static-maps/intro
  *
  * David Wakeling, 2018.
  */
 public class Maps {
-  final static String OUTPUT    = "output.png";  /* Ouput file        */
+  final static String OUTPUT    = "Images/output.png";  /* Ouput file        */
   final static String LATITUDE  = "50.7184";     /* Exeter, latitude  */
   final static String LONGITUDE = "-3.5339";     /* Exeter, longitude */
   final static String ZOOM      = "10";           /* 0 ... 21           */
@@ -53,8 +53,8 @@ public class Maps {
    * Download map data.
    */
   public static void main( String[] argv ) {
-    final byte[] data = readData( LATITUDE, LONGITUDE, ZOOM, SIZE ); 
-    writeData( OUTPUT, data ); 
+    final byte[] data = readData( LATITUDE, LONGITUDE, ZOOM, SIZE );
+    writeData( OUTPUT, data );
   }
-  
+
 }

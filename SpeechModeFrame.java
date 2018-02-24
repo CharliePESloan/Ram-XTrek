@@ -64,7 +64,8 @@ public class SpeechModeFrame extends BlankXTrex {
 
 
 	public SpeechModeFrame() {
-		setTitle( "XTrex" );
+		super();
+		/*setTitle( "XTrex" );
 		setContentPane( new JLabel( new ImageIcon( "XTrex Background.png" ) ) );
 		setLayout( null );
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -72,9 +73,9 @@ public class SpeechModeFrame extends BlankXTrex {
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
         setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
-        setSize( 450, 835 ); /* title bar! */
+        setSize( 450, 835 );
         setResizable( false );
-        setVisible( true );
+        setVisible( true );*/
 
 		/* Setup languageButtons */
 		noLanguageButton.setPrevNext(spanishButton,englishButton);
@@ -94,8 +95,8 @@ public class SpeechModeFrame extends BlankXTrex {
 		germanButton.setBounds(95, 462, 255, 45); add(germanButton);
 		italianButton.setBounds(95,512,255,45); add(italianButton);
 		spanishButton.setBounds(95,562,255,45); add(spanishButton);
-		
-		Font myFont = new Font("Comic Sans MS",Font.PLAIN, 32);
+
+		Font myFont = new Font("Trebuchet MS",Font.PLAIN, 32);
 		noLanguageButton.setFont(myFont);
 		englishButton.setFont(myFont);
 		frenchButton.setFont(myFont);

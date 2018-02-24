@@ -21,9 +21,9 @@ class View extends JPanel implements Observer {
 
   public View( Controller controller, Model model ) {
 
-    try { 
-      image = ImageIO.read( new File( "XTrex Background.png" ) ); //loads in files
-	  image1 = ImageIO.read( new File( "output.png"));
+    try {
+      image = ImageIO.read( new File( "Images/XTrex Background.png" ) ); //loads in files
+	  image1 = ImageIO.read( new File( "Images/output.png"));
 
     } catch ( Exception ex ) {
       System.out.println( ex ); System.exit( 1 );
@@ -40,7 +40,7 @@ class View extends JPanel implements Observer {
   public  void paintComponent( Graphics g ) {
     super.paintComponent( g );
     Graphics2D g2d = (Graphics2D) g;
-	g2d.drawImage( image, 0, 0, this ); //draws background 
+	g2d.drawImage( image, 0, 0, this ); //draws background
 	g2d.drawImage( image1, 80,225,this); //draws maps on screen
 	g2d.setColor(Color.RED);
 	g2d.fillOval(219,426,15,15);
