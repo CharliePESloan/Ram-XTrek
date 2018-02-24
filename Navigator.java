@@ -13,24 +13,26 @@ public class Navigator
 	final static String MODE    = "TRANSIT";
 
 	/* Navigation Variables */
-	private	String origin;
-	private	String destination;
-	private JSONObject myJSON;
-	private	byte[] directionsRaw = {};
-	private JSONObject directionsJSON;
+	private	String		origin;
+	private	String		destination;
 
-	private JSONArray  routes;
-	private JSONObject route;
-	private JSONArray  legs;
-	private JSONObject leg;
-	private JSONArray  steps;
+	private	byte[]		directionsRaw = {};
+	private JSONObject	directionsJSON;
 
-	private JSONObject step;
-	private String	   html;
-	private Document   doc;
+	private JSONArray	routes;
+	private JSONObject	route;
+	private JSONArray	legs;
+	private JSONObject	leg;
+	private JSONArray	steps;
 
-	private int	   currentDirection;
-	private String	   directions[];
+	private JSONObject	step;
+	private JSONObject	distance;
+	private String		distanceStr;
+	private String		html;
+	private Document	doc;
+
+	private int		currentDirection;
+	private String	directionsStr[];
 
 
 	/*
@@ -68,10 +70,10 @@ public class Navigator
 		destination = newDest;
 	}
 
-	/* refreshDirections
+	/* refreshdirectionsStr
 	 * Connects to Google and updates route with latest origin and destination
 	 */
-	public void refreshDirections()
+	public void refreshdirections()
 	{
 		try
 		{
@@ -91,6 +93,7 @@ public class Navigator
 			final String[][] headers = {};
 
 			directionsRaw = HttpConnect.httpConnect( METHOD, url, headers, body );
+
 			directionsJSON = new JSONObject(new String(directionsRaw));
 			routes = (JSONArray)directionsJSON.get("routes");
 			route  = routes.getJSONObject(0);
@@ -98,16 +101,23 @@ public class Navigator
 			leg    = legs.getJSONObject(0);
 			steps  = (JSONArray)leg.get("steps");
 
-			directions = new String[steps.length()];
+			directionsStr = new String[steps.length()];
 
 			for (int i=0; i<steps.length(); i++)
 			{
 				step = steps.getJSONObject(i);
-				html = (String)step.get("html_instructions");
+
+				distance = step.getJSONObject("distance");
+				if (distance.getInt("value") >= 1000)
+					{ distanceStr = String.format("In %.1f kilometers ",(float)distance.getInt("value") / 1000); }
+				else
+					{ distanceStr = String.format("In %d meters ",		distance.getInt("value")); }
+
+				html = step.getString("html_instructions");
 				doc = Jsoup.parse(html);
-				directions[i] = doc.text();
+				directionsStr[i] = distanceStr + doc.text();
 				//System.out.println(doc.text());
-				//System.out.println(step.get("html_instructions"));
+				//System.out.println(step);
 			}
 
 		} catch (Exception ex)
@@ -118,22 +128,27 @@ public class Navigator
 
 	public String getDirection()
 	{
-		if (currentDirection<directions.length)
+		if (currentDirection<directionsStr.length)
 		{
-			return directions[currentDirection++];
+			return directionsStr[currentDirection++];
 		} else {
 			return "You have reached your destination";
 		}
+	}
+
+	public String[] getdirectionsStr()
+	{
+		return directionsStr;
 	}
 
 	public void printOut()
 	{
 		if (false)
 		{
-			System.out.println("Full Directions:");
+			System.out.println("Full directionsStr:");
 			if (directionsRaw.length == 0)
 			{
-				System.out.println("No directions");
+				System.out.println("No directionsStr");
 			} else
 			{
 				for (int i=0; i < directionsRaw.length; i++)
@@ -144,7 +159,7 @@ public class Navigator
 		}
 
 		System.out.println("Origin="+origin);
-		for (String d : directions)
+		for (String d : directionsStr)
 		{
 			System.out.println(d);
 		}
@@ -160,7 +175,7 @@ public class Navigator
 		//myDir.setDest	(51.3758f,  2.3599f);
 		myDir.setOrigin("Exeter");
 		myDir.setDest("Bath");
-		myDir.refreshDirections();
+		myDir.refreshdirections();
 		myDir.printOut();
 	}
 }
