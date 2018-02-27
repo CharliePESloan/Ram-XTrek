@@ -115,8 +115,8 @@ public class XTrex extends BlankXTrex {
                 System.out.println("Redirecting to Trip Computer page");
             } else if(SpeechButton.getIcon() == speechIconSelected){
                 System.out.println("Redirecting to Speech page");
-                dispose();
-                new SpeechModeFrame();
+                //dispose();
+                //new SpeechModeFrame();
             } else if(AboutButton.getIcon() == aboutIconSelected){
                 System.out.println("Redirecting to About page");
             } else if (SatelliteButton.getIcon() == satelliteIconSelected){
