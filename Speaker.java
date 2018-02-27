@@ -5,6 +5,12 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+/*
+ * Speaker
+ *
+ * Charlie Sloan 2018
+ */
+
 public class Speaker
 {
 	final static String KEY1 = "b43e10841e0448dd96fda3fbd3110ff8";

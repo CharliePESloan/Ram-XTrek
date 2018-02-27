@@ -3,6 +3,12 @@ import org.json.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+/*
+ * Navigator
+ *
+ * Charlie Sloan 2018 (adapted from code by David Wakeling)
+ */
+
 public class Navigator
 {
 	/* Constant Values */
