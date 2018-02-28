@@ -1,0 +1,74 @@
+import javax.swing.border.Border;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.Color;
+
+public class CycleButton extends JButton
+{
+    final static Border border =
+            BorderFactory.createLineBorder(Color.black, 3 );
+
+    boolean     isSelected;
+    boolean     hasImages;
+    CycleButton prevButton;
+    CycleButton nextButton;
+    ImageIcon   imageNormal;
+    ImageIcon   imageSelected;
+
+    CycleButton(String label)
+    {
+        isSelected = false;
+        hasImages = false;
+        setBorder( border );
+        setBackground(Color.white);
+        setForeground(Color.black);
+        setText(label);
+    }
+    CycleButton(String label, ImageIcon normal, ImageIcon selected)
+    {
+        isSelected      = false;
+        hasImages       = true;
+        imageNormal     = normal;
+        imageSelected   = selected;
+    }
+    public void setPrevNext(CycleButton prev,CycleButton next)
+    {
+        prevButton = prev;
+        nextButton = next;
+    }
+    public void select()
+    {
+        isSelected = true;
+        if (hasImages)
+        {
+            setIcon(imageSelected);
+        } else
+        {
+            setBackground(Color.orange);
+        }
+    }
+    public void deselect()
+    {
+        isSelected = false;
+        if (hasImages)
+        {
+            setIcon(imageNormal);
+        } else
+        {
+            setBackground(Color.white);
+        }
+    }
+    public CycleButton prev()
+    {
+        deselect();
+        prevButton.select();
+        return prevButton;
+    }
+    public CycleButton next()
+    {
+        deselect();
+        nextButton.select();
+        return nextButton;
+    }
+}
