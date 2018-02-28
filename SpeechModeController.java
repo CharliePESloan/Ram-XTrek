@@ -1,7 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SpeechModePlusController implements ActionListener
+public class SpeechModeController implements ActionListener
 {
     private SpeechModeModel myModel;
 
