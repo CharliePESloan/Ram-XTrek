@@ -20,54 +20,16 @@ public class WhereToFrame extends BlankXTrex {
     public String textDisplay = ""; //Empty text box
     ImageIcon[] letter = new ImageIcon[26]; //Array of images  A-Z
     ImageIcon[] hLetter = new ImageIcon[26]; //Array of images A-Z (highlighted)
-	TextButton[] buttons = new TextButton[26]; //Array of buttons
+    TextButton[] buttons = new TextButton[26]; //Array of buttons
     static String abcd = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	ExtractButton selected;
-
-    ImageIcon SPACE = new ImageIcon("Images/TestSpace.png");
-    ImageIcon RIGHT = new ImageIcon("Images/TestRight.png");
-    ImageIcon HSPACE = new ImageIcon("Images/HTestSpace.png");
-    ImageIcon HRIGHT = new ImageIcon("Images/HTestRight.png");
+    ExtractButton selected;
 
     final TextField display = new TextField();
 
     final TextButton buttonSpace = new TextButton("SPACE");
     final TextButton buttonRight = new TextButton("RIGHT");
-    final SideButton buttonPlus = new BlankXTrex.SideButton("PLUS");
-    final SideButton buttonMinus = new BlankXTrex.SideButton("MINUS");
-    final SideButton buttonSelect = new BlankXTrex.SideButton("SEL");
 
-    /*public class SideButton extends JButton {
-        SideButton(String s) {
-            setIcon( new ImageIcon("Images/" + s + ".png"));
-            setBorder(null);
-            addMouseListener (new MouseAdapter() {
-                public void mouseEntered(MouseEvent me) {
-                  setIcon(new ImageIcon("Images/" + s + "Selected.png"));  //Highlights the button when the mouse enters the image
-                }
-                public void mouseExited(MouseEvent me) {
-                    setIcon(new ImageIcon("Images/" + s + ".png"));
-                }
-            });
-        }
-    }
-
-    public class SelectButton extends JButton {
-        SelectButton (String s) {
-            setIcon( new ImageIcon("Images/" + s + ".png"));
-            setBorder(null);
-            addMouseListener (new java.awt.event.MouseAdapter() {
-                public void mouseEntered(MouseEvent me) {
-                  setIcon(new ImageIcon(s + "Selected.png")); //Highlights the button when the mouse enters the image
-                }
-                public void mouseExited(MouseEvent me) {
-                    setIcon(new ImageIcon(s + ".png"));
-                }
-            });
-        }
-    }*/
-
-	 public class TextButton extends ExtractButton {
+	public class TextButton extends ExtractButton {
         TextButton (String s) {
 			super (s);
             setIcon( new ImageIcon("Images/Test" + s + ".png")); //Sets the images to each button
@@ -83,7 +45,7 @@ public class WhereToFrame extends BlankXTrex {
 		{
 			selected = false;
 			setIcon( new ImageIcon("Images/Test" + s + ".png"));
-            setBorder(null);
+                        setBorder(null);
 			setBorder( BorderFactory.createLineBorder(Color.black, 3 ) );
 			setBackground(Color.black);
 			setText(s);
@@ -121,19 +83,8 @@ public class WhereToFrame extends BlankXTrex {
 
     public WhereToFrame(){
         super();
-        /*setTitle( "XTrex" );
-        setContentPane( new JLabel( new ImageIcon( "Images/XTrex Background.png" ) ) );
-        setLayout( null );
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Dimension screenSize = tk.getScreenSize();
-        int screenHeight = screenSize.height;
-        int screenWidth = screenSize.width;
-        setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
-        setSize( 450, 835 );
-        setResizable( false );
-        setVisible( true );*/
-
-		display.setEditable(false);
+        
+	display.setEditable(false);
 
         PlusButton.setBounds(9, 102, 30, 68);add(PlusButton);
         MinusButton.setBounds(11, 175, 27, 64);add(MinusButton);
@@ -165,11 +116,8 @@ public class WhereToFrame extends BlankXTrex {
 		buttons[0].select();
 
         display.setBounds (95, 312, 260, 50); add(display);
-        buttonPlus.setBounds (9, 102, 30, 68); add(buttonPlus);
-        buttonMinus.setBounds (11, 175, 27, 64); add(buttonMinus);
-        buttonSelect.setBounds (8, 272,29, 72); add(buttonSelect);
 
-        buttons[0].setBounds (95, 365, 65, 45);
+        buttons[0].setBounds (95, 365, 65, 45);//x,y, width, length
         buttons[1].setBounds (160, 365, 65, 45);
         buttons[2].setBounds (225, 365, 65, 45);
         buttons[3].setBounds (290, 365, 65, 45);
@@ -219,14 +167,18 @@ public class WhereToFrame extends BlankXTrex {
 
         SelectButton.addMouseListener(new MouseAdapter(){
            public void mouseClicked(MouseEvent me) {
-			   if (selected == buttonSpace) {
-				   textDisplay += " ";
-				   display.setText("" + textDisplay);
-			   }
-			   else {
-               textDisplay += selected.getText();
-               display.setText("" + textDisplay);
-			   }
+			if (selected == buttonSpace) {
+                            textDisplay += " ";
+			    display.setText("" + textDisplay);
+			}
+                        if (selected == buttonRight) {
+                            dispose();
+                            new WhereToFrameTwo();
+                        }
+			else {
+                            textDisplay += selected.getText();
+                            display.setText("" + textDisplay);
+                        }
            }
 });
 }}
