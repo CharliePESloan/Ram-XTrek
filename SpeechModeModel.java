@@ -6,7 +6,6 @@ import java.util.concurrent.ExecutorService;
 public class SpeechModeModel extends Observable implements Model
 {
 	//ExecutorService executor = Executors.newFixedThreadPool(1);
-	ExecutorService executor = Executors.newSingleThreadExecutor();
 	CycleButton selected = null;
 	String	    language;
 	String	    artist;
@@ -52,6 +51,7 @@ public class SpeechModeModel extends Observable implements Model
 				break;
 		}
 		System.out.println(artist);
+		ExecutorService executor = Executors.newSingleThreadExecutor();
 		executor.execute( new Runnable() {
 			public void run() {
 				Speaker.saySomething(selected.getText(),language,artist);
