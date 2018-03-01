@@ -19,10 +19,10 @@ public class SpeechModeView extends JPanel implements Observer
 	/* Create language buttons */
 	final public CycleButton buttonOff = new CycleButton("Off", "en-GB");
 	final CycleButton buttonEnglish	= new CycleButton("English","en-GB");
-	final CycleButton buttonFrench	= new CycleButton("Français", "fr-FR");
+	final CycleButton buttonFrench	= new CycleButton("Francais", "fr-FR");
 	final CycleButton buttonGerman	= new CycleButton("Deutsch", "de-DE");
 	final CycleButton buttonItalian	= new CycleButton("Italiano","it-IT");
-	final CycleButton buttonSpanish	= new CycleButton("Español","es-ES");
+	final CycleButton buttonSpanish	= new CycleButton("Espanol","es-ES");
 
 	public void showMe()
 	{
