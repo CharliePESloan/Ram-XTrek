@@ -26,7 +26,8 @@ public class XTrex2 extends JFrame/*extends BlankXTrex*/
 	final public int screenHeight = screenSize.height;
 	final public int screenWidth  = screenSize.width;
 
-
+	// Card layout stores each screen and brings the current
+	// one to the front
 	CardLayout cardLayout = new CardLayout();
 	JPanel	   cardPanel  = new JPanel(cardLayout);
 
@@ -99,6 +100,13 @@ public class XTrex2 extends JFrame/*extends BlankXTrex*/
   final SideButton    SelectButton  = new SideButton("SelectButton");
   final SideButton    MenuButton    = new SideButton("MenuButton");
 
+  final SpeechModeModel	menuModel	= new SpeechModeModel(this){
+	  			XTrex2 XTrek;
+	  			@Override
+				public void pressedSelect(){
+					myXTrek.setMenu("Speech");
+				}
+  			};
   final SpeechModeModel	speechModel	= new SpeechModeModel(this);
   final Controller	controller 	= new Controller(speechModel); //Should be menu model at first */
   final JPanel		menuView	= new JPanel();
@@ -113,7 +121,16 @@ public class XTrex2 extends JFrame/*extends BlankXTrex*/
 
 	public void setMenu(String menu)
 	{
-		// Switches CardLayout to show the specified menu
+		// Switches controller's model to correct value
+		switch(menu){
+			case "Menu":
+				controller.setModel(menuModel);
+				break;
+			case "Speech":
+				controller.setModel(speechModel);
+				break;
+		}
+		// Switches cardLayout to show the specified menu
 		cardLayout.show(cardPanel,menu);
 	}
 

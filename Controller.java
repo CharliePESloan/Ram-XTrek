@@ -18,7 +18,7 @@ class Controller implements MouseListener
 		this.model = model;
 	}
 
-	public void switchModel( Model model )
+	public void setModel( Model model )
 	{
 		this.model = model;
 	}
