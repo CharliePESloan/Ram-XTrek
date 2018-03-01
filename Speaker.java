@@ -17,7 +17,7 @@ public class Speaker
 	final static String KEY2 = "1be7b3ec099d461582bb194df5bd03de";
 
 	final static String TEXT   = "Hello world! I am just testing out how this voice sounds, okay?";
-	final static String LANG   = "en-US";
+	//final static String LANG   = "en-US";
 	final static String GENDER = "Female";
 	// final static String ARTIST = "(en-GB, Susan, Apollo)";
 	// final static String ARTIST = "(en-AU, HayleyRUS)";
@@ -27,16 +27,20 @@ public class Speaker
 	final static String FORMAT = "riff-16khz-16bit-mono-pcm";
 
 	final static Speech mySpeech	= new Speech();
-	final static Sound  mySound		= new Sound();
+	final static Sound  mySound	= new Sound();
 
 	public Speaker()
 	{}
 
-	public static void saySomething(String text)
+	public static void saySomething(String text,String lang,String artist)
 	{
 		final String token  = Speech.renewAccessToken( KEY1 );
-		final byte[] speech = Speech.generateSpeech( token,		text,	LANG,
-													 GENDER,	ARTIST,	FORMAT );
+		final byte[] speech = Speech.generateSpeech( token,
+							     text,
+							     lang,
+							     GENDER,
+							     artist,
+							     FORMAT );
 		InputStream myInputStream = new ByteArrayInputStream(speech);
 		try
 		{
@@ -53,6 +57,6 @@ public class Speaker
 	public static void main(String[] argv)
 	{
 		Speaker mySpeaker = new Speaker();
-		mySpeaker.saySomething(TEXT);
+		mySpeaker.saySomething(TEXT,"en-GB",ARTIST);
 	}
 }

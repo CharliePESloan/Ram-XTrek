@@ -13,16 +13,16 @@ import java.util.Observer;
 
 public class SpeechModeView extends JPanel implements Observer
 {
-	SpeechModeController myController;
-	SpeechModeModel 	 myModel;
+	Controller	myController;
+	SpeechModeModel	myModel;
 
 	/* Create language buttons */
-	final public CycleButton buttonOff		= new CycleButton("Off");
-	final CycleButton		 buttonEnglish	= new CycleButton("English");
-	final CycleButton		 buttonFrench	= new CycleButton("French");
-	final CycleButton		 buttonGerman	= new CycleButton("German");
-	final CycleButton		 buttonItalian	= new CycleButton("Italian");
-	final CycleButton		 buttonSpanish	= new CycleButton("Spanish");
+	final public CycleButton buttonOff = new CycleButton("Off", "en-GB");
+	final CycleButton buttonEnglish	= new CycleButton("English","en-GB");
+	final CycleButton buttonFrench	= new CycleButton("Français", "fr-FR");
+	final CycleButton buttonGerman	= new CycleButton("Deutsch", "de-DE");
+	final CycleButton buttonItalian	= new CycleButton("Italiano","it-IT");
+	final CycleButton buttonSpanish	= new CycleButton("Español","es-ES");
 
 	public void showMe()
 	{
@@ -38,23 +38,15 @@ public class SpeechModeView extends JPanel implements Observer
 		//jTextField.setText("" + obj );
 	}
 
-	/*public static void main( String[] argv ) {
-		JFrame frame = new SpeechModeView();
-		frame.setLocationRelativeTo( null );
-		frame.setSize( 450, 835 );
-		frame.setResizable( false );
-		frame.setVisible( true );
-	}*/
 
-
-	public SpeechModeView( SpeechModeController controller, SpeechModeModel model )
+	public SpeechModeView( Controller controller, SpeechModeModel model )
 	{
 		myController = controller;
 		myModel = model;
 		myModel.setSelected(buttonOff);
 
 		//super();
-		setBackground(Color.red);
+		//setBackground(Color.red);
 		setLayout( null );
 		//setSize( 250, 300 );
         //setVisible( true );
