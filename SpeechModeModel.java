@@ -7,11 +7,14 @@ public class SpeechModeModel extends Observable implements Model
 {
 	//ExecutorService executor = Executors.newFixedThreadPool(1);
 	CycleButton selected = null;
+	XTrex2	    myXTrek;
 	String	    language;
 	String	    artist;
 
-	public SpeechModeModel()
-	{}
+	public SpeechModeModel(XTrex2 XTrek)
+	{
+		myXTrek = XTrek;
+	}
 	public void setSelected(CycleButton newSelected)
 	{
 		selected = newSelected;
@@ -28,7 +31,9 @@ public class SpeechModeModel extends Observable implements Model
 		setSelected(selected.next());
 	}
 	public void pressedMenu()
-	{}
+	{
+		myXTrek.setMenu("Menu");
+	}
 	public void pressedSelect()
 	{
 		language = selected.getData();

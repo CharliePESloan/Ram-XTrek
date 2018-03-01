@@ -6,7 +6,9 @@ import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.CardLayout;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -21,8 +23,12 @@ public class XTrex2 extends JFrame/*extends BlankXTrex*/
 
 	public Toolkit tk = Toolkit.getDefaultToolkit();
 	public Dimension screenSize = tk.getScreenSize();
-	public int screenHeight = screenSize.height;
-	public int screenWidth = screenSize.width;
+	final public int screenHeight = screenSize.height;
+	final public int screenWidth  = screenSize.width;
+
+
+	CardLayout cardLayout = new CardLayout();
+	JPanel	   cardPanel  = new JPanel(cardLayout);
 
 
 	// Creating the icons for the menu buttons
@@ -93,9 +99,10 @@ public class XTrex2 extends JFrame/*extends BlankXTrex*/
   final SideButton    SelectButton  = new SideButton("SelectButton");
   final SideButton    MenuButton    = new SideButton("MenuButton");
 
-  final SpeechModeModel	smm		= new SpeechModeModel();
-  final Controller	controller 	= new Controller(smm);
-  final SpeechModeView	smv 		= new SpeechModeView(controller, smm);
+  final SpeechModeModel	speechModel	= new SpeechModeModel(this);
+  final Controller	controller 	= new Controller(speechModel); //Should be menu model at first */
+  final JPanel		menuView	= new JPanel();
+  final SpeechModeView	speechView	= new SpeechModeView(controller, speechModel);
 
   // A separate class for menu buttons, that could be useful later
      private class DisplayButton extends JButton{
@@ -103,6 +110,12 @@ public class XTrex2 extends JFrame/*extends BlankXTrex*/
              setBorder( null );
          }
      }
+
+	public void setMenu(String menu)
+	{
+		// Switches CardLayout to show the specified menu
+		cardLayout.show(cardPanel,menu);
+	}
 
   // What is constructed when XTrex() is called
   public XTrex2() {
@@ -113,6 +126,7 @@ public class XTrex2 extends JFrame/*extends BlankXTrex*/
 	setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
 	setResizable( false );
 
+	menuView.setBackground(Color.red);
 	
         WindowAdapter adapter = new WindowAdapter() {
             @Override
@@ -123,20 +137,6 @@ public class XTrex2 extends JFrame/*extends BlankXTrex*/
             }
         };
         addWindowListener(adapter);
-
-	// Placing the menu buttons
-	//WhereToButton.setBounds(95, 312, 125, 93); add(WhereToButton);
-	  WhereToButton.setIcon(whereToIcon);
-	//MapButton.setBounds(95,415,125,93);add(MapButton);
-	  MapButton.setIcon(mapIconSelected);
-	//SatelliteButton.setBounds(95,518,125,93); add(SatelliteButton);
-	  SatelliteButton.setIcon(satelliteIcon);
-	//TripComputerButton.setBounds(226, 312, 125, 93); add(TripComputerButton);
-	  TripComputerButton.setIcon(tripCompIcon);
-	//SpeechButton.setBounds(226,415,125,93); add(SpeechButton);
-	  SpeechButton.setIcon(speechIcon);
-	//AboutButton.setBounds(226,518,125,93); add(AboutButton);
-	  AboutButton.setIcon(aboutIcon);
 
 	// Placing the navigation buttons
 	PlusButton.setBounds(9, 102, 30, 68);
@@ -149,14 +149,22 @@ public class XTrex2 extends JFrame/*extends BlankXTrex*/
 	MinusButton.addMouseListener(controller);
 	SelectButton.addMouseListener(controller);
 
-	smv.setBounds(95,305,250, 300);
+
+	//speechView.setBounds(0,0,250, 300);
+	menuView.setSize(250, 300);
+	speechView.setSize(250, 300);
+	cardPanel.setBounds(95,305,250, 300);
 
 	add(PlusButton);
 	add(MinusButton);
 	add(SelectButton);
 	add(MenuButton);
-	add(smv);
+	
+	cardPanel.add(menuView,"Menu");
+	cardPanel.add(speechView,"Speech");
+	add(cardPanel);
 
+	cardLayout.show(cardPanel,"Speech");
 	//pack();
 
 	setSize( 450, 835 );
@@ -246,15 +254,15 @@ public class XTrex2 extends JFrame/*extends BlankXTrex*/
   public static void main( String[] argv ) {
 
     // Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
-    Toolkit tk = Toolkit.getDefaultToolkit();
+    /*Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension screenSize = tk.getScreenSize();
     int screenHeight = screenSize.height;
-    int screenWidth = screenSize.width;
+    int screenWidth = screenSize.width;*/
 
-    JFrame menuFrame = new XTrex2();
-    menuFrame.setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
-    menuFrame.setSize( 450, 835 ); /* title bar! */
-    menuFrame.setResizable( false );
-    menuFrame.setVisible( true );
+    JFrame XTrek = new XTrex2();
+    //menuFrame.setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
+    //menuFrame.setSize( 450, 835 ); /* title bar! */
+    //menuFrame.setResizable( false );
+    //menuFrame.setVisible( true );
   }
 }
