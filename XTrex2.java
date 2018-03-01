@@ -149,7 +149,7 @@ public class XTrex2 extends JFrame/*extends BlankXTrex*/
 	MinusButton.addMouseListener(controller);
 	SelectButton.addMouseListener(controller);
 
-
+	menuView.add(new JLabel("MENU!"));
 	//speechView.setBounds(0,0,250, 300);
 	menuView.setSize(250, 300);
 	speechView.setSize(250, 300);
