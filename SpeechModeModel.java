@@ -52,13 +52,13 @@ public class SpeechModeModel extends Observable implements Model
 				break;
 		}
 		System.out.println(artist);
-		/*executor.execute( new Runnable() {
+		executor.execute( new Runnable() {
 			public void run() {
 				Speaker.saySomething(selected.getText(),language,artist);
 			}
 		} );
-		executor.shutdown();*/
+		executor.shutdown();
 
-		Speaker.saySomething(selected.getText(),language,artist);
+		//Speaker.saySomething(selected.getText(),language,artist);
 	}
 }
