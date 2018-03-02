@@ -27,7 +27,7 @@ public class SpeechModeView extends JPanel implements Observer
 	final CycleButton buttonItalian	= new CycleButton("Italiano","it-IT");
 	final CycleButton buttonSpanish	= new CycleButton("Espanol", "es-ES");
 
-
+	/* update */
 	public void update( Observable obs, Object obj )
 	{
 		

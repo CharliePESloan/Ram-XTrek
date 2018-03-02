@@ -58,10 +58,12 @@ public class Navigator
 	{
 		//origin = String.valueOf(latitude)+","+String.valueOf(longitude);
 		origin = String.valueOf(latitude)+","+String.valueOf(longitude);
+		encOrigin = URLEncoder.encode(origin,"UTF-8");
 	}
-	public void setOrigin(String newOrigin)
+	public void setOrigin(String origin)
 	{
-		origin = newOrigin;
+		this.origin = origin;
+		encOrigin = URLEncoder.encode(origin,"UTF-8");
 	}
 
 	/*
@@ -74,7 +76,15 @@ public class Navigator
 	}
 	public void setDest(String newDest)
 	{
-		destination = newDest;
+		this.destination = destination;
+	}
+
+	/* setLang
+	 * Set the current language
+	 */
+	public void setLang(String language)
+	{
+		this.language = language
 	}
 
 	/* refreshdirectionsStr
@@ -85,12 +95,12 @@ public class Navigator
 		try
 		{
 			System.out.println("Attempting to fetch directions");
-			final String encOrigin =	URLEncoder.encode(origin,"UTF-8");
 			final String encDestination =	URLEncoder.encode(destination,"UTF-8");
 
 			final String url = (URLBASE
 					   +"?origin="	   +encOrigin
 					   +"&destination="+encDestination
+					   +"&language="   +language
 					   +"&region="	   +REGION
 					   +"&mode="	   +MODE
 					   +"&key="	   +KEY);

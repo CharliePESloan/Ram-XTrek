@@ -5,7 +5,7 @@ import java.util.concurrent.ExecutorService;
 
 public class SpeechModeModel extends Observable implements Model
 {
-	//ExecutorService executor = Executors.newFixedThreadPool(1);
+	/* Initialise variables */
 	CycleButton selected = null;
 	XTrex2	    myXTrek;
 	String	    language;
@@ -36,6 +36,7 @@ public class SpeechModeModel extends Observable implements Model
 	}
 	public void pressedSelect()
 	{
+		/* Get selected language code and choose artist */
 		language = selected.getData();
 		switch (language)
 		{
@@ -55,7 +56,7 @@ public class SpeechModeModel extends Observable implements Model
 				artist = "(en-GB, Susan, Apollo)";
 				break;
 		}
-		System.out.println(artist);
+		/* Start speaking a different thread */
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 		executor.execute( new Runnable() {
 			public void run() {
@@ -63,7 +64,5 @@ public class SpeechModeModel extends Observable implements Model
 			}
 		} );
 		executor.shutdown();
-
-		//Speaker.saySomething(selected.getText(),language,artist);
 	}
 }
