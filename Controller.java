@@ -1,6 +1,5 @@
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-//import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
 import javax.swing.JButton;
 
@@ -11,30 +10,43 @@ import javax.swing.JButton;
  */
 class Controller implements MouseListener
 {
+	// The currently selected model
 	private Model model;
 
+	/* Constructor
+	 * Sets up initial model
+	 */
 	public Controller( Model model )
 	{
 		this.model = model;
 	}
 
+	/* setModel
+	 * Change the current model
+	 */
 	public void setModel( Model model )
 	{
 		this.model = model;
 	}
 
-	public void mouseClicked( MouseEvent me)
+	/* mouseClicked
+	 * Handle click events for all buttons on the XTrek device 
+	 */
+	public void mouseClicked( MouseEvent me )
 	{
-		System.out.println("Clicked!");
+		// Try to get the source of the event as a button
 		Object	o = me.getSource();
 		JButton	b = null;
-
 		if(o instanceof JButton)
 			b = (JButton)o;
 
+		// If the event came from a button then handle it
 		if(b != null)
 		{
+			// Debug print statement
 			System.out.println("It's a " + b.getText() + "!");
+
+			// The model handles each button with a specfific function
 			switch (b.getText())
 			{
 				case "PlusButton":
@@ -55,13 +67,10 @@ class Controller implements MouseListener
 	
 	public void mousePressed( MouseEvent me )
 	{}
-
 	public void mouseEntered( MouseEvent me )
 	{}
-
 	public void mouseExited( MouseEvent me )
 	{}
-	
 	public void mouseReleased( MouseEvent me )
 	{}
 
