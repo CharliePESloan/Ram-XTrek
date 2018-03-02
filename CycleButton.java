@@ -33,6 +33,7 @@ public class CycleButton extends JLabel
 		setOpaque(false);
 		imageNormal     = normal;
 		imageSelected   = selected;
+		setIcon(normal);
 	}
 	public void setPrevNext(CycleButton prev,CycleButton next)
 	{
