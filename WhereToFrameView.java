@@ -13,20 +13,30 @@ import javax.swing.*;
 public class WhereToFrameView extends JPanel implements Observer {
     ImageIcon[] letter = new ImageIcon[26]; //Array of images  A-Z
     ImageIcon[] hLetter = new ImageIcon[26]; //Array of images A-Z (highlighted)
-    JButton[] buttons = new JButton[26]; //Array of buttons
+    CycleButton[] buttons = new CycleButton[26]; //Array of buttons
     static String abcd = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     final JTextField display = new JTextField();
-    final JButton buttonSpace = new JButton("SPACE");
-    final JButton buttonRight = new JButton("RIGHT");
+    final CycleButton buttonSpace = new CycleButton("SPACE");
+    final CycleButton buttonRight = new CycleButton("RIGHT");
+    CycleButton isSelected;
     
-    public WhereToFrameView (Controller controller, Model model){
+    public WhereToFrameView (Controller controller, WhereToFrameModel model){
     
     for(int i=0; i<26; i++) {
             letter[i] = new ImageIcon("Test" + abcd.charAt(i) + ".png"); //Creates the images
 			hLetter[i] = new ImageIcon("HTest" + abcd.charAt(i) + ".png"); //Creates the highlighted images
-			buttons[i] = new JButton(Character.toString(abcd.charAt(i))); //Creates the buttons
+			buttons[i] = new CycleButton(Character.toString(abcd.charAt(i))); //Creates the buttons
 			add(buttons[i]);
         }
+    for (int i=1; i<25;i++) {
+			buttons[i].setPrevNext(buttons[i-1],buttons[i+1]);
+		}
+		buttonRight.setPrevNext(buttonSpace, buttons[0]);
+		buttonSpace.setPrevNext(buttons[25], buttonRight);
+		buttons[0].setPrevNext(buttonRight, buttons[1]);
+		buttons[25].setPrevNext(buttons[24], buttonSpace);
+
+                model.setSelected(buttons[0]);
     
         display.setBounds (95, 312, 260, 50); add(display);
 
