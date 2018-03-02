@@ -11,7 +11,7 @@ import javax.swing.*;
  * @author User
  */
 public class WhereToFrameModel extends Observable implements Model {
-    CycleButton selected = null;
+    CycleButton selected;
     XTrex2 myXTrek;
     String letters;
     String textDisplay ="";
