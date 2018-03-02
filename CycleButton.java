@@ -1,13 +1,13 @@
-import javax.swing.border.Border;
-import javax.swing.BorderFactory;
+//import javax.swing.border.Border;
+//import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import javax.swing.JLabel;
 import java.awt.Color;
 
-public class CycleButton extends JButton
+public class CycleButton extends JLabel
 {
-	final static Border border =
-		BorderFactory.createLineBorder(Color.black, 3 );
+	//final static Border border =
+	//	BorderFactory.createLineBorder(Color.black, 3 );
 
 	boolean     isSelected;
 	boolean     hasImages;
@@ -21,7 +21,8 @@ public class CycleButton extends JButton
 	{
 		isSelected = false;
 		hasImages = false;
-		setBorder( border );
+		//setBorder( border );
+		setOpaque(true);
 		setBackground(Color.white);
 		setForeground(Color.black);
 		setText(label);
