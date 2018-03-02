@@ -43,7 +43,7 @@ public class SpeechModeView extends JPanel implements Observer
 
 		// Use absolute positioning
 		setLayout( null );
-
+		// Set background colour
 		setBackground(Color.black);
 
 		/* Setup CycleButtons */
