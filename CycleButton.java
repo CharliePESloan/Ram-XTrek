@@ -12,6 +12,7 @@ public class CycleButton extends JLabel
 	ImageIcon   imageNormal;
 	ImageIcon   imageSelected;
 
+	/* Constructors */
 	CycleButton(String label)
 	{
 		isSelected = false;
@@ -26,15 +27,18 @@ public class CycleButton extends JLabel
 		this(label);
 		this.data = data;
 	}
-	CycleButton(String label, ImageIcon normal, ImageIcon selected)
+	CycleButton(String data, ImageIcon normal, ImageIcon selected)
 	{
 		isSelected      = false;
 		hasImages       = true;
-		setOpaque(false);
 		imageNormal     = normal;
 		imageSelected   = selected;
+		this.data	= data;
+		setOpaque(false);
 		setIcon(normal);
 	}
+
+	/*  */
 	public void setPrevNext(CycleButton prev,CycleButton next)
 	{
 		prevButton = prev;
