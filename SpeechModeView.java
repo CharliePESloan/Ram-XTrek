@@ -20,12 +20,12 @@ public class SpeechModeView extends JPanel implements Observer
 	SpeechModeModel	myModel;
 
 	/* Create language buttons */
-	final public CycleButton buttonOff = new CycleButton("Off", "en-GB");
-	final CycleButton buttonEnglish	= new CycleButton("English","en-GB");
-	final CycleButton buttonFrench	= new CycleButton("Francais", "fr-FR");
+	final public CycleButton buttonOff = new CycleButton("Off",  "en-GB");
+	final CycleButton buttonEnglish	= new CycleButton("English", "en-GB");
+	final CycleButton buttonFrench	= new CycleButton("Francais","fr-FR");
 	final CycleButton buttonGerman	= new CycleButton("Deutsch", "de-DE");
 	final CycleButton buttonItalian	= new CycleButton("Italiano","it-IT");
-	final CycleButton buttonSpanish	= new CycleButton("Espanol","es-ES");
+	final CycleButton buttonSpanish	= new CycleButton("Espanol", "es-ES");
 
 
 	public void update( Observable obs, Object obj )
@@ -44,8 +44,10 @@ public class SpeechModeView extends JPanel implements Observer
 		// Use absolute positioning
 		setLayout( null );
 
+		setBackground(Color.black);
+
 		/* Setup CycleButtons */
-		buttonOff.		setPrevNext(buttonSpanish,	buttonEnglish);
+		buttonOff.	setPrevNext(buttonSpanish,	buttonEnglish);
 		buttonEnglish.	setPrevNext(buttonOff,		buttonFrench);
 		buttonFrench.	setPrevNext(buttonEnglish,	buttonGerman);
 		buttonGerman.	setPrevNext(buttonFrench,	buttonItalian);

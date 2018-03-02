@@ -38,16 +38,16 @@ class Controller implements MouseListener
 			switch (b.getText())
 			{
 				case "PlusButton":
-					this.model.pressedPlus();
+					model.pressedPlus();
 					break;
 				case "MinusButton":
-					this.model.pressedMinus();
+					model.pressedMinus();
 					break;
 				case "SelectButton":
-					this.model.pressedSelect();
+					model.pressedSelect();
 					break;
 				case "MenuButton":
-					this.model.pressedMenu();
+					model.pressedMenu();
 					break;
 			}
 		}
