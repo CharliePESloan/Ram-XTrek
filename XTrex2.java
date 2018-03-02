@@ -107,10 +107,10 @@ public class XTrex2 extends JFrame/*extends BlankXTrex*/
 					myXTrek.setMenu("Speech");
 				}
   			};
-  final SpeechModeModel	speechModel	= new SpeechModeModel(this);
+  final WhereToFrameModel	speechModel	= new WhereToFrameModel(this);
   final Controller	controller 	= new Controller(speechModel); //Should be menu model at first */
   final JPanel		menuView	= new JPanel();
-  final SpeechModeView	speechView	= new SpeechModeView(controller, speechModel);
+  final WhereToFrameView	speechView	= new WhereToFrameView(controller, speechModel);
 
   // A separate class for menu buttons, that could be useful later
      private class DisplayButton extends JButton{
