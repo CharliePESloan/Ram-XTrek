@@ -182,104 +182,14 @@ public class XTrex2 extends JFrame/*extends BlankXTrex*/
 	add(cardPanel);
 
 	cardLayout.show(cardPanel,"Speech");
-	//pack();
 
 	setSize( 450, 835 );
 	setVisible( true );
 
-    /*
-     * Adding functionality to the select navigation button
-     * The prints statements are there to ensure that the code is working,
-     * even if the new frame is not yet created (temporary).
-     *
-    SelectButton.addMouseListener(new java.awt.event.MouseAdapter(){
-        public void mouseClicked(java.awt.event.MouseEvent evt){
-            if(MapButton.getIcon() == mapIconSelected){
-                System.out.println("Redirecting to Map page");
-                dispose();
-                new MapFrame();
-            } else if(WhereToButton.getIcon() == whereToIconSelected){
-                System.out.println("Redirecting to Where To page");
-                dispose();
-                new WhereToFrame();
-            } else if(TripComputerButton.getIcon() == tripCompIconSelected){
-                System.out.println("Redirecting to Trip Computer page");
-            } else if(SpeechButton.getIcon() == speechIconSelected){
-                System.out.println("Redirecting to Speech page");
-                //dispose();
-                //new SpeechModeFrame();
-                smv.showMe();
-            } else if(AboutButton.getIcon() == aboutIconSelected){
-                System.out.println("Redirecting to About page");
-            } else if (SatelliteButton.getIcon() == satelliteIconSelected){
-                System.out.println("Redirecting to Satellite page");
-            }
-        }
-    });
-
-    // Adding functionality to the plus navigation button
-    PlusButton.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            if(MapButton.getIcon() == mapIconSelected){
-                MapButton.setIcon(mapIcon);
-                WhereToButton.setIcon(whereToIconSelected);
-            } else if(WhereToButton.getIcon() == whereToIconSelected){
-                WhereToButton.setIcon(whereToIcon);
-                TripComputerButton.setIcon(tripCompIconSelected);
-            } else if(TripComputerButton.getIcon() == tripCompIconSelected){
-                TripComputerButton.setIcon(tripCompIcon);
-                SpeechButton.setIcon(speechIconSelected);
-            } else if(SpeechButton.getIcon() == speechIconSelected){
-                SpeechButton.setIcon(speechIcon);
-                AboutButton.setIcon(aboutIconSelected);
-            } else if(AboutButton.getIcon() == aboutIconSelected){
-                AboutButton.setIcon(aboutIcon);
-                SatelliteButton.setIcon(satelliteIconSelected);
-            } else if (SatelliteButton.getIcon() == satelliteIconSelected){
-                SatelliteButton.setIcon(satelliteIcon);
-                MapButton.setIcon(mapIconSelected);
-            }
-        }
-    });*
-
-    // Adding functionality to the minus navigation button
-    MinusButton.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            if(WhereToButton.getIcon() == whereToIconSelected){
-                WhereToButton.setIcon(whereToIcon);
-                MapButton.setIcon(mapIconSelected);
-            } else if(MapButton.getIcon() == mapIconSelected){
-                MapButton.setIcon(mapIcon);
-                SatelliteButton.setIcon(satelliteIconSelected);
-            } else if(SatelliteButton.getIcon() == satelliteIconSelected){
-                SatelliteButton.setIcon(satelliteIcon);
-                AboutButton.setIcon(aboutIconSelected);
-            } else if(AboutButton.getIcon() == aboutIconSelected){
-                AboutButton.setIcon(aboutIcon);
-                SpeechButton.setIcon(speechIconSelected);
-            } else if(SpeechButton.getIcon() == speechIconSelected){
-                SpeechButton.setIcon(speechIcon);
-                TripComputerButton.setIcon(tripCompIconSelected);
-            } else if(TripComputerButton.getIcon() == tripCompIconSelected){
-                TripComputerButton.setIcon(tripCompIcon);
-                WhereToButton.setIcon(whereToIconSelected);
-            }
-        }
-    });*/
   }
 
   public static void main( String[] argv ) {
 
-    // Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
-    /*Toolkit tk = Toolkit.getDefaultToolkit();
-    Dimension screenSize = tk.getScreenSize();
-    int screenHeight = screenSize.height;
-    int screenWidth = screenSize.width;*/
-
     JFrame XTrek = new XTrex2();
-    //menuFrame.setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
-    //menuFrame.setSize( 450, 835 ); /* title bar! */
-    //menuFrame.setResizable( false );
-    //menuFrame.setVisible( true );
   }
 }

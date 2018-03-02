@@ -61,7 +61,6 @@ public class Sound {
       byte[]         ba   = bos.toByteArray();
       DataLine.Info  info = new DataLine.Info( SourceDataLine.class, af );
       SourceDataLine line = (SourceDataLine) AudioSystem.getLine( info );
-
       line.open( af );
       line.start();
       line.write( ba, 0, ba.length );
