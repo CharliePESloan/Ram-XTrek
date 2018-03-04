@@ -26,12 +26,14 @@ public class Navigator
 	private	byte[]		directionsRaw = {};
 	private JSONObject	directionsJSON;
 
+	// Variables for traversing directionsJSON
 	private JSONArray	routes;
 	private JSONObject	route;
 	private JSONArray	legs;
 	private JSONObject	leg;
 	private JSONArray	steps;
 
+	// Variables for traversing individual steps
 	private JSONObject	step;
 	private JSONObject	distance;
 	private String		distanceStr;
@@ -111,6 +113,7 @@ public class Navigator
 
 			directionsRaw = HttpConnect.httpConnect( METHOD, url, headers, body );
 
+			// Traverse directionsJSON to get array of steps
 			directionsJSON = new JSONObject(new String(directionsRaw));
 			routes = (JSONArray)directionsJSON.get("routes");
 			route  = routes.getJSONObject(0);
@@ -118,23 +121,29 @@ public class Navigator
 			leg    = legs.getJSONObject(0);
 			steps  = (JSONArray)leg.get("steps");
 
+			//
 			directionsStr = new String[steps.length()];
-
 			for (int i=0; i<steps.length(); i++)
 			{
 				step = steps.getJSONObject(i);
 
 				distance = step.getJSONObject("distance");
+
+				// Read distances larger than 1000m in km
 				if (distance.getInt("value") >= 1000)
-					{ distanceStr = String.format("In %.1f kilometers ",(float)distance.getInt("value") / 1000); }
+				{
+					distanceStr = String.format("In %.1f kilometers ",
+												(float)distance.getInt("value") / 1000);
+				}
 				else
-					{ distanceStr = String.format("In %d meters ",		distance.getInt("value")); }
+				{
+					distanceStr = String.format("In %d meters ",
+												distance.getInt("value"));
+				}
 
 				html = step.getString("html_instructions");
 				doc = Jsoup.parse(html);
 				directionsStr[i] = distanceStr + doc.text();
-				//System.out.println(doc.text());
-				//System.out.println(step);
 			}
 
 		} catch (Exception ex)
@@ -143,6 +152,10 @@ public class Navigator
 		}
 	}
 
+	/* getDirection
+	 * Return the next direction in sequence until all directions have
+	 * been exhausted
+	 */
 	public String getDirection()
 	{
 		if (currentDirection<directionsStr.length)
@@ -154,13 +167,20 @@ public class Navigator
 		}
 	}
 
+	/* getdirectionsStr
+	 * Return a string array containing most recent instructions
+	 */
 	public String[] getdirectionsStr()
 	{
 		return directionsStr;
 	}
 
+	/* printOut
+	 * Output directions
+	 */
 	public void printOut()
 	{
+		// Temporary debug stuff
 		if (false)
 		{
 			System.out.println("Full directionsStr:");
@@ -176,14 +196,13 @@ public class Navigator
 			}
 		}
 
+		// Print origin, directions and destination
 		System.out.println("Origin="+origin);
 		for (String d : directionsStr)
 		{
 			System.out.println(d);
 		}
 		System.out.println("Destination="+destination);
-
-
 	}
 
 	public static void main(String args[])

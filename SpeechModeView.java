@@ -16,6 +16,11 @@ import java.util.Observer;
  */
 public class SpeechModeView extends JPanel implements Observer
 {
+	/* Static Variables */
+	final static int buttonWidth  = 255;
+	final static int buttonHeight =  45;
+
+	/* ModelViewController Objects */
 	Controller	myController;
 	SpeechModeModel	myModel;
 
@@ -30,7 +35,7 @@ public class SpeechModeView extends JPanel implements Observer
 	/* update */
 	public void update( Observable obs, Object obj )
 	{
-		
+
 	}
 
 	/* Constructor */
@@ -54,18 +59,17 @@ public class SpeechModeView extends JPanel implements Observer
 		buttonItalian.	setPrevNext(buttonGerman,	buttonSpanish);
 		buttonSpanish.	setPrevNext(buttonItalian,	buttonOff);
 
-
 		/* Set position and size of buttons and add to frame */
-		buttonOff.setBounds	(0,  0,255,45);
-		buttonEnglish.setBounds	(0, 50,255,45);
-		buttonFrench.setBounds	(0,100,255,45);
-		buttonGerman.setBounds	(0,150,255,45);
-		buttonItalian.setBounds	(0,200,255,45);
-		buttonSpanish.setBounds	(0,250,255,45);
-	
+		buttonOff.setBounds		(0,  0,buttonWidth,buttonHeight);
+		buttonEnglish.setBounds	(0, 50,buttonWidth,buttonHeight);
+		buttonFrench.setBounds	(0,100,buttonWidth,buttonHeight);
+		buttonGerman.setBounds	(0,150,buttonWidth,buttonHeight);
+		buttonItalian.setBounds	(0,200,buttonWidth,buttonHeight);
+		buttonSpanish.setBounds	(0,250,buttonWidth,buttonHeight);
+
 		/* Set up fonts */
 		Font myFont = new Font("Trebuchet MS",Font.PLAIN, 32);
-		buttonOff.setFont	(myFont);
+		buttonOff.setFont		(myFont);
 		buttonEnglish.setFont	(myFont);
 		buttonFrench.setFont	(myFont);
 		buttonGerman.setFont	(myFont);
