@@ -30,6 +30,9 @@ public class WhereToFrameView extends JPanel implements Observer {
     
     public WhereToFrameView (Controller controller, WhereToFrameModel model){
     //d = getContentPane();
+    //255,36
+    a.setSize(255,36);
+    b.setSize(255,252);
     add(a);
     add(b);
     a.add(display);
