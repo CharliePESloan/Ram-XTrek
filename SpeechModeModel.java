@@ -32,7 +32,7 @@ public class SpeechModeModel extends Observable implements Model
 	}
 	public void pressedMenu()
 	{
-		myXTrek.setMenu("Menu");
+		XTrek.setMenu("Menu");
 	}
 	public void pressedSelect()
 	{
