@@ -66,6 +66,7 @@ public class MenuFrame extends JFrame{
     JButton    SelectButton  = new JButton("SelectButton");
     JButton    MenuButton    = new JButton("MenuButton");
       
+    
     // Placing the navigation buttons
     PlusButton.setBounds(9, 102, 30, 68);add(PlusButton);
     MinusButton.setBounds(11, 175, 27, 64);add(MinusButton);

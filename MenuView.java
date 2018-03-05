@@ -51,6 +51,7 @@ public class MenuView extends JPanel /*implements Observer*/ {
     ImageIcon speechIconSelected = new ImageIcon("Images/SpeechButtonSelected.png");
   ImageIcon aboutIcon = new ImageIcon("Images/InfoButton.png");
     ImageIcon aboutIconSelected = new ImageIcon("Images/InfoButtonSelected.png");
+  ImageIcon plusIcon = new ImageIcon("Images/PlusButton.png");
     // Creating the menu buttons
   final CycleButton WhereToButton      = new CycleButton("WhereToButton", whereToIcon, whereToIconSelected);
   final CycleButton MapButton          = new CycleButton("MapButton", mapIcon, mapIconSelected);
@@ -58,6 +59,7 @@ public class MenuView extends JPanel /*implements Observer*/ {
   final CycleButton TripComputerButton = new CycleButton("TripCompButton", tripCompIcon, tripCompIconSelected);
   final CycleButton SpeechButton       = new CycleButton("SpeechButton", speechIcon, speechIconSelected);
   final CycleButton AboutButton        = new CycleButton("AboutButton", aboutIcon, aboutIconSelected);
+      
       
   WhereToButton.setPrevNext(MapButton, TripComputerButton);
   MapButton.setPrevNext(SatelliteButton, WhereToButton);

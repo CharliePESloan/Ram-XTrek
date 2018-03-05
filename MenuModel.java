@@ -42,6 +42,8 @@ public class MenuModel extends Observable implements Model {
 		switch (currentButton)
 		{
 			case "WhereToButton":
+                System.out.println("Switching to WhereTo Mode");
+                mainFrame.setMenu("WhereTo");
 				break;
 			case "MapButton":
 				break;
