@@ -27,7 +27,7 @@ public class MenuView extends JPanel /*implements Observer*/ {
     int y_loc = 300;
     int lb_x = 0;
     int rb_x = 130;
-    MenuController menuController;
+    Controller controller;
     MenuModel menuModel;
     
   public MenuView(Controller menuController, MenuModel menuModel){
