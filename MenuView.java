@@ -39,18 +39,18 @@ public class MenuView extends JPanel /*implements Observer*/ {
     setSize(width, height);
     setLocation(x_loc,y_loc);
   // Creating the icons for the menu buttons 
-  ImageIcon whereToIcon = new ImageIcon("WhereToButton.png");
-    ImageIcon whereToIconSelected = new ImageIcon("WhereToButtonSelected.png");
-  ImageIcon mapIcon = new ImageIcon("MapButton.png");
-    ImageIcon mapIconSelected = new ImageIcon("MapButtonSelected.png");
-  ImageIcon satelliteIcon = new ImageIcon("SatelliteButton.png");
-    ImageIcon satelliteIconSelected = new ImageIcon("SatelliteButtonSelected.png");
-  ImageIcon tripCompIcon = new ImageIcon("TripCompButton.png");
-    ImageIcon tripCompIconSelected = new ImageIcon("TripCompButtonSelected.png");
-  ImageIcon speechIcon = new ImageIcon("SpeechButton.png");
-    ImageIcon speechIconSelected = new ImageIcon("SpeechButtonSelected.png");
-  ImageIcon aboutIcon = new ImageIcon("InfoButton.png");
-    ImageIcon aboutIconSelected = new ImageIcon("InfoButtonSelected.png");
+  ImageIcon whereToIcon = new ImageIcon("Images/WhereToButton.png");
+    ImageIcon whereToIconSelected = new ImageIcon("Images/WhereToButtonSelected.png");
+  ImageIcon mapIcon = new ImageIcon("Images/MapButton.png");
+    ImageIcon mapIconSelected = new ImageIcon("Images/MapButtonSelected.png");
+  ImageIcon satelliteIcon = new ImageIcon("Images/SatelliteButton.png");
+    ImageIcon satelliteIconSelected = new ImageIcon("Images/SatelliteButtonSelected.png");
+  ImageIcon tripCompIcon = new ImageIcon("Images/TripCompButton.png");
+    ImageIcon tripCompIconSelected = new ImageIcon("Images/TripCompButtonSelected.png");
+  ImageIcon speechIcon = new ImageIcon("Images/SpeechButton.png");
+    ImageIcon speechIconSelected = new ImageIcon("Images/SpeechButtonSelected.png");
+  ImageIcon aboutIcon = new ImageIcon("Images/InfoButton.png");
+    ImageIcon aboutIconSelected = new ImageIcon("Images/InfoButtonSelected.png");
     // Creating the menu buttons
   final CycleButton WhereToButton      = new CycleButton("WhereToButton", whereToIcon, whereToIconSelected);
   final CycleButton MapButton          = new CycleButton("MapButton", mapIcon, mapIconSelected);
