@@ -38,12 +38,14 @@ public class WhereToFrameModel extends Observable implements Model {
         letters = selected.getData();
         if (letters == "SPACE") {
             textDisplay += " ";
+            setChanged(); notifyObservers(textDisplay);
         }
-        if (letters == "RIGHT") {
+        else if (letters == "RIGHT") {
             
         }
         else {
             textDisplay += letters;
+            setChanged(); notifyObservers(textDisplay);
         }
     }
 }
