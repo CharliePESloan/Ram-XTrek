@@ -7,13 +7,13 @@ public class SpeechModeModel extends Observable implements Model
 {
 	/* Initialise variables */
 	CycleButton selected = null;
-	XTrex2	    myXTrek;
+	MenuFrame   XTrek;
 	String	    language;
 	String	    artist;
 
-	public SpeechModeModel(XTrex2 XTrek)
+	public SpeechModeModel(MenuFrame XTrek)
 	{
-		myXTrek = XTrek;
+		this.XTrek = XTrek;
 	}
 	public void setSelected(CycleButton newSelected)
 	{
