@@ -20,7 +20,7 @@ import javax.swing.*;
 * This class should basically just have a main method that implements Model, View and Controller. 
 */ 
 
-public class MenuFrame extends BlankXTrex {
+public class MenuFrame extends JFrame{
     CardLayout cardlayout = new CardLayout();
     JPanel cards = new JPanel(cardlayout);
     
@@ -47,18 +47,25 @@ public class MenuFrame extends BlankXTrex {
              setBorder( null );
          }
      }
+    
+  
 
   // What is constructed when MenuFrame() is called
   public MenuFrame() {
     // The frame specifications
     setTitle( "XTrex" );
-    setContentPane( new JLabel( new ImageIcon( "XTrex Background.png" ) ) );
+    setContentPane( new JLabel( new ImageIcon( "Images/XTrex Background.png" ) ) );
     setLayout( null );
     setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
     setSize( 450, 835 ); /* title bar! */
     setResizable( false );
     setVisible( true );
 
+    JButton    PlusButton    = new JButton("PlusButton");
+    JButton    MinusButton   = new JButton("MinusButton");
+    JButton    SelectButton  = new JButton("SelectButton");
+    JButton    MenuButton    = new JButton("MenuButton");
+      
     // Placing the navigation buttons
     PlusButton.setBounds(9, 102, 30, 68);add(PlusButton);
     MinusButton.setBounds(11, 175, 27, 64);add(MinusButton);
@@ -70,6 +77,7 @@ public class MenuFrame extends BlankXTrex {
     cards.setLocation(90,300);
     cards.add(menuView, "Menu");
     cards.add(speechView, "Speech");
+    cards.add(whereToView, "WhereTo");
     //menuFrame.add(menuView);
     //JPanel menuView = new MenuView(menuFrame);
     
@@ -99,6 +107,7 @@ public class MenuFrame extends BlankXTrex {
               controller.setModel(menuModel);
               break;
               case "WhereTo":
+              System.out.println("Changing model to whereToModel");
               controller.setModel(whereToModel);
               break;
       }
