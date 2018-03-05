@@ -12,11 +12,11 @@ import javax.swing.*;
  */
 public class WhereToFrameModel extends Observable implements Model {
     CycleButton selected;
-    XTrex2 myXTrek;
+    MenuFrame myXTrek;
     String letters;
     String textDisplay ="";
     
-    public WhereToFrameModel(XTrex2 XTrek) {
+    public WhereToFrameModel(MenuFrame XTrek) {
         myXTrek = XTrek;
     }
     public void setSelected(CycleButton newSelected) {
