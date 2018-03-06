@@ -19,8 +19,8 @@ class MapView extends JPanel implements Observer {
  
   BufferedImage mapImage; 
   
-  public MapView( Controller controller, Model model ) {
-    //model.addObserver( this );
+  public MapView( Controller controller, MapModel model ) {
+    model.addObserver(this);
   }
 
   public void update( Observable obs, Object obj ) {
