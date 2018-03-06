@@ -28,7 +28,7 @@ public class SpeechModeView extends JPanel implements Observer
 
 	/* Create language buttons */
 	final Language langEnglish	= new Language("English","en-GB");
-	final Language langFrench	= new Language("French","fr-Fr");
+	final Language langFrench	= new Language("French","fr-FR");
 	final Language langGerman	= new Language("German","de-DE");
 	final Language langItalian	= new Language("Italian","it-IT");
 	final Language langSpanish	= new Language("Spanish","es-ES");
