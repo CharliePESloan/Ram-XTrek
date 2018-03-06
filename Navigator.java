@@ -142,7 +142,6 @@ public class Navigator
 
 		directionsRaw = HttpConnect.httpConnect( METHOD, url, headers, body );
 
-		printRaw();
 
 		// Traverse directionsJSON to get array of steps
 		directionsJSON = new JSONObject(new String(directionsRaw));
@@ -170,12 +169,23 @@ public class Navigator
 	 */
 	public String getDirection()
 	{
-		if (currentDirection<directionsStr.length)
+		if (currentDirection<directions.length)
 		{
-			Speaker.saySomething(directionsStr[currentDirection],language.getBingCode(),language.getArtist());
-			return directionsStr[currentDirection++];
+			Speaker.saySomething(directions[currentDirection].getText(),language.getBingCode(),language.getArtist());
+			return directions[currentDirection++].getText();
 		} else {
 			return "You have reached your destination";
+		}
+	}
+	
+	public String getDirection(int i)
+	{
+		if (i<directions.length && i>0)
+		{
+			Speaker.saySomething(directions[i].getText(),language.getBingCode(),language.getArtist());
+			return directions[i].getText();
+		} else {
+			return language.getDestinationText();
 		}
 	}
 
@@ -208,7 +218,7 @@ public class Navigator
 	 */
 	public void printOut()
 	{
-		printRaw();
+		//printRaw();
 
 		// Print origin, directions and destination
 		System.out.println("Origin="+origin);

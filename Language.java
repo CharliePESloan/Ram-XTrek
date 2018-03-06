@@ -4,34 +4,36 @@ public class Language
 	String googleCode;
 	String bingCode;
 	String artist;
+	String destinationText;
 
-	public Language(String name, String langCode)
+	public Language(String name, String googleCode)
 	{
 		this.name  = name;
-		this.bingCode = langCode;
-		switch (langCode)
+		this.googleCode = googleCode;
+		switch (googleCode)
 		{
 			case "fr-FR":
 				artist = "(fr-FR, Julie, Apollo)";
-				this.googleCode = "fr";
+				destinationText = "Vous avez atteint votre destination.";
 				break;
 			case "de-DE":
 				artist = "(de-DE, Hedda)";
-				this.googleCode = "de";
+				destinationText = "Sie haben ihr Ziel erreicht.";
 				break;
 			case "it-IT":
 				artist = "(it-IT, Cosimo, Apollo)";
-				this.googleCode = "it";
+				destinationText = "Hai raggiunto la tua destinazione.";
 				break;
 			case "es-ES":
 				artist = "(es-ES, Laura, Apollo)";
-				this.googleCode = "es";
+				destinationText = "Ha llegado a su destino.";
 				break;
 			default:
 				artist = "(en-GB, Susan, Apollo)";
-				this.googleCode = "en";
+				destinationText = "You have reached your destination.";
 				break;
 		}
+		bingCode = artist.substring(1,6);
 	}
 
 	public String getName()
@@ -52,6 +54,11 @@ public class Language
 	public String getArtist()
 	{
 		return artist;
+	}
+
+	public String getDestinationText()
+	{
+		return destinationText;
 	}
 
 }

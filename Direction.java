@@ -1,41 +1,43 @@
+import org.json.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class Direction
 {
-	private String directionText;
+	private String text;
 	private float latitude;
 	private float longitude;
 
-	private JSONObject	distance;
-	private String		distanceStr;
-	private String		html;
-	private Document	doc;
-
-
 	public Direction(JSONObject direction)
 	{
-		distance = step.getJSONObject("distance");
+		JSONObject distance;
+		String distanceStr;
 
-		// Read distances larger than 1000m in km
+		distance = direction.getJSONObject("distance"); 
+
+		distanceStr = distance.getString("text");
+		/*/ Read distances larger than 1000m in km
 		if (distance.getInt("value") >= 1000)
-		{
-			distanceStr = String.format("In %.1f kilometers ",
-						    (float)distance.getInt("value") / 1000);
+		{distanceStr = String.format("In %.1f kilometers ",
+			       (float)distance.getInt("value") / 1000);
 		}
-		else
-		{
-			distanceStr = String.format("In %d meters ",
-						    distance.getInt("value"));
-		}
+		else{
+		distanceStr = String.format("In %d meters ",
+			      distance.getInt("value"));
+		 }*/
 
-		html = step.getString("html_instructions");
-		doc = Jsoup.parse(html);
-		directionText = distanceStr + doc.text();
+		String   html = direction.getString("html_instructions");
+		Document doc = Jsoup.parse(html);
+		text = distanceStr + doc.text();
+	}
+
+	public String getText()
+	{
+		return text;
 	}
 
 	public float distanceTo(float latitude,float longitude)
 	{
-		this
+		return this.latitude;
 	}
 }
