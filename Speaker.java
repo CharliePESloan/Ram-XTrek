@@ -11,7 +11,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * Charlie Sloan 2018
  */
 
-public class Speaker
+public class Speaker implements Runnable
 {
 	// Constant values
 	final static String KEY1 = "b43e10841e0448dd96fda3fbd3110ff8";
@@ -23,19 +23,21 @@ public class Speaker
 	final static String OUTPUT = "output.wav";
 	final static String FORMAT = "riff-16khz-16bit-mono-pcm";
 
-	// Classes used to produce speech and play sound
-	final static Speech mySpeech	= new Speech();
-	final static Sound  mySound	= new Sound();
+	final String text;
+	final String lang;
+	final String artist;
 
-	public Speaker()
-	{}
-
-	/* Method which outputs the sound of a voice speaking the text argument
-	 * in the chosen language
-	 */
-	public static void saySomething(String text,String lang,String artist)
+	public Speaker(String text, String lang, String artist)
 	{
+		this.text = text;
+		this.lang = lang;
+		this.artist = artist;
+	}
+	
+	public void run() {
+		//Speaker.saySomething(selected.getText(),language,artist);
 		// Get raw audio
+		System.out.println("Running thread");
 		final String token  = Speech.renewAccessToken( KEY1 );
 		final byte[] speech = Speech.generateSpeech( token,
 							     text,
@@ -57,10 +59,24 @@ public class Speaker
 		}
 	}
 
+	/* Method which outputs the sound of a voice speaking the text argument
+	 * in the chosen language
+	 */
+	public static void saySomething(String text,String lang,String artist)
+	{
+		System.out.println("trying to speak");
+		/* Start speaking a different thread */
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+		
+		executor.execute( new Speaker(text,lang,artist) );
+
+		executor.shutdown();
+	}
+
 	// Test to ensure speech module is functional
 	public static void main(String[] argv)
 	{
-		Speaker mySpeaker = new Speaker();
-		mySpeaker.saySomething(TEXT,"en-GB",ARTIST);
+		//Speaker mySpeaker = new Speaker();
+		Speaker.saySomething(TEXT,"en-GB",ARTIST);
 	}
 }

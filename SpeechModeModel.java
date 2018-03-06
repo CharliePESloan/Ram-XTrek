@@ -7,9 +7,9 @@ public class SpeechModeModel extends Observable implements Model
 {
 	/* Initialise variables */
 	CycleButton selected = null;
-	MenuFrame   XTrek;
-	String	    language;
-	String	    artist;
+	MenuFrame	XTrek;
+	Language	language;
+	String		artist;
 
 	public SpeechModeModel(MenuFrame XTrek)
 	{
@@ -38,31 +38,13 @@ public class SpeechModeModel extends Observable implements Model
 	{
 		/* Get selected language code and choose artist */
 		language = selected.getData();
-		switch (language)
-		{
-			case "fr-FR":
-				artist = "(fr-FR, Julie, Apollo)";
-				break;
-			case "de-DE":
-				artist = "(de-DE, Hedda)";
-				break;
-			case "it-IT":
-				artist = "(it-IT, Cosimo, Apollo)";
-				break;
-			case "es-ES":
-				artist = "(es-ES, Laura, Apollo)";
-				break;
-			default:
-				artist = "(en-GB, Susan, Apollo)";
-				break;
-		}
-		/* Start speaking a different thread */
+		Speaker.saySomething(selected.getText(),language.getBingCode(),language.getArtist());
+		/* Start speaking a different thread *
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 		executor.execute( new Runnable() {
 			public void run() {
 				Speaker.saySomething(selected.getText(),language,artist);
 			}
-		} );
-		executor.shutdown();
+		} );*/
 	}
 }

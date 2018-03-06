@@ -4,13 +4,13 @@ import java.awt.Color;
 
 public class CycleButton extends JLabel
 {
-	boolean     isSelected;
-	boolean     hasImages;
-	String	data = "";
-	CycleButton prevButton;
-	CycleButton nextButton;
-	ImageIcon   imageNormal;
-	ImageIcon   imageSelected;
+	boolean		isSelected;
+	boolean		hasImages;
+	Object		data;
+	CycleButton	prevButton;
+	CycleButton	nextButton;
+	ImageIcon	imageNormal;
+	ImageIcon	imageSelected;
 
 	/* Constructors */
 	CycleButton(String label)
@@ -22,7 +22,7 @@ public class CycleButton extends JLabel
 		setForeground(Color.black);
 		setText(label);
 	}
-	CycleButton(String label,String data)
+	CycleButton(String label,Object data)
 	{
 		this(label);
 		this.data = data;
@@ -78,7 +78,7 @@ public class CycleButton extends JLabel
 		nextButton.select();
 		return nextButton;
 	}
-	public String getData()
+	public Object getData()
 	{
 		return data;
 	}
