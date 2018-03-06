@@ -20,17 +20,17 @@ class MapView extends JPanel implements Observer {
   BufferedImage mapImage; 
   
   public MapView( Controller controller, Model model ) {
-    model.addObserver( this );
+    //model.addObserver( this );
   }
 
   public void update( Observable obs, Object obj ) {
-	 mapImage = obj; 
+    mapImage = (BufferedImage)obj; 
     repaint();
   }
 
   public  void paintComponent( Graphics g  ) {
     super.paintComponent( g );
-	g.drawImage( MapImage, 80,225,this); //draws maps on screen
+	g.drawImage( mapImage, 80,225,this); //draws maps on screen
 	g.setColor(Color.RED);
 	g.fillOval(219,426,15,15);
   }
