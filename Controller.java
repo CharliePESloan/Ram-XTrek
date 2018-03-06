@@ -5,17 +5,17 @@ import javax.swing.JButton;
 
 /*
  * Controller
- *
  * Charlie Sloan (2018)
+ * 
+ * Listens for MouseEvents on the side buttons and calls the appropriate
+ * function of the current model
  */
 class Controller implements MouseListener
 {
 	// The currently selected model
 	private Model model;
 
-	/* Constructor
-	 * Sets up initial model
-	 */
+	/* Constructor */
 	public Controller( Model model )
 	{
 		this.model = model;

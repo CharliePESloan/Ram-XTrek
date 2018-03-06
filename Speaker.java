@@ -10,8 +10,9 @@ import java.util.concurrent.ExecutorService;
 
 /*
  * Speaker
+ * Charlie Sloan (2018)
  *
- * Charlie Sloan 2018
+ * Combines Speech and Sound workshops to implement dynamic text-to-speech
  */
 
 public class Speaker implements Runnable
@@ -19,28 +20,25 @@ public class Speaker implements Runnable
 	// Constant values
 	final static String KEY1 = "b43e10841e0448dd96fda3fbd3110ff8";
 	final static String KEY2 = "1be7b3ec099d461582bb194df5bd03de";
-
-	final static String TEXT   = "Hello world!";
 	final static String GENDER = "Female";
-	final static String ARTIST = "(en-CA, Linda)";
-	final static String OUTPUT = "output.wav";
 	final static String FORMAT = "riff-16khz-16bit-mono-pcm";
 
+	// Variables
 	final String text;
 	final String lang;
 	final String artist;
 
+	/* Constructor */
 	public Speaker(String text, Language language)
 	{
-		this.text = text;
-		this.lang = lang.getBingCode();
+		this.text   = text;
+		this.lang   = language.getBingCode();
 		this.artist = language.getArtist();
 	}
 	
 	public void run() {
-		//Speaker.saySomething(selected.getText(),language,artist);
+		
 		// Get raw audio
-		System.out.println("Running thread");
 		final String token  = Speech.renewAccessToken( KEY1 );
 		final byte[] speech = Speech.generateSpeech( token,
 							     text,
@@ -48,13 +46,16 @@ public class Speaker implements Runnable
 							     GENDER,
 							     artist,
 							     FORMAT );
-		InputStream myInputStream = new ByteArrayInputStream(speech);
+		InputStream myInputStream =
+			new ByteArrayInputStream(speech);
+		
+		// Try to play the audio
 		try
 		{
-			// Try to play the audio
 			AudioInputStream myAudio =
 				AudioSystem.getAudioInputStream(myInputStream);
-			Sound.playStream( myAudio, Sound.readStream( myAudio ) );
+			Sound.playStream( myAudio,
+				Sound.readStream( myAudio ) );
 		}
 		catch ( IOException | UnsupportedAudioFileException e )
 		{
@@ -62,23 +63,18 @@ public class Speaker implements Runnable
 		}
 	}
 
-	/* Method which outputs the sound of a voice speaking the text argument
-	 * in the chosen language
+	/* saySomething
+	 * Method which outputs from the device's speakers the sound of a
+	 * voice speaking the string argument in a specified language.
 	 */
 	public static void saySomething(String text,Language language)
 	{
 		/* Start speaking a different thread */
-		ExecutorService executor = Executors.newSingleThreadExecutor();
+		ExecutorService executor =
+			Executors.newSingleThreadExecutor();
 		
 		executor.execute( new Speaker(text,language) );
 
 		executor.shutdown();
-	}
-
-	// Test to ensure speech module is functional
-	public static void main(String[] argv)
-	{
-		//Speaker mySpeaker = new Speaker();
-		Speaker.saySomething(TEXT,new Language("en"));
 	}
 }

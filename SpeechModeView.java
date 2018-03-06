@@ -13,6 +13,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 /* SpeechModeView
+ * Charlie Sloan (2018)
+ *
  * A view representing the speech mode screen
  */
 public class SpeechModeView extends JPanel implements Observer
@@ -23,9 +25,8 @@ public class SpeechModeView extends JPanel implements Observer
 	final static int NUM_BUTTONS = 6;
 
 	/* ModelViewController Objects */
-	Controller	controller;
-	SpeechModeModel	model;
-	int selected = 0;
+	final Controller	controller;
+	final SpeechModeModel	model;
 
 	/* Create language buttons */
 	final CycleButton[] buttons = new CycleButton[]
@@ -37,88 +38,36 @@ public class SpeechModeView extends JPanel implements Observer
                 	new CycleButton("Italiano"),
                 	new CycleButton("Espanol")
 		};
-
-	/*final public CycleButton buttonOff = new CycleButton("Off",  langEnglish);
-	final CycleButton buttonEnglish	= new CycleButton("English", langEnglish);
-	final CycleButton buttonFrench	= new CycleButton("Francais",langFrench);
-	final CycleButton buttonGerman	= new CycleButton("Deutsch", langGerman);
-	final CycleButton buttonItalian	= new CycleButton("Italiano",langItalian);
-	final CycleButton buttonSpanish	= new CycleButton("Espanol", langSpanish);
-*/
-	
-/*	final Language[] languages = new Language[]
-		{
-			new Language("English","en"),
-			new Language("French","fr"),
-			new Language("German","de"),
-			new Language("Italian","it"),
-			new Language("Spanish","es")
-		};*/
-
-	
-
-
-	/* update */
-	public void update( Observable obs, Object obj )
-	{
-		buttons[selected].deselect();
-		selected = (int)obj;
-		buttons[selected].select();
-	}
+	int selected = 0;
 
 	/* Constructor */
 	public SpeechModeView( Controller controller, SpeechModeModel model )
 	{
-		/* Setup model */
+		/* Setup ModelViewController */
 		this.controller = controller;
 		this.model = model;
 		model.addObserver(this);
-		//myModel.setSelected(buttonOff);
 
-		// Use GridLayout
+		/* Setup JPanel */
 		setLayout( new GridLayout(NUM_BUTTONS,1) );
-		// Set background colour
 		setBackground(Color.black);
 
+
+		/* Setup buttons */
 		buttons[0].select();
-
-		/* Setup CycleButtons *
-		buttonOff.	setPrevNext(buttonSpanish,	buttonEnglish);
-		buttonEnglish.	setPrevNext(buttonOff,		buttonFrench);
-		buttonFrench.	setPrevNext(buttonEnglish,	buttonGerman);
-		buttonGerman.	setPrevNext(buttonFrench,	buttonItalian);
-		buttonItalian.	setPrevNext(buttonGerman,	buttonSpanish);
-		buttonSpanish.	setPrevNext(buttonItalian,	buttonOff);
-*/
-
-		/* Set position and size of buttons and add to frame *
-		buttonOff.setBounds		(0,  0,buttonWidth,buttonHeight);
-		buttonEnglish.setBounds	(0, 50,buttonWidth,buttonHeight);
-		buttonFrench.setBounds	(0,100,buttonWidth,buttonHeight);
-		buttonGerman.setBounds	(0,150,buttonWidth,buttonHeight);
-		buttonItalian.setBounds	(0,200,buttonWidth,buttonHeight);
-		buttonSpanish.setBounds	(0,250,buttonWidth,buttonHeight);*/
-
-		/* Set up fonts */
 		Font myFont = new Font("Trebuchet MS",Font.PLAIN, 32);
 		for (CycleButton cb : buttons)
 		{
 			cb.setFont(myFont);
 			add(cb);
 		}
-		/*buttonOff.setFont	(myFont);
-		buttonEnglish.setFont	(myFont);
-		buttonFrench.setFont	(myFont);
-		buttonGerman.setFont	(myFont);
-		buttonItalian.setFont	(myFont);
-		buttonSpanish.setFont	(myFont);
+	}
 
-		/* Add the buttons to the panel *
-		add(buttonOff);
-		add(buttonEnglish);
-		add(buttonFrench);
-		add(buttonGerman);
-		add(buttonItalian);
-		add(buttonSpanish);*/
+	/* Select appropriate button */
+	public void update( Observable obs, Object obj )
+	{
+		buttons[selected].deselect();
+		selected = (int)obj;
+		buttons[selected].select();
 	}
 }

@@ -1,18 +1,16 @@
 import java.util.Observable;
 
+/* SpeechModeModel
+ * Charlie Sloan (2018)
+ *
+ * Model for speech mode of XTrek; allows the user to select a language
+ * and reads out their choice
+ */
 public class SpeechModeModel extends Observable implements Model
 {
 	/* Constants */
 	final int NUM_BUTTONS = 5;
-
-	/* Initialise variables */
-	//CycleButton selected = null;
-	int selected = 0;
-	MenuFrame	XTrek;
-	Language	language;
-	String		artist;
-
-	Language[] languages = new Language[]
+	final Language[] languages = new Language[]
 		{
 			new Language("English","en"),
                         new Language("Francais","fr"),
@@ -22,15 +20,17 @@ public class SpeechModeModel extends Observable implements Model
 
 		};
 
+	/* Declare variables */
+	MenuFrame XTrek;
+	Language  language;
+	int	  selected = 0;
+
+	
+	/* Constructor */
 	public SpeechModeModel(MenuFrame XTrek)
 	{
 		this.XTrek = XTrek;
 	}
-	/*public void setSelected(CycleButton newSelected)
-	{
-		selected = newSelected;
-		selected.select();
-	}*/
 
 	/* Side buttons */
 	public void pressedPlus()
@@ -38,25 +38,21 @@ public class SpeechModeModel extends Observable implements Model
 		selected--;
 		if (selected<0)
 		{selected=NUM_BUTTONS;}
+		
 		setChanged(); notifyObservers(selected);
-		//setSelected(selected.prev());
 	}
 	public void pressedMinus()
 	{
 		selected++;
 		if (selected>NUM_BUTTONS)
 		{selected=0;}
+		
 		setChanged(); notifyObservers(selected);
-		//setSelected(selected.next());
-	}
-	public void pressedMenu()
-	{
-		XTrek.setMenu("Menu");
 	}
 	public void pressedSelect()
 	{
+		/* Find selected language code and name of button */
 		String text;
-		/* Get selected language code and choose artist */
 		if (selected == 0)
 		{
 			language = languages[0];
@@ -69,6 +65,10 @@ public class SpeechModeModel extends Observable implements Model
 
 		// Read out which button was pressed
 		Speaker.saySomething(text,language);
+	}
+	public void pressedMenu()
+	{
+		XTrek.setMenu("Menu");
 	}
 	public void pressedOnOff()
 	{
