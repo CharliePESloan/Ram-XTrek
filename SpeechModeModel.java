@@ -3,7 +3,7 @@ import java.util.Observable;
 public class SpeechModeModel extends Observable implements Model
 {
 	/* Constants */
-	final int NUM_BUTTONS = 6;
+	final int NUM_BUTTONS = 5;
 
 	/* Initialise variables */
 	//CycleButton selected = null;
@@ -14,11 +14,11 @@ public class SpeechModeModel extends Observable implements Model
 
 	Language[] languages = new Language[]
 		{
-			new Language("English","en")
-                        new Language("French","fr");
-                        new Language("German","de");
-                        new Language("Italian","it")
-                        new Language("Spanish","es")
+			new Language("English","en"),
+                        new Language("Francais","fr"),
+                        new Language("Deutsch","de"),
+                        new Language("Italiano","it"),
+                        new Language("Espanol","es")
 
 		};
 
@@ -35,14 +35,18 @@ public class SpeechModeModel extends Observable implements Model
 	/* Side buttons */
 	public void pressedPlus()
 	{
-		selected++;
-		if (selected>6) {selected=0};
+		selected--;
+		if (selected<0)
+		{selected=NUM_BUTTONS;}
+		setChanged(); notifyObservers(selected);
 		//setSelected(selected.prev());
 	}
 	public void pressedMinus()
 	{
-		selected--;
-		if (selected<0) {selected=6};
+		selected++;
+		if (selected>NUM_BUTTONS)
+		{selected=0;}
+		setChanged(); notifyObservers(selected);
 		//setSelected(selected.next());
 	}
 	public void pressedMenu()

@@ -23,18 +23,19 @@ public class SpeechModeView extends JPanel implements Observer
 	final static int NUM_BUTTONS = 6;
 
 	/* ModelViewController Objects */
-	Controller	myController;
-	SpeechModeModel	myModel;
+	Controller	controller;
+	SpeechModeModel	model;
+	int selected = 0;
 
 	/* Create language buttons */
 	final CycleButton[] buttons = new CycleButton[]
 		{
-			new CycleButton("Off",langEnglish),
-			new CycleButton("English", langEnglish),
-                	new CycleButton("Francais",langFrench),
-                	new CycleButton("Deutsch", langGerman),
-                	new CycleButton("Italiano",langItalian),
-                	new CycleButton("Espanol", langSpanish)
+			new CycleButton("Off"),
+			new CycleButton("English"),
+                	new CycleButton("Francais"),
+                	new CycleButton("Deutsch"),
+                	new CycleButton("Italiano"),
+                	new CycleButton("Espanol")
 		};
 
 	/*final public CycleButton buttonOff = new CycleButton("Off",  langEnglish);
@@ -60,8 +61,9 @@ public class SpeechModeView extends JPanel implements Observer
 	/* update */
 	public void update( Observable obs, Object obj )
 	{
-		int selectedButton = (int)obj;
-		buttons[selectedButton].select();
+		buttons[selected].deselect();
+		selected = (int)obj;
+		buttons[selected].select();
 	}
 
 	/* Constructor */
@@ -77,6 +79,8 @@ public class SpeechModeView extends JPanel implements Observer
 		setLayout( new GridLayout(NUM_BUTTONS,1) );
 		// Set background colour
 		setBackground(Color.black);
+
+		buttons[0].select();
 
 		/* Setup CycleButtons *
 		buttonOff.	setPrevNext(buttonSpanish,	buttonEnglish);
@@ -97,19 +101,24 @@ public class SpeechModeView extends JPanel implements Observer
 
 		/* Set up fonts */
 		Font myFont = new Font("Trebuchet MS",Font.PLAIN, 32);
-		buttonOff.setFont	(myFont);
+		for (CycleButton cb : buttons)
+		{
+			cb.setFont(myFont);
+			add(cb);
+		}
+		/*buttonOff.setFont	(myFont);
 		buttonEnglish.setFont	(myFont);
 		buttonFrench.setFont	(myFont);
 		buttonGerman.setFont	(myFont);
 		buttonItalian.setFont	(myFont);
 		buttonSpanish.setFont	(myFont);
 
-		/* Add the buttons to the panel */
+		/* Add the buttons to the panel *
 		add(buttonOff);
 		add(buttonEnglish);
 		add(buttonFrench);
 		add(buttonGerman);
 		add(buttonItalian);
-		add(buttonSpanish);
+		add(buttonSpanish);*/
 	}
 }
