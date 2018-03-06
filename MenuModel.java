@@ -46,6 +46,8 @@ public class MenuModel extends Observable implements Model {
                 mainFrame.setMenu("WhereTo");
 				break;
 			case "MapButton":
+                System.out.println("Switching to Map Mode");
+                mainFrame.setMenu("Map");
 				break;
 			case "SatelliteButton":
 				break;
