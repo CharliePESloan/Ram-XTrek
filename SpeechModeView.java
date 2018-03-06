@@ -27,45 +27,65 @@ public class SpeechModeView extends JPanel implements Observer
 	SpeechModeModel	myModel;
 
 	/* Create language buttons */
-	final Language langEnglish	= new Language("English","en");
-	final Language langFrench	= new Language("French","fr");
-	final Language langGerman	= new Language("German","de");
-	final Language langItalian	= new Language("Italian","it");
-	final Language langSpanish	= new Language("Spanish","es");
+	final CycleButton[] buttons = new CycleButton[]
+		{
+			new CycleButton("Off",langEnglish),
+			new CycleButton("English", langEnglish),
+                	new CycleButton("Francais",langFrench),
+                	new CycleButton("Deutsch", langGerman),
+                	new CycleButton("Italiano",langItalian),
+                	new CycleButton("Espanol", langSpanish)
+		};
 
-	final public CycleButton buttonOff = new CycleButton("Off",  langEnglish);
+	/*final public CycleButton buttonOff = new CycleButton("Off",  langEnglish);
 	final CycleButton buttonEnglish	= new CycleButton("English", langEnglish);
 	final CycleButton buttonFrench	= new CycleButton("Francais",langFrench);
 	final CycleButton buttonGerman	= new CycleButton("Deutsch", langGerman);
 	final CycleButton buttonItalian	= new CycleButton("Italiano",langItalian);
 	final CycleButton buttonSpanish	= new CycleButton("Espanol", langSpanish);
+*/
+	
+/*	final Language[] languages = new Language[]
+		{
+			new Language("English","en"),
+			new Language("French","fr"),
+			new Language("German","de"),
+			new Language("Italian","it"),
+			new Language("Spanish","es")
+		};*/
+
+	
+
 
 	/* update */
 	public void update( Observable obs, Object obj )
 	{
-
+		int selectedButton = (int)obj;
+		buttons[selectedButton].select();
 	}
 
 	/* Constructor */
 	public SpeechModeView( Controller controller, SpeechModeModel model )
 	{
 		/* Setup model */
-		myController = controller;
-		myModel = model;
-		myModel.setSelected(buttonOff);
+		this.controller = controller;
+		this.model = model;
+		model.addObserver(this);
+		//myModel.setSelected(buttonOff);
 
 		// Use GridLayout
 		setLayout( new GridLayout(NUM_BUTTONS,1) );
 		// Set background colour
 		setBackground(Color.black);
 
-		/* Setup CycleButtons */
+		/* Setup CycleButtons *
 		buttonOff.	setPrevNext(buttonSpanish,	buttonEnglish);
 		buttonEnglish.	setPrevNext(buttonOff,		buttonFrench);
 		buttonFrench.	setPrevNext(buttonEnglish,	buttonGerman);
 		buttonGerman.	setPrevNext(buttonFrench,	buttonItalian);
 		buttonItalian.	setPrevNext(buttonGerman,	buttonSpanish);
 		buttonSpanish.	setPrevNext(buttonItalian,	buttonOff);
+*/
 
 		/* Set position and size of buttons and add to frame *
 		buttonOff.setBounds		(0,  0,buttonWidth,buttonHeight);

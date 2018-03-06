@@ -2,30 +2,48 @@ import java.util.Observable;
 
 public class SpeechModeModel extends Observable implements Model
 {
+	/* Constants */
+	final int NUM_BUTTONS = 6;
+
 	/* Initialise variables */
-	CycleButton selected = null;
+	//CycleButton selected = null;
+	int selected = 0;
 	MenuFrame	XTrek;
 	Language	language;
 	String		artist;
+
+	Language[] languages = new Language[]
+		{
+			new Language("English","en")
+                        new Language("French","fr");
+                        new Language("German","de");
+                        new Language("Italian","it")
+                        new Language("Spanish","es")
+
+		};
 
 	public SpeechModeModel(MenuFrame XTrek)
 	{
 		this.XTrek = XTrek;
 	}
-	public void setSelected(CycleButton newSelected)
+	/*public void setSelected(CycleButton newSelected)
 	{
 		selected = newSelected;
 		selected.select();
-	}
+	}*/
 
 	/* Side buttons */
 	public void pressedPlus()
 	{
-		setSelected(selected.prev());
+		selected++;
+		if (selected>6) {selected=0};
+		//setSelected(selected.prev());
 	}
 	public void pressedMinus()
 	{
-		setSelected(selected.next());
+		selected--;
+		if (selected<0) {selected=6};
+		//setSelected(selected.next());
 	}
 	public void pressedMenu()
 	{
@@ -33,16 +51,20 @@ public class SpeechModeModel extends Observable implements Model
 	}
 	public void pressedSelect()
 	{
+		String text;
 		/* Get selected language code and choose artist */
-		language = (Language)selected.getData();
-		Speaker.saySomething(selected.getText(),language.getBingCode(),language.getArtist());
-		/* Start speaking a different thread *
-		ExecutorService executor = Executors.newSingleThreadExecutor();
-		executor.execute( new Runnable() {
-			public void run() {
-				Speaker.saySomething(selected.getText(),language,artist);
-			}
-		} );*/
+		if (selected == 0)
+		{
+			language = languages[0];
+			text     = "Off";
+		} else
+		{
+			language = languages[selected-1];
+			text     = language.getName();;
+		}
+
+		// Read out which button was pressed
+		Speaker.saySomething(text,language);
 	}
 	public void pressedOnOff()
 	{

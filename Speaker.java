@@ -30,11 +30,11 @@ public class Speaker implements Runnable
 	final String lang;
 	final String artist;
 
-	public Speaker(String text, String lang, String artist)
+	public Speaker(String text, Language language)
 	{
 		this.text = text;
-		this.lang = lang;
-		this.artist = artist;
+		this.lang = lang.getBingCode();
+		this.artist = language.getArtist();
 	}
 	
 	public void run() {
@@ -65,13 +65,12 @@ public class Speaker implements Runnable
 	/* Method which outputs the sound of a voice speaking the text argument
 	 * in the chosen language
 	 */
-	public static void saySomething(String text,String lang,String artist)
+	public static void saySomething(String text,Language language)
 	{
-		System.out.println("trying to speak");
 		/* Start speaking a different thread */
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 		
-		executor.execute( new Speaker(text,lang,artist) );
+		executor.execute( new Speaker(text,language) );
 
 		executor.shutdown();
 	}
@@ -80,6 +79,6 @@ public class Speaker implements Runnable
 	public static void main(String[] argv)
 	{
 		//Speaker mySpeaker = new Speaker();
-		Speaker.saySomething(TEXT,"en-GB",ARTIST);
+		Speaker.saySomething(TEXT,new Language("en"));
 	}
 }

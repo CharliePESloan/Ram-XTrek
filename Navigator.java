@@ -171,7 +171,7 @@ public class Navigator
 	{
 		if (currentDirection<directions.length)
 		{
-			Speaker.saySomething(directions[currentDirection].getText(),language.getBingCode(),language.getArtist());
+			Speaker.saySomething(directions[currentDirection].getText(),language);
 			return directions[currentDirection++].getText();
 		} else {
 			return "You have reached your destination";
