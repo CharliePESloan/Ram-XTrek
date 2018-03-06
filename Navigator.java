@@ -1,8 +1,6 @@
 import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
 import org.json.*;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 /*
  * Navigator
@@ -27,6 +25,7 @@ public class Navigator
 	private	String		encOrigin;
 	private	String		encDestination;
 
+	private Direction[]	directions;
 	private	byte[]		directionsRaw = {};
 	private JSONObject	directionsJSON;
 
@@ -39,13 +38,9 @@ public class Navigator
 
 	// Variables for traversing individual steps
 	private JSONObject	step;
-	private JSONObject	distance;
-	private String		distanceStr;
-	private String		html;
-	private Document	doc;
 
 	private int		currentDirection;
-	private String	directionsStr[];
+	private String		directionsStr[];
 
 
 	/*
@@ -120,6 +115,11 @@ public class Navigator
 		this.language = language;
 	}
 
+	public void getClosestNode(float latitude, float longitude)
+	{
+		
+	}
+
 	/* refreshdirectionsStr
 	 * Connects to Google and updates route with latest origin and destination
 	 */
@@ -152,29 +152,14 @@ public class Navigator
 		leg    = legs.getJSONObject(0);
 		steps  = (JSONArray)leg.get("steps");
 
-		//
-		directionsStr = new String[steps.length()];
+		//directionsStr = new String[steps.length()];
+		directions = new Direction[steps.length()];
 		for (int i=0; i<steps.length(); i++)
 		{
 			step = steps.getJSONObject(i);
 
-			distance = step.getJSONObject("distance");
+			directions[i] = new Direction(step);
 
-			// Read distances larger than 1000m in km
-			if (distance.getInt("value") >= 1000)
-			{
-				distanceStr = String.format("In %.1f kilometers ",
-							    (float)distance.getInt("value") / 1000);
-			}
-			else
-			{
-				distanceStr = String.format("In %d meters ",
-							    distance.getInt("value"));
-			}
-
-			html = step.getString("html_instructions");
-			doc = Jsoup.parse(html);
-			directionsStr[i] = distanceStr + doc.text();
 		}
 
 	}
