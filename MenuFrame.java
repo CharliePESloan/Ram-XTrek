@@ -28,11 +28,13 @@ public class MenuFrame extends JFrame{
     MenuModel menuModel = new MenuModel(this);
     SpeechModeModel speechModel = new SpeechModeModel(this);
     WhereToFrameModel whereToModel = new WhereToFrameModel(this);
+    MapModel mapModel = new MapModel(this);
    // MenuController	menuController = new MenuController(menuModel);
     Controller controller = new Controller(menuModel);
     JPanel menuView = new MenuView(controller, menuModel);
     JPanel speechView = new SpeechModeView(controller, speechModel);
     JPanel whereToView = new WhereToFrameView(controller, whereToModel);
+    JPanel mapView = new MapView(controller, mapModel);
   /* Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
   */
 
@@ -79,6 +81,7 @@ public class MenuFrame extends JFrame{
     cards.add(menuView, "Menu");
     cards.add(speechView, "Speech");
     cards.add(whereToView, "WhereTo");
+    cards.add(mapView, "Map");
     //menuFrame.add(menuView);
     //JPanel menuView = new MenuView(menuFrame);
     
@@ -101,15 +104,19 @@ public class MenuFrame extends JFrame{
   public void setMenu(String menu){
       switch(menu){
               case "Speech":
-              System.out.println("Changing model to speechModel");
-              controller.setModel(speechModel);
+                System.out.println("Changing model to speechModel");
+                controller.setModel(speechModel);
               break;
               case "Menu":
-              controller.setModel(menuModel);
+                controller.setModel(menuModel);
               break;
               case "WhereTo":
-              System.out.println("Changing model to whereToModel");
-              controller.setModel(whereToModel);
+                System.out.println("Changing model to whereToModel");
+                controller.setModel(whereToModel);
+              break;
+              case "Map":
+                System.out.println("Changing model to MapModel");
+                controller.setModel(mapModel);
               break;
       }
       cardlayout.show(cards, menu);

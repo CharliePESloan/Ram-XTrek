@@ -6,7 +6,7 @@ import java.net.URL;
  * Maps obtained using the Google Mapping Service.
  *
  * See https://developers.google.com/maps/documentation/static-maps/intro
- *
+ *  
  * David Wakeling, 2018.
  */
 public class Maps {
@@ -36,25 +36,5 @@ public class Maps {
     return response;
   }
 
-  /*
-   * Write map data.
-   */
-  static void writeData( String file, byte[] data ) {
-    try {
-      OutputStream os = new FileOutputStream( file );
-      os.write( data, 0, data.length );
-      os.close();
-    } catch ( IOException ex ) {
-      ex.printStackTrace(); System.exit( 1 );
-    }
-  }
-
-  /*
-   * Download map data.
-   */
-  public static void main( String[] argv ) {
-    final byte[] data = readData( LATITUDE, LONGITUDE, ZOOM, SIZE );
-    writeData( OUTPUT, data );
-  }
 
 }
