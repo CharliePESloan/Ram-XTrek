@@ -35,7 +35,7 @@ public class WhereToFrameModel extends Observable implements Model {
         myXTrek.setMenu("Menu");
     }
     public void pressedSelect() {
-        letters = selected.getData();
+        letters = (String)selected.getData();
         if (letters == "SPACE") {
             textDisplay += " ";
             setChanged(); notifyObservers(textDisplay);

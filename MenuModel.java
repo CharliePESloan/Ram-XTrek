@@ -38,7 +38,7 @@ public class MenuModel extends Observable implements Model {
 	}
 	public void pressedSelect()
 	{
-		currentButton = selected.getData();
+		currentButton = (String)selected.getData();
 		switch (currentButton)
 		{
 			case "WhereToButton":

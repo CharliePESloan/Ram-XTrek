@@ -1,7 +1,4 @@
 import java.util.Observable;
-import java.lang.Runnable;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ExecutorService;
 
 public class SpeechModeModel extends Observable implements Model
 {
@@ -37,7 +34,7 @@ public class SpeechModeModel extends Observable implements Model
 	public void pressedSelect()
 	{
 		/* Get selected language code and choose artist */
-		language = selected.getData();
+		language = (Language)selected.getData();
 		Speaker.saySomething(selected.getText(),language.getBingCode(),language.getArtist());
 		/* Start speaking a different thread *
 		ExecutorService executor = Executors.newSingleThreadExecutor();
