@@ -3,6 +3,7 @@ import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
@@ -17,8 +18,9 @@ import java.util.Observer;
 public class SpeechModeView extends JPanel implements Observer
 {
 	/* Static Variables */
-	final static int buttonWidth  = 255;
-	final static int buttonHeight =  45;
+	final static int BUTTON_WIDTH  = 255;
+	final static int BUTTON_HEIGHT =  45;
+	final static int NUM_BUTTONS = 6;
 
 	/* ModelViewController Objects */
 	Controller	myController;
@@ -46,8 +48,8 @@ public class SpeechModeView extends JPanel implements Observer
 		myModel = model;
 		myModel.setSelected(buttonOff);
 
-		// Use absolute positioning
-		setLayout( null );
+		// Use GridLayout
+		setLayout( new GridLayout(NUM_BUTTONS,1) );
 		// Set background colour
 		setBackground(Color.black);
 
@@ -59,17 +61,17 @@ public class SpeechModeView extends JPanel implements Observer
 		buttonItalian.	setPrevNext(buttonGerman,	buttonSpanish);
 		buttonSpanish.	setPrevNext(buttonItalian,	buttonOff);
 
-		/* Set position and size of buttons and add to frame */
+		/* Set position and size of buttons and add to frame *
 		buttonOff.setBounds		(0,  0,buttonWidth,buttonHeight);
 		buttonEnglish.setBounds	(0, 50,buttonWidth,buttonHeight);
 		buttonFrench.setBounds	(0,100,buttonWidth,buttonHeight);
 		buttonGerman.setBounds	(0,150,buttonWidth,buttonHeight);
 		buttonItalian.setBounds	(0,200,buttonWidth,buttonHeight);
-		buttonSpanish.setBounds	(0,250,buttonWidth,buttonHeight);
+		buttonSpanish.setBounds	(0,250,buttonWidth,buttonHeight);*/
 
 		/* Set up fonts */
 		Font myFont = new Font("Trebuchet MS",Font.PLAIN, 32);
-		buttonOff.setFont		(myFont);
+		buttonOff.setFont	(myFont);
 		buttonEnglish.setFont	(myFont);
 		buttonFrench.setFont	(myFont);
 		buttonGerman.setFont	(myFont);

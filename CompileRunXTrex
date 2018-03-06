@@ -1,0 +1,2 @@
+javac -d  bin MenuFrame.java
+java  -cp bin MenuFrame
