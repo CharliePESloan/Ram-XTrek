@@ -8,6 +8,9 @@ import java.util.*;
 import javax.swing.*;
 import java.io.IOException;
 import java.io.ByteArrayInputStream;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO; 
+
 /**
  *
  * @author Devash Patel 
@@ -23,6 +26,7 @@ public class MapModel extends Observable implements Model {
     private int zoomVal = 5; 
 	byte[] mapImage; 
 	
+	BufferedImage img; 
 	
     public MapModel(MenuFrame XTrek) {
         myXTrek = XTrek;
@@ -30,17 +34,25 @@ public class MapModel extends Observable implements Model {
   
     public void pressedPlus() {
 		zoomVal ++; 
-		mapImage = Maps.readData(LATITUDE, LONGITUDE, zoomVal.toString(zoomVal), SIZE);
-		BufferedImage img = Image.IO.read(new ByteArrayInputStream(mapImage)); 
-        setSelected(selected.prev());
+		mapImage = Maps.readData(LATITUDE, LONGITUDE, Integer.toString(zoomVal), SIZE);
+		try{
+		ImageIO.read(new ByteArrayInputStream(mapImage)); 
+		}
+		catch (Exception e){
+			System.out.println("help"); 
+		}
         setChanged(); notifyObservers (img);
     }
     public void pressedMinus() {
 		zoomVal --; 
-		mapImage = Maps.readData(LATITUDE, LONGITUDE, zoomVal.toString(zoomVal), SIZE); 
-		BufferedImage img = Image.IO.read(new ByteArrayInputStream(mapImage));
-        setSelected(selected.next());
-        setChanged(); notifyObservers (img);
+		mapImage = Maps.readData(LATITUDE, LONGITUDE, Integer.toString(zoomVal), SIZE); 
+		try {
+		ImageIO.read(new ByteArrayInputStream(mapImage));
+		}
+        catch (Exception e){
+			System.out.println("help");
+		}
+		setChanged(); notifyObservers (img);
     }
     public void pressedMenu() {
         myXTrek.setMenu("Menu");
