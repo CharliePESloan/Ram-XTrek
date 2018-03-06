@@ -1,4 +1,5 @@
 import java.net.URLEncoder;
+import java.io.UnsupportedEncodingException;
 import org.json.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,11 +18,14 @@ public class Navigator
 	final static String METHOD  = "GET";
 	final static String REGION  = "uk";
 	final static String MODE    = "TRANSIT";
-	final static Speaker mySpeaker = new Speaker();
+	private      Language language     = new Language("English", "en-GB");
+	//final static Speaker mySpeaker = new Speaker();
 
 	/* Navigation Variables */
 	private	String		origin;
 	private	String		destination;
+	private	String		encOrigin;
+	private	String		encDestination;
 
 	private	byte[]		directionsRaw = {};
 	private JSONObject	directionsJSON;
@@ -58,14 +62,26 @@ public class Navigator
 	 */
 	public void setOrigin(float latitude,float longitude)
 	{
-		//origin = String.valueOf(latitude)+","+String.valueOf(longitude);
-		origin = String.valueOf(latitude)+","+String.valueOf(longitude);
-		encOrigin = URLEncoder.encode(origin,"UTF-8");
+		try
+		{
+			origin = String.valueOf(latitude)+","+String.valueOf(longitude);
+			encOrigin = URLEncoder.encode(origin,"UTF-8");
+			System.out.println(origin + " -> " + encOrigin);
+		} catch (UnsupportedEncodingException ex)
+		{
+			System.out.println( ex ); System.exit( 1 );
+		}
 	}
 	public void setOrigin(String origin)
 	{
-		this.origin = origin;
-		encOrigin = URLEncoder.encode(origin,"UTF-8");
+		try
+		{
+			//this.origin = origin;
+			encOrigin = URLEncoder.encode(origin,"UTF-8");
+		} catch (UnsupportedEncodingException ex)
+		{
+			System.out.println( ex ); System.exit( 1 );
+		}
 	}
 
 	/*
@@ -74,19 +90,34 @@ public class Navigator
 	 */
 	public void setDest(float latitude,float longitude)
 	{
-		destination = String.valueOf(latitude)+","+String.valueOf(longitude);
+		try
+		{
+			destination = String.valueOf(latitude)+","+String.valueOf(longitude);
+			encDestination = URLEncoder.encode(destination,"UTF-8");
+			//encDestination = destination;
+		} catch (UnsupportedEncodingException ex)
+		{
+			System.out.println( ex ); System.exit( 1 );
+		}
 	}
-	public void setDest(String newDest)
+	public void setDest(String destination)
 	{
-		this.destination = destination;
+		try
+		{
+			//this.destination = destination;
+			encDestination = URLEncoder.encode(destination,"UTF-8");
+		} catch (UnsupportedEncodingException ex)
+		{
+			System.out.println( ex ); System.exit( 1 );
+		}
 	}
 
 	/* setLang
 	 * Set the current language
 	 */
-	public void setLang(String language)
+	public void setLang(Language language)
 	{
-		this.language = language
+		this.language = language;
 	}
 
 	/* refreshdirectionsStr
@@ -94,62 +125,58 @@ public class Navigator
 	 */
 	public void refreshdirections()
 	{
-		try
+		System.out.println("Attempting to fetch directions");
+		//final String encDestination =	URLEncoder.encode(destination,"UTF-8");
+
+		final String url = (URLBASE
+				   +"?origin="	   +encOrigin
+				   +"&destination="+encDestination
+				   +"&language="   +language.getGoogleCode()
+				   +"&region="	   +REGION
+				   +"&mode="	   +MODE
+				   +"&key="	   +KEY);
+		System.out.println(url);
+
+		final byte[] body = {};
+		final String[][] headers = {};
+
+		directionsRaw = HttpConnect.httpConnect( METHOD, url, headers, body );
+
+		printRaw();
+
+		// Traverse directionsJSON to get array of steps
+		directionsJSON = new JSONObject(new String(directionsRaw));
+		routes = (JSONArray)directionsJSON.get("routes");
+		route  = routes.getJSONObject(0);
+		legs   = (JSONArray)route.get("legs");
+		leg    = legs.getJSONObject(0);
+		steps  = (JSONArray)leg.get("steps");
+
+		//
+		directionsStr = new String[steps.length()];
+		for (int i=0; i<steps.length(); i++)
 		{
-			System.out.println("Attempting to fetch directions");
-			final String encDestination =	URLEncoder.encode(destination,"UTF-8");
+			step = steps.getJSONObject(i);
 
-			final String url = (URLBASE
-					   +"?origin="	   +encOrigin
-					   +"&destination="+encDestination
-					   +"&language="   +language
-					   +"&region="	   +REGION
-					   +"&mode="	   +MODE
-					   +"&key="	   +KEY);
-			System.out.println(url);
+			distance = step.getJSONObject("distance");
 
-			final byte[] body = {};
-			final String[][] headers = {};
-
-			directionsRaw = HttpConnect.httpConnect( METHOD, url, headers, body );
-
-			// Traverse directionsJSON to get array of steps
-			directionsJSON = new JSONObject(new String(directionsRaw));
-			routes = (JSONArray)directionsJSON.get("routes");
-			route  = routes.getJSONObject(0);
-			legs   = (JSONArray)route.get("legs");
-			leg    = legs.getJSONObject(0);
-			steps  = (JSONArray)leg.get("steps");
-
-			//
-			directionsStr = new String[steps.length()];
-			for (int i=0; i<steps.length(); i++)
+			// Read distances larger than 1000m in km
+			if (distance.getInt("value") >= 1000)
 			{
-				step = steps.getJSONObject(i);
-
-				distance = step.getJSONObject("distance");
-
-				// Read distances larger than 1000m in km
-				if (distance.getInt("value") >= 1000)
-				{
-					distanceStr = String.format("In %.1f kilometers ",
-												(float)distance.getInt("value") / 1000);
-				}
-				else
-				{
-					distanceStr = String.format("In %d meters ",
-												distance.getInt("value"));
-				}
-
-				html = step.getString("html_instructions");
-				doc = Jsoup.parse(html);
-				directionsStr[i] = distanceStr + doc.text();
+				distanceStr = String.format("In %.1f kilometers ",
+							    (float)distance.getInt("value") / 1000);
+			}
+			else
+			{
+				distanceStr = String.format("In %d meters ",
+							    distance.getInt("value"));
 			}
 
-		} catch (Exception ex)
-		{
-			System.out.println( ex ); System.exit( 1 );
+			html = step.getString("html_instructions");
+			doc = Jsoup.parse(html);
+			directionsStr[i] = distanceStr + doc.text();
 		}
+
 	}
 
 	/* getDirection
@@ -160,7 +187,7 @@ public class Navigator
 	{
 		if (currentDirection<directionsStr.length)
 		{
-			mySpeaker.saySomething(directionsStr[currentDirection]);
+			Speaker.saySomething(directionsStr[currentDirection],language.getBingCode(),language.getArtist());
 			return directionsStr[currentDirection++];
 		} else {
 			return "You have reached your destination";
@@ -175,26 +202,28 @@ public class Navigator
 		return directionsStr;
 	}
 
+	public void printRaw()
+	{
+		// Temporary debug stuff
+		System.out.println("Full directionsStr:");
+		if (directionsRaw.length == 0)
+		{
+			System.out.println("No directionsStr");
+		} else
+		{
+			for (int i=0; i < directionsRaw.length; i++)
+			{
+				System.out.print( (char) directionsRaw[i]);
+			}
+		}
+	}
+
 	/* printOut
 	 * Output directions
 	 */
 	public void printOut()
 	{
-		// Temporary debug stuff
-		if (false)
-		{
-			System.out.println("Full directionsStr:");
-			if (directionsRaw.length == 0)
-			{
-				System.out.println("No directionsStr");
-			} else
-			{
-				for (int i=0; i < directionsRaw.length; i++)
-				{
-					System.out.print( (char) directionsRaw[i]);
-				}
-			}
-		}
+		printRaw();
 
 		// Print origin, directions and destination
 		System.out.println("Origin="+origin);
@@ -208,14 +237,21 @@ public class Navigator
 	public static void main(String args[])
 	{
 		Navigator myDir = new Navigator();
-		//myDir.setOrigin	(50.7236f, -3.52751f);
+		
+		//myDir.setOrigin("Exeter");
 		//myDir.setDest	(51.3758f,  2.3599f);
-		myDir.setOrigin("Exeter");
-		myDir.setDest("Bath");
+		//myDir.setOrigin("Bath");
+		myDir.setOrigin	(50.729042f, -3.531057f);
+		myDir.setDest	(50.742957f, -3.348418f);
+		//myDir.setDest("Bath");
+		
+		myDir.setLang(new Language("French","fr-FR"));
+		
 		myDir.refreshdirections();
 		myDir.printOut();
 
-		while (myDir.getDirection()!="You have reached your destination")
-		{}
+		//while (myDir.getDirection()!="You have reached your destination")
+		//{}
+		myDir.getDirection();
 	}
 }
