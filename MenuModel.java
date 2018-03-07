@@ -25,7 +25,6 @@ public class MenuModel extends Observable implements Model {
 	/* Side buttons */
 	public void pressedPlus()
 	{
-        System.out.println("The selected button is: " + selected.getText());
 		setSelected(selected.next());
 	}
 	public void pressedMinus()

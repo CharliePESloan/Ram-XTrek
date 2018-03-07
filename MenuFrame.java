@@ -30,12 +30,12 @@ public class MenuFrame extends JFrame{
     ImageIcon onOffIcon = new ImageIcon("Images/OnOffButton.png");
 
 
-    
+    OnOffModel onOffModel = new OnOffModel(this);
     MenuModel menuModel = new MenuModel(this);
     SpeechModeModel speechModel = new SpeechModeModel(this);
     WhereToFrameModel whereToModel = new WhereToFrameModel(this);
     MapModel mapModel = new MapModel(this);
-    OnOffModel onOffModel = new OnOffModel(this);
+    
    // MenuController	menuController = new MenuController(menuModel);
     Controller controller = new Controller(menuModel);
     JPanel menuView = new MenuView(controller, menuModel);
@@ -104,11 +104,12 @@ OnOffButton.setName("OnOffButton");
     add(cards);
     cards.setSize(255, 293);
     cards.setLocation(90,300);
+    cards.add(onOffView, "OnOff");
     cards.add(menuView, "Menu");
     cards.add(speechView, "Speech");
     cards.add(whereToView, "WhereTo");
     cards.add(mapView, "Map");
-    cards.add(onOffView, "OnOff");
+    
     //menuFrame.add(menuView);
     //JPanel menuView = new MenuView(menuFrame);
     
