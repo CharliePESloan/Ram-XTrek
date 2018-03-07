@@ -21,8 +21,8 @@ import java.awt.Dimension;
  */
 public class MenuView extends JPanel /*implements Observer*/ {
     JFrame mainFrame;
-    int width = 255;
-    int height = 293;
+    int width = 260;
+    int height = 294;
     int x_loc = 90;
     int y_loc = 300;
     int lb_x = 0;

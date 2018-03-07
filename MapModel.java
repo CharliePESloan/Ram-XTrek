@@ -11,53 +11,52 @@ import java.io.ByteArrayInputStream;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO; 
 
-/**
- *
- * @author Devash Patel 
- 
+/*
+ * @author Devash Patel  
  */
 public class MapModel extends Observable implements Model {
 
     MenuFrame myXTrek;
-	final static String OUTPUT    = "Images/output.png";  /* Ouput file        */
-	final static String LATITUDE  = "50.7184";     /* Exeter, latitude  */
-	final static String LONGITUDE = "-3.5339";     /* Exeter, longitude */
-	final static String SIZE      = "278x402";     /* Size              */
-    private int zoomVal = 5; 
+	final static String LATITUDE  = "50.7184";     /* latitude  */
+	final static String LONGITUDE = "-3.5339";     /* longitude */
+	final static String SIZE      = "278x402";     /* Size      */
+    private int zoomVal = 10; 					   /* zoom Value */	
 	byte[] mapImage; 
 	
 	BufferedImage img; 
 	
     public MapModel(MenuFrame XTrek) {
         myXTrek = XTrek;
+		imageLoader();
     }
-  
-    public void pressedPlus() {
-		zoomVal ++; 
-		mapImage = Maps.readData(LATITUDE, LONGITUDE, Integer.toString(zoomVal), SIZE);
-		try{
-		ImageIO.read(new ByteArrayInputStream(mapImage)); 
-		}
-		catch (Exception e){
-			System.out.println("help"); 
-		}
-        setChanged(); notifyObservers (img);
-    }
-    public void pressedMinus() {
-		zoomVal --; 
+	
+	public void imageLoader () {
 		mapImage = Maps.readData(LATITUDE, LONGITUDE, Integer.toString(zoomVal), SIZE); 
 		try {
-		ImageIO.read(new ByteArrayInputStream(mapImage));
+		img = ImageIO.read(new ByteArrayInputStream(mapImage));
 		}
         catch (Exception e){
 			System.out.println("help");
 		}
 		setChanged(); notifyObservers (img);
+	}
+  
+    public void pressedPlus() {
+		zoomVal ++; 
+		System.out.println(zoomVal); 
+		imageLoader(); 
+    }
+    public void pressedMinus() {
+		zoomVal --; 
+		System.out.println(zoomVal);
+		imageLoader();
     }
     public void pressedMenu() {
         myXTrek.setMenu("Menu");
     }
     public void pressedSelect() {
-       
     }
+	public void pressedOnOff() {
+		
+	}
 }
