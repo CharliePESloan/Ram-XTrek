@@ -16,7 +16,7 @@ public class WhereToFrameView extends JPanel implements Observer {
     ImageIcon[] hLetter = new ImageIcon[26]; //Array of images A-Z (highlighted)
     CycleButton[] buttons = new CycleButton[26]; //Array of buttons
     static String abcd = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    final JTextField display = new JTextField("Enter Address",23);
+    final JTextField display = new JTextField("Enter Address",12);
     final CycleButton buttonSpace; 
     ImageIcon letterSpace = new ImageIcon("Images/TestSpace.png");
     ImageIcon letterHSpace = new ImageIcon("Images/HTestSpace.png");
@@ -26,13 +26,15 @@ public class WhereToFrameView extends JPanel implements Observer {
     
     CycleButton isSelected;
     GridLayout background = new GridLayout(7,4);
+	GridLayout test = new GridLayout(1,0);
     GridBagLayout backgroundTwo = new GridBagLayout();
     CardLayout card;
     Container abc;
-    JPanel a = new JPanel();
+    JPanel a = new JPanel(test);
     JPanel cards = new JPanel(card);
     JPanel b = new JPanel(background);
     JPanel c = new JPanel(backgroundTwo);
+	Font bigFont = display.getFont().deriveFont(Font.PLAIN, 24f);
     
     CycleButton[] numberButtons = new CycleButton[10];
     ImageIcon[] number = new ImageIcon[10];
@@ -52,14 +54,14 @@ public class WhereToFrameView extends JPanel implements Observer {
     
     public WhereToFrameView (Controller controller, WhereToFrameModel model){
     //255,36
-    display.setSize(255,36);
-    setBackground(Color.black);
+	display.setFont(bigFont);
     
     add(a);
     add(cards);
     a.add(display);
     add(b, "TextKeyboard");
     cards.add(c, "NumberKeyboard");
+	//setKeyboard("TextKeyBoard");
     
     
     model.addObserver(this);
@@ -106,7 +108,6 @@ public class WhereToFrameView extends JPanel implements Observer {
     public void setKeyboard(String type ){
         switch (type) {
         case "TextKeyboard":
-            type = "TextKeyboard";
             break;
         
         case "NumberKeyboard":
