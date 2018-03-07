@@ -22,10 +22,10 @@ class MapView extends JPanel implements Observer {
  
   BufferedImage mapImage; 
   
-  int centreCoord = 0;  
-  int xCentreCoord = 127; 
-  int yCentreCoord = 145; 
-  int circleSize = 15; 
+  private int centreCoord = 0;  
+  private int xCentreCoord = 127; 
+  private int yCentreCoord = 145; 
+  private int circleSize = 15; 
   
   
   public MapView( Controller controller, MapModel model ) {
@@ -34,7 +34,7 @@ class MapView extends JPanel implements Observer {
   }
 
   public void update( Observable obs, Object obj ) {
-    mapImage = (BufferedImage)obj; 
+    mapImage = (BufferedImage) obj; 
     repaint(); // image updated when zoomed in or out
   }
 

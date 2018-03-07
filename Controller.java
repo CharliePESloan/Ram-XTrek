@@ -1,76 +1,102 @@
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+//import java.awt.event.ActionListener;
 import javax.swing.SwingUtilities;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
 
 /*
  * Controller
+ *
  * Charlie Sloan (2018)
- * 
- * Listens for MouseEvents on the side buttons and calls the appropriate
- * function of the current model
  */
 class Controller implements MouseListener
 {
-	// The currently selected model
 	private Model model;
 
-	/* Constructor */
 	public Controller( Model model )
 	{
 		this.model = model;
 	}
 
-	/* setModel
-	 * Change the current model
-	 */
 	public void setModel( Model model )
 	{
 		this.model = model;
 	}
 
-	/* mouseClicked
-	 * Handle click events for all buttons on the XTrek device 
-	 */
-	public void mouseClicked( MouseEvent me )
+	public void mouseClicked( MouseEvent me)
 	{
-		// Try to get the source of the event as a button
+		System.out.println("Clicked!");
 		Object	o = me.getSource();
 		JButton	b = null;
+
 		if(o instanceof JButton)
 			b = (JButton)o;
 
-		// If the event came from a button then handle it
 		if(b != null)
 		{
-			// Debug print statement
-			System.out.println("It's a " + b.getText() + "!");
-
-			// The model handles each button with a specfific function
-			switch (b.getText())
+			System.out.println("It's a " + b.getName() + "!");
+			switch (b.getName())
 			{
 				case "PlusButton":
-					model.pressedPlus();
+					this.model.pressedPlus();
 					break;
 				case "MinusButton":
-					model.pressedMinus();
+					this.model.pressedMinus();
 					break;
 				case "SelectButton":
-					model.pressedSelect();
+					this.model.pressedSelect();
 					break;
 				case "MenuButton":
-					model.pressedMenu();
+					this.model.pressedMenu();
 					break;
+                case "OnOffButton":
+                    this.model.pressedOnOff();
 			}
 		}
 	}
 	
 	public void mousePressed( MouseEvent me )
 	{}
+
 	public void mouseEntered( MouseEvent me )
-	{}
+	{
+        System.out.println("Mouse Entered");
+		Object	o = me.getSource();
+		JButton	b = null;
+
+		if(o instanceof JButton)
+			b = (JButton)o;
+
+		if(b != null)
+		{
+			System.out.println("It's a " + b.getName() + "!");
+			switch (b.getText())
+			{
+				case "PlusButton":
+					System.out.println("Mouse entered into plus button");
+                    MenuModel menuModel = (MenuModel)this.model;
+                    menuModel.mainFrame.PlusButton.setIcon(new ImageIcon("Images/PlusButtonSelected.png"));
+					break;
+				case "MinusButton":
+					
+					break;
+				case "SelectButton":
+					
+					break;
+				case "MenuButton":
+					
+					break;
+                case "OnOffButton":
+                    
+			}
+		}
+    }
+
 	public void mouseExited( MouseEvent me )
 	{}
+	
 	public void mouseReleased( MouseEvent me )
 	{}
 

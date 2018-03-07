@@ -23,13 +23,13 @@ import javax.swing.*;
 public class MenuFrame extends JFrame{
     CardLayout cardlayout = new CardLayout();
     JPanel cards = new JPanel(cardlayout);
-    
-    
-    ImageIcon plusIcon = new ImageIcon("Images/PlusButton.png");
+        ImageIcon plusIcon = new ImageIcon("Images/PlusButton.png");
     ImageIcon minusIcon = new ImageIcon("Images/MinusButton.png");
     ImageIcon selectIcon = new ImageIcon("Images/SelectButton.png");
     ImageIcon menuIcon = new ImageIcon("Images/MenuButton.png");
     ImageIcon onOffIcon = new ImageIcon("Images/OnOffButton.png");
+
+
     
     MenuModel menuModel = new MenuModel(this);
     SpeechModeModel speechModel = new SpeechModeModel(this);
@@ -43,6 +43,12 @@ public class MenuFrame extends JFrame{
     JPanel whereToView = new WhereToFrameView(controller, whereToModel);
     JPanel mapView = new MapView(controller, mapModel);
     JPanel onOffView = new OnOffView(controller, onOffModel);
+    
+    JButton PlusButton = new JButton();
+    JButton MinusButton = new JButton();
+    JButton SelectButton = new JButton();
+    JButton MenuButton = new JButton();
+    JButton OnOffButton = new JButton();
   /* Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
   */
 
@@ -71,11 +77,11 @@ public class MenuFrame extends JFrame{
     setResizable( false );
     setVisible( true );
 
-    JButton    PlusButton    = new JButton("PlusButton");
-    JButton    MinusButton   = new JButton("MinusButton");
-    JButton    SelectButton  = new JButton("SelectButton");
-    JButton    MenuButton    = new JButton("MenuButton");
-    JButton OnOffButton = new JButton("OnOffButton");
+PlusButton.setName("PlusButton");
+MinusButton.setName("MinusButton");
+SelectButton.setName("SelectButton");
+MenuButton.setName("MenuButton");
+OnOffButton.setName("OnOffButton");
       
     
     // Placing the navigation buttons
@@ -88,10 +94,10 @@ public class MenuFrame extends JFrame{
     SelectButton.setBounds(5, 260, 25, 97); add(SelectButton);
       SelectButton.setIcon(selectIcon);
       SelectButton.setBorder(null);
-    MenuButton.setBounds(409, 113, 30,84); add(MenuButton);
+    MenuButton.setBounds(408, 110, 30,84); add(MenuButton);
       MenuButton.setIcon(menuIcon);
       MenuButton.setBorder(null);
-    OnOffButton.setBounds(285,180,75,80); add(OnOffButton);
+    OnOffButton.setBounds(280,185,75,75); add(OnOffButton);
       OnOffButton.setIcon(onOffIcon);
       OnOffButton.setBorder(null);
       

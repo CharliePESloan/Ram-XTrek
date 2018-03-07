@@ -21,8 +21,8 @@ import java.awt.Dimension;
  */
 public class MenuView extends JPanel /*implements Observer*/ {
     JFrame mainFrame;
-    int width = 260;
-    int height = 294;
+    int width = 255;
+    int height = 293;
     int x_loc = 90;
     int y_loc = 300;
     int lb_x = 0;
@@ -51,7 +51,7 @@ public class MenuView extends JPanel /*implements Observer*/ {
     ImageIcon speechIconSelected = new ImageIcon("Images/SpeechButtonSelected.png");
   ImageIcon aboutIcon = new ImageIcon("Images/InfoButton.png");
     ImageIcon aboutIconSelected = new ImageIcon("Images/InfoButtonSelected.png");
-  ImageIcon plusIcon = new ImageIcon("Images/PlusButton.png");
+
     // Creating the menu buttons
   final CycleButton WhereToButton      = new CycleButton("WhereToButton", whereToIcon, whereToIconSelected);
   final CycleButton MapButton          = new CycleButton("MapButton", mapIcon, mapIconSelected);
@@ -67,12 +67,7 @@ public class MenuView extends JPanel /*implements Observer*/ {
   TripComputerButton.setPrevNext(WhereToButton, SpeechButton);
   SpeechButton.setPrevNext(TripComputerButton, AboutButton);
   AboutButton.setPrevNext(SpeechButton, SatelliteButton);
-    
-  /** Creating the side/navigation buttons    
-  final SideButton    PlusButton    = new BlankXTrex.SideButton("PlusButton");
-  final SideButton    MinusButton   = new BlankXTrex.SideButton("MinusButton");
-  final SideButton    SelectButton  = new BlankXTrex.SideButton("SelectButton");
-  final SideButton    MenuButton    = new BlankXTrex.SideButton("MenuButton"); **/ 
+ 
       
   // Placing the menu buttons   
   WhereToButton.setBounds(lb_x, 0, 125, 93); add(WhereToButton);
