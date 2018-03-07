@@ -25,16 +25,24 @@ public class MenuFrame extends JFrame{
     JPanel cards = new JPanel(cardlayout);
     
     
+    ImageIcon plusIcon = new ImageIcon("Images/PlusButton.png");
+    ImageIcon minusIcon = new ImageIcon("Images/MinusButton.png");
+    ImageIcon selectIcon = new ImageIcon("Images/SelectButton.png");
+    ImageIcon menuIcon = new ImageIcon("Images/MenuButton.png");
+    ImageIcon onOffIcon = new ImageIcon("Images/OnOffButton.png");
+    
     MenuModel menuModel = new MenuModel(this);
     SpeechModeModel speechModel = new SpeechModeModel(this);
     WhereToFrameModel whereToModel = new WhereToFrameModel(this);
     MapModel mapModel = new MapModel(this);
+    OnOffModel onOffModel = new OnOffModel(this);
    // MenuController	menuController = new MenuController(menuModel);
     Controller controller = new Controller(menuModel);
     JPanel menuView = new MenuView(controller, menuModel);
     JPanel speechView = new SpeechModeView(controller, speechModel);
     JPanel whereToView = new WhereToFrameView(controller, whereToModel);
     JPanel mapView = new MapView(controller, mapModel);
+    JPanel onOffView = new OnOffView(controller, onOffModel);
   /* Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
   */
 
@@ -56,7 +64,7 @@ public class MenuFrame extends JFrame{
   public MenuFrame() {
     // The frame specifications
     setTitle( "XTrex" );
-    setContentPane( new JLabel( new ImageIcon( "Images/XTrex Background.png" ) ) );
+    setContentPane( new JLabel( new ImageIcon( "Images/XTrex Background x.png" ) ) );
     setLayout( null );
     setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
     setSize( 450, 835 ); /* title bar! */
@@ -67,13 +75,25 @@ public class MenuFrame extends JFrame{
     JButton    MinusButton   = new JButton("MinusButton");
     JButton    SelectButton  = new JButton("SelectButton");
     JButton    MenuButton    = new JButton("MenuButton");
+    JButton OnOffButton = new JButton("OnOffButton");
       
     
     // Placing the navigation buttons
-    PlusButton.setBounds(9, 102, 30, 68);add(PlusButton);
-    MinusButton.setBounds(11, 175, 27, 64);add(MinusButton);
-    SelectButton.setBounds(5, 260, 34, 97); add(SelectButton);
+    PlusButton.setBounds(9, 102, 29, 68);add(PlusButton);
+      PlusButton.setIcon(plusIcon);
+      PlusButton.setBorder(null);
+    MinusButton.setBounds(11, 175, 26, 64);add(MinusButton);
+      MinusButton.setIcon(minusIcon);
+      MinusButton.setBorder(null);
+    SelectButton.setBounds(5, 260, 25, 97); add(SelectButton);
+      SelectButton.setIcon(selectIcon);
+      SelectButton.setBorder(null);
     MenuButton.setBounds(409, 113, 30,84); add(MenuButton);
+      MenuButton.setIcon(menuIcon);
+      MenuButton.setBorder(null);
+    OnOffButton.setBounds(285,180,75,80); add(OnOffButton);
+      OnOffButton.setIcon(onOffIcon);
+      OnOffButton.setBorder(null);
       
     add(cards);
     cards.setSize(255, 293);
@@ -82,6 +102,7 @@ public class MenuFrame extends JFrame{
     cards.add(speechView, "Speech");
     cards.add(whereToView, "WhereTo");
     cards.add(mapView, "Map");
+    cards.add(onOffView, "OnOff");
     //menuFrame.add(menuView);
     //JPanel menuView = new MenuView(menuFrame);
     
@@ -90,7 +111,7 @@ public class MenuFrame extends JFrame{
     int screenHeight = screenSize.height;
     int screenWidth = screenSize.width;
     
-    
+    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
     setSize( 450, 835 ); /* title bar! */
     setResizable( false );
@@ -100,6 +121,7 @@ public class MenuFrame extends JFrame{
     MinusButton.addMouseListener(controller);
     SelectButton.addMouseListener(controller);
     MenuButton.addMouseListener(controller);
+    OnOffButton.addMouseListener(controller);
   }
   public void setMenu(String menu){
       switch(menu){
@@ -117,6 +139,10 @@ public class MenuFrame extends JFrame{
               case "Map":
                 System.out.println("Changing model to MapModel");
                 controller.setModel(mapModel);
+              break;
+              case "OnOff":
+                System.out.println("Changing model to OnOff");
+                controller.setModel(onOffModel);
               break;
       }
       cardlayout.show(cards, menu);
