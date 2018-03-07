@@ -38,7 +38,7 @@ public class MenuModel extends Observable implements Model {
 	}
 	public void pressedSelect()
 	{
-		currentButton = (String)selected.getData();
+		currentButton = selected.getData();
 		switch (currentButton)
 		{
 			case "WhereToButton":
@@ -60,6 +60,9 @@ public class MenuModel extends Observable implements Model {
 			default:
 				break;
 		}
-
+    }
+    public void pressedOnOff(){
+        mainFrame.setMenu("OnOff");
+    }
 //Speaker.saySomething(selected.getText(),language,artist);
-}}
+}
