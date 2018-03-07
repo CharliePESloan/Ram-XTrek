@@ -8,6 +8,7 @@ import java.util.Observable;
  */
 public interface Model
 {
+  MenuFrame mainFrame;
   public void pressedPlus();
   public void pressedMinus();
   public void pressedSelect();
