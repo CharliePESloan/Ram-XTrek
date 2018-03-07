@@ -62,7 +62,6 @@ class Controller implements MouseListener
 
 	public void mouseEntered( MouseEvent me )
 	{
-        System.out.println("Mouse Entered");
 		Object	o = me.getSource();
 		JButton	b = null;
 
@@ -72,30 +71,66 @@ class Controller implements MouseListener
 		if(b != null)
 		{
 			System.out.println("It's a " + b.getName() + "!");
-			switch (b.getText())
+            if(this.model instanceof MenuModel){
+            System.out.println("The class is MenuModel");
+            } else{
+            System.out.println("The class is not MenuModel");
+            }
+			switch (b.getName())
 			{
 				case "PlusButton":
-					System.out.println("Mouse entered into plus button");
-                    MenuModel menuModel = (MenuModel)this.model;
-                    menuModel.mainFrame.PlusButton.setIcon(new ImageIcon("Images/PlusButtonSelected.png"));
+                    b.setIcon(new ImageIcon("Images/PlusButtonSelected.png"));
 					break;
 				case "MinusButton":
-					
+                    b.setIcon(new ImageIcon("Images/MinusButtonSelected.png"));
 					break;
 				case "SelectButton":
-					
+                    b.setIcon(new ImageIcon("Images/SelectButtonSelected.png"));
 					break;
 				case "MenuButton":
-					
-					break;
+                    b.setIcon(new ImageIcon("Images/MenuButtonSelected.png"));
+                    break;
                 case "OnOffButton":
-                    
+                    break;
 			}
 		}
     }
 
 	public void mouseExited( MouseEvent me )
-	{}
+	{
+		Object	o = me.getSource();
+		JButton	b = null;
+
+		if(o instanceof JButton)
+			b = (JButton)o;
+
+		if(b != null)
+		{
+			System.out.println("It's a " + b.getName() + "!");
+            if(this.model instanceof MenuModel){
+            System.out.println("The class is MenuModel");
+            } else{
+            System.out.println("The class is not MenuModel");
+            }
+			switch (b.getName())
+			{
+				case "PlusButton":
+                    b.setIcon(new ImageIcon("Images/PlusButton.png"));
+					break;
+				case "MinusButton":
+                    b.setIcon(new ImageIcon("Images/MinusButton.png"));
+					break;
+				case "SelectButton":
+                    b.setIcon(new ImageIcon("Images/SelectButton.png"));
+					break;
+				case "MenuButton":
+                    b.setIcon(new ImageIcon("Images/MenuButton.png"));
+                    break;
+                case "OnOffButton":
+                    break;
+			}
+		}
+    }
 	
 	public void mouseReleased( MouseEvent me )
 	{}
