@@ -72,6 +72,6 @@ public class SpeechModeModel extends Observable implements Model
 	}
 	public void pressedOnOff()
 	{
-		XTrek.setMenu("Off");
+		XTrek.setMenu("OnOff");
 	}
 }
