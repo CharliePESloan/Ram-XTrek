@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
@@ -65,6 +60,12 @@ public class MapModel extends Observable implements Model {
     public void pressedSelect() { //Select button able to be pressed, but no funcationality
     }
 	public void pressedOnOff() { //Changes the XTrek's on/off state 
-		myXTrek.setMenu("OnOff");
+		myXTrek.setMenu("OnOff");	
+		reset();
 	}
+	public void reset () {
+		zoomVal = 10; 
+		imageLoader();
+	}
+	
 }
