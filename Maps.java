@@ -15,6 +15,7 @@ public class Maps {
                         , String longitude
                         , String zoom
                         , String size
+						, String key
                         ) {
     final String method = "GET";
     final String url
@@ -22,7 +23,7 @@ public class Maps {
         + "?" + "center" + "=" + latitude + "," + longitude
         + "&" + "zoom"   + "=" + zoom
         + "&" + "size"   + "=" + size
-        );
+        + "&" + "key"    + "=" + key);
     final byte[] body
         = {};
     final String[][] headers

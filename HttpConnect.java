@@ -32,7 +32,7 @@ public class HttpConnect {
       conn.setConnectTimeout( TIMEOUT );
       conn.setReadTimeout   ( TIMEOUT );
       for ( int i = 0; i < headers.length; i++ ) {
-        conn.setRequestProperty( headers[ i ][ 0 ], headers[ i ][ 1 ] );
+        conn.setRequestProperty(headers[ i ][ 0 ], headers[ i ][ 1 ] );
       }
       conn.connect();
 
