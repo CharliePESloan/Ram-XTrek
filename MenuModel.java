@@ -62,4 +62,10 @@ public class MenuModel extends Observable implements Model {
 		}
 
 //Speaker.saySomething(selected.getText(),language,artist);
-}}
+}
+
+	public void pressedOnOff()
+	{
+	}
+
+}
