@@ -21,6 +21,9 @@ public class MapModel extends Observable implements Model {
 	final static String LONGITUDE = "-3.5339";     /* longitude */
 	final static String SIZE      = "278x402";     /* Size      */
     private int zoomVal = 10; 					   /* zoom Value */	
+	private int maxZoom = 21;                      /* maximum zoom value */
+	private int minZoom = 2;                       /* minimum zoom value */ 
+	
 	byte[] mapImage; 
 	
 	BufferedImage img; 
@@ -30,33 +33,37 @@ public class MapModel extends Observable implements Model {
 		imageLoader();
     }
 	
-	public void imageLoader () {
+	public void imageLoader () {   // Loads the map image
 		mapImage = Maps.readData(LATITUDE, LONGITUDE, Integer.toString(zoomVal), SIZE); 
 		try {
 		img = ImageIO.read(new ByteArrayInputStream(mapImage));
 		}
         catch (Exception e){
-			System.out.println("help");
+			System.out.println(e);
 		}
 		setChanged(); notifyObservers (img);
 	}
   
-    public void pressedPlus() {
-		zoomVal ++; 
-		System.out.println(zoomVal); 
+    public void pressedPlus() {  //Zoom in method
+		zoomVal ++;  
+		if (zoomVal >= maxZoom){
+			zoomVal = maxZoom;
+		}
 		imageLoader(); 
     }
-    public void pressedMinus() {
+    public void pressedMinus() { //Zoom out method
 		zoomVal --; 
-		System.out.println(zoomVal);
+		if (zoomVal <= minZoom){
+			zoomVal = minZoom; 
+		}
 		imageLoader();
     }
-    public void pressedMenu() {
+    public void pressedMenu() { //Returns to the menu screen
         myXTrek.setMenu("Menu");
     }
-    public void pressedSelect() {
+    public void pressedSelect() { //Select button able to be pressed, but no funcationality
     }
-	public void pressedOnOff() {
+	public void pressedOnOff() { //Changes the XTrek's on/off state 
 		
 	}
 }
