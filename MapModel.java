@@ -64,6 +64,6 @@ public class MapModel extends Observable implements Model {
     public void pressedSelect() { //Select button able to be pressed, but no funcationality
     }
 	public void pressedOnOff() { //Changes the XTrek's on/off state 
-		
+		myXTrek.setMenu("OnOff");
 	}
 }
