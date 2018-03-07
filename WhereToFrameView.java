@@ -16,9 +16,14 @@ public class WhereToFrameView extends JPanel implements Observer {
     ImageIcon[] hLetter = new ImageIcon[26]; //Array of images A-Z (highlighted)
     CycleButton[] buttons = new CycleButton[26]; //Array of buttons
     static String abcd = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    final JTextField display = new JTextField(80);
-    final CycleButton buttonSpace = new CycleButton("SPACE");
-    final CycleButton buttonRight = new CycleButton("RIGHT");
+    final JTextField display = new JTextField("Enter Address",23);
+    final CycleButton buttonSpace; 
+    ImageIcon letterSpace = new ImageIcon("Images/TestSpace.png");
+    ImageIcon letterHSpace = new ImageIcon("Images/HTestSpace.png");
+    final CycleButton buttonRight;
+    ImageIcon letterRight = new ImageIcon("Images/TestRight.png");
+    ImageIcon letterHRight = new ImageIcon("Images/HTestRight.png");
+    
     CycleButton isSelected;
     GridLayout background = new GridLayout(7,4);
     GridBagLayout backgroundTwo = new GridBagLayout();
@@ -48,6 +53,7 @@ public class WhereToFrameView extends JPanel implements Observer {
     public WhereToFrameView (Controller controller, WhereToFrameModel model){
     //255,36
     display.setSize(255,36);
+    setBackground(Color.black);
     
     add(a);
     add(cards);
@@ -63,6 +69,8 @@ public class WhereToFrameView extends JPanel implements Observer {
             buttons[i] = new CycleButton(Character.toString(abcd.charAt(i)), letter[i], hLetter[i]); //Creates the buttons
             b.add(buttons[i]);
         }
+    buttonSpace = new CycleButton("SPACE", letterSpace, letterHSpace);
+    buttonRight = new CycleButton("RIGHT", letterRight, letterHRight);
     for (int i=1; i<25;i++) {
 			buttons[i].setPrevNext(buttons[i-1],buttons[i+1]);
 		}
@@ -108,7 +116,7 @@ public class WhereToFrameView extends JPanel implements Observer {
     }
     @Override
     public void update(Observable o, Object arg) {
-            display.setText("" + arg);
+            display.setText("" +  arg);
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
