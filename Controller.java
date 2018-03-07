@@ -27,7 +27,6 @@ class Controller implements MouseListener
 
 	public void mouseClicked( MouseEvent me)
 	{
-		System.out.println("Clicked!");
 		Object	o = me.getSource();
 		JButton	b = null;
 
@@ -36,7 +35,6 @@ class Controller implements MouseListener
 
 		if(b != null)
 		{
-			System.out.println("It's a " + b.getName() + "!");
 			switch (b.getName())
 			{
 				case "PlusButton":
@@ -70,12 +68,6 @@ class Controller implements MouseListener
 
 		if(b != null)
 		{
-			System.out.println("It's a " + b.getName() + "!");
-            if(this.model instanceof MenuModel){
-            System.out.println("The class is MenuModel");
-            } else{
-            System.out.println("The class is not MenuModel");
-            }
 			switch (b.getName())
 			{
 				case "PlusButton":
@@ -106,12 +98,6 @@ class Controller implements MouseListener
 
 		if(b != null)
 		{
-			System.out.println("It's a " + b.getName() + "!");
-            if(this.model instanceof MenuModel){
-            System.out.println("The class is MenuModel");
-            } else{
-            System.out.println("The class is not MenuModel");
-            }
 			switch (b.getName())
 			{
 				case "PlusButton":

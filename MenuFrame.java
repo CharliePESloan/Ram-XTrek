@@ -132,22 +132,18 @@ OnOffButton.setName("OnOffButton");
   public void setMenu(String menu){
       switch(menu){
               case "Speech":
-                System.out.println("Changing model to speechModel");
                 controller.setModel(speechModel);
               break;
               case "Menu":
                 controller.setModel(menuModel);
               break;
               case "WhereTo":
-                System.out.println("Changing model to whereToModel");
                 controller.setModel(whereToModel);
               break;
               case "Map":
-                System.out.println("Changing model to MapModel");
                 controller.setModel(mapModel);
               break;
               case "OnOff":
-                System.out.println("Changing model to OnOff");
                 controller.setModel(onOffModel);
               break;
       }
