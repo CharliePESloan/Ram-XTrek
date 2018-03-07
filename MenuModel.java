@@ -42,11 +42,9 @@ public class MenuModel extends Observable implements Model {
 		switch (currentButton)
 		{
 			case "WhereToButton":
-                System.out.println("Switching to WhereTo Mode");
                 mainFrame.setMenu("WhereTo");
 				break;
 			case "MapButton":
-                System.out.println("Switching to Map Mode");
                 mainFrame.setMenu("Map");
 				break;
 			case "SatelliteButton":
@@ -54,7 +52,6 @@ public class MenuModel extends Observable implements Model {
 			case "TripCompButton":
 				break;
             case "SpeechButton":
-				System.out.println("Switching to Speech Mode");
                 mainFrame.setMenu("Speech");
                 break;
 			default:

@@ -20,6 +20,7 @@ public class MapModel extends Observable implements Model {
 	final static String LATITUDE  = "50.7184";     /* latitude  */
 	final static String LONGITUDE = "-3.5339";     /* longitude */
 	final static String SIZE      = "254x292";     /* Size      */
+	final static String KEY       = "AIzaSyBDqXQupiOoXyFBQMu7cju5AozteVS8agU"; 
     private int zoomVal = 10; 					   /* zoom Value */	
 	private int maxZoom = 21;                      /* maximum zoom value */
 	private int minZoom = 2;                       /* minimum zoom value */ 
@@ -34,7 +35,7 @@ public class MapModel extends Observable implements Model {
     }
 	
 	public void imageLoader () {   // Loads the map image
-		mapImage = Maps.readData(LATITUDE, LONGITUDE, Integer.toString(zoomVal), SIZE); 
+		mapImage = Maps.readData(LATITUDE, LONGITUDE, Integer.toString(zoomVal), SIZE, KEY); 
 		try {
 		img = ImageIO.read(new ByteArrayInputStream(mapImage));
 		}
