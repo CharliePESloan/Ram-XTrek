@@ -25,11 +25,11 @@ public class WhereToFrameModel extends Observable implements Model {
     }
     public void pressedPlus() {
         setSelected(selected.prev());
-        setChanged(); notifyObservers (letters);
+        setChanged(); //notifyObservers (letters);
     }
     public void pressedMinus() {
         setSelected(selected.next());
-        setChanged(); notifyObservers (letters);
+        setChanged(); //notifyObservers (letters);
     }
     public void pressedMenu() {
         XTrek.setMenu("Menu");
