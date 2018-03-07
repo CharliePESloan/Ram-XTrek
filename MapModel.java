@@ -19,7 +19,7 @@ public class MapModel extends Observable implements Model {
     MenuFrame myXTrek;
 	final static String LATITUDE  = "50.7184";     /* latitude  */
 	final static String LONGITUDE = "-3.5339";     /* longitude */
-	final static String SIZE      = "278x402";     /* Size      */
+	final static String SIZE      = "254x292";     /* Size      */
     private int zoomVal = 10; 					   /* zoom Value */	
 	private int maxZoom = 21;                      /* maximum zoom value */
 	private int minZoom = 2;                       /* minimum zoom value */ 
