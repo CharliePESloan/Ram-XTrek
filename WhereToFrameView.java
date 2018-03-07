@@ -26,21 +26,29 @@ public class WhereToFrameView extends JPanel implements Observer {
     
     CycleButton isSelected;
     GridLayout background = new GridLayout(7,4);
-	GridLayout test = new GridLayout(1,0);
+	GridLayout testOne = new GridLayout(1,0);
     GridBagLayout backgroundTwo = new GridBagLayout();
+	GridBagConstraints test = new GridBagConstraints();
+	
     CardLayout card;
     Container abc;
-    JPanel a = new JPanel(test);
+    
+	JPanel a = new JPanel(testOne);
     JPanel cards = new JPanel(card);
     JPanel b = new JPanel(background);
     JPanel c = new JPanel(backgroundTwo);
-	Font bigFont = display.getFont().deriveFont(Font.PLAIN, 24f);
+	
     
     CycleButton[] numberButtons = new CycleButton[10];
     ImageIcon[] number = new ImageIcon[10];
     ImageIcon[] hNumber = new ImageIcon[10];
-    final CycleButton buttonLeft = new CycleButton("LEFT");
-    final CycleButton buttonDel = new CycleButton("DEL");
+    final CycleButton buttonLeft;
+	ImageIcon letterLeft = new ImageIcon("Images/TestLeft.png");
+    ImageIcon letterHLeft = new ImageIcon("Images/HTestLeft.png");
+    final CycleButton buttonDel;
+	ImageIcon letterDel = new ImageIcon("Images/TestDel.png");
+    ImageIcon letterHDel = new ImageIcon("Images/HTestDel.png");
+	Font bigFont = display.getFont().deriveFont(Font.PLAIN, 24f);
     
      public String removeChar(String s, int a) {
         return s.substring(0, a) + s.substring(a + 1);
@@ -54,25 +62,31 @@ public class WhereToFrameView extends JPanel implements Observer {
     
     public WhereToFrameView (Controller controller, WhereToFrameModel model){
     //255,36
-	display.setFont(bigFont);
     
     add(a);
     add(cards);
     a.add(display);
-    add(b, "TextKeyboard");
-    cards.add(c, "NumberKeyboard");
-	//setKeyboard("TextKeyBoard");
-    
+    cards.add(b, "TextKeyboard");
+    add(c, "NumberKeyboard");    
     
     model.addObserver(this);
+	display.setFont(bigFont);
+	
     for(int i=0; i<26; i++) {
             letter[i] = new ImageIcon("Images/Test" + abcd.charAt(i) + ".png"); //Creates the images
             hLetter[i] = new ImageIcon("Images/HTest" + abcd.charAt(i) + ".png"); //Creates the highlighted images
             buttons[i] = new CycleButton(Character.toString(abcd.charAt(i)), letter[i], hLetter[i]); //Creates the buttons
             b.add(buttons[i]);
         }
-    buttonSpace = new CycleButton("SPACE", letterSpace, letterHSpace);
+	buttonSpace = new CycleButton("SPACE", letterSpace, letterHSpace);
     buttonRight = new CycleButton("RIGHT", letterRight, letterHRight);
+	b.add(buttonSpace);
+    b.add(buttonRight);
+		
+   
+	buttonDel = new CycleButton("DEL",letterDel, letterHDel);
+	buttonLeft = new CycleButton("DEL",letterLeft, letterHLeft);
+	
     for (int i=1; i<25;i++) {
 			buttons[i].setPrevNext(buttons[i-1],buttons[i+1]);
 		}
@@ -81,18 +95,58 @@ public class WhereToFrameView extends JPanel implements Observer {
 		buttons[0].setPrevNext(buttonRight, buttons[1]);
 		buttons[25].setPrevNext(buttons[24], buttonSpace);
 
-                model.setSelected(buttons[0]);
-                b.add(buttonSpace);
-                b.add(buttonRight);
+    model.setSelected(buttons[0]);
+    
                 
      for (int i=0; i<10;++i){
             number[i] = new ImageIcon("Images/Test" + Integer.toString(i) + ".png"); //Creates the images
             hNumber[i] = new ImageIcon("Images/HTest" + Integer.toString(i) + ".png");
             numberButtons[i] = new CycleButton(Integer.toString(i), number[i], hNumber[i]);
-            c.add(numberButtons[i]);
         }
-     c.add(buttonLeft);
-     c.add(buttonDel);
+		test.gridx = 0;
+		test.gridy = 0;
+		c.add(numberButtons[1],test);
+		
+		test.gridx = 1;
+		c.add(numberButtons[2],test);
+		
+		test.gridx = 2;
+		c.add(numberButtons[3],test);
+		
+		test.gridx = 0;
+		test.gridy = 1;
+		c.add(numberButtons[4],test);
+		
+		test.gridx = 1;
+		c.add(numberButtons[5],test);
+	
+		test.gridx = 2;
+		c.add(numberButtons[6],test);
+		
+		test.gridx = 0;
+		test.gridy = 2;
+		c.add(numberButtons[7],test);
+		
+		test.gridx = 1;
+		c.add(numberButtons[8],test);
+		
+		test.gridx = 2;
+		c.add(numberButtons[9],test);
+		
+		test.gridx = 0;
+		test.gridy = 3;
+		c.add(numberButtons[0],test);
+		
+		test.gridx = 0;
+		test.gridy = 4;
+		c.add(buttonLeft, test);
+		
+		test.gridx = 1;
+		test.gridy = 3;
+		
+		test.gridwidth = 2;
+		test.gridheight = 2;
+		c.add(buttonDel, test);
      
      for (int i=2; i<9;i++) {
 			numberButtons[i].setPrevNext(numberButtons[i-1],numberButtons[i+1]);
