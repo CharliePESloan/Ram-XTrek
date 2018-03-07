@@ -12,12 +12,12 @@ import javax.swing.*;
  */
 public class WhereToFrameModel extends Observable implements Model {
     CycleButton selected;
-    MenuFrame myXTrek;
+    MenuFrame XTrek;
     String letters;
     String textDisplay ="";
     
     public WhereToFrameModel(MenuFrame XTrek) {
-        myXTrek = XTrek;
+        XTrek = XTrek;
     }
     public void setSelected(CycleButton newSelected) {
         selected = newSelected;
@@ -32,10 +32,10 @@ public class WhereToFrameModel extends Observable implements Model {
         setChanged(); notifyObservers (letters);
     }
     public void pressedMenu() {
-        myXTrek.setMenu("Menu");
+        XTrek.setMenu("Menu");
     }
     public void pressedSelect() {
-        letters = (String)selected.getData();
+        letters =  (String) selected.getData();
         if (letters == "SPACE") {
             textDisplay += " ";
             setChanged(); notifyObservers(textDisplay);
@@ -48,4 +48,8 @@ public class WhereToFrameModel extends Observable implements Model {
             setChanged(); notifyObservers(textDisplay);
         }
     }
+    public void pressedOnOff()
+	{
+		XTrek.setMenu("Off");
+	}
 }
