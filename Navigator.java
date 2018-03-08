@@ -118,7 +118,10 @@ public class Navigator
 	// Not yet implemented
 	public void getClosestNode(float latitude, float longitude)
 	{
-		
+		for (Direction d : directions)
+		{
+			System.out.println(d.getText());
+		}
 	}
 
 	/* refreshDirections
@@ -142,7 +145,7 @@ public class Navigator
 		directionsRaw = HttpConnect.httpConnect( METHOD, url, headers, body );
 
 		// Traverse directionsJSON to get array of steps
-		directionsJSON = new JSONObject(new String(directionsRaw);
+		directionsJSON = new JSONObject(new String(directionsRaw));
 		routes = (JSONArray)directionsJSON.get("routes");
 		route  = routes.getJSONObject(0);
 		legs   = (JSONArray)route.get("legs");
@@ -215,7 +218,7 @@ public class Navigator
 	 */
 	public void printOut()
 	{
-		printRaw();
+		//printRaw();
 
 		// Print origin, directions and destination
 		System.out.println("Origin="+origin);
@@ -237,7 +240,7 @@ public class Navigator
 		
 		//myDir.setLang(new Language("French","fr-FR"));
 		
-		myDir.refreshdirections();
+		myDir.refreshDirections();
 		myDir.printOut();
 
 		Speaker.saySomething(myDir.getDirection(),
