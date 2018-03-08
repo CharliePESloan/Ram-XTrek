@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 /**
  *
- * @author User
+ * @author Nathan Painter
  */
 public class WhereToFrameModel extends Observable implements Model {
 	public String removeChar(String s, int a) {
