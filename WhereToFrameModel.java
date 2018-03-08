@@ -6,7 +6,8 @@ import javax.swing.*;
  * @author Nathan Painter
  */
 public class WhereToFrameModel extends Observable implements Model {
-	public String removeChar(String s, int a) {
+	public String removeChar(String s, int a) //Method to delete the last entered text
+	{ 
         return s.substring(0, a) + s.substring(a + 1);
     }
     CycleButton selected;

@@ -5,6 +5,8 @@ import javax.swing.*;
 /**
  *
  * @author Nathan Painter
+ *
+ * Images for the number and letter keyboard created by Nathan Painter
  */
 public class WhereToFrameView extends JPanel implements Observer {
 	final WhereToFrameModel model;
