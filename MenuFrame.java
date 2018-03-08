@@ -31,6 +31,8 @@ public class MenuFrame extends JFrame{
     ImageIcon menuIcon = new ImageIcon("Images/MenuButton.png");
     ImageIcon onOffIcon = new ImageIcon("Images/OnOffButton.png");
 
+    Win7Ublox7 win7u7 = new Win7Ublox7();
+    Thread thread = new Thread(this.win7u7);
 
     OnOffModel onOffModel = new OnOffModel(this);
     MenuModel menuModel = new MenuModel(this);
@@ -54,8 +56,7 @@ public class MenuFrame extends JFrame{
     JButton MenuButton = new JButton();
     JButton OnOffButton = new JButton();
     
-    Win7Ublox7 win7u7 = new Win7Ublox7();
-    Thread thread = new Thread(this.win7u7);
+    
   /* Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
   */
 
