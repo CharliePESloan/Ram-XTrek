@@ -13,7 +13,6 @@ import java.awt.*;
 import javax.swing.*;
 
 /*Work Package 5*/
-
 public class SatelliteView extends JPanel implements Observable{
 	
     
