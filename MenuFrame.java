@@ -35,6 +35,7 @@ public class MenuFrame extends JFrame{
     SpeechModeModel speechModel = new SpeechModeModel(this);
     WhereToFrameModel whereToModel = new WhereToFrameModel(this);
     MapModel mapModel = new MapModel(this);
+    SatelliteModel satModel = new SatelliteModel(this);
     
     Controller controller = new Controller(onOffModel);
     JPanel onOffView = new OnOffView(controller, onOffModel);
@@ -42,6 +43,7 @@ public class MenuFrame extends JFrame{
     JPanel speechView = new SpeechModeView(controller, speechModel);
     JPanel whereToView = new WhereToFrameView(controller, whereToModel);
     JPanel mapView = new MapView(controller, mapModel);
+    JPanel satView = new SatelliteView(controller, satModel);
     
     
     JButton PlusButton = new JButton();
@@ -85,19 +87,19 @@ OnOffButton.setName("OnOffButton");
       
     
     // Placing the navigation buttons
-    PlusButton.setBounds(9, 102, 29, 68);add(PlusButton);
+    PlusButton.setBounds(7, 96, 32, 72);add(PlusButton);
       PlusButton.setIcon(plusIcon);
       PlusButton.setBorder(null);
-    MinusButton.setBounds(11, 175, 26, 64);add(MinusButton);
+    MinusButton.setBounds(4, 167, 32, 75);add(MinusButton);
       MinusButton.setIcon(minusIcon);
       MinusButton.setBorder(null);
-    SelectButton.setBounds(5, 260, 25, 97); add(SelectButton);
+    SelectButton.setBounds(8, 260, 25, 97); add(SelectButton);
       SelectButton.setIcon(selectIcon);
       SelectButton.setBorder(null);
     MenuButton.setBounds(408, 110, 30,84); add(MenuButton);
       MenuButton.setIcon(menuIcon);
       MenuButton.setBorder(null);
-    OnOffButton.setBounds(280,185,75,75); add(OnOffButton);
+    OnOffButton.setBounds(270,185,75,75); add(OnOffButton);
       OnOffButton.setIcon(onOffIcon);
       OnOffButton.setBorder(null);
       
@@ -109,6 +111,7 @@ OnOffButton.setName("OnOffButton");
     cards.add(speechView, "Speech");
     cards.add(whereToView, "WhereTo");
     cards.add(mapView, "Map");
+    cards.add(satView, "Satellite");
     
     //menuFrame.add(menuView);
     //JPanel menuView = new MenuView(menuFrame);
@@ -146,6 +149,9 @@ OnOffButton.setName("OnOffButton");
               break;
               case "OnOff":
                 controller.setModel(onOffModel);
+              break;
+              case "Satellite":
+              controller.setModel(satModel);
               break;
       }
       cardlayout.show(cards, menu);
