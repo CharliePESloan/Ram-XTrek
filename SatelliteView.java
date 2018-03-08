@@ -24,8 +24,8 @@ public class SatelliteView extends JPanel /*implements Observer*/ {
     JFrame mainFrame;
     int width = 255;
     int height = 293;
-    int x_loc = 90;
-    int y_loc = 300;
+    int x_loc = 20;
+    int y_loc = 20;
     int lb_x = 0;
     int rb_x = 130;
     Controller controller;
@@ -42,6 +42,8 @@ public class SatelliteView extends JPanel /*implements Observer*/ {
     setSize(width, height);
     setLocation(x_loc,y_loc);  
     setLocation(x_loc,y_loc);
+	add(latitude);
+	add(longitude);
  
   }
 }
