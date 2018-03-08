@@ -40,5 +40,9 @@ public class SatelliteModel extends Observable implements Model {
     public void reset(){
         
     }
+	
+	public MenuFrame getMainFrame(){
+		return mainFrame;
+	}
 //Speaker.saySomething(selected.getText(),language,artist);
 }

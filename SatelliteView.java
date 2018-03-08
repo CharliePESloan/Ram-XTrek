@@ -31,20 +31,22 @@ public class SatelliteView extends JPanel implements Observer {
     int rb_x = 130;
     Controller controller;
     SatelliteModel satelliteModel;
-	JLabel longitude = new JLabel("ahahha");
+	JLabel longitude = new JLabel("ahah");
 	JLabel latitude = new JLabel("hahah");
     
   public SatelliteView(Controller controller, SatelliteModel satelliteModel){
      this.controller = controller;
      this.satelliteModel =  satelliteModel;
+	 
+	satelliteModel.getMainFrame().getWin7Ublox7().addObserver(this);
       
      setLayout(null);
       setBackground(Color.white);
     setSize(width, height);
     //setLocation(x_loc,y_loc);  
     //setLocation(x_loc,y_loc);
-	longitude.setBounds(120, 350, 200, 80);
-	latitude.setBounds(120, 425, 200, 80);
+	longitude.setBounds(0, 0, 200, 80);
+	latitude.setBounds(20, 20, 200, 80);
 	add(latitude);
 	add(longitude);
  
