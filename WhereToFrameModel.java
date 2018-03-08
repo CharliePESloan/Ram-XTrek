@@ -11,9 +11,6 @@ import javax.swing.*;
  * @author User
  */
 public class WhereToFrameModel extends Observable implements Model {
-	public String removeChar(String s, int a) {
-        return s.substring(0, a) + s.substring(a + 1);
-    }
     CycleButton selected;
     MenuFrame XTrek;
     String letters;
@@ -27,11 +24,11 @@ public class WhereToFrameModel extends Observable implements Model {
         selected.select();
     }
     public void pressedPlus() {
-        setSelected(selected.next());
+        setSelected(selected.prev());
         setChanged(); 
     }
     public void pressedMinus() {
-        setSelected(selected.prev());
+        setSelected(selected.next());
         setChanged();
     }
     public void pressedMenu() {
@@ -44,16 +41,7 @@ public class WhereToFrameModel extends Observable implements Model {
             setChanged(); notifyObservers(textDisplay);
         }
         else if (letters == "RIGHT") {
-			selected.deselect();
-            setChanged(); notifyObservers(false);
-        }
-		else if (letters == "LEFT") {
-			selected.deselect();
-            setChanged(); notifyObservers(true);
-        }
-		else if (letters == "DEL") {
-            textDisplay = removeChar(textDisplay, textDisplay.length()-1);
-			setChanged(); notifyObservers(textDisplay);
+            
         }
         else {
             textDisplay += letters;
@@ -63,10 +51,8 @@ public class WhereToFrameModel extends Observable implements Model {
     public void pressedOnOff()
 	{
 		XTrek.setMenu("OnOff");
-		reset();
 	}
 	public void reset () {
-		textDisplay = "";
-        setChanged(); notifyObservers("Dev is a twat");
+
 	}
 }

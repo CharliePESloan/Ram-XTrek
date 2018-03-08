@@ -12,7 +12,6 @@ import javax.swing.*;
  * @author User
  */
 public class WhereToFrameView extends JPanel implements Observer {
-	final WhereToFrameModel model;
     ImageIcon[] letter = new ImageIcon[26]; //Array of images  A-Z
     ImageIcon[] hLetter = new ImageIcon[26]; //Array of images A-Z (highlighted)
     CycleButton[] buttons = new CycleButton[26]; //Array of buttons
@@ -32,6 +31,7 @@ public class WhereToFrameView extends JPanel implements Observer {
 	GridBagConstraints test = new GridBagConstraints();
 	
     CardLayout cardLayout = new CardLayout();
+    Container abc;
     
 	JPanel a = new JPanel(testOne);
     JPanel cards = new JPanel(cardLayout);
@@ -50,22 +50,25 @@ public class WhereToFrameView extends JPanel implements Observer {
     ImageIcon letterHDel = new ImageIcon("Images/HTestDel.png");
 	Font bigFont = display.getFont().deriveFont(Font.PLAIN, 24f);
     
-        
+     public String removeChar(String s, int a) {
+        return s.substring(0, a) + s.substring(a + 1);
+    }   
     
- 
+    public void actionPerformed(ActionEvent e) {
+	cardLayout.next(abc);
+	}
+    
+    
+    
     public WhereToFrameView (Controller controller, WhereToFrameModel model){
 		//255,36
 		
 		a.add(display);
-		//b.addActionListner(this);
-		//c.addActionListner(this);
-		
 		cards.add(b, "TextKeyboard");
 		cards.add(c, "NumberKeyboard");
 		add(a);
 		add(cards);
 		
-		this.model = model;
 		model.addObserver(this);
 		display.setFont(bigFont);
 		
@@ -82,7 +85,7 @@ public class WhereToFrameView extends JPanel implements Observer {
 			
 	   
 		buttonDel = new CycleButton("DEL",letterDel, letterHDel);
-		buttonLeft = new CycleButton("LEFT",letterLeft, letterHLeft);
+		buttonLeft = new CycleButton("DEL",letterLeft, letterHLeft);
 		
 		for (int i=1; i<25;i++) {
 				buttons[i].setPrevNext(buttons[i-1],buttons[i+1]);
@@ -92,7 +95,8 @@ public class WhereToFrameView extends JPanel implements Observer {
 			buttons[0].setPrevNext(buttonRight, buttons[1]);
 			buttons[25].setPrevNext(buttons[24], buttonSpace);
 
-		
+		model.setSelected(buttons[0]);
+		setKeyboard("TextKeyboard");
 		
 					
 		 for (int i=0; i<10;++i){
@@ -153,34 +157,27 @@ public class WhereToFrameView extends JPanel implements Observer {
 			numberButtons[1].setPrevNext(buttonDel, numberButtons[2]);
 			buttonDel.setPrevNext(buttonLeft, numberButtons[1]);
 			numberButtons[9].setPrevNext(numberButtons[8], numberButtons[0]);
-		
-		setKeyboard("TextKeyboard");	
+			
+			
 	}
     public void setKeyboard( String type ){
+		System.out.println(type);
+		System.out.println(cards);
+		System.out.println(cardLayout);
         switch (type) {
         case "TextKeyboard":
-		model.setSelected(buttons[0]);
             break;
+        
         case "NumberKeyboard":
-		model.setSelected(numberButtons[1]);
             break;
     }
         cardLayout.show(cards, type);
     }
     @Override
     public void update(Observable o, Object arg) {
-		if (arg instanceof Boolean) {
-			boolean bean = (boolean) arg;
-			if (bean == true) {
-				setKeyboard("TextKeyboard");
-			}
-			else {
-				setKeyboard("NumberKeyboard");
-			}
-		}
-		else {
+		
             display.setText("" +  arg);
-        }
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void add(CardLayout card) {
