@@ -14,10 +14,11 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.awt.Toolkit;
 import java.awt.Dimension;
+
 /*
- * Menu View.
+ * Satellite View.
  *
- * Darya Shyroka 2018.
+ * Clyde Udunna 2018.
  */
 public class SatelliteView extends JPanel /*implements Observer*/ {
     JFrame mainFrame;
@@ -29,6 +30,8 @@ public class SatelliteView extends JPanel /*implements Observer*/ {
     int rb_x = 130;
     Controller controller;
     SatelliteModel satelliteModel;
+	JLabel longitude = new JLabel();
+	JLabel latitude = new JLabel();
     
   public SatelliteView(Controller controller, SatelliteModel satelliteModel){
      this.controller = controller;
@@ -37,12 +40,6 @@ public class SatelliteView extends JPanel /*implements Observer*/ {
      setLayout(null);
       setBackground(Color.white);
     setSize(width, height);
-    setLocation(x_loc,y_loc);
-      
-//Set the position of the text, relative to the icon:
-label1.setVerticalTextPosition(JLabel.BOTTOM);
-label1.setHorizontalTextPosition(JLabel.CENTER);
-  
-
+    setLocation(x_loc,y_loc);  
   }
 }

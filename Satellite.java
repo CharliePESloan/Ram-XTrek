@@ -3,6 +3,13 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import java.io.InputStream;
 
+/*Satellite Software
+*
+*
+* Clyde Udunna 2018.
+*/
+
+
 public class Satellite{
 	
 	public Satellite(){};
@@ -43,9 +50,12 @@ class Win7Ublox7 implements Runnable{
   final static int    TIMEOUT   =  2000;  /* ms  */
   final static int    BUFF_SIZE =  1024;
   String[] a;
+  SatelliteView myView;
 
 	//Dongle Reader starts here//
-  public Win7Ublox7(){};
+  public Win7Ublox7(){
+	myView = new SatelliteView();
+  };
   
 	public void run() {
 	Satellite mySat = new Satellite(){};
@@ -81,8 +91,8 @@ class Win7Ublox7 implements Runnable{
 				/*System.out.print( s );*/
 				a = mySat.getGLL(s);
 				if(a == null){continue;}
-				System.out.println(a[0] + " " + a[1]);
-				System.out.println(a[2] + " " + a[3]);		
+				myView.longitude.setText(a[0] + " " + a[1]);
+				myView.latitude.setText(a[2] + " " + a[3]);		
 			}
 		}else {
 			System.out.println( "not a serial port" ); System.exit( 1 );
