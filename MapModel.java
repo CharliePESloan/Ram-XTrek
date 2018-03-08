@@ -30,7 +30,6 @@ public class MapModel extends Observable implements Model {
     }
 	
 	public void imageLoader () {   // Loads the map image
-		System.out.println(Satellite.getCoordinates()); 
 		mapImage = Maps.readData(LATITUDE, LONGITUDE, Integer.toString(zoomVal), SIZE, KEY); 
 		try {
 		img = ImageIO.read(new ByteArrayInputStream(mapImage));
@@ -58,7 +57,7 @@ public class MapModel extends Observable implements Model {
     public void pressedMenu() { //Returns to the menu screen
         myXTrek.setMenu("Menu");
     }
-    public void pressedSelect() { //Select button able to be pressed, but no funcationality
+    public void pressedSelect() { //Select button able to be pressed, but no functionality
     }
 	public void pressedOnOff() { //Changes the XTrek's on/off state 
 		myXTrek.setMenu("OnOff");	

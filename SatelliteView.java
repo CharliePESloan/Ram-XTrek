@@ -40,12 +40,8 @@ public class SatelliteView extends JPanel /*implements Observer*/ {
      setLayout(null);
       setBackground(Color.white);
     setSize(width, height);
-<<<<<<< HEAD
     setLocation(x_loc,y_loc);  
-=======
     setLocation(x_loc,y_loc);
-  
-
->>>>>>> b97ecc066a17c80e7b4ad4cecb3919e235f5619a
+ 
   }
 }
