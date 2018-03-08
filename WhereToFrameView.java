@@ -57,8 +57,7 @@ public class WhereToFrameView extends JPanel implements Observer {
 		//255,36
 		
 		a.add(display);
-		//b.addActionListner(this);
-		//c.addActionListner(this);
+		
 		
 		cards.add(b, "TextKeyboard");
 		cards.add(c, "NumberKeyboard");
@@ -68,7 +67,7 @@ public class WhereToFrameView extends JPanel implements Observer {
 		this.model = model;
 		model.addObserver(this);
 		display.setFont(bigFont);
-		
+		display.setEditable(false);
 		for(int i=0; i<26; i++) {
 				letter[i] = new ImageIcon("Images/Test" + abcd.charAt(i) + ".png"); //Creates the images
 				hLetter[i] = new ImageIcon("Images/HTest" + abcd.charAt(i) + ".png"); //Creates the highlighted images
@@ -184,6 +183,5 @@ public class WhereToFrameView extends JPanel implements Observer {
     }
 
     private void add(CardLayout card) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -67,6 +67,7 @@ public class WhereToFrameModel extends Observable implements Model {
 	}
 	public void reset () {
 		textDisplay = "";
-        setChanged(); notifyObservers("Dev is a twat");
+		setChanged(); notifyObservers(true);
+        setChanged(); notifyObservers("Enter Address");
 	}
 }
