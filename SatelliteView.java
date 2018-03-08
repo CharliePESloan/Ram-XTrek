@@ -3,7 +3,7 @@ import java.awt.TextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
@@ -14,30 +14,15 @@ import javax.swing.*;
 
 /*Work Package 5*/
 
-public class SatelliteFrame extends BlankXTrex {
-	/*XTrex button used for navigation, final as they are constant and won't be changed*/
-    final SideButton    PlusButton    = new BlankXTrex.SideButton("PlusButton");
-    final SideButton    MinusButton   = new BlankXTrex.SideButton("MinusButton");
-    final SideButton    SelectButton  = new BlankXTrex.SideButton("SelectButton");
-    final SideButton    MenuButton    = new BlankXTrex.SideButton("MenuButton");
+public class SatelliteView extends JPanel implements Observable{
+	
     
     public SatelliteFrame(){
 		/*This code here has been provided by my team mate in order for me to integrate my 
 		 *package with the GUI to display the result of my functions.
 		 *They set the up the XTrex look and take attributes and properties from the 
 		 *BlankXTrex who is a parent to this class, for me to then add to the work*/
-        setTitle( "XTrex" );
-        JLabel content = new JLabel(new ImageIcon("XTrex Background.png"));
-        //content.add("XTrex Background.png");
-        setContentPane(content);
-        setLayout( null );
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Dimension screenSize = tk.getScreenSize();
-        int screenHeight = screenSize.height;
-        int screenWidth = screenSize.width;
-        setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
-        setSize( 450, 835 ); /* title bar! */ 
-        setResizable( false );
+        
         
         //Making a satellite object
 		Satellite mySat = new Satellite();
@@ -64,12 +49,6 @@ public class SatelliteFrame extends BlankXTrex {
 		
 		add(longitude); //labels added to frame
 		add(latitude);
-		
-		//Buttons instantiated above are set in position on the frame and added to it
-        PlusButton.setBounds(9, 102, 30, 68);add(PlusButton);
-        MinusButton.setBounds(11, 175, 27, 64);add(MinusButton);
-        SelectButton.setBounds(5, 268, 34, 97); add(SelectButton);
-        MenuButton.setBounds(409, 113, 30,84); add(MenuButton);
         
 		/*This button allows me to move from this page to the Main Menu,
 		 *it does so by creating a new instance when clicked. The same procedure
