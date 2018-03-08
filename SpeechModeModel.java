@@ -1,6 +1,7 @@
 import java.util.Observable;
 
-/* SpeechModeModel
+/*
+ * SpeechModeModel
  * Charlie Sloan (2018)
  *
  * Model for speech mode of XTrek; allows the user to select a language

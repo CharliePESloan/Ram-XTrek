@@ -2,8 +2,10 @@ import org.json.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-/* Direction
+/*
+ * Direction
  * Charlie Sloan (2018)
+ *
  * Stores information about a specfici direction such as its text and
  * coordinates
  */
@@ -11,17 +13,22 @@ import org.jsoup.nodes.Document;
 public class Direction
 {
 	private String text;
-	private float latitude;
-	private float longitude;
+	private float latStart;
+	private float lonStart;
+	private float latEnd;
+	private float lonEnd;
 
 	public Direction(JSONObject direction)
 	{
-		JSONObject distance;
+		JSONObject jObject;
 		String distanceStr;
 
-		distance = direction.getJSONObject("distance"); 
+		JObject = direction.getJSONObject("distance"); 
 
-		distanceStr = distance.getString("text");
+		distanceStr = JObject.getString("text");
+
+		JObject = direction.getJSONObject("start_location");
+
 		/*/ Read distances larger than 1000m in km
 		if (distance.getInt("value") >= 1000)
 		{distanceStr = String.format("In %.1f kilometers ",
@@ -40,6 +47,23 @@ public class Direction
 	public String getText()
 	{
 		return text;
+	}
+
+	public float getLat1()
+	{
+		return latStart;
+	}
+	public float getLon1()
+	{
+		return lonStart;
+	}
+	public float getLat2()
+	{
+		return latEnd;
+	}
+	public float getLon2()
+	{
+		return lonEnd;
 	}
 	
 	private float degreesToRadians(float degrees)

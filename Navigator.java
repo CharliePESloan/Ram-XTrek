@@ -20,6 +20,7 @@ public class Navigator
 	final static String METHOD = "GET";
 	final static String REGION = "uk";
 	final static String MODE   = "TRANSIT";
+	final static String ENCODING = "UTF-8";
 
 	/* Variables */
 	private Language	language = new Language("English", "en");
@@ -62,7 +63,7 @@ public class Navigator
 		try
 		{
 			origin = String.valueOf(latitude)+","+String.valueOf(longitude);
-			encOrigin = URLEncoder.encode(origin,"UTF-8");
+			encOrigin = URLEncoder.encode(origin,ENCODING);
 			System.out.println(origin + " -> " + encOrigin);
 		} catch (UnsupportedEncodingException ex)
 		{
@@ -73,7 +74,7 @@ public class Navigator
 	{
 		try
 		{
-			encOrigin = URLEncoder.encode(origin,"UTF-8");
+			encOrigin = URLEncoder.encode(origin,ENCODING);
 		} catch (UnsupportedEncodingException ex)
 		{
 			System.out.println( ex ); System.exit( 1 );
@@ -89,7 +90,7 @@ public class Navigator
 		try
 		{
 			destination = String.valueOf(latitude)+","+String.valueOf(longitude);
-			encDestination = URLEncoder.encode(destination,"UTF-8");
+			encDestination = URLEncoder.encode(destination,ENCODING);
 		} catch (UnsupportedEncodingException ex)
 		{
 			System.out.println( ex ); System.exit( 1 );
@@ -113,15 +114,6 @@ public class Navigator
 	public void setLang(Language language)
 	{
 		this.language = language;
-	}
-
-	// Not yet implemented
-	public void getClosestNode(float latitude, float longitude)
-	{
-		for (Direction d : directions)
-		{
-			System.out.println(d.getText());
-		}
 	}
 
 	/* refreshDirections
@@ -218,7 +210,7 @@ public class Navigator
 	 */
 	public void printOut()
 	{
-		//printRaw();
+		printRaw();
 
 		// Print origin, directions and destination
 		System.out.println("Origin="+origin);
@@ -227,6 +219,16 @@ public class Navigator
 			System.out.println( getDirection(i) );
 		}
 		System.out.println("Destination="+destination);
+	}
+
+	// Not yet implemented
+	public void getClosestNode(float latitude, float longitude)
+	{
+		for (int i=0; i<directions.length; i++)
+		{
+			System.out.println( getDirection(i) );
+			
+		}
 	}
 
 	public static void main(String args[])
@@ -242,6 +244,8 @@ public class Navigator
 		
 		myDir.refreshDirections();
 		myDir.printOut();
+
+		myDir.getClosestNode(50.729042f,-3.531057f);
 
 		Speaker.saySomething(myDir.getDirection(),
 				     new Language("en"));
