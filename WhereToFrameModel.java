@@ -52,4 +52,7 @@ public class WhereToFrameModel extends Observable implements Model {
 	{
 		XTrek.setMenu("OnOff");
 	}
+	public void reset () {
+
+	}
 }
