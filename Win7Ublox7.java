@@ -2,8 +2,9 @@ import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import java.io.InputStream;
+import java.util.Observable;
 
-public class Win7Ublox7 implements Runnable{
+public class Win7Ublox7 extends Observable implements Runnable{
   final static String PORT_NAME = "COM4"; /* found via Computer->Devices */
   final static int    BAUD_RATE =  9600;  /* bps */
   final static int    TIMEOUT   =  2000;  /* ms  */
@@ -48,6 +49,8 @@ public class Win7Ublox7 implements Runnable{
 				/*System.out.print( s );*/
 				a = mySat.getGLL(s);
 				if(a == null){continue;} 
+				setChanged();
+				notifyObservers(a);
 				//longitude.setText(a[0] + " " + a[1]);
 				//latitude.setText(a[2] + " " + a[3]);		
 			}
