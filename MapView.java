@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.*;
+
 /*
  * View.
  * Class controls what is displayed on the screen. 

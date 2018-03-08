@@ -85,10 +85,10 @@ OnOffButton.setName("OnOffButton");
       
     
     // Placing the navigation buttons
-    PlusButton.setBounds(9, 102, 29, 68);add(PlusButton);
+    PlusButton.setBounds(8, 102, 29, 68);add(PlusButton);
       PlusButton.setIcon(plusIcon);
       PlusButton.setBorder(null);
-    MinusButton.setBounds(11, 175, 26, 64);add(MinusButton);
+    MinusButton.setBounds(9, 173, 26, 64);add(MinusButton);
       MinusButton.setIcon(minusIcon);
       MinusButton.setBorder(null);
     SelectButton.setBounds(5, 260, 25, 97); add(SelectButton);
@@ -97,7 +97,7 @@ OnOffButton.setName("OnOffButton");
     MenuButton.setBounds(408, 110, 30,84); add(MenuButton);
       MenuButton.setIcon(menuIcon);
       MenuButton.setBorder(null);
-    OnOffButton.setBounds(280,185,75,75); add(OnOffButton);
+    OnOffButton.setBounds(270,185,75,75); add(OnOffButton);
       OnOffButton.setIcon(onOffIcon);
       OnOffButton.setBorder(null);
       
