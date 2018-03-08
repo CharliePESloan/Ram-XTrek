@@ -35,6 +35,7 @@ public class MenuFrame extends JFrame{
     SpeechModeModel speechModel = new SpeechModeModel(this);
     WhereToFrameModel whereToModel = new WhereToFrameModel(this);
     MapModel mapModel = new MapModel(this);
+    SatelliteModel satModel = new SatelliteModel(this);
     
     Controller controller = new Controller(onOffModel);
     JPanel onOffView = new OnOffView(controller, onOffModel);
@@ -42,6 +43,7 @@ public class MenuFrame extends JFrame{
     JPanel speechView = new SpeechModeView(controller, speechModel);
     JPanel whereToView = new WhereToFrameView(controller, whereToModel);
     JPanel mapView = new MapView(controller, mapModel);
+    JPanel satView = new SatelliteView(controller, satModel);
     
     
     JButton PlusButton = new JButton();
@@ -109,6 +111,7 @@ OnOffButton.setName("OnOffButton");
     cards.add(speechView, "Speech");
     cards.add(whereToView, "WhereTo");
     cards.add(mapView, "Map");
+    cards.add(satView, "Satellite");
     
     //menuFrame.add(menuView);
     //JPanel menuView = new MenuView(menuFrame);
@@ -146,6 +149,9 @@ OnOffButton.setName("OnOffButton");
               break;
               case "OnOff":
                 controller.setModel(onOffModel);
+              break;
+              case "Satellite":
+              controller.setModel(satModel);
               break;
       }
       cardlayout.show(cards, menu);

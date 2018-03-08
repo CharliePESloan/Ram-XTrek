@@ -19,7 +19,7 @@ import java.awt.Dimension;
  *
  * Darya Shyroka 2018.
  */
-public class MenuView extends JPanel /*implements Observer*/ {
+public class SatelliteView extends JPanel /*implements Observer*/ {
     JFrame mainFrame;
     int width = 255;
     int height = 293;
@@ -38,9 +38,7 @@ public class MenuView extends JPanel /*implements Observer*/ {
       setBackground(Color.white);
     setSize(width, height);
     setLocation(x_loc,y_loc);
- 
-      
-  // Placing the menu buttons   
+  
 
   }
 }

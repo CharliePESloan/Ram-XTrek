@@ -47,7 +47,7 @@ public class MenuModel extends Observable implements Model {
                 mainFrame.setMenu("Map");
 				break;
 			case "SatelliteButton":
-				break;
+				mainFrame.setMenu("Satellite");
 			case "TripCompButton":
 				break;
             case "SpeechButton":
