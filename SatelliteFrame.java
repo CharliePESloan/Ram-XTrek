@@ -7,13 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URL;
 import java.awt.Toolkit;
 import java.awt.Dimension; 
-import java.awt.image.BufferedImage;
 import java.awt.*;
 import javax.swing.*;
 

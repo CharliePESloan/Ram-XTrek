@@ -42,6 +42,7 @@ class Win7Ublox7 implements Runnable{
   final static int    BAUD_RATE =  9600;  /* bps */
   final static int    TIMEOUT   =  2000;  /* ms  */
   final static int    BUFF_SIZE =  1024;
+  String[] a;
 
 	//Dongle Reader starts here//
   public Win7Ublox7(){};
@@ -78,7 +79,7 @@ class Win7Ublox7 implements Runnable{
 			while ( ( n = in.read( buffer ) ) > -1 ) {
 				s = new String( buffer, 0, n );     
 				/*System.out.print( s );*/
-				String[] a = mySat.getGLL(s);
+				a = mySat.getGLL(s);
 				if(a == null){continue;}
 				System.out.println(a[0] + " " + a[1]);
 				System.out.println(a[2] + " " + a[3]);		
@@ -93,4 +94,7 @@ class Win7Ublox7 implements Runnable{
 		//Dongle Reader ends here, modified version.//
 		
   
+	getCoordinates(String[] myCoord){
+		return myCoord;
 	}
+}
