@@ -94,7 +94,7 @@ class Win7Ublox7 implements Runnable{
 		//Dongle Reader ends here, modified version.//
 		
   
-	getCoordinates(String[] myCoord){
-		return myCoord;
+	getCoordinates(){
+		return a;
 	}
 }
