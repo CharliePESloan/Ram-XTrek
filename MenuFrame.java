@@ -85,6 +85,9 @@ SelectButton.setName("SelectButton");
 MenuButton.setName("MenuButton");
 OnOffButton.setName("OnOffButton");
       
+      Win7Ublox7 win7u7 = new Win7Ublox7();
+      Thread thread = new Thread(win7u7);
+      thread.start();
     
     // Placing the navigation buttons
     PlusButton.setBounds(7, 96, 32, 72);add(PlusButton);
