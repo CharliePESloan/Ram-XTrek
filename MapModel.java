@@ -30,6 +30,7 @@ public class MapModel extends Observable implements Model {
     }
 	
 	public void imageLoader () {   // Loads the map image
+		System.out.println(Satellite.getCoordinates()); 
 		mapImage = Maps.readData(LATITUDE, LONGITUDE, Integer.toString(zoomVal), SIZE, KEY); 
 		try {
 		img = ImageIO.read(new ByteArrayInputStream(mapImage));
