@@ -44,6 +44,10 @@ public class SatelliteView extends JPanel /*implements Observer*/ {
     setLocation(x_loc,y_loc);  
 =======
     setLocation(x_loc,y_loc);
+      
+//Set the position of the text, relative to the icon:
+label1.setVerticalTextPosition(JLabel.BOTTOM);
+label1.setHorizontalTextPosition(JLabel.CENTER);
   
 
 >>>>>>> b97ecc066a17c80e7b4ad4cecb3919e235f5619a
