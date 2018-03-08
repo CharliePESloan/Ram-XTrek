@@ -58,8 +58,12 @@ public class MenuModel extends Observable implements Model {
 		}
     }
     public void pressedOnOff(){
-        System.out.println("Changing view to on off");
+        //System.out.println("Changing view to on off");
         mainFrame.setMenu("OnOff");
+    }
+    
+    public void reset(){
+        
     }
 //Speaker.saySomething(selected.getText(),language,artist);
 }
