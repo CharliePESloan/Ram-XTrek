@@ -77,7 +77,7 @@ public class MenuFrame extends JFrame{
     setLocation((screenWidth / 3)+150, (screenHeight / 4)-150);
     setSize( 450, 835 ); /* title bar! */
     setResizable( false );
-    setVisible( true );
+    
 
 PlusButton.setName("PlusButton");
 MinusButton.setName("MinusButton");
@@ -158,6 +158,7 @@ OnOffButton.setName("OnOffButton");
               break;
       }
       cardlayout.show(cards, menu);
+      setVisible( true );
   }
   public static void main( String[] argv ) {
       
