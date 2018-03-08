@@ -17,7 +17,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 /*
-* This class should basically just have a main method that implements Model, View and Controller. 
+* Darya Shyroka, 2018.
+*
+* All images were modified using GIMP by Darya Shyroka. 
 */ 
 
 public class MenuFrame extends JFrame{
@@ -53,6 +55,7 @@ public class MenuFrame extends JFrame{
     JButton OnOffButton = new JButton();
     
     Win7Ublox7 win7u7 = new Win7Ublox7();
+    Thread thread = new Thread(this.win7u7);
   /* Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
   */
 
@@ -89,7 +92,7 @@ SelectButton.setName("SelectButton");
 MenuButton.setName("MenuButton");
 OnOffButton.setName("OnOffButton");
 
-      Thread thread = new Thread(this.win7u7);
+      
       thread.start();
     
     // Placing the navigation buttons
