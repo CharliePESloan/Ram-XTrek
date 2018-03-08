@@ -17,7 +17,7 @@ import javax.swing.*;
 public class SatelliteView extends JPanel implements Observable{
 	
     
-    public SatelliteFrame(){
+    public SatelliteView(){
 		/*This code here has been provided by my team mate in order for me to integrate my 
 		 *package with the GUI to display the result of my functions.
 		 *They set the up the XTrex look and take attributes and properties from the 
