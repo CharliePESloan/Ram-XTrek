@@ -1,24 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.*;
 import javax.swing.*;
 /**
  *
- * @author User
+ * @author Nathan Painter
  */
 public class WhereToFrameView extends JPanel implements Observer {
 	final WhereToFrameModel model;
+	final static int fontSize = 24; //Size of the font inside the text display
+	final static int displaySize = 12; //Size of the display
+	final JTextField display = new JTextField("Enter Address",displaySize);
     ImageIcon[] letter = new ImageIcon[26]; //Array of images  A-Z
     ImageIcon[] hLetter = new ImageIcon[26]; //Array of images A-Z (highlighted)
-    CycleButton[] buttons = new CycleButton[26]; //Array of buttons
-    static String abcd = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    final JTextField display = new JTextField("Enter Address",12);
-    final CycleButton buttonSpace; 
+    CycleButton[] buttons = new CycleButton[26]; //Array of letter buttons
+    static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    
+    
+	final CycleButton buttonSpace; 
     ImageIcon letterSpace = new ImageIcon("Images/TestSpace.png");
     ImageIcon letterHSpace = new ImageIcon("Images/HTestSpace.png");
     final CycleButton buttonRight;
@@ -26,42 +25,40 @@ public class WhereToFrameView extends JPanel implements Observer {
     ImageIcon letterHRight = new ImageIcon("Images/HTestRight.png");
     
     CycleButton isSelected;
-    GridLayout background = new GridLayout(7,4);
-	GridLayout testOne = new GridLayout(1,0);
-    GridBagLayout backgroundTwo = new GridBagLayout();
-	GridBagConstraints test = new GridBagConstraints();
+    
+	GridLayout textLayout = new GridLayout(7,4); //Layout for the text keyboard
+	GridLayout grid = new GridLayout(1,0);
+    GridBagLayout numberLayout = new GridBagLayout(); //Layout for the number keyboard
+	GridBagConstraints constraints = new GridBagConstraints();
 	
     CardLayout cardLayout = new CardLayout();
     
-	JPanel a = new JPanel(testOne);
+	JPanel displayPanel = new JPanel(grid);
     JPanel cards = new JPanel(cardLayout);
-    JPanel b = new JPanel(background);
-    JPanel c = new JPanel(backgroundTwo);
+    JPanel textPanel = new JPanel(textLayout);
+    JPanel numberPanel = new JPanel(numberLayout);
 	
     
-    CycleButton[] numberButtons = new CycleButton[10];
-    ImageIcon[] number = new ImageIcon[10];
-    ImageIcon[] hNumber = new ImageIcon[10];
+    CycleButton[] numberButtons = new CycleButton[10];//Array of number buttons
+    ImageIcon[] number = new ImageIcon[10];//Array of images 0-9
+    ImageIcon[] hNumber = new ImageIcon[10];//Array of images 0-9 (highlighted)
     final CycleButton buttonLeft;
 	ImageIcon letterLeft = new ImageIcon("Images/TestLeft.png");
     ImageIcon letterHLeft = new ImageIcon("Images/HTestLeft.png");
     final CycleButton buttonDel;
 	ImageIcon letterDel = new ImageIcon("Images/TestDel.png");
     ImageIcon letterHDel = new ImageIcon("Images/HTestDel.png");
-	Font bigFont = display.getFont().deriveFont(Font.PLAIN, 24f);
+	Font bigFont = display.getFont().deriveFont(Font.PLAIN, fontSize);
     
         
     
  
     public WhereToFrameView (Controller controller, WhereToFrameModel model){
-		//255,36
 		
-		a.add(display);
-		
-		
-		cards.add(b, "TextKeyboard");
-		cards.add(c, "NumberKeyboard");
-		add(a);
+		displayPanel.add(display);
+		cards.add(textPanel, "TextKeyboard");
+		cards.add(numberPanel, "NumberKeyboard");
+		add(displayPanel);
 		add(cards);
 		
 		this.model = model;
@@ -69,15 +66,15 @@ public class WhereToFrameView extends JPanel implements Observer {
 		display.setFont(bigFont);
 		display.setEditable(false);
 		for(int i=0; i<26; i++) {
-				letter[i] = new ImageIcon("Images/Test" + abcd.charAt(i) + ".png"); //Creates the images
-				hLetter[i] = new ImageIcon("Images/HTest" + abcd.charAt(i) + ".png"); //Creates the highlighted images
-				buttons[i] = new CycleButton(Character.toString(abcd.charAt(i)), letter[i], hLetter[i]); //Creates the buttons
-				b.add(buttons[i]);
+				letter[i] = new ImageIcon("Images/Test" + alphabet.charAt(i) + ".png"); //Creates the images for the letter keyboard
+				hLetter[i] = new ImageIcon("Images/HTest" + alphabet.charAt(i) + ".png"); //Creates the highlighted images for the letter keyboard
+				buttons[i] = new CycleButton(Character.toString(alphabet.charAt(i)), letter[i], hLetter[i]); //Creates the buttons for the letter keyboard
+				textPanel.add(buttons[i]);
 			}
 		buttonSpace = new CycleButton("SPACE", letterSpace, letterHSpace);
 		buttonRight = new CycleButton("RIGHT", letterRight, letterHRight);
-		b.add(buttonSpace);
-		b.add(buttonRight);
+		textPanel.add(buttonSpace);
+		textPanel.add(buttonRight);
 			
 	   
 		buttonDel = new CycleButton("DEL",letterDel, letterHDel);
@@ -95,54 +92,55 @@ public class WhereToFrameView extends JPanel implements Observer {
 		
 					
 		 for (int i=0; i<10;++i){
-				number[i] = new ImageIcon("Images/Test" + Integer.toString(i) + ".png"); //Creates the images
-				hNumber[i] = new ImageIcon("Images/HTest" + Integer.toString(i) + ".png");
-				numberButtons[i] = new CycleButton(Integer.toString(i), number[i], hNumber[i]);
+				number[i] = new ImageIcon("Images/Test" + Integer.toString(i) + ".png"); //Creates the images for the number keyboard
+				hNumber[i] = new ImageIcon("Images/HTest" + Integer.toString(i) + ".png");//Creates the highlighted images for the number keyboard
+				numberButtons[i] = new CycleButton(Integer.toString(i), number[i], hNumber[i]);//Creates the buttons for the number keyboard
 			}
-			test.gridx = 0;
-			test.gridy = 0;
-			c.add(numberButtons[1],test);
+			//Layout for the number keyboard
+			constraints.gridx = 0;
+			constraints.gridy = 0;
+			numberPanel.add(numberButtons[1],constraints);
 			
-			test.gridx = 1;
-			c.add(numberButtons[2],test);
+			constraints.gridx = 1;
+			numberPanel.add(numberButtons[2],constraints);
 			
-			test.gridx = 2;
-			c.add(numberButtons[3],test);
+			constraints.gridx = 2;
+			numberPanel.add(numberButtons[3],constraints);
 			
-			test.gridx = 0;
-			test.gridy = 1;
-			c.add(numberButtons[4],test);
+			constraints.gridx = 0;
+			constraints.gridy = 1;
+			numberPanel.add(numberButtons[4],constraints);
 			
-			test.gridx = 1;
-			c.add(numberButtons[5],test);
+			constraints.gridx = 1;
+			numberPanel.add(numberButtons[5],constraints);
 		
-			test.gridx = 2;
-			c.add(numberButtons[6],test);
+			constraints.gridx = 2;
+			numberPanel.add(numberButtons[6],constraints);
 			
-			test.gridx = 0;
-			test.gridy = 2;
-			c.add(numberButtons[7],test);
+			constraints.gridx = 0;
+			constraints.gridy = 2;
+			numberPanel.add(numberButtons[7],constraints);
 			
-			test.gridx = 1;
-			c.add(numberButtons[8],test);
+			constraints.gridx = 1;
+			numberPanel.add(numberButtons[8],constraints);
 			
-			test.gridx = 2;
-			c.add(numberButtons[9],test);
+			constraints.gridx = 2;
+			numberPanel.add(numberButtons[9],constraints);
 			
-			test.gridx = 0;
-			test.gridy = 3;
-			c.add(numberButtons[0],test);
+			constraints.gridx = 0;
+			constraints.gridy = 3;
+			numberPanel.add(numberButtons[0],constraints);
 			
-			test.gridx = 0;
-			test.gridy = 4;
-			c.add(buttonLeft, test);
+			constraints.gridx = 0;
+			constraints.gridy = 4;
+			numberPanel.add(buttonLeft, constraints);
 			
-			test.gridx = 1;
-			test.gridy = 3;
+			constraints.gridx = 1;
+			constraints.gridy = 3;
 			
-			test.gridwidth = 2;
-			test.gridheight = 2;
-			c.add(buttonDel, test);
+			constraints.gridwidth = 2;
+			constraints.gridheight = 2;
+			numberPanel.add(buttonDel, constraints);
 		 
 		 for (int i=2; i<9;i++) {
 				numberButtons[i].setPrevNext(numberButtons[i-1],numberButtons[i+1]);
@@ -153,15 +151,15 @@ public class WhereToFrameView extends JPanel implements Observer {
 			buttonDel.setPrevNext(buttonLeft, numberButtons[1]);
 			numberButtons[9].setPrevNext(numberButtons[8], numberButtons[0]);
 		
-		setKeyboard("TextKeyboard");	
+		setKeyboard("TextKeyboard"); //Sets the default keyboard  to the text keyboard
 	}
     public void setKeyboard( String type ){
         switch (type) {
         case "TextKeyboard":
-		model.setSelected(buttons[0]);
+		model.setSelected(buttons[0]); //Sets the selected button at A
             break;
         case "NumberKeyboard":
-		model.setSelected(numberButtons[1]);
+		model.setSelected(numberButtons[1]); //Sets the selected button at 1
             break;
     }
         cardLayout.show(cards, type);
@@ -180,8 +178,5 @@ public class WhereToFrameView extends JPanel implements Observer {
 		else {
             display.setText("" +  arg);
         }
-    }
-
-    private void add(CardLayout card) {
     }
 }
