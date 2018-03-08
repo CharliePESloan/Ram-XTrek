@@ -51,6 +51,8 @@ public class MenuFrame extends JFrame{
     JButton SelectButton = new JButton();
     JButton MenuButton = new JButton();
     JButton OnOffButton = new JButton();
+    
+    Win7Ublox7 win7u7 = new Win7Ublox7();
   /* Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
   */
 
@@ -65,7 +67,9 @@ public class MenuFrame extends JFrame{
              setBorder( null );
          }
      }
-    
+  public Win7Ublox7 getWin7Ublox7(){
+      return this.win7u7;
+  }
   
 
   // What is constructed when MenuFrame() is called
@@ -84,9 +88,8 @@ MinusButton.setName("MinusButton");
 SelectButton.setName("SelectButton");
 MenuButton.setName("MenuButton");
 OnOffButton.setName("OnOffButton");
-      
-      Win7Ublox7 win7u7 = new Win7Ublox7();
-      Thread thread = new Thread(win7u7);
+
+      Thread thread = new Thread(this.win7u7);
       thread.start();
     
     // Placing the navigation buttons
