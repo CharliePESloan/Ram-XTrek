@@ -20,10 +20,10 @@ public class Direction
 
 	public Direction(JSONObject direction)
 	{
-		JSONObject jObject;
+		JSONObject JObject;
 		String distanceStr;
 
-		JObject = direction.getJSONObject("distance"); 
+		JObject = direction.getJSONObject("distance");
 
 		distanceStr = JObject.getString("text");
 
@@ -65,7 +65,7 @@ public class Direction
 	{
 		return lonEnd;
 	}
-	
+
 	private float degreesToRadians(float degrees)
 	{
 		return (degrees * (float)Math.PI) / 180;
@@ -73,8 +73,8 @@ public class Direction
 
 	public double distanceTo(float latitude,float longitude)
 	{
-		float lat1 = this.latitude;
-		final float lon1 = this.longitude;
+		float lat1 = this.latStart;
+		final float lon1 = this.lonStart;
 		float lat2 = latitude;
 		final float lon2 = longitude;
 		final int   earthRadiusKm = 6371;
@@ -87,8 +87,8 @@ public class Direction
 
 		double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
 			  Math.sin(dLon/2) * Math.sin(dLon/2) *
-			  Math.cos(lat1)   * Math.cos(lat2); 
-		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+			  Math.cos(lat1)   * Math.cos(lat2);
+		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 		return (double)earthRadiusKm * c;
 	}
 }

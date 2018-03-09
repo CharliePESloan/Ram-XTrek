@@ -24,7 +24,7 @@ public class Navigator
 
 	/* Variables */
 	private Language	language = new Language("English", "en");
-	
+
 	private	String		origin;
 	private	String		destination;
 	private	String		encOrigin;
@@ -100,7 +100,6 @@ public class Navigator
 	{
 		try
 		{
-			//this.destination = destination;
 			encDestination = URLEncoder.encode(destination,"UTF-8");
 		} catch (UnsupportedEncodingException ex)
 		{
@@ -167,7 +166,7 @@ public class Navigator
 		} else {
 			return "You have reached your destination";
 		}
-	}	
+	}
 	public String getDirection(int i)
 	{
 		if (i<directions.length && i>=0)
@@ -227,27 +226,30 @@ public class Navigator
 		for (int i=0; i<directions.length; i++)
 		{
 			System.out.println( getDirection(i) );
-			
+
 		}
 	}
 
 	public static void main(String args[])
 	{
 		Navigator myDir = new Navigator();
-		
+
 		//myDir.setOrigin("Exeter");
 		myDir.setOrigin	(50.729042f, -3.531057f);
 		myDir.setDest	(50.742957f, -3.348418f);
 		//myDir.setDest("Bath");
-		
-		//myDir.setLang(new Language("French","fr-FR"));
-		
+
+		Language lang = new Language("French","fr");
+		//Language lang = new Language("English","en");
+
+		myDir.setLang(lang);
+
 		myDir.refreshDirections();
 		myDir.printOut();
 
-		myDir.getClosestNode(50.729042f,-3.531057f);
+		//myDir.getClosestNode(50.729042f,-3.531057f);
 
 		Speaker.saySomething(myDir.getDirection(),
-				     new Language("en"));
+				    		 lang);
 	}
 }

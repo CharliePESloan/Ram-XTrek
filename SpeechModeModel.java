@@ -26,7 +26,7 @@ public class SpeechModeModel extends Observable implements Model
 	Language  language;
 	int	  selected = 0;
 
-	
+
 	/* Constructor */
 	public SpeechModeModel(MenuFrame XTrek)
 	{
@@ -39,7 +39,7 @@ public class SpeechModeModel extends Observable implements Model
 		selected--;
 		if (selected<0)
 		{selected=NUM_BUTTONS;}
-		
+
 		setChanged(); notifyObservers(selected);
 	}
 	public void pressedMinus()
@@ -47,17 +47,15 @@ public class SpeechModeModel extends Observable implements Model
 		selected++;
 		if (selected>NUM_BUTTONS)
 		{selected=0;}
-		
+
 		setChanged(); notifyObservers(selected);
 	}
+	// Set language and read out which button was pressed
 	public void pressedSelect()
 	{
-		/* Find selected language code and name of button */
 		String text;
-		// Set language and read out which button was pressed
 		if (selected == 0)
 		{
-			//language = languages[0];
 			language = null;
 			text     = "Off";
 			Speaker.saySomething(text,languages[0]);
@@ -74,6 +72,7 @@ public class SpeechModeModel extends Observable implements Model
 	}
 	public void pressedOnOff()
 	{
+		reset();
 		mainFrame.setMenu("OnOff");
 	}
 
@@ -81,5 +80,7 @@ public class SpeechModeModel extends Observable implements Model
 	{
 		selected = 0;
 		language = null;
+		
+		setChanged(); notifyObservers(selected);
 	}
 }
