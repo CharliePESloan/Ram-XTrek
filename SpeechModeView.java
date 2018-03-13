@@ -52,7 +52,6 @@ public class SpeechModeView extends JPanel implements Observer
 		setLayout( new GridLayout(NUM_BUTTONS,1) );
 		setBackground(Color.black);
 
-
 		/* Setup buttons */
 		buttons[0].select();
 		Font myFont = new Font("Trebuchet MS",Font.PLAIN, FONT_SIZE);
@@ -66,9 +65,12 @@ public class SpeechModeView extends JPanel implements Observer
 	/* Select appropriate button */
 	public void update( Observable obs, Object obj )
 	{
-		buttons[selected].deselect();
-		selected = (int)obj;
-		buttons[selected].select();
+		if (obj instanceof Integer)
+		{
+			buttons[selected].deselect();
+			selected = (int)obj;
+			buttons[selected].select();
+		}
 	}
 }
 

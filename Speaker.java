@@ -79,7 +79,7 @@ public class Speaker implements Runnable
 	}
 	public static void saySomething(String text)
 	{
-		language = new Language("en");
+		Language language = new Language("en");
 		/* Start speaking a different thread */
 		ExecutorService executor =
 			Executors.newSingleThreadExecutor();

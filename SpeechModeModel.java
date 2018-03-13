@@ -65,6 +65,7 @@ public class SpeechModeModel extends Observable implements Model
 			text     = language.getName();;
 			Speaker.saySomething(text,language);
 		}
+		setChanged(); notifyObservers(language);
 	}
 	public void pressedMenu()
 	{
