@@ -77,4 +77,15 @@ public class Speaker implements Runnable
 
 		executor.shutdown();
 	}
+	public static void saySomething(String text)
+	{
+		language = new Language("en");
+		/* Start speaking a different thread */
+		ExecutorService executor =
+			Executors.newSingleThreadExecutor();
+		
+		executor.execute( new Speaker(text,language) );
+
+		executor.shutdown();
+	}
 }
