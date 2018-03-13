@@ -1,6 +1,8 @@
 import org.json.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import java.util.Map;
+import java.util.HashMap;
 
 /*
  * Direction
@@ -18,30 +20,52 @@ public class Direction
 	private float latEnd;
 	private float lonEnd;
 
-	public Direction(JSONObject direction)
+	private static final Map<String, String> REPLACERS =
+		createMap();
+	private static Map<String,String> createMap()
 	{
-		JSONObject JObject;
-		String distanceStr;
+		Map<String, String> map = new HashMap<>();
+		map.put(" N ", "North ");
+		map.put(" E "," East ");
+		map.put(" S "," South ");
+		map.put(" W "," West ");
 
-		JObject = direction.getJSONObject("distance");
+		return map;
+	}
 
-		distanceStr = JObject.getString("text");
+	public Direction(JSONObject direction, Language lang)
+	{
+		JSONObject distance;
+		JSONObject location;
+		String	   distanceStr;
+		int	   distanceInt;
 
-		JObject = direction.getJSONObject("start_location");
+		distance = direction.getJSONObject("distance");
+		distanceInt = distance.getInt("value");
 
-		/*/ Read distances larger than 1000m in km
-		if (distance.getInt("value") >= 1000)
-		{distanceStr = String.format("In %.1f kilometers ",
-			       (float)distance.getInt("value") / 1000);
+		//distanceStr = JObject.getString("text");
+
+		/* Read distances larger than 1000m in km */
+		if (distanceInt >= 1000)
+		{
+			distanceStr = String.format(lang.getKilometerText(),
+						    (float)distanceInt / 1000);
 		}
 		else{
-		distanceStr = String.format("In %d meters ",
-			      distance.getInt("value"));
-		 }*/
+			distanceStr = String.format(lang.getMeterText(),
+						    distanceInt);
+		}
+		
+		location = direction.getJSONObject("start_location");
 
 		String   html = direction.getString("html_instructions");
 		Document doc = Jsoup.parse(html);
 		text = distanceStr + " " + doc.text();
+		for (Map.Entry<String, String> entry : REPLACERS.entrySet())
+		{
+			text = text.replaceAll( entry.getKey(),
+						entry.getValue() );
+		}
 	}
 
 	public String getText()

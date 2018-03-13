@@ -148,7 +148,7 @@ public class Navigator
 		for (int i=0; i<steps.length(); i++)
 		{
 			step = steps.getJSONObject(i);
-			directions[i] = new Direction(step);
+			directions[i] = new Direction(step,language);
 
 		}
 
@@ -234,10 +234,10 @@ public class Navigator
 	{
 		Navigator myDir = new Navigator();
 
-		//myDir.setOrigin("Exeter");
-		myDir.setOrigin	(50.729042f, -3.531057f);
-		myDir.setDest	(50.742957f, -3.348418f);
-		//myDir.setDest("Bath");
+		myDir.setOrigin("Exeter");
+		//myDir.setOrigin	(50.729042f, -3.531057f);
+		//myDir.setDest	(50.742957f, -3.348418f);
+		myDir.setDest("Glasgow");
 
 		Language lang = new Language("French","fr");
 		//Language lang = new Language("English","en");
@@ -249,7 +249,7 @@ public class Navigator
 
 		//myDir.getClosestNode(50.729042f,-3.531057f);
 
-		Speaker.saySomething(myDir.getDirection(),
+		Speaker.saySomething(myDir.getDirection(24),
 				    		 lang);
 	}
 }

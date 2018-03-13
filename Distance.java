@@ -1,3 +1,9 @@
+/* Distance
+ * Charlie Sloan (2018)
+ *
+ * Calculates the distance between two latitudes and longitudes
+ */
+
 public class Distance
 {
 	private static float degreesToRadians(float degrees)
@@ -28,6 +34,6 @@ public class Distance
 			  Math.cos(lat1)   * Math.cos(lat2);
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
-		return (double)earthRadiusKm * c;
+		return (double)EARTHRADIUSKM * c;
 	}
 }
