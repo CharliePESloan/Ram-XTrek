@@ -35,7 +35,7 @@ public class CycleButton extends JLabel
 		this(label);
 		this.data = data;
 	}
-	CycleButton(String data, ImageIcon normal, ImageIcon selected)
+	CycleButton(Object data, ImageIcon normal, ImageIcon selected)
 	{
 		this.selected	= false;
 		hasImages	= true;
