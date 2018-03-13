@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.util.*;
 /*
- * Menu Model.
+ * Satellite Model.
  *
- * Darya Shyroka 2018.
+ * Clyde Udunna 2018.
  */
 public class SatelliteModel extends Observable implements Model {	
 
