@@ -44,8 +44,8 @@ public class MapModel extends Observable implements Model, Observer {
 		else if (obj instanceof String [])
 		{
 			String[] a = (String[]) obj;
-			LONGITUDE = (a[0] + " " + a[1]);
-			LATITUDE = (a[2] + " " + a[3]);
+			LATITUDE = (a[0] + " " + a[1]);
+			LONGITUDE = (a[2] + " " + a[3]);
 		}
 	}
 	
