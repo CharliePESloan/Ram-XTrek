@@ -10,7 +10,7 @@ import org.json.*;
  * a usable format
  */
 
-public class Navigator
+public class Navigator implements Observer
 {
 	/* Constant Values */
 	final static String URLBASE =
@@ -49,9 +49,10 @@ public class Navigator
 	/*
 	 * Constructor
 	 */
-	public Navigator()
+	public Navigator(SatelliteModel satModel)
 	{
 		currentDirection=0;
+		satModel.addObserver(this);
 	}
 
 	/*
@@ -230,13 +231,28 @@ public class Navigator
 		}
 	}
 
+	public void update(Observable obs, Object obj)
+	{
+		if (obj instance String[])
+		{
+			String[] arr = (String[])obj;
+			System.out.println((arr));
+			float lat =
+				(arr[1]=="N" ? 1 : -1) * (float)arr[0];
+			float lon =
+				(arr[3]=="N" ? 1 : -1) * (float)arr[2];
+			System.out.println(lat);
+			System.out.println(lon);
+		}
+	}
+
 	public static void main(String args[])
 	{
 		Navigator myDir = new Navigator();
 
-		myDir.setOrigin("Exeter");
 		//myDir.setOrigin	(50.729042f, -3.531057f);
 		//myDir.setDest	(50.742957f, -3.348418f);
+		myDir.setOrigin("Exeter");
 		myDir.setDest("Glasgow");
 
 		Language lang = new Language("French","fr");

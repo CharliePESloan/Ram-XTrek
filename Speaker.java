@@ -38,26 +38,35 @@ public class Speaker implements Runnable
 	
 	public void run() {
 		
-		// Get raw audio
-		final String token  = Speech.renewAccessToken( KEY1 );
-		final byte[] speech = Speech.generateSpeech( token,
-							     text,
-							     lang,
-							     GENDER,
-							     artist,
-							     FORMAT );
-		InputStream myInputStream =
-			new ByteArrayInputStream(speech);
-		
-		// Try to play the audio
-		try
+		try 
 		{
-			AudioInputStream myAudio =
-				AudioSystem.getAudioInputStream(myInputStream);
-			Sound.playStream( myAudio,
-				Sound.readStream( myAudio ) );
+			// Get raw audio
+			final String token  = Speech.renewAccessToken( KEY1 );
+			final byte[] speech =
+				Speech.generateSpeech( token,
+						       text,
+						       lang,
+						       GENDER,
+						       artist,
+						       FORMAT );
+		
+			InputStream myInputStream =
+				new ByteArrayInputStream(speech);
+		
+			// Try to play the audio
+			try
+			{
+				AudioInputStream myAudio =
+					AudioSystem.getAudioInputStream(myInputStream);
+				Sound.playStream( myAudio,
+					Sound.readStream( myAudio ) );
+			}
+			catch ( UnsupportedAudioFileException e )
+			{
+				System.out.println(e);
+			}
 		}
-		catch ( IOException | UnsupportedAudioFileException e )
+		catch ( IOException )
 		{
 			System.out.println(e);
 		}

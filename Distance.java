@@ -11,10 +11,10 @@ public class Distance
 		return (degrees * (float)Math.PI) / 180;
 	}
 
-	public static double distanceTo(double latitude1,
-					double longitude1,
-					double latitude2,
-					double longitude2)
+	public static double between(double latitude1,
+				     double longitude1,
+				     double latitude2,
+				     double longitude2)
 	{
 		final int	EARTHRADIUSKM = 6371;
 		
