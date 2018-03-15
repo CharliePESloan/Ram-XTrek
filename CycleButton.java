@@ -45,16 +45,6 @@ public class CycleButton extends JLabel
 		setOpaque(false);
 		setIcon(normal);
 	}
-	CycleButton(String data, ImageIcon normal, ImageIcon selected)
-	{
-		this.selected	= false;
-		hasImages	= true;
-		imageNormal	= normal;
-		imageSelected	= selected;
-		this.data	= data;
-		setOpaque(false);
-		setIcon(normal);
-	}
 
 	/*
 	 * setPrevNext
