@@ -32,10 +32,10 @@ public class SpeechModeView extends JPanel implements Observer
 		{
 			new CycleButton("Off"),
 			new CycleButton("English"),
-                	new CycleButton("Francais"),
-                	new CycleButton("Deutsch"),
-                	new CycleButton("Italiano"),
-                	new CycleButton("Espanol")
+			new CycleButton("Francais"),
+			new CycleButton("Deutsch"),
+			new CycleButton("Italiano"),
+			new CycleButton("Espanol")
 		};
 	int selected = 0;
 
