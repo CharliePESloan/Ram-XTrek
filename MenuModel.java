@@ -37,21 +37,21 @@ public class MenuModel extends Observable implements Model {
 	}
 	public void pressedSelect()
 	{
-		currentButton = (String)selected.getData();
+		currentButton = selected.getData();
 		switch (currentButton)
 		{
 			case "WhereToButton":
-                mainFrame.setMenu("WhereTo");
+                mainFrame.setMenu(MenuEnum.WHERETO);
 				break;
 			case "MapButton":
-                mainFrame.setMenu("Map");
+                mainFrame.setMenu(MenuEnum.MAPS);
 				break;
 			case "SatelliteButton":
-				mainFrame.setMenu("Satellite");
+				mainFrame.setMenu(MenuEnum.SATELLITE);
 			case "TripCompButton":
 				break;
             case "SpeechButton":
-                mainFrame.setMenu("Speech");
+                mainFrame.setMenu(MenuEnum.SPEECH);
                 break;
 			default:
 				break;
@@ -59,7 +59,8 @@ public class MenuModel extends Observable implements Model {
     }
     public void pressedOnOff(){
         //System.out.println("Changing view to on off");
-        mainFrame.setMenu("OnOff");
+        mainFrame.setMenu(MenuEnum.ONOFF);
+        mainFrame.menuModel.reset();
     }
     
     public void reset(){
