@@ -75,7 +75,7 @@ public class Speaker implements Runnable
 		}
 		catch ( IOException e )
 		{
-			System.out.println("Outer error");
+			System.out.println(r + "Outer error");
 			System.out.println(e);
 		}
 	}
