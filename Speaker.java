@@ -8,6 +8,8 @@ import java.lang.Runnable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
 
+import java.util.Random;
+
 /*
  * Speaker
  * Charlie Sloan (2018)
@@ -36,8 +38,9 @@ public class Speaker implements Runnable
 		this.artist = language.getArtist();
 	}
 	
-	public synchronized void run() {
-		//synchronized() {
+	public void run() {
+		Random rand = new Random();
+		float r = 10*rand.nextFloat();
 		try 
 		{
 			// Get raw audio
@@ -52,24 +55,29 @@ public class Speaker implements Runnable
 		
 			InputStream myInputStream =
 				new ByteArrayInputStream(speech);
+			System.out.println(r + "got audio");
 		
 			// Try to play the audio
 			try
 			{
 				AudioInputStream myAudio =
 					AudioSystem.getAudioInputStream(myInputStream);
+				System.out.println(r + "Converted");
 				Sound.playStream( myAudio,
 					Sound.readStream( myAudio ) );
+				System.out.println(r + "Played");
 			}
 			catch ( UnsupportedAudioFileException e )
 			{
+				System.out.println(r + "Inner error");
 				System.out.println(e);
 			}
 		}
 		catch ( IOException e )
 		{
+			System.out.println("Outer error");
 			System.out.println(e);
-		} //}
+		}
 	}
 
 	/* saySomething
@@ -96,5 +104,10 @@ public class Speaker implements Runnable
 		executor.execute( new Speaker(text,language) );
 
 		executor.shutdown();
+	}
+
+	public static void main(String[] args)
+	{
+		Speaker.saySomething("HELP");
 	}
 }
