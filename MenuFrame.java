@@ -40,7 +40,7 @@ public class MenuFrame extends JFrame{
     OnOffModel onOffModel = new OnOffModel(this);
     MenuModel menuModel = new MenuModel(this);
     SpeechModeModel speechModel = new SpeechModeModel(this);
-    WhereToFrameModel whereToModel = new WhereToFrameModel(this);
+    WhereToFrameModel whereToModel = new WhereToFrameModel(this, speechModel);
 	SatelliteModel satModel = new SatelliteModel(this);
     MapModel mapModel = new MapModel(this, speechModel, satModel );
     
@@ -97,7 +97,7 @@ MenuButton.setName("MenuButton");
 OnOffButton.setName("OnOffButton");
 
       
-      //thread.start();
+      thread.start();
     
     // Placing the navigation buttons
     PlusButton.setBounds(7, 96, 32, 72);add(PlusButton);
