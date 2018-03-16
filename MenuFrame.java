@@ -41,8 +41,9 @@ public class MenuFrame extends JFrame{
     MenuModel menuModel = new MenuModel(this);
     SpeechModeModel speechModel = new SpeechModeModel(this);
     WhereToFrameModel whereToModel = new WhereToFrameModel(this);
-    MapModel mapModel = new MapModel(this);
-    SatelliteModel satModel = new SatelliteModel(this);
+	SatelliteModel satModel = new SatelliteModel(this);
+    MapModel mapModel = new MapModel(this, speechModel, satModel );
+    
     
     Controller controller = new Controller(onOffModel);
     JPanel onOffView = new OnOffView(controller, onOffModel);
