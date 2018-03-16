@@ -79,12 +79,12 @@ public class MapModel extends Observable implements Model, Observer {
 		imageLoader();
     }
     public void pressedMenu() { //Returns to the menu screen
-        mainframe.setMenu(MenuEnum.MENU);
+        mainFrame.setMenu(MenuEnum.MENU);
     }
     public void pressedSelect() { //Select button able to be pressed, but no functionality
     }
 	public void pressedOnOff() { //Changes the XTrek's on/off state 
-		mainframe.setMenu(MenuEnum.OnOff);	
+		mainFrame.setMenu(MenuEnum.ONOff);	
 		reset();
 	}
 	public void reset () {
