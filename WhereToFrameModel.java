@@ -32,7 +32,7 @@ public class WhereToFrameModel extends Observable implements Model {
     }
     public void pressedMenu() {
 		Speaker.saySomething(textDisplay);
-        mainFrame.setMenu("Menu");
+        mainFrame.setMenu(MenuEnum.MENU);
     }
     public void pressedSelect() {
         letters =  (String) selected.getData();
