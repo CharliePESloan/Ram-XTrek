@@ -13,7 +13,7 @@ import java.awt.Graphics2D;
  */
 public class MapModel extends Observable implements Model, Observer {
 
-    MenuFrame myXTrek;
+    MenuFrame mainFrame;
 	private static String LATITUDE  = "50.7184";     /* latitude  */
 	private static String LONGITUDE = "-3.5339";     /* longitude */
 	
@@ -29,7 +29,7 @@ public class MapModel extends Observable implements Model, Observer {
 	BufferedImage img; 
 	
     public MapModel(MenuFrame XTrek, SpeechModeModel speechModel, SatelliteModel satModel) {
-        myXTrek = XTrek;
+        mainFrame = XTrek;
 		speechModel.addObserver(this); 
 		satModel.addObserver(this); 
 		imageLoader();
@@ -84,7 +84,7 @@ public class MapModel extends Observable implements Model, Observer {
     public void pressedSelect() { //Select button able to be pressed, but no functionality
     }
 	public void pressedOnOff() { //Changes the XTrek's on/off state 
-		mainFrame.setMenu(MenuEnum.ONOff);	
+		mainFrame.setMenu(MenuEnum.ONOFF);	
 		reset();
 	}
 	public void reset () {
