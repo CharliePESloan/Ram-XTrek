@@ -11,12 +11,12 @@ public class WhereToFrameModel extends Observable implements Model {
         return s.substring(0, a) + s.substring(a + 1);
     }
     CycleButton selected;
-    MenuFrame XTrek;
+    MenuFrame mainFrame;
     String letters;
     String textDisplay ="";
     
-    public WhereToFrameModel(MenuFrame XTrek) {
-        this.XTrek = XTrek;
+    public WhereToFrameModel(MenuFrame mainFrame) {
+        this.mainFrame = mainFrame;
     }
     public void setSelected(CycleButton newSelected) {
         selected = newSelected;
@@ -32,7 +32,7 @@ public class WhereToFrameModel extends Observable implements Model {
     }
     public void pressedMenu() {
 		Speaker.saySomething(textDisplay);
-        XTrek.setMenu("Menu");
+        mainFrame.setMenu("Menu");
     }
     public void pressedSelect() {
         letters =  (String) selected.getData();
@@ -64,7 +64,7 @@ public class WhereToFrameModel extends Observable implements Model {
     }
     public void pressedOnOff()
 	{
-		XTrek.setMenu("OnOff");
+		mainFrame.setMenu(MenuEnum.ONOFF);
 		reset();
 	}
 	public void reset () {
