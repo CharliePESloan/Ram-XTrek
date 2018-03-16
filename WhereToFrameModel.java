@@ -31,28 +31,34 @@ public class WhereToFrameModel extends Observable implements Model {
         setChanged();
     }
     public void pressedMenu() {
+		Speaker.saySomething(textDisplay);
         XTrek.setMenu("Menu");
     }
     public void pressedSelect() {
         letters =  (String) selected.getData();
         if (letters == "SPACE") {
             textDisplay += " ";
+			Speaker.saySomething(letters);
             setChanged(); notifyObservers(textDisplay);
         }
         else if (letters == "RIGHT") {
 			selected.deselect();
+			Speaker.saySomething("Number Keyboard");
             setChanged(); notifyObservers(false);
         }
 		else if (letters == "LEFT") {
 			selected.deselect();
+			Speaker.saySomething("Text Keyboard");
             setChanged(); notifyObservers(true);
         }
 		else if (letters == "DEL") {
+			Speaker.saySomething("Delete");
             textDisplay = removeChar(textDisplay, textDisplay.length()-1);
 			setChanged(); notifyObservers(textDisplay);
         }
         else {
             textDisplay += letters;
+			Speaker.saySomething(letters);
             setChanged(); notifyObservers(textDisplay);
         }
     }
@@ -63,6 +69,7 @@ public class WhereToFrameModel extends Observable implements Model {
 	}
 	public void reset () {
 		textDisplay = "";
+		selected.deselect();
 		setChanged(); notifyObservers(true);
         setChanged(); notifyObservers("Enter Address");
 	}
