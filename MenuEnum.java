@@ -1,5 +1,5 @@
 public enum MenuEnum {
-    MAPS, WHERETO, TRIPCOMP, MENU,
+    MAPS, WHERETO, TRIP, MENU,
     SPEECH, ABOUT, SATELLITE, ONOFF;
     @Override 
     public String toString() {
