@@ -30,7 +30,7 @@ public class MapModel extends Observable implements Model, Observer {
 	
     public MapModel(MenuFrame XTrek, SpeechModeModel speechModel, SatelliteModel satModel) {
         mainFrame = XTrek;
-		speechModel.addObserver(this); 
+		XTrek.getWin7Ublox().addObserver(this); 
 		satModel.addObserver(this); 
 		imageLoader();
     }
