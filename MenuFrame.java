@@ -34,8 +34,8 @@ public class MenuFrame extends JFrame{
     
     
 
-    //Win7Ublox7 win7u7 = new Win7Ublox7();
-    //Thread thread = new Thread(this.win7u7);
+    Win7Ublox7 win7u7 = new Win7Ublox7();
+    Thread thread = new Thread(this.win7u7);
 
     OnOffModel onOffModel = new OnOffModel(this);
     MenuModel menuModel = new MenuModel(this);
@@ -75,9 +75,9 @@ public class MenuFrame extends JFrame{
              setBorder( null );
          }
      }
- // public Win7Ublox7 getWin7Ublox7(){
-  //    return this.win7u7;
- // }
+  public Win7Ublox7 getWin7Ublox7(){
+	  return this.win7u7;
+  }
   
 
   // What is constructed when MenuFrame() is called
