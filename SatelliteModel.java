@@ -26,7 +26,7 @@ public class SatelliteModel extends Observable implements Model {
 	}
 	public void pressedMenu()
 	{
-		mainFrame.setMenu("Menu");
+		mainFrame.setMenu(MenuEnum.MENU);
 	}
 	public void pressedSelect()
 	{
@@ -34,7 +34,7 @@ public class SatelliteModel extends Observable implements Model {
     }
     public void pressedOnOff(){
         //System.out.println("Changing view to on off");
-        mainFrame.setMenu("OnOff");
+        mainFrame.setMenu(MenuEnum.ONOFF);
     }
     
     public void reset(){
