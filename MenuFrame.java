@@ -97,7 +97,7 @@ MenuButton.setName("MenuButton");
 OnOffButton.setName("OnOffButton");
 
       
-      //thread.start();
+      thread.start();
     
     // Placing the navigation buttons
     PlusButton.setBounds(7, 96, 32, 72);add(PlusButton);
