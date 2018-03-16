@@ -36,8 +36,8 @@ public class Speaker implements Runnable
 		this.artist = language.getArtist();
 	}
 	
-	public void run() {
-		
+	public synchronized void run() {
+		//synchronized() {
 		try 
 		{
 			// Get raw audio
@@ -69,7 +69,7 @@ public class Speaker implements Runnable
 		catch ( IOException e )
 		{
 			System.out.println(e);
-		}
+		} //}
 	}
 
 	/* saySomething

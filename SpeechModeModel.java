@@ -69,12 +69,12 @@ public class SpeechModeModel extends Observable implements Model
 	}
 	public void pressedMenu()
 	{
-		mainFrame.setMenu("Menu");
+		mainFrame.setMenu(MenuFrame.MENU);
 	}
 	public void pressedOnOff()
 	{
 		reset();
-		mainFrame.setMenu("OnOff");
+		mainFrame.setMenu(MenuEnum.ONOFF);
 	}
 
 	public void reset()
