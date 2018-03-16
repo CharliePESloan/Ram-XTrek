@@ -5,10 +5,10 @@ import javax.swing.*;
 public class TripComputerModel extends Observable implements Model {
 	
 	CycleButton selected;
-	MenuFrame XTrek;
+	MenuFrame mainFrame;
 	
-	public TripComputerModel (MenuFrame XTrek) {
-		this.XTrek = XTrek;
+	public TripComputerModel (MenuFrame mainFrame) {
+		this.mainFrame = mainFrame;
 	}
 	public void setSelected(CycleButton newSelected) {
 		
@@ -20,13 +20,13 @@ public class TripComputerModel extends Observable implements Model {
 		
 	}
 	public void pressedMenu() {
-		XTrek.setMenu("Menu");
+		mainFrame.setMenu(MenuEnum.MENU);
 	}
 	public void pressedSelect() {
 		
 	}
 	public void pressedOnOff() {
-		XTrek.setMenu("OnOff");
+		mainFrame.setMenu(MenuEnum.ONOFF);
 		reset();
 	}
 	public void reset() {
