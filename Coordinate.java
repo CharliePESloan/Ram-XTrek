@@ -1,6 +1,8 @@
 //5043.94335,N,00330.91606,W
 
 public class Coordinate {
+	
+	final static int EARTHRADIUSKM = 6371;
 
 	long	lat;
 	long	lon;
@@ -32,9 +34,7 @@ public class Coordinate {
 				     double longitude1,
 				     double latitude2,
 				     double longitude2)
-	{
-		final int	EARTHRADIUSKM = 6371;
-		
+	{	
 		float		lat1 = (float)latitude1;
 		final float	lon1 = (float)longitude1;
 		float		lat2 = (float)latitude2;
