@@ -23,7 +23,7 @@ import javax.swing.*;
 public class MenuFrame extends JFrame{
     CardLayout cardlayout = new CardLayout();
     JPanel cards = new JPanel(cardlayout);
-        ImageIcon plusIcon = new ImageIcon("Images/PlusButton.png");
+    ImageIcon plusIcon = new ImageIcon("Images/PlusButton.png");
     ImageIcon minusIcon = new ImageIcon("Images/MinusButton.png");
     ImageIcon selectIcon = new ImageIcon("Images/SelectButton.png");
     ImageIcon menuIcon = new ImageIcon("Images/MenuButton.png");
@@ -36,13 +36,13 @@ public class MenuFrame extends JFrame{
     WhereToFrameModel whereToModel = new WhereToFrameModel(this);
     MapModel mapModel = new MapModel(this);
     
-   // MenuController	menuController = new MenuController(menuModel);
-    Controller controller = new Controller(menuModel);
+    Controller controller = new Controller(onOffModel);
+    JPanel onOffView = new OnOffView(controller, onOffModel);
     JPanel menuView = new MenuView(controller, menuModel);
     JPanel speechView = new SpeechModeView(controller, speechModel);
     JPanel whereToView = new WhereToFrameView(controller, whereToModel);
     JPanel mapView = new MapView(controller, mapModel);
-    JPanel onOffView = new OnOffView(controller, onOffModel);
+    
     
     JButton PlusButton = new JButton();
     JButton MinusButton = new JButton();
