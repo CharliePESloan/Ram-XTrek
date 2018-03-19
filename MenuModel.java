@@ -37,7 +37,7 @@ public class MenuModel extends Observable implements Model {
 	}
 	public void pressedSelect()
 	{
-		currentButton = (String)selected.getData();
+		currentButton = selected.getData();
 		switch (currentButton)
 		{
 			case "WhereToButton":
@@ -49,7 +49,7 @@ public class MenuModel extends Observable implements Model {
 			case "SatelliteButton":
 				mainFrame.setMenu(MenuEnum.SATELLITE);
 			case "TripCompButton":
-				mainFrame.setMenu(MenuEnum.TRIP);
+                mainFrame.setMenu(MenuEnum.TRIP);
 				break;
             case "SpeechButton":
                 mainFrame.setMenu(MenuEnum.SPEECH);
@@ -69,4 +69,3 @@ public class MenuModel extends Observable implements Model {
     }
 //Speaker.saySomething(selected.getText(),language,artist);
 }
-
