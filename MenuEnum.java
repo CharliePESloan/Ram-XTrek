@@ -5,7 +5,7 @@
 **/
 
 public enum MenuEnum {
-    MAPS, WHERETO, TRIPCOMP, MENU,
+    MAPS, WHERETO, TRIP, MENU,
     SPEECH, ABOUT, SATELLITE, ONOFF;
     // a method to convert the enums to a string,
     // required by certain functions. 
@@ -14,7 +14,7 @@ public enum MenuEnum {
     switch(this) {
       case MAPS: return "Maps";
       case WHERETO: return "WhereTo";
-      case TRIPCOMP: return "TripComp";
+      case TRIP: return "TripComp";
       case MENU: return "Menu";
       case SPEECH: return "Speech";
       case ABOUT: return "About";
