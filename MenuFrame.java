@@ -61,6 +61,8 @@ public class MenuFrame extends JFrame{
     JButton SelectButton = new JButton();
     JButton MenuButton = new JButton();
     JButton OnOffButton = new JButton();
+
+    Navigator nav = new Navigator(speechModel,satModel,whereToModel);
     
     
   /* Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm

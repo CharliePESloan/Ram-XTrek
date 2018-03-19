@@ -18,10 +18,10 @@ public class Distance
 	{
 		final int	EARTHRADIUSKM = 6371;
 		
-		float		lat1 = latitude1;
-		final float	lon1 = longitude1;
-		float		lat2 = latitude2;
-		final float	lon2 = longitude2;
+		float		lat1 = (float)latitude1;
+		final float	lon1 = (float)longitude1;
+		float		lat2 = (float)latitude2;
+		final float	lon2 = (float)longitude2;
 
 		float latD = degreesToRadians(lat2-lat1);
 		float lonD = degreesToRadians(lon2-lon1);

@@ -16,6 +16,7 @@ public class Navigator implements Observer
 {
 	/* Constant Values */
 	final static int SEARCHDISTANCE = 10000;
+	final static float SPEECHDISTANCE = 0.01f;
 	final static String URLBASE =
 		"https://maps.googleapis.com/maps/api/directions/json";
 	final static String KEY	=
@@ -28,7 +29,7 @@ public class Navigator implements Observer
 	/* Variables */
 	private SpeechModeModel speech;
 	private SatelliteModel  satellite;
-	private WhereToModel	whereTo;
+	private WhereToFrameModel whereTo;
 	private Language	language = new Language("English", "en");
 
 	private	String		origin;
@@ -259,13 +260,16 @@ public class Navigator implements Observer
 				closest  = dir;
 			}
 		}
-		if 
+		if (smallest > SPEECHDISTANCE)
+		{
+			return null;
+		}
 		return closest;
 	}
 
 	public void update(Observable obs, Object obj)
 	{
-		if (obj instanceof String[])
+		/* if (obj instanceof String[])
 		{
 			String[] arr = (String[])obj;
 			System.out.println((arr));
@@ -276,27 +280,26 @@ public class Navigator implements Observer
 			System.out.println(lat);
 			System.out.println(lon);
 		}
-		else if (obs == satellite)
+		else */
+		if (obs == satellite && obj instanceof Coordinate)
 		{
 			Direction d = checkNextDir( (Coordinate)obj );
 			if (d != null)
 			{
-				Speaker.saySomething(d.getText(),language)
+				Speaker.saySomething(d.getText(),language);
 			}
 		}
-		else if (obs == speech)
+		else if (obs == speech && obj instanceof Language)
 		{
 			language = (Language)obj;
-		else if (obs == whereTo)
+		}
+		else if (obs == whereTo && obj instanceof String)
 		{
-			if (obj instanceof String)
-			{
 				setDest((String)obj);
-			}
 		}
 	}
 
-	public static void main(String args[])
+	/*public static void main(String args[])
 	{
 		Navigator myDir = new Navigator();
 
@@ -317,5 +320,5 @@ public class Navigator implements Observer
 
 		Speaker.saySomething(myDir.getDirection(24).getText(),
 				    		 lang);
-	}
+	}*/
 }

@@ -109,11 +109,11 @@ public class Direction
 
 	public double distanceTo(float latitude,float longitude)
 	{
-		return Distance.between(this.latStart,this.lonstart,
+		return Distance.between(this.latStart,this.lonStart,
 					latitude,     longitude);
 	}
 	public double distanceTo(Coordinate c)
 	{
-		return coordinate.between(c);
+		return cStart.distanceTo(c);
 	}
 }
