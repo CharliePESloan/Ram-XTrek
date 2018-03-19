@@ -20,9 +20,8 @@ import java.util.Observer;
 public class SpeechModeView extends JPanel implements Observer
 {
 	/* Static Variables */
-	final static int BUTTON_WIDTH  = 255;
-	final static int BUTTON_HEIGHT =  45;
 	final static int NUM_BUTTONS = 6;
+	final static int FONT_SIZE = 32;
 
 	/* ModelViewController Objects */
 	final Controller	controller;
@@ -33,15 +32,16 @@ public class SpeechModeView extends JPanel implements Observer
 		{
 			new CycleButton("Off"),
 			new CycleButton("English"),
-                	new CycleButton("Francais"),
-                	new CycleButton("Deutsch"),
-                	new CycleButton("Italiano"),
-                	new CycleButton("Espanol")
+			new CycleButton("Francais"),
+			new CycleButton("Deutsch"),
+			new CycleButton("Italiano"),
+			new CycleButton("Espanol")
 		};
 	int selected = 0;
 
 	/* Constructor */
-	public SpeechModeView( Controller controller, SpeechModeModel model )
+	public SpeechModeView( Controller controller,
+			       SpeechModeModel model )
 	{
 		/* Setup ModelViewController */
 		this.controller = controller;
@@ -52,10 +52,9 @@ public class SpeechModeView extends JPanel implements Observer
 		setLayout( new GridLayout(NUM_BUTTONS,1) );
 		setBackground(Color.black);
 
-
 		/* Setup buttons */
 		buttons[0].select();
-		Font myFont = new Font("Trebuchet MS",Font.PLAIN, 32);
+		Font myFont = new Font("Trebuchet MS",Font.PLAIN, FONT_SIZE);
 		for (CycleButton cb : buttons)
 		{
 			cb.setFont(myFont);
@@ -66,8 +65,12 @@ public class SpeechModeView extends JPanel implements Observer
 	/* Select appropriate button */
 	public void update( Observable obs, Object obj )
 	{
-		buttons[selected].deselect();
-		selected = (int)obj;
-		buttons[selected].select();
+		if (obj instanceof Integer)
+		{
+			buttons[selected].deselect();
+			selected = (int)obj;
+			buttons[selected].select();
+		}
 	}
 }
+

@@ -23,4 +23,3 @@ public enum MenuEnum {
       default: throw new IllegalArgumentException();
     }
   }
-}

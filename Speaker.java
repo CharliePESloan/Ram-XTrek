@@ -8,6 +8,8 @@ import java.lang.Runnable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
 
+import java.util.Random;
+
 /*
  * Speaker
  * Charlie Sloan (2018)
@@ -37,28 +39,43 @@ public class Speaker implements Runnable
 	}
 	
 	public void run() {
-		
-		// Get raw audio
-		final String token  = Speech.renewAccessToken( KEY1 );
-		final byte[] speech = Speech.generateSpeech( token,
-							     text,
-							     lang,
-							     GENDER,
-							     artist,
-							     FORMAT );
-		InputStream myInputStream =
-			new ByteArrayInputStream(speech);
-		
-		// Try to play the audio
-		try
+		Random rand = new Random();
+		float r = 10*rand.nextFloat();
+		try 
 		{
-			AudioInputStream myAudio =
-				AudioSystem.getAudioInputStream(myInputStream);
-			Sound.playStream( myAudio,
-				Sound.readStream( myAudio ) );
+			// Get raw audio
+			final String token  = Speech.renewAccessToken( KEY1 );
+			final byte[] speech =
+				Speech.generateSpeech( token,
+						       text,
+						       lang,
+						       GENDER,
+						       artist,
+						       FORMAT );
+		
+			InputStream myInputStream =
+				new ByteArrayInputStream(speech);
+			System.out.println(r + "got audio");
+		
+			// Try to play the audio
+			try
+			{
+				AudioInputStream myAudio =
+					AudioSystem.getAudioInputStream(myInputStream);
+				System.out.println(r + "Converted");
+				Sound.playStream( myAudio,
+					Sound.readStream( myAudio ) );
+				System.out.println(r + "Played");
+			}
+			catch ( UnsupportedAudioFileException e )
+			{
+				System.out.println(r + "Inner error");
+				System.out.println(e);
+			}
 		}
-		catch ( IOException | UnsupportedAudioFileException e )
+		catch ( IOException e )
 		{
+			System.out.println(r + "Outer error");
 			System.out.println(e);
 		}
 	}
@@ -76,5 +93,21 @@ public class Speaker implements Runnable
 		executor.execute( new Speaker(text,language) );
 
 		executor.shutdown();
+	}
+	public static void saySomething(String text)
+	{
+		Language language = new Language("en");
+		/* Start speaking a different thread */
+		ExecutorService executor =
+			Executors.newSingleThreadExecutor();
+		
+		executor.execute( new Speaker(text,language) );
+
+		executor.shutdown();
+	}
+
+	public static void main(String[] args)
+	{
+		Speaker.saySomething("HELP");
 	}
 }

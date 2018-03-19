@@ -1,23 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.*;
 import javax.swing.*;
 /**
  *
- * @author User
+ * @author Nathan Painter
+ *
+ * Images for the number and letter keyboard created by Nathan Painter
  */
 public class WhereToFrameView extends JPanel implements Observer {
+	final WhereToFrameModel model;
+	final static int fontSize = 24; //Size of the font inside the text display
+	final static int displaySize = 12; //Size of the display
+	final JTextField display = new JTextField("Enter Address",displaySize);
     ImageIcon[] letter = new ImageIcon[26]; //Array of images  A-Z
     ImageIcon[] hLetter = new ImageIcon[26]; //Array of images A-Z (highlighted)
-    CycleButton[] buttons = new CycleButton[26]; //Array of buttons
-    static String abcd = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    final JTextField display = new JTextField("Enter Address",12);
-    final CycleButton buttonSpace; 
+    CycleButton[] buttons = new CycleButton[26]; //Array of letter buttons
+    static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    
+    
+	final CycleButton buttonSpace; 
     ImageIcon letterSpace = new ImageIcon("Images/TestSpace.png");
     ImageIcon letterHSpace = new ImageIcon("Images/HTestSpace.png");
     final CycleButton buttonRight;
@@ -25,157 +27,158 @@ public class WhereToFrameView extends JPanel implements Observer {
     ImageIcon letterHRight = new ImageIcon("Images/HTestRight.png");
     
     CycleButton isSelected;
-    GridLayout background = new GridLayout(7,4);
-	GridLayout testOne = new GridLayout(1,0);
-    GridBagLayout backgroundTwo = new GridBagLayout();
-	GridBagConstraints test = new GridBagConstraints();
-	
-    CardLayout card;
-    Container abc;
     
-	JPanel a = new JPanel(testOne);
-    JPanel cards = new JPanel(card);
-    JPanel b = new JPanel(background);
-    JPanel c = new JPanel(backgroundTwo);
+	GridLayout textLayout = new GridLayout(7,4); //Layout for the text keyboard
+	GridLayout grid = new GridLayout(1,0);
+    GridBagLayout numberLayout = new GridBagLayout(); //Layout for the number keyboard
+	GridBagConstraints constraints = new GridBagConstraints();
+	
+    CardLayout cardLayout = new CardLayout();
+    
+	JPanel displayPanel = new JPanel(grid);
+    JPanel cards = new JPanel(cardLayout);
+    JPanel textPanel = new JPanel(textLayout);
+    JPanel numberPanel = new JPanel(numberLayout);
 	
     
-    CycleButton[] numberButtons = new CycleButton[10];
-    ImageIcon[] number = new ImageIcon[10];
-    ImageIcon[] hNumber = new ImageIcon[10];
+    CycleButton[] numberButtons = new CycleButton[10];//Array of number buttons
+    ImageIcon[] number = new ImageIcon[10];//Array of images 0-9
+    ImageIcon[] hNumber = new ImageIcon[10];//Array of images 0-9 (highlighted)
     final CycleButton buttonLeft;
 	ImageIcon letterLeft = new ImageIcon("Images/TestLeft.png");
     ImageIcon letterHLeft = new ImageIcon("Images/HTestLeft.png");
     final CycleButton buttonDel;
 	ImageIcon letterDel = new ImageIcon("Images/TestDel.png");
     ImageIcon letterHDel = new ImageIcon("Images/HTestDel.png");
-	Font bigFont = display.getFont().deriveFont(Font.PLAIN, 24f);
+	Font bigFont = display.getFont().deriveFont(Font.PLAIN, fontSize);
     
-     public String removeChar(String s, int a) {
-        return s.substring(0, a) + s.substring(a + 1);
-    }   
+        
     
-    public void actionPerformed(ActionEvent e) {
-	card.next(abc);
-	}
-    
-    
-    
+ 
     public WhereToFrameView (Controller controller, WhereToFrameModel model){
-    //255,36
-    
-    add(a);
-    add(cards);
-    a.add(display);
-    cards.add(b, "TextKeyboard");
-    add(c, "NumberKeyboard");    
-    
-    model.addObserver(this);
-	display.setFont(bigFont);
-	
-    for(int i=0; i<26; i++) {
-            letter[i] = new ImageIcon("Images/Test" + abcd.charAt(i) + ".png"); //Creates the images
-            hLetter[i] = new ImageIcon("Images/HTest" + abcd.charAt(i) + ".png"); //Creates the highlighted images
-            buttons[i] = new CycleButton(Character.toString(abcd.charAt(i)), letter[i], hLetter[i]); //Creates the buttons
-            b.add(buttons[i]);
-        }
-	buttonSpace = new CycleButton("SPACE", letterSpace, letterHSpace);
-    buttonRight = new CycleButton("RIGHT", letterRight, letterHRight);
-	b.add(buttonSpace);
-    b.add(buttonRight);
 		
-   
-	buttonDel = new CycleButton("DEL",letterDel, letterHDel);
-	buttonLeft = new CycleButton("DEL",letterLeft, letterHLeft);
-	
-    for (int i=1; i<25;i++) {
-			buttons[i].setPrevNext(buttons[i-1],buttons[i+1]);
-		}
-		buttonRight.setPrevNext(buttonSpace, buttons[0]);
-		buttonSpace.setPrevNext(buttons[25], buttonRight);
-		buttons[0].setPrevNext(buttonRight, buttons[1]);
-		buttons[25].setPrevNext(buttons[24], buttonSpace);
+		displayPanel.add(display);
+		cards.add(textPanel, "TextKeyboard");
+		cards.add(numberPanel, "NumberKeyboard");
+		add(displayPanel);
+		add(cards);
+		
+		this.model = model;
+		model.addObserver(this);
+		display.setFont(bigFont);
+		display.setEditable(false);
+		for(int i=0; i<26; i++) {
+				letter[i] = new ImageIcon("Images/Test" + alphabet.charAt(i) + ".png"); //Creates the images for the letter keyboard
+				hLetter[i] = new ImageIcon("Images/HTest" + alphabet.charAt(i) + ".png"); //Creates the highlighted images for the letter keyboard
+				buttons[i] = new CycleButton(Character.toString(alphabet.charAt(i)), letter[i], hLetter[i]); //Creates the buttons for the letter keyboard
+				textPanel.add(buttons[i]);
+			}
+		buttonSpace = new CycleButton("SPACE", letterSpace, letterHSpace);
+		buttonRight = new CycleButton("RIGHT", letterRight, letterHRight);
+		textPanel.add(buttonSpace);
+		textPanel.add(buttonRight);
+			
+	   
+		buttonDel = new CycleButton("DEL",letterDel, letterHDel);
+		buttonLeft = new CycleButton("LEFT",letterLeft, letterHLeft);
+		
+		for (int i=1; i<25;i++) {
+				buttons[i].setPrevNext(buttons[i-1],buttons[i+1]);
+			}
+			buttonRight.setPrevNext(buttonSpace, buttons[0]);
+			buttonSpace.setPrevNext(buttons[25], buttonRight);
+			buttons[0].setPrevNext(buttonRight, buttons[1]);
+			buttons[25].setPrevNext(buttons[24], buttonSpace);
 
-    model.setSelected(buttons[0]);
-    
-                
-     for (int i=0; i<10;++i){
-            number[i] = new ImageIcon("Images/Test" + Integer.toString(i) + ".png"); //Creates the images
-            hNumber[i] = new ImageIcon("Images/HTest" + Integer.toString(i) + ".png");
-            numberButtons[i] = new CycleButton(Integer.toString(i), number[i], hNumber[i]);
-        }
-		test.gridx = 0;
-		test.gridy = 0;
-		c.add(numberButtons[1],test);
 		
-		test.gridx = 1;
-		c.add(numberButtons[2],test);
 		
-		test.gridx = 2;
-		c.add(numberButtons[3],test);
+					
+		 for (int i=0; i<10;++i){
+				number[i] = new ImageIcon("Images/Test" + Integer.toString(i) + ".png"); //Creates the images for the number keyboard
+				hNumber[i] = new ImageIcon("Images/HTest" + Integer.toString(i) + ".png");//Creates the highlighted images for the number keyboard
+				numberButtons[i] = new CycleButton(Integer.toString(i), number[i], hNumber[i]);//Creates the buttons for the number keyboard
+			}
+			//Layout for the number keyboard
+			constraints.gridx = 0;
+			constraints.gridy = 0;
+			numberPanel.add(numberButtons[1],constraints);
+			
+			constraints.gridx = 1;
+			numberPanel.add(numberButtons[2],constraints);
+			
+			constraints.gridx = 2;
+			numberPanel.add(numberButtons[3],constraints);
+			
+			constraints.gridx = 0;
+			constraints.gridy = 1;
+			numberPanel.add(numberButtons[4],constraints);
+			
+			constraints.gridx = 1;
+			numberPanel.add(numberButtons[5],constraints);
 		
-		test.gridx = 0;
-		test.gridy = 1;
-		c.add(numberButtons[4],test);
+			constraints.gridx = 2;
+			numberPanel.add(numberButtons[6],constraints);
+			
+			constraints.gridx = 0;
+			constraints.gridy = 2;
+			numberPanel.add(numberButtons[7],constraints);
+			
+			constraints.gridx = 1;
+			numberPanel.add(numberButtons[8],constraints);
+			
+			constraints.gridx = 2;
+			numberPanel.add(numberButtons[9],constraints);
+			
+			constraints.gridx = 0;
+			constraints.gridy = 3;
+			numberPanel.add(numberButtons[0],constraints);
+			
+			constraints.gridx = 0;
+			constraints.gridy = 4;
+			numberPanel.add(buttonLeft, constraints);
+			
+			constraints.gridx = 1;
+			constraints.gridy = 3;
+			
+			constraints.gridwidth = 2;
+			constraints.gridheight = 2;
+			numberPanel.add(buttonDel, constraints);
+		 
+		 for (int i=2; i<9;i++) {
+				numberButtons[i].setPrevNext(numberButtons[i-1],numberButtons[i+1]);
+			}
+			numberButtons[0].setPrevNext(numberButtons[9], buttonLeft);
+			buttonLeft.setPrevNext(numberButtons[0], buttonDel);
+			numberButtons[1].setPrevNext(buttonDel, numberButtons[2]);
+			buttonDel.setPrevNext(buttonLeft, numberButtons[1]);
+			numberButtons[9].setPrevNext(numberButtons[8], numberButtons[0]);
 		
-		test.gridx = 1;
-		c.add(numberButtons[5],test);
-	
-		test.gridx = 2;
-		c.add(numberButtons[6],test);
-		
-		test.gridx = 0;
-		test.gridy = 2;
-		c.add(numberButtons[7],test);
-		
-		test.gridx = 1;
-		c.add(numberButtons[8],test);
-		
-		test.gridx = 2;
-		c.add(numberButtons[9],test);
-		
-		test.gridx = 0;
-		test.gridy = 3;
-		c.add(numberButtons[0],test);
-		
-		test.gridx = 0;
-		test.gridy = 4;
-		c.add(buttonLeft, test);
-		
-		test.gridx = 1;
-		test.gridy = 3;
-		
-		test.gridwidth = 2;
-		test.gridheight = 2;
-		c.add(buttonDel, test);
-     
-     for (int i=2; i<9;i++) {
-			numberButtons[i].setPrevNext(numberButtons[i-1],numberButtons[i+1]);
-		}
-        numberButtons[0].setPrevNext(numberButtons[9], buttonLeft);
-        buttonLeft.setPrevNext(numberButtons[0], buttonDel);
-        numberButtons[1].setPrevNext(buttonDel, numberButtons[2]);
-        buttonDel.setPrevNext(buttonLeft, numberButtons[1]);
-        numberButtons[9].setPrevNext(numberButtons[8], numberButtons[0]);
-        
-        
-    }
-    public void setKeyboard(String type ){
+		setKeyboard("TextKeyboard"); //Sets the default keyboard  to the text keyboard
+	}
+    public void setKeyboard( String type ){
         switch (type) {
         case "TextKeyboard":
+		model.setSelected(buttons[0]); //Sets the selected button at A
             break;
-        
         case "NumberKeyboard":
+		model.setSelected(numberButtons[1]); //Sets the selected button at 1
             break;
     }
-        //card.show(cards, type);
+        cardLayout.show(cards, type);
     }
     @Override
     public void update(Observable o, Object arg) {
+		if (arg instanceof Boolean) {
+			boolean bean = (boolean) arg;
+			if (bean == true) {
+				setKeyboard("TextKeyboard");
+			}
+			else {
+				setKeyboard("NumberKeyboard");
+			}
+		}
+		else {
             display.setText("" +  arg);
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void add(CardLayout card) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
     }
 }

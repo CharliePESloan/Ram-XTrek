@@ -34,8 +34,11 @@ public class OnOffModel extends Observable implements Model {
 		}
     
     public void pressedOnOff(){
-        mainFrame.setMenu("Menu");
+        mainFrame.setMenu(MenuEnum.MENU);
     }
-
+    
+    public void reset(){
+        
+}
 //Speaker.saySomething(selected.getText(),language,artist);
 }

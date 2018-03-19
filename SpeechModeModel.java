@@ -1,6 +1,7 @@
 import java.util.Observable;
 
-/* SpeechModeModel
+/*
+ * SpeechModeModel
  * Charlie Sloan (2018)
  *
  * Model for speech mode of XTrek; allows the user to select a language
@@ -21,15 +22,15 @@ public class SpeechModeModel extends Observable implements Model
 		};
 
 	/* Declare variables */
-	MenuFrame XTrek;
+	MenuFrame mainFrame;
 	Language  language;
 	int	  selected = 0;
 
-	
+
 	/* Constructor */
 	public SpeechModeModel(MenuFrame XTrek)
 	{
-		this.XTrek = XTrek;
+		mainFrame = XTrek;
 	}
 
 	/* Side buttons */
@@ -38,7 +39,7 @@ public class SpeechModeModel extends Observable implements Model
 		selected--;
 		if (selected<0)
 		{selected=NUM_BUTTONS;}
-		
+
 		setChanged(); notifyObservers(selected);
 	}
 	public void pressedMinus()
@@ -46,32 +47,41 @@ public class SpeechModeModel extends Observable implements Model
 		selected++;
 		if (selected>NUM_BUTTONS)
 		{selected=0;}
-		
+
 		setChanged(); notifyObservers(selected);
 	}
+	// Set language and read out which button was pressed
 	public void pressedSelect()
 	{
-		/* Find selected language code and name of button */
 		String text;
 		if (selected == 0)
 		{
-			language = languages[0];
+			language = null;
 			text     = "Off";
+			Speaker.saySomething(text,languages[0]);
 		} else
 		{
 			language = languages[selected-1];
 			text     = language.getName();;
+			Speaker.saySomething(text,language);
 		}
-
-		// Read out which button was pressed
-		Speaker.saySomething(text,language);
+		setChanged(); notifyObservers(language);
 	}
 	public void pressedMenu()
 	{
-		XTrek.setMenu("Menu");
+		mainFrame.setMenu(MenuEnum.MENU);
 	}
 	public void pressedOnOff()
 	{
-		XTrek.setMenu("OnOff");
+		reset();
+		mainFrame.setMenu(MenuEnum.ONOFF);
+	}
+
+	public void reset()
+	{
+		selected = 0;
+		language = null;
+		
+		setChanged(); notifyObservers(selected);
 	}
 }

@@ -11,11 +11,12 @@ import javax.swing.JButton;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.*;
+
 /*
  * View.
  * Class controls what is displayed on the screen. 
  *
- * Devash Patel 2018.
+ * @ author Devash Patel 2018.
  * Code adapted from that produced by David Wakeling
  */
 class MapView extends JPanel implements Observer {

@@ -1,14 +1,22 @@
-import gnu.io.CommPort;
-import gnu.io.CommPortIdentifier;
-import gnu.io.SerialPort;
-import java.io.InputStream;
+/*Satellite Software
+*
+*
+* Clyde Udunna 2018.
+*/
 
+/*This is my satellite class it takes care of parsing the information
+*received from the Dongle and transforming it into a more readable format
+*which gives the user the longitude and the latitude of their current position*/
 public class Satellite{
 	
 	public Satellite(){};
 	
+	/*The get position method gets a line passed to it,
+	*it checks whether the line passed to it is a GLL sentence that 
+	*contains the coordinates we are looking for. If so the 
+	*information wanted gets stored in an array for later use.*/
 	public String[] getPosition(String coordinate){
-	    String[] components;
+	    String[] components; // Array in which values are stored.
 		if(coordinate.startsWith("$GPGLL")){
 			String message = coordinate.substring(7);
 			components = message.split(",");
@@ -18,6 +26,11 @@ public class Satellite{
 		}
 	return null;
 	}
+	
+	/* This method scans every line passed in by the dongle 
+	*and used getPosition(), to check whether a valid line has been
+	*found, if so the array with the contents is returned to be passed 
+	*onto the rest of the program*/
 	
 	public String[] getGLL(String text){
 		String [] lines = text.split("\n");
@@ -37,60 +50,3 @@ public class Satellite{
 	}
 }
 
-class Win7Ublox7 implements Runnable{
-  final static String PORT_NAME = "COM4"; /* found via Computer->Devices */
-  final static int    BAUD_RATE =  9600;  /* bps */
-  final static int    TIMEOUT   =  2000;  /* ms  */
-  final static int    BUFF_SIZE =  1024;
-
-	//Dongle Reader starts here//
-  public Win7Ublox7(){};
-  
-	public void run() {
-	Satellite mySat = new Satellite(){};
-	try {
-		String s;
-		CommPortIdentifier portId =
-			CommPortIdentifier.getPortIdentifier( "COM4");
-		
-		if ( portId.isCurrentlyOwned() ) {
-			System.out.println( "port in use" ); System.exit( 1 );
-		 }
-			
-		System.err.close();
-		CommPort commPort = portId.open( "whatever", TIMEOUT );
-				
-		if ( commPort instanceof SerialPort ) {
-			SerialPort serialPort = (SerialPort) commPort;
-			serialPort.setSerialPortParams( BAUD_RATE
-										  , SerialPort.DATABITS_8
-										  , SerialPort.STOPBITS_1
-										  , SerialPort.PARITY_NONE
-										  );
-					
-			serialPort.setFlowControlMode( SerialPort.FLOWCONTROL_RTSCTS_IN );
-			serialPort.setRTS( true );
-
-			InputStream in = serialPort.getInputStream();
-			byte[] buffer  = new byte[ BUFF_SIZE ];
-			int    n;
-					
-			while ( ( n = in.read( buffer ) ) > -1 ) {
-				s = new String( buffer, 0, n );     
-				/*System.out.print( s );*/
-				String[] a = mySat.getGLL(s);
-				if(a == null){continue;}
-				System.out.println(a[0] + " " + a[1]);
-				System.out.println(a[2] + " " + a[3]);		
-			}
-		}else {
-			System.out.println( "not a serial port" ); System.exit( 1 );
-		}
-	}catch ( Exception ex ) {
-		System.out.println( ex ); System.exit( 1 );
-		}
-	}
-		//Dongle Reader ends here, modified version.//
-		
-  
-	}
