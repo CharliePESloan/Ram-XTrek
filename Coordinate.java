@@ -1,5 +1,9 @@
 //5043.94335,N,00330.91606,W
 
+/* Coordinate
+ * Charlie Sloan (2018)
+ */
+
 public class Coordinate {
 	
 	final static int EARTHRADIUSKM = 6371;
@@ -54,14 +58,14 @@ public class Coordinate {
 		return (double)EARTHRADIUSKM * c;
 	}
 
-	public double distanceTo(Coordinate c)
+	public double distanceTo(Coordinate coordinate)
 	{
 		final int	EARTHRADIUSKM = 6371;
 		
 		float		lat1 = lat;
 		final float	lon1 = lon;
-		float		lat2 = c.getLat();
-		final float	lon2 = c.getLon();
+		float		lat2 = coordinate.getLat();
+		final float	lon2 = coordinate.getLon();
 
 		float latD = degreesToRadians(lat2-lat1);
 		float lonD = degreesToRadians(lon2-lon1);
