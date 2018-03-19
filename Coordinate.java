@@ -91,4 +91,12 @@ public class Coordinate {
 		return lon;
 	}
 
+	public String getLatStr()
+	{
+		return Long.toString(lat);
+	}
+	public String getLonStr()
+	{
+		return Long.toString(lon);
+	}
 }
