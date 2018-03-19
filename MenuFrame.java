@@ -75,9 +75,9 @@ public class MenuFrame extends JFrame{
              setBorder( null );
          }
      }
- // public Win7Ublox7 getWin7Ublox7(){
-  //    return this.win7u7;
- // }
+  public Win7Ublox7 getWin7Ublox7(){
+      return this.win7u7;
+  }
   
 
   // What is constructed when MenuFrame() is called
