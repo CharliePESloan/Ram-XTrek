@@ -15,7 +15,7 @@ import java.util.Observable;
  *use of a thread it allows us to parse and pass on the information 
  *received to the rest of our program.*/
 public class Win7Ublox7 extends Observable implements Runnable{
-  final static String PORT_NAME = "COM7"; /* found via Computer->Devices */
+  final static String PORT_NAME = "COM3"; /* found via Computer->Devices */
   final static int    BAUD_RATE =  9600;  /* bps */
   final static int    TIMEOUT   =  2000;  /* ms  */
   final static int    BUFF_SIZE =  1024;
@@ -31,7 +31,7 @@ public class Win7Ublox7 extends Observable implements Runnable{
 	try {
 		String s;
 		CommPortIdentifier portId =
-			CommPortIdentifier.getPortIdentifier( "COM7");
+			CommPortIdentifier.getPortIdentifier(PORT_NAME);
 		
 		if ( portId.isCurrentlyOwned() ) {
 			System.out.println( "port in use" ); System.exit( 1 );
