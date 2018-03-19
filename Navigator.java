@@ -1,6 +1,8 @@
 import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
 import org.json.*;
+import java.util.Observable;
+import java.util.Observer;
 
 /*
  * Navigator
@@ -159,22 +161,23 @@ public class Navigator implements Observer
 	 * Return the next direction in sequence until all directions have
 	 * been exhausted or the direction at position i
 	 */
-	public String getDirection()
+	public Direction getDirection()
 	{
 		if (currentDirection<directions.length)
 		{
-			return directions[currentDirection++].getText();
+			return directions[currentDirection++];
 		} else {
-			return "You have reached your destination";
+			return null;
 		}
 	}
-	public String getDirection(int i)
+	public Direction getDirection(int i)
 	{
 		if (i<directions.length && i>=0)
 		{
-			return directions[i].getText();
+			return directions[i];
 		} else {
-			return language.getDestinationText();
+			return null;
+			//return language.getDestinationText();
 		}
 	}
 
@@ -216,7 +219,7 @@ public class Navigator implements Observer
 		System.out.println("Origin="+origin);
 		for (int i=0; i<directions.length; i++)
 		{
-			System.out.println( getDirection(i) );
+			System.out.println( getDirection(i).getText() );
 		}
 		System.out.println("Destination="+destination);
 	}
@@ -226,7 +229,7 @@ public class Navigator implements Observer
 	{
 		for (int i=0; i<directions.length; i++)
 		{
-			System.out.println( getDirection(i) );
+			System.out.println( getDirection(i).getText() );
 
 		}
 	}
@@ -237,7 +240,8 @@ public class Navigator implements Observer
 		for (int i=0; i<directions.length; i++)
 		{
 			Direction d = getDirection(i);
-			double dist = c.distanceTo(d);
+			double dist =
+				c.distanceTo(d.getCoordinateStart());
 			if (dist < smallest)
 			{
 				smallest = dist;
@@ -284,7 +288,7 @@ public class Navigator implements Observer
 
 		//myDir.getClosestNode(50.729042f,-3.531057f);
 
-		Speaker.saySomething(myDir.getDirection(24),
+		Speaker.saySomething(myDir.getDirection(24).getText(),
 				    		 lang);
 	}
 }
