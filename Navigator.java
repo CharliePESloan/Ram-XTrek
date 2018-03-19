@@ -230,6 +230,21 @@ public class Navigator implements Observer
 
 		}
 	}
+	// Not yet implemented
+	public void getClosestNode(Coordinate c)
+	{
+		double smallest = 0;
+		for (int i=0; i<directions.length; i++)
+		{
+			Direction d = getDirection(i);
+			double dist = c.distanceTo(d);
+			if (dist < smallest)
+			{
+				smallest = dist;
+			}
+			//Distance.between();
+		}
+	}
 
 	public void update(Observable obs, Object obj)
 	{
