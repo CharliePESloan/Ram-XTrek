@@ -20,7 +20,7 @@ import java.util.Observer;
 public class SpeechModeView extends JPanel implements Observer
 {
 	/* Static Variables */
-	final static int NUM_BUTTONS = 6;
+	//final static int NUM_BUTTONS = 6;
 	final static int FONT_SIZE = 32;
 
 	/* ModelViewController Objects */
@@ -48,8 +48,11 @@ public class SpeechModeView extends JPanel implements Observer
 		this.model = model;
 		model.addObserver(this);
 
-		/* Setup JPanel */
-		setLayout( new GridLayout(NUM_BUTTONS,1) );
+		/* Setup JPanel
+		 * A zero in either width or height of a gridlayout
+		 * means any number of objects can be placed in it
+		 */
+		setLayout( new GridLayout(0,1) );
 		setBackground(Color.black);
 
 		/* Setup buttons */

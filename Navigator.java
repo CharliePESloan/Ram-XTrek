@@ -15,6 +15,8 @@ import java.util.Observer;
 public class Navigator implements Observer
 {
 	/* Constant Values */
+	final static int SEARCHDISTANCE = 10000;
+	final static float SPEECHDISTANCE = 0.01f;
 	final static String URLBASE =
 		"https://maps.googleapis.com/maps/api/directions/json";
 	final static String KEY	=
@@ -25,6 +27,9 @@ public class Navigator implements Observer
 	final static String ENCODING = "UTF-8";
 
 	/* Variables */
+	private SpeechModeModel speech;
+	private SatelliteModel  satellite;
+	private WhereToFrameModel whereTo;
 	private Language	language = new Language("English", "en");
 
 	private	String		origin;
@@ -51,10 +56,16 @@ public class Navigator implements Observer
 	/*
 	 * Constructor
 	 */
-	public Navigator(SatelliteModel satModel)
+	public Navigator(SpeechModeModel speechModel,SatelliteModel satModel,WhereToFrameModel whereModel)
 	{
 		currentDirection=0;
-		satModel.addObserver(this);
+
+		speech = speechModel;
+		whereTo = whereModel;
+		satellite = satModel;
+		speech.addObserver(this);
+		whereTo.addObserver(this);
+		satellite.addObserver(this);
 	}
 
 	/*
@@ -234,25 +245,31 @@ public class Navigator implements Observer
 		}
 	}
 	// Not yet implemented
-	public void getClosestNode(Coordinate c)
+	public Direction checkNextDir(Coordinate c)
 	{
-		double smallest = 0;
+		double smallest = SEARCHDISTANCE;
+		Direction closest = null;
 		for (int i=0; i<directions.length; i++)
 		{
-			Direction d = getDirection(i);
+			Direction dir = getDirection(i);
 			double dist =
-				c.distanceTo(d.getCoordinateStart());
+				c.distanceTo(dir.getCoordinateStart());
 			if (dist < smallest)
 			{
 				smallest = dist;
+				closest  = dir;
 			}
-			//Distance.between();
 		}
+		if (smallest > SPEECHDISTANCE)
+		{
+			return null;
+		}
+		return closest;
 	}
 
 	public void update(Observable obs, Object obj)
 	{
-		if (obj instanceof String[])
+		/* if (obj instanceof String[])
 		{
 			String[] arr = (String[])obj;
 			System.out.println((arr));
@@ -263,13 +280,26 @@ public class Navigator implements Observer
 			System.out.println(lat);
 			System.out.println(lon);
 		}
-		else if (obj instanceof String)
+		else */
+		if (obs == satellite && obj instanceof Coordinate)
 		{
-			setDest((String)obj);
+			Direction d = checkNextDir( (Coordinate)obj );
+			if (d != null)
+			{
+				Speaker.saySomething(d.getText(),language);
+			}
+		}
+		else if (obs == speech && obj instanceof Language)
+		{
+			language = (Language)obj;
+		}
+		else if (obs == whereTo && obj instanceof String)
+		{
+				setDest((String)obj);
 		}
 	}
 
-	public static void main(String args[])
+	/*public static void main(String args[])
 	{
 		Navigator myDir = new Navigator();
 
@@ -290,5 +320,5 @@ public class Navigator implements Observer
 
 		Speaker.saySomething(myDir.getDirection(24).getText(),
 				    		 lang);
-	}
+	}*/
 }
