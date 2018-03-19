@@ -42,6 +42,7 @@ public class MenuFrame extends JFrame{
     SpeechModeModel speechModel = new SpeechModeModel(this);
     WhereToFrameModel whereToModel = new WhereToFrameModel(this, speechModel);
     SatelliteModel satModel = new SatelliteModel(this);
+	TripComputerModel tripModel = new TripComputerModel(this);
     MapModel mapModel = new MapModel(this, speechModel, satModel);
     
     
@@ -50,6 +51,7 @@ public class MenuFrame extends JFrame{
     JPanel menuView = new MenuView(controller, menuModel);
     JPanel speechView = new SpeechModeView(controller, speechModel);
     JPanel whereToView = new WhereToFrameView(controller, whereToModel);
+	JPanel tripView = new TripComputerView(controller, tripModel);
     JPanel mapView = new MapView(controller, mapModel);
     JPanel satView = new SatelliteView(controller, satModel);
     
@@ -123,6 +125,7 @@ OnOffButton.setName("OnOffButton");
     cards.add(menuView, MenuEnum.MENU);
     cards.add(speechView, MenuEnum.SPEECH);
     cards.add(whereToView, MenuEnum.WHERETO);
+	cards.add(tripView, MenuEnum.TRIP);
     cards.add(mapView, MenuEnum.MAPS);
     cards.add(satView, MenuEnum.SATELLITE);
     
@@ -158,6 +161,9 @@ OnOffButton.setName("OnOffButton");
               break;
               case WHERETO:
                 controller.setModel(whereToModel);
+              break;
+			  case TRIP:
+                controller.setModel(tripModel);
               break;
               case MAPS:
                 controller.setModel(mapModel);
