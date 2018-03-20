@@ -27,7 +27,7 @@ public class Navigator implements Observer
 	final static String ENCODING = "UTF-8";
 
 	/* Variables */
-	private SpeechModeModel speech;
+	private SpeechModel speech;
 	private SatelliteModel  satellite;
 	private WhereToFrameModel whereTo;
 	private Language	language = new Language("English", "en");
@@ -56,7 +56,7 @@ public class Navigator implements Observer
 	/*
 	 * Constructor
 	 */
-	public Navigator(SpeechModeModel speechModel,SatelliteModel satModel,WhereToFrameModel whereModel)
+	public Navigator(SpeechModel speechModel,SatelliteModel satModel,WhereToFrameModel whereModel)
 	{
 		currentDirection=0;
 
