@@ -1,6 +1,8 @@
 import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
 import org.json.*;
+import java.util.Observable;
+import java.util.Observer;
 
 /*
  * Navigator
@@ -13,6 +15,8 @@ import org.json.*;
 public class Navigator implements Observer
 {
 	/* Constant Values */
+	final static int SEARCHDISTANCE = 10000;
+	final static float SPEECHDISTANCE = 0.01f;
 	final static String URLBASE =
 		"https://maps.googleapis.com/maps/api/directions/json";
 	final static String KEY	=
@@ -23,6 +27,9 @@ public class Navigator implements Observer
 	final static String ENCODING = "UTF-8";
 
 	/* Variables */
+	private SpeechModeModel speech;
+	private SatelliteModel  satellite;
+	private WhereToFrameModel whereTo;
 	private Language	language = new Language("English", "en");
 
 	private	String		origin;
@@ -49,10 +56,16 @@ public class Navigator implements Observer
 	/*
 	 * Constructor
 	 */
-	public Navigator(SatelliteModel satModel)
+	public Navigator(SpeechModeModel speechModel,SatelliteModel satModel,WhereToFrameModel whereModel)
 	{
 		currentDirection=0;
-		satModel.addObserver(this);
+
+		speech = speechModel;
+		whereTo = whereModel;
+		satellite = satModel;
+		speech.addObserver(this);
+		whereTo.addObserver(this);
+		satellite.addObserver(this);
 	}
 
 	/*
@@ -159,22 +172,23 @@ public class Navigator implements Observer
 	 * Return the next direction in sequence until all directions have
 	 * been exhausted or the direction at position i
 	 */
-	public String getDirection()
+	public Direction getDirection()
 	{
 		if (currentDirection<directions.length)
 		{
-			return directions[currentDirection++].getText();
+			return directions[currentDirection++];
 		} else {
-			return "You have reached your destination";
+			return null;
 		}
 	}
-	public String getDirection(int i)
+	public Direction getDirection(int i)
 	{
 		if (i<directions.length && i>=0)
 		{
-			return directions[i].getText();
+			return directions[i];
 		} else {
-			return language.getDestinationText();
+			return null;
+			//return language.getDestinationText();
 		}
 	}
 
@@ -216,7 +230,7 @@ public class Navigator implements Observer
 		System.out.println("Origin="+origin);
 		for (int i=0; i<directions.length; i++)
 		{
-			System.out.println( getDirection(i) );
+			System.out.println( getDirection(i).getText() );
 		}
 		System.out.println("Destination="+destination);
 	}
@@ -226,14 +240,36 @@ public class Navigator implements Observer
 	{
 		for (int i=0; i<directions.length; i++)
 		{
-			System.out.println( getDirection(i) );
+			System.out.println( getDirection(i).getText() );
 
 		}
+	}
+	// Not yet implemented
+	public Direction checkNextDir(Coordinate c)
+	{
+		double smallest = SEARCHDISTANCE;
+		Direction closest = null;
+		for (int i=0; i<directions.length; i++)
+		{
+			Direction dir = getDirection(i);
+			double dist =
+				c.distanceTo(dir.getCoordinateStart());
+			if (dist < smallest)
+			{
+				smallest = dist;
+				closest  = dir;
+			}
+		}
+		if (smallest > SPEECHDISTANCE)
+		{
+			return null;
+		}
+		return closest;
 	}
 
 	public void update(Observable obs, Object obj)
 	{
-		if (obj instanceof String[])
+		/* if (obj instanceof String[])
 		{
 			String[] arr = (String[])obj;
 			System.out.println((arr));
@@ -244,13 +280,26 @@ public class Navigator implements Observer
 			System.out.println(lat);
 			System.out.println(lon);
 		}
-		else if (obj instanceof String)
+		else */
+		if (obs == satellite && obj instanceof Coordinate)
 		{
-			setDest((String)obj);
+			Direction d = checkNextDir( (Coordinate)obj );
+			if (d != null)
+			{
+				Speaker.saySomething(d.getText(),language);
+			}
+		}
+		else if (obs == speech && obj instanceof Language)
+		{
+			language = (Language)obj;
+		}
+		else if (obs == whereTo && obj instanceof String)
+		{
+				setDest((String)obj);
 		}
 	}
 
-	public static void main(String args[])
+	/*public static void main(String args[])
 	{
 		Navigator myDir = new Navigator();
 
@@ -269,7 +318,7 @@ public class Navigator implements Observer
 
 		//myDir.getClosestNode(50.729042f,-3.531057f);
 
-		Speaker.saySomething(myDir.getDirection(24),
+		Speaker.saySomething(myDir.getDirection(24).getText(),
 				    		 lang);
-	}
+	}*/
 }

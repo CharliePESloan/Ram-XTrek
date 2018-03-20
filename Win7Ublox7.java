@@ -60,8 +60,9 @@ public class Win7Ublox7 extends Observable implements Runnable{
 				/*System.out.print( s );*/
 				a = mySat.getGLL(s); //updating our array to contain new values
 				if(a == null){continue;} 
+				Coordinate c = new Coordinate(a);
 				setChanged(); //Notifying the observer that a change has occurred
-				notifyObservers(a);//Passing on our values to the observer for further use	
+				notifyObservers(c);//Passing on our values to the observer for further use	
 			}
 		}else {
 			System.out.println( "not a serial port" ); System.exit( 1 );
@@ -78,4 +79,5 @@ public class Win7Ublox7 extends Observable implements Runnable{
 	public String[] getCoordinates(){
 		return a;
 	}
+
 }

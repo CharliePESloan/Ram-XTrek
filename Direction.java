@@ -14,12 +14,16 @@ import java.util.HashMap;
 
 public class Direction
 {
+	/* Variables */
 	private String text;
 	private float latStart;
 	private float lonStart;
 	private float latEnd;
 	private float lonEnd;
+	private Coordinate cStart;
+	private Coordinate cEnd;
 
+	/* Set up word replacements */
 	private static final Map<String, String> REPLACERS =
 		createMap();
 	private static Map<String,String> createMap()
@@ -89,6 +93,14 @@ public class Direction
 	{
 		return lonEnd;
 	}
+	public Coordinate getCoordinateStart()
+	{
+		return cStart;
+	}
+	public Coordinate getCoordinateEnd()
+	{
+		return cEnd;
+	}
 
 	private float degreesToRadians(float degrees)
 	{
@@ -97,7 +109,11 @@ public class Direction
 
 	public double distanceTo(float latitude,float longitude)
 	{
-		return Distance.between(this.latStart,this.lonstart,
+		return Distance.between(this.latStart,this.lonStart,
 					latitude,     longitude);
+	}
+	public double distanceTo(Coordinate c)
+	{
+		return cStart.distanceTo(c);
 	}
 }
