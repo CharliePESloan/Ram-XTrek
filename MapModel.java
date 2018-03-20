@@ -14,8 +14,8 @@ import java.awt.Graphics2D;
 public class MapModel extends Observable implements Model, Observer {
 
     MenuFrame mainFrame;
-	private static String LATITUDE  = "50.7184";     /* latitude  */
-	private static String LONGITUDE = "-3.5339";     /* longitude */
+	private static String LATITUDE = "50.1234";     /* latitude  */
+	private static String LONGITUDE = "-3.1234";     /* longitude */
 	
 	final static String SIZE      = "254x292";     /* Size      */
 	final static String KEY       = "AIzaSyBDqXQupiOoXyFBQMu7cju5AozteVS8agU"; 
@@ -28,24 +28,26 @@ public class MapModel extends Observable implements Model, Observer {
 	
 	BufferedImage img; 
 	
-    public MapModel(MenuFrame XTrek, SpeechModeModel speechModel, SatelliteModel satModel) {
+    public MapModel(MenuFrame XTrek, SpeechModel speechModel, SatelliteModel satModel) {
         mainFrame = XTrek;
 		XTrek.getWin7Ublox7().addObserver(this); 
 		satModel.addObserver(this); 
+		speechModel.addObserver(this);
 		imageLoader();
     }
 	
 	public void update(Observable obs, Object obj){
 		if (obj instanceof Language)
-		{
+		{ 
 			language = (Language) obj; 
 			imageLoader();
 		}
-		else if (obj instanceof String [])
+		else if (obj instanceof Coordinate)
 		{
-			String[] a = (String[]) obj;
-			LATITUDE = (a[0]);
-			LONGITUDE = (a[2]);
+			Coordinate a = (Coordinate) obj;
+			System.out.println(a.getLatStr()); 
+			//a.getLatStr() = LATITUDE; 
+			//a.getLonStr() = LONGITUDE; 
 		}
 	}
 	
