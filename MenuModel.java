@@ -62,6 +62,11 @@ public class MenuModel extends Observable implements Model {
         //System.out.println("Changing view to on off");
         mainFrame.setMenu(MenuEnum.ONOFF);
         mainFrame.menuModel.reset();
+        mainFrame.whereToModel.reset();
+        mainFrame.mapModel.reset();
+        //mainFrame.tripModel.reset();
+        mainFrame.speechModel.reset();
+        mainFrame.satModel.reset();
     }
     
     public void reset(){
