@@ -41,9 +41,9 @@ public class Speaker implements Observer
 		// TODO Renew
 		token  = Speech.renewAccessToken( KEY1 );
 	}
-	public Speaker()
-	{
-	}
+	//public Speaker()
+	//{
+	//}
 
 	/* saySomething
 	 * Method which outputs from the device's speakers the sound of a
@@ -82,7 +82,7 @@ public class Speaker implements Observer
 		executor.shutdown();
 	}
 
-	public void update(Observer obs, Object obj)
+	public void update(Observable obs, Object obj)
 	{
 		if (obs instanceof SpeechModel && obj instanceof Language)
 		{
@@ -90,8 +90,9 @@ public class Speaker implements Observer
 		}
 	}
 
-	public static void main(String[] args)
+	/*public static void main(String[] args)
 	{
-		Speaker.saySomething("HELP");
-	}
+		Speaker s = new Speaker();
+		s.saySomething("HELP");
+	}*/
 }
