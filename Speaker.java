@@ -39,9 +39,6 @@ public class Speaker implements Observer
 		// TODO Renew every 10 minutes
 		token = Speech.renewAccessToken( KEY1 );
 	}
-	//public Speaker()
-	//{
-	//}
 
 	/* saySomething
 	 * Method which outputs from the device's speakers the sound of a
@@ -87,10 +84,4 @@ public class Speaker implements Observer
 			language = (Language)obj;
 		}
 	}
-
-	/*public static void main(String[] args)
-	{
-		Speaker s = new Speaker();
-		s.saySomething("HELP");
-	}*/
 }

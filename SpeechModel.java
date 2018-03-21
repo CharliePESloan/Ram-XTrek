@@ -58,12 +58,12 @@ public class SpeechModel extends Observable implements Model
 		{
 			language = null;
 			text     = "Off";
-			Speaker.saySomething(text,languages[0]);
+			mainFrame.saySomething(text);
 		} else
 		{
 			language = languages[selected-1];
-			text     = language.getName();;
-			Speaker.saySomething(text,language);
+			text     = language.getName();
+			mainFrame.saySomething(text);
 		}
 		setChanged(); notifyObservers(language);
 	}
