@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.*;
+import java.awt.geom.AffineTransform; 
+import java.lang.Math; 
 
 /*
  * View.
@@ -23,27 +25,57 @@ class MapView extends JPanel implements Observer {
  
   BufferedImage mapImage; 
   
+  private int rotation = 0; 
   private int centreCoord = 0;  
   private int xCentreCoord = 127; 
   private int yCentreCoord = 145; 
   private int circleSize = 15; 
+  private int HYP; 
+  
+  
+  
+  public int getScreenPositionX() {
+	  float x  = (-1/2)*(mapImage.getWidth() - getWidth()); 
+	  return (int) x; 
+  }
+  
+  public int getScreenPositionY (){
+	  float y = (-1/2)*(mapImage.getHeight() - getHeight()); 
+	  return (int) y; 
+  }
+ 
   
   
   public MapView( Controller controller, MapModel model ) {
     model.addObserver(this);
 	model.imageLoader();
+	
   }
 
   public void update( Observable obs, Object obj ) {
-    mapImage = (BufferedImage) obj; 
+	if (obj instanceof BufferedImage){
+		mapImage = (BufferedImage) obj; 
+		HYP = (int) Math.sqrt(mapImage.getWidth()*mapImage.getWidth() + mapImage.getHeight()*mapImage.getHeight() ); 
+	}
+    else if (obj instanceof BufferedImage){
+		rotation = (int) obj;
+	}
     repaint(); // image updated when zoomed in or out
   }
 
   public  void paintComponent( Graphics g  ) {
-    super.paintComponent( g );
-	g.drawImage( mapImage, centreCoord,centreCoord,this); //draws maps on screen
-	g.setColor(Color.RED);
-	g.fillOval(xCentreCoord,yCentreCoord,circleSize,circleSize); //displays a red dot at the centre of the map
+	super.paintComponent(g); 
+	Graphics2D g2d = (Graphics2D) g; 
+	g2d.rotate(Math.toRadians(rotation), getWidth()/2,getHeight()/2 );
+	g2d.drawImage(mapImage, -(HYP-getWidth())/2, -(HYP-getHeight())/2, null);
+	System.out.println(HYP); 
+	System.out.println(getWidth());
+	System.out.println(getHeight()); 
+	
+  }
+  
+  public Dimension getPreferredSize() {
+    return new Dimension( mapImage.getWidth(), mapImage.getHeight() );
   }
 
 }

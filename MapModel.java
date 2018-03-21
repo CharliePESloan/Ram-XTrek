@@ -14,10 +14,10 @@ import java.awt.Graphics2D;
 public class MapModel extends Observable implements Model, Observer {
 
     MenuFrame mainFrame;
-	private static String LATITUDE = "50.1234";     /* latitude  */
-	private static String LONGITUDE = "-3.1234";     /* longitude */
+	private String LATITUDE = "50.7184";     /* latitude  */
+	private String LONGITUDE = "-3.5339";     /* longitude */
 	
-	final static String SIZE      = "254x292";     /* Size      */
+	final static String SIZE      = "254x292";     /* Size   254x292    */
 	final static String KEY       = "AIzaSyBDqXQupiOoXyFBQMu7cju5AozteVS8agU"; 
     private int zoomVal = 10; 					   /* zoom Value */	
 	private int maxZoom = 21;                      /* maximum zoom value */
@@ -45,20 +45,19 @@ public class MapModel extends Observable implements Model, Observer {
 		else if (obj instanceof Coordinate)
 		{
 			Coordinate a = (Coordinate) obj;
-			System.out.println(a.getLatStr()); 
-			//a.getLatStr() = LATITUDE; 
-			//a.getLonStr() = LONGITUDE; 
+			LATITUDE = a.getLatStr; 
+			LONGITUDE = a.getLonStr; 
 		}
 	}
 	
 	
 	public void imageLoader () {   // Loads the map image
 		
-		mapImage = Maps.readData(LATITUDE, LONGITUDE, Integer.toString(zoomVal), SIZE, KEY, language.getBingCode()); 
-	
 		try {
-	
+				
+		mapImage = Maps.readData(LATITUDE, LONGITUDE, Integer.toString(zoomVal), SIZE, KEY, language.getBingCode()); 
 		img = ImageIO.read(new ByteArrayInputStream(mapImage));
+		
 		}
         catch (Exception e){
 			System.out.println(e);
@@ -90,7 +89,7 @@ public class MapModel extends Observable implements Model, Observer {
 		reset();
 	}
 	public void reset () {
-		zoomVal = 10; 
+		zoomVal = zoomVal; 
 		imageLoader();
 	}
 	
