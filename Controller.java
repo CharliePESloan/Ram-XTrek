@@ -24,7 +24,11 @@ class Controller implements MouseListener
 	{
 		this.model = model;
 	}
-
+    
+    public Object getModel(){
+        return this.model;
+    }
+    
 	public void mouseClicked( MouseEvent me)
 	{
 		Object	o = me.getSource();
@@ -56,7 +60,7 @@ class Controller implements MouseListener
 	}
 	
 	public void mousePressed( MouseEvent me )
-	{}
+	{    }
 
 	public void mouseEntered( MouseEvent me )
 	{
@@ -71,13 +75,17 @@ class Controller implements MouseListener
 			switch (b.getName())
 			{
 				case "PlusButton":
-                    b.setIcon(new ImageIcon("Images/PlusButtonSelected.png"));
+                    if(!(this.model instanceof TripComputerModel) || (this.model instanceof SatelliteModel)){
+                    b.setIcon(new ImageIcon("Images/PlusButtonSelected.png"));}
 					break;
 				case "MinusButton":
-                    b.setIcon(new ImageIcon("Images/MinusButtonSelected.png"));
+                    if(!(this.model instanceof TripComputerModel) || (this.model instanceof SatelliteModel)){
+                    b.setIcon(new ImageIcon("Images/MinusButtonSelected.png"));}
 					break;
 				case "SelectButton":
-                    b.setIcon(new ImageIcon("Images/SelectButtonSelected.png"));
+                    if(!((this.model instanceof TripComputerModel) || (this.model instanceof SatelliteModel)
+                       || (this.model instanceof MapModel))){
+                    b.setIcon(new ImageIcon("Images/SelectButtonSelected.png"));}
 					break;
 				case "MenuButton":
                     b.setIcon(new ImageIcon("Images/MenuButtonSelected.png"));
