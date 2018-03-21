@@ -65,10 +65,10 @@ public class Win7Ublox7 extends Observable implements Runnable{
 				notifyObservers(c);//Passing on our values to the observer for further use	
 			}
 		}else {
-			System.out.println( "not a serial port" ); System.exit( 1 );
+			System.out.println( "not a serial port" ); 
 		}
 	}catch ( Exception ex ) {
-		System.out.println( ex ); System.exit( 1 );
+		System.out.println( ex ); 
 		}
 	}
 		//Dongle Reader ends here, modified version.//
