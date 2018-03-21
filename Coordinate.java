@@ -1,37 +1,36 @@
-//5043.94335,N,00330.91606,W
-
 /* Coordinate
- * Charlie Sloan (2018)
+ * Clyde Udunna 2018
  */
 
 public class Coordinate {
 	
 	final static int EARTHRADIUSKM = 6371;
 
-	long	lat;
-	long	lon;
-	long[]	coord;
+	double	lat = 0.0;
+	double	lon = 0.0;
+	double[] coord;
 		
-	public Coordinate(String[] coordinates)
-	{
-		lat = Long.parseLong(coordinates[0]);
-		if( coordinates[1].equals("S") )
-		{
-			lat = -lat;
-		}
-
-		lon = Long.parseLong(coordinates[2]);
-		if( coordinates[3].equals("W") )
-		{
-			lon = -lon;
-		}
-
-		coord = new long[]{lat, lon};
+	public Coordinate(String[] coordinates){
+		double latitude = changeFormat(coordinates[0]);
+		if(coordinates[1].equals("S")){lat = -latitude;}
+		else{lat = latitude;}
+		
+		double longitude = changeFormat(coordinates[2]);
+		if(coordinates[3].equals("W")){lon = -longitude;}
+		else{lon = longitude;}
+		
+		coord = new double[] {lat, lon};
+	}
+	
+	public double changeFormat(String coordinate){
+		double number = Double.parseDouble(coordinate);
+		number = number/100.0;
+		double finalValue = Math.round(number*10000.0) / 10000.0;
+		return finalValue;
 	}
 		
-	private static float degreesToRadians(float degrees)
-	{
-		return (degrees * (float)Math.PI) / 180;
+	private static double degreesToRadians(double degrees){
+		return (degrees * (double)Math.PI) / 180;
 	}
 
 	public static double between(double latitude1,
@@ -39,13 +38,13 @@ public class Coordinate {
 				     double latitude2,
 				     double longitude2)
 	{	
-		float		lat1 = (float)latitude1;
-		final float	lon1 = (float)longitude1;
-		float		lat2 = (float)latitude2;
-		final float	lon2 = (float)longitude2;
+		double		lat1 = (double)latitude1;
+		final double	lon1 = (double)longitude1;
+		double		lat2 = (double)latitude2;
+		final double	lon2 = (double)longitude2;
 
-		float latD = degreesToRadians(lat2-lat1);
-		float lonD = degreesToRadians(lon2-lon1);
+		double latD = degreesToRadians(lat2-lat1);
+		double lonD = degreesToRadians(lon2-lon1);
 
 		lat1 = degreesToRadians(lat1);
 		lat2 = degreesToRadians(lat2);
@@ -62,13 +61,13 @@ public class Coordinate {
 	{
 		final int	EARTHRADIUSKM = 6371;
 		
-		float		lat1 = lat;
-		final float	lon1 = lon;
-		float		lat2 = coordinate.getLat();
-		final float	lon2 = coordinate.getLon();
+		double	lat1 = lat;
+		final double lon1 = lon;
+		double		lat2 = coordinate.getLat();
+		final double	lon2 = coordinate.getLon();
 
-		float latD = degreesToRadians(lat2-lat1);
-		float lonD = degreesToRadians(lon2-lon1);
+		double latD = degreesToRadians(lat2-lat1);
+		double lonD = degreesToRadians(lon2-lon1);
 
 		lat1 = degreesToRadians(lat1);
 		lat2 = degreesToRadians(lat2);
@@ -81,26 +80,24 @@ public class Coordinate {
 		return (double)EARTHRADIUSKM * c;
 	}
 	
-	public long[] getPos()
-	{
+	public double[] getPos(){
 		return coord;
 	}
 
-	public long getLat()
-	{
+	public double getLat(){
 		return lat;
 	}
-	public long getLon()
-	{
+	
+	public double getLon(){
 		return lon;
 	}
 
-	public String getLatStr()
-	{
+	public String getLatStr(){
 		return Long.toString(lat);
 	}
-	public String getLonStr()
-	{
+	
+	public String getLonStr(){
 		return Long.toString(lon);
 	}
+	
 }
