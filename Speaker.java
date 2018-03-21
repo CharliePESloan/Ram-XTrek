@@ -7,8 +7,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.lang.Runnable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
-
-import java.util.Random;
+import java.util.Observer;
+import java.util.Observable;
 
 /*
  * Speaker
@@ -17,97 +17,88 @@ import java.util.Random;
  * Combines Speech and Sound workshops to implement dynamic text-to-speech
  */
 
-public class Speaker implements Runnable
+public class Speaker implements Observer
 {
 	// Constant values
 	final static String KEY1 = "b43e10841e0448dd96fda3fbd3110ff8";
 	final static String KEY2 = "1be7b3ec099d461582bb194df5bd03de";
-	final static String GENDER = "Female";
-	final static String FORMAT = "riff-16khz-16bit-mono-pcm";
 
 	// Variables
 	final String text;
-	final String lang;
+	//final String lang;
 	final String artist;
 
+	Language language;
+	String token;
+	float time;
+
 	/* Constructor */
-	public Speaker(String text, Language language)
+	public Speaker(String text,Language language, SpeechModel speechModel)
 	{
-		this.text   = text;
-		this.lang   = language.getBingCode();
-		this.artist = language.getArtist();
+		this.language = language;
+		speechModel.addObserver(this);
+		// TODO Renew every 10 minutes
+		token = Speech.renewAccessToken( KEY1 );
 	}
-	
-	public void run() {
-		Random rand = new Random();
-		float r = 10*rand.nextFloat();
-		try 
-		{
-			// Get raw audio
-			final String token  = Speech.renewAccessToken( KEY1 );
-			final byte[] speech =
-				Speech.generateSpeech( token,
-						       text,
-						       lang,
-						       GENDER,
-						       artist,
-						       FORMAT );
-		
-			InputStream myInputStream =
-				new ByteArrayInputStream(speech);
-			System.out.println(r + "got audio");
-		
-			// Try to play the audio
-			try
-			{
-				AudioInputStream myAudio =
-					AudioSystem.getAudioInputStream(myInputStream);
-				System.out.println(r + "Converted");
-				Sound.playStream( myAudio,
-					Sound.readStream( myAudio ) );
-				System.out.println(r + "Played");
-			}
-			catch ( UnsupportedAudioFileException e )
-			{
-				System.out.println(r + "Inner error");
-				System.out.println(e);
-			}
-		}
-		catch ( IOException e )
-		{
-			System.out.println(r + "Outer error");
-			System.out.println(e);
-		}
+	public Speaker(Language language, SpeechModel speechModel)
+	{
+		this.language = language;
+		speechModel.addObserver(this);
+		// TODO Renew every 10 minutes
+		token = Speech.renewAccessToken( KEY1 );
 	}
+	//public Speaker()
+	//{
+	//}
 
 	/* saySomething
 	 * Method which outputs from the device's speakers the sound of a
 	 * voice speaking the string argument in a specified language.
 	 */
-	public static void saySomething(String text,Language language)
+	public void saySomething(String text,Language language)
 	{
+		//try
+		//{
 		/* Start speaking a different thread */
 		ExecutorService executor =
 			Executors.newSingleThreadExecutor();
 		
-		executor.execute( new Speaker(text,language) );
+		executor.execute( new SpeechThread(text,
+						   this.language,
+						   token) );
 
 		executor.shutdown();
+		//}
+		//catch (Exception e)
+		//{
+		//	System.out.println(e);
+		//}
 	}
-	public static void saySomething(String text)
+	public void saySomething(String text)
 	{
-		Language language = new Language("en");
+		//Language language = new Language("en");
 		/* Start speaking a different thread */
 		ExecutorService executor =
 			Executors.newSingleThreadExecutor();
 		
-		executor.execute( new Speaker(text,language) );
+		executor.execute( new SpeechThread(text,
+						   this.language,
+						   token) );
 
 		executor.shutdown();
 	}
 
-	public static void main(String[] args)
+	public void update(Observable obs, Object obj)
 	{
-		Speaker.saySomething("HELP");
+		if (obs instanceof SpeechModel && obj instanceof Language)
+		{
+			language = (Language)obj;
+		}
 	}
+
+	/*public static void main(String[] args)
+	{
+		Speaker s = new Speaker();
+		s.saySomething("HELP");
+	}*/
 }
