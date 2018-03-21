@@ -102,7 +102,7 @@ OnOffButton.setName("OnOffButton");
 
        nav.setOrigin("Exeter");
       
-      //thread.start();
+      thread.start();
     
     // Placing the navigation buttons
     PlusButton.setBounds(7, 96, 32, 72);add(PlusButton);
@@ -157,30 +157,37 @@ OnOffButton.setName("OnOffButton");
   }
   public void setMenu(MenuEnum menu){
       //MenuEnum menu;
+      //if(this.model = )
       switch(menu){
               case SPEECH:
                 saySomething(this.speaker, "Speech");
                 controller.setModel(speechModel);
               break;
               case MENU:
-	        //nav.refreshDirections();
-             // nav.printOut();
+	           // nav.refreshDirections();
+               // nav.printOut();
+                saySomething(this.speaker, "Menu");
                 controller.setModel(menuModel);
               break;
               case WHERETO:
+                saySomething(this.speaker, "Where to?");
                 controller.setModel(whereToModel);
               break;
 			  case TRIP:
+                saySomething(this.speaker, "Trip Computer");
                 controller.setModel(tripModel);
               break;
               case MAPS:
+                saySomething(this.speaker, "Maps");
                 controller.setModel(mapModel);
               break;
               case ONOFF:
+                saySomething(this.speaker, "Turning on");
                 controller.setModel(onOffModel);
               break;
               case SATELLITE:
-              controller.setModel(satModel);
+                saySomething(this.speaker, "Satellite");
+                controller.setModel(satModel);
               break;
               default:
               break;
