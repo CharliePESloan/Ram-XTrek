@@ -161,38 +161,38 @@ OnOffButton.setName("OnOffButton");
       //if(controller.getModel() == menuModel){
       switch(menu){
               case SPEECH:
-                saySomething(this.speaker, "Speech");
+                saySomething("Speech");
                 controller.setModel(speechModel);
               break;
               case MENU:
 	           // nav.refreshDirections();
                // nav.printOut();
                 if(controller.getModel() == onOffModel){
-                saySomething(this.speaker, "Turning On");}
+                saySomething("Turning On");}
                 else {
-                saySomething(this.speaker, "Back to main menu");}
+                saySomething("Back to main menu");}
                 controller.setModel(menuModel);
               break;
               case WHERETO:
-                saySomething(this.speaker, "Where to?");
+                saySomething("Where to?");
                 controller.setModel(whereToModel);
               break;
 			  case TRIP:
-                saySomething(this.speaker, "Trip Computer");
+                saySomething("Trip Computer");
                 controller.setModel(tripModel);
               break;
               case MAPS:
-                saySomething(this.speaker, "Maps");
+                saySomething("Maps");
                 controller.setModel(mapModel);
               break;
               case ONOFF:
                 if(controller.getModel() == menuModel){
                 System.out.println("We are in menu model and we clicked OnOff");
-                saySomething(this.speaker, "Turning off");}
+                saySomething("Turning off");}
                 controller.setModel(onOffModel);
               break;
               case SATELLITE:
-                saySomething(this.speaker, "Satellite");
+                saySomething("Satellite");
                 controller.setModel(satModel);
               break;
               default:
@@ -201,8 +201,8 @@ OnOffButton.setName("OnOffButton");
       cardlayout.show(cards, menu);
       setVisible(true);
   }
-  public void saySomething(Speaker speaker, String speech){
-      speaker.saySomething(speech);
+  public void saySomething(String speech){
+      this.speaker.saySomething(speech);
   }
   public static void main( String[] argv ) {    
     MenuFrame menuFrame = new MenuFrame();
