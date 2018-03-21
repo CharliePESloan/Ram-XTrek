@@ -224,7 +224,7 @@ public class Navigator implements Observer
 	 */
 	public void printOut()
 	{
-		printRaw();
+		//printRaw();
 
 		// Print origin, directions and destination
 		System.out.println("Origin="+origin);
@@ -260,6 +260,7 @@ public class Navigator implements Observer
 				closest  = dir;
 			}
 		}
+
 		if (smallest > SPEECHDISTANCE)
 		{
 			return null;
@@ -287,6 +288,7 @@ public class Navigator implements Observer
 			if (d != null)
 			{
 				Speaker.saySomething(d.getText(),language);
+				
 			}
 		}
 		else if (obs == speech && obj instanceof Language)
@@ -305,6 +307,7 @@ public class Navigator implements Observer
 
 		//myDir.setOrigin	(50.729042f, -3.531057f);
 		//myDir.setDest	(50.742957f, -3.348418f);
+		
 		myDir.setOrigin("Exeter");
 		myDir.setDest("Glasgow");
 
