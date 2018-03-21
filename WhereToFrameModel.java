@@ -41,7 +41,7 @@ public class WhereToFrameModel extends Observable implements Model, Observer {
         setChanged();
     }
     public void pressedMenu() {
-		mainFrame.saySomething(textDisplay,language);
+		mainFrame.saySomething(textDisplay);
         mainFrame.setMenu(MenuEnum.MENU);
     }
     public void pressedSelect() {
