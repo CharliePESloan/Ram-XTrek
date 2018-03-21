@@ -41,36 +41,36 @@ public class WhereToFrameModel extends Observable implements Model, Observer {
         setChanged();
     }
     public void pressedMenu() {
-		Speaker.saySomething(textDisplay,language);
+		mainFrame.saySomething(textDisplay,language);
         mainFrame.setMenu(MenuEnum.MENU);
     }
     public void pressedSelect() {
         letters =  (String) selected.getData();
         if (letters == "SPACE") {
             textDisplay += " ";
-			Speaker.saySomething(letters, language);
+			mainFrame.saySomething(letters);
             setChanged(); notifyObservers(textDisplay);
         }
         else if (letters == "RIGHT") {
 			selected.deselect();
-			Speaker.saySomething(number, language);
+			mainFrame.saySomething(number);
             setChanged(); notifyObservers(false);
         }
 		else if (letters == "LEFT") {
 			selected.deselect();
-			Speaker.saySomething(text,language);
+			mainFrame.saySomething(text);
             setChanged(); notifyObservers(true);
         }
 		else if (letters == "DEL") {
-			Speaker.saySomething(delete,language);
+			mainFrame.saySomething(delete);
             try {
 				textDisplay = removeChar(textDisplay, textDisplay.length()-1);
 				setChanged(); notifyObservers(textDisplay);
-			} catch (java.lang.StringIndexOutOfBoundsException e) {}
+			} catch (java.lang.StringIndexOutOfBoundsException e) {mainFrame.saySomething("naaaa Fam");}
         }
         else {
             textDisplay += letters;
-			Speaker.saySomething(letters,language );
+			mainFrame.saySomething(letters);
             setChanged(); notifyObservers(textDisplay);
         }
     }
