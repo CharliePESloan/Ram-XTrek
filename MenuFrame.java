@@ -61,7 +61,7 @@ public class MenuFrame extends JFrame {
     JButton MenuButton = new JButton();
     JButton OnOffButton = new JButton();
 
-    Navigator nav = new Navigator(speechModel,satModel,whereToModel);
+    Navigator nav = new Navigator(this,speechModel,satModel,whereToModel);
      Language language = new Language("en");
     Speaker speaker = new Speaker(language, speechModel);
     String currentView = "OnOff";
