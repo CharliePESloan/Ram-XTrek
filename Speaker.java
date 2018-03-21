@@ -24,22 +24,14 @@ public class Speaker implements Observer
 	final static String KEY2 = "1be7b3ec099d461582bb194df5bd03de";
 
 	// Variables
-	final String text;
 	//final String lang;
-	final String artist;
+	//final String artist;
 
 	Language language;
 	String token;
 	float time;
 
 	/* Constructor */
-	public Speaker(String text,Language language, SpeechModel speechModel)
-	{
-		this.language = language;
-		speechModel.addObserver(this);
-		// TODO Renew every 10 minutes
-		token = Speech.renewAccessToken( KEY1 );
-	}
 	public Speaker(Language language, SpeechModel speechModel)
 	{
 		this.language = language;
