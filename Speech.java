@@ -26,6 +26,8 @@ public class Speech {
    * Renew an access token --- they expire after 10 minutes.
    */
   static String renewAccessToken( String key1 ) {
+    try
+    {
     final String method = "POST";
     final String url = 
       "https://api.cognitive.microsoft.com/sts/v1.0/issueToken";
@@ -36,6 +38,12 @@ public class Speech {
         };
     byte[] response = HttpConnect.httpConnect( method, url, headers, body );
     return new String( response ); 
+    }
+    catch (Exception e)
+    {
+	    System.out.println("Error getting token\n");
+	    return null;
+    }
   }
 
   /*
@@ -44,6 +52,8 @@ public class Speech {
   static byte[] generateSpeech( String token,  String text
                               , String lang,   String gender
                               , String artist, String format ) {
+    try
+    {
     final String method = "POST";
     final String url = "https://speech.platform.bing.com/synthesize";
     final byte[] body
@@ -62,6 +72,13 @@ public class Speech {
         };
     byte[] response = HttpConnect.httpConnect( method, url, headers, body );
     return response;
+    }
+    catch (Exception e)
+    {
+	    System.out.println("Problem generating speech");
+	    System.out.println(e);
+	    return null;
+    }
   } 
 
   /*
@@ -76,7 +93,7 @@ public class Speech {
       dos.flush();
       dos.close();
     } catch ( Exception ex ) {
-      System.out.println( ex ); System.exit( 1 ); return;
+      System.out.println( ex ); return;
     }
   }
 

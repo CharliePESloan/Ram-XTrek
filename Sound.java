@@ -9,6 +9,7 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.SourceDataLine;
 /*
  * Sound generation. David Wakeling, 2018.
+ * Improvements by Charlie Sloan
  */
 public class Sound {
   private final static String FILENAME = "eastwood.wav";
@@ -22,7 +23,7 @@ public class Sound {
       AudioInputStream stm  = AudioSystem.getAudioInputStream( file );
       return stm;
     } catch ( Exception ex ) {
-      System.out.println( ex ); System.exit( 1 ); return null;
+      System.out.println( ex ); return null;
     }
   }
 
@@ -48,7 +49,7 @@ public class Sound {
 
       return bos;
     } catch ( Exception ex ) {
-      System.out.println( ex ); System.exit( 1 ); return null;
+      System.out.println( ex ); return null;
     }
   }
 
@@ -65,7 +66,7 @@ public class Sound {
       line.start();
       line.write( ba, 0, ba.length );
     } catch ( Exception ex ) {
-      System.out.println( ex ); System.exit( 1 );
+      System.out.println( ex );
     }
   }
 
