@@ -64,6 +64,7 @@ public class MenuFrame extends JFrame {
     Navigator nav = new Navigator(speechModel,satModel,whereToModel);
      Language language = new Language("en");
     Speaker speaker = new Speaker("Speaker", language);
+    String currentView = "OnOff";
     
   /* Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
   */
@@ -157,7 +158,7 @@ OnOffButton.setName("OnOffButton");
   }
   public void setMenu(MenuEnum menu){
       //MenuEnum menu;
-      //if(this.model = )
+      //if(controller.getModel() == menuModel){
       switch(menu){
               case SPEECH:
                 saySomething(this.speaker, "Speech");
@@ -166,7 +167,10 @@ OnOffButton.setName("OnOffButton");
               case MENU:
 	           // nav.refreshDirections();
                // nav.printOut();
-                saySomething(this.speaker, "Menu");
+                if(controller.getModel() == onOffModel){
+                saySomething(this.speaker, "Turning On");}
+                else {
+                saySomething(this.speaker, "Back to main menu");}
                 controller.setModel(menuModel);
               break;
               case WHERETO:
@@ -182,7 +186,9 @@ OnOffButton.setName("OnOffButton");
                 controller.setModel(mapModel);
               break;
               case ONOFF:
-                saySomething(this.speaker, "Turning on");
+                if(controller.getModel() == menuModel){
+                System.out.println("We are in menu model and we clicked OnOff");
+                saySomething(this.speaker, "Turning off");}
                 controller.setModel(onOffModel);
               break;
               case SATELLITE:
@@ -191,7 +197,7 @@ OnOffButton.setName("OnOffButton");
               break;
               default:
               break;
-      }
+      }//}
       cardlayout.show(cards, menu);
       setVisible(true);
   }
