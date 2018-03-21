@@ -27,6 +27,7 @@ public class Navigator implements Observer
 	final static String ENCODING = "UTF-8";
 
 	/* Variables */
+	private MenuFrame mainFrame;
 	private SpeechModel speech;
 	private SatelliteModel  satellite;
 	private WhereToFrameModel whereTo;
@@ -56,10 +57,11 @@ public class Navigator implements Observer
 	/*
 	 * Constructor
 	 */
-	public Navigator(SpeechModel speechModel,SatelliteModel satModel,WhereToFrameModel whereModel)
+	public Navigator(MenuFrame mainFrame, SpeechModel speechModel,SatelliteModel satModel,WhereToFrameModel whereModel)
 	{
 		currentDirection=0;
 
+		this.mainFrame = mainFrame;
 		speech = speechModel;
 		whereTo = whereModel;
 		satellite = satModel;
@@ -287,7 +289,7 @@ public class Navigator implements Observer
 			Direction d = checkNextDir( (Coordinate)obj );
 			if (d != null)
 			{
-				Speaker.saySomething(d.getText(),language);
+				mainFrame.saySomething(d.getText(),language);
 				
 			}
 		}
@@ -297,7 +299,7 @@ public class Navigator implements Observer
 		}
 		else if (obs == whereTo && obj instanceof String)
 		{
-				setDest((String)obj);
+			setDest((String)obj);
 		}
 	}
 
