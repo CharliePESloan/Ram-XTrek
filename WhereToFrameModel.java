@@ -24,7 +24,7 @@ public class WhereToFrameModel extends Observable implements Model, Observer {
 			language = (Language) obj; 
 		}
 	}
-    public WhereToFrameModel(MenuFrame mainFrame, SpeechModeModel speechModel) {
+    public WhereToFrameModel(MenuFrame mainFrame, SpeechModel speechModel) {
         this.mainFrame = mainFrame;
 		speechModel.addObserver(this); 
     }

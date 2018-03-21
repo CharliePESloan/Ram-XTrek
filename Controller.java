@@ -67,7 +67,7 @@ class Controller implements MouseListener
 			b = (JButton)o;
 
 		if(b != null)
-		{
+		{if(!(this.model instanceof OnOffModel)){ 
 			switch (b.getName())
 			{
 				case "PlusButton":
@@ -84,7 +84,7 @@ class Controller implements MouseListener
                     break;
                 case "OnOffButton":
                     break;
-			}
+			}}
 		}
     }
 

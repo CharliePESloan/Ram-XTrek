@@ -18,11 +18,14 @@ import java.awt.event.*;
 import javax.swing.*;
 /*
 * Darya Shyroka, 2018.
-*
+* 
+* The XTrek main frame, this is where the XTrek is run from. 
+* 
 * All images were modified using GIMP by Darya Shyroka. 
 */ 
 
-public class MenuFrame extends JFrame{
+public class MenuFrame extends JFrame {
+    
     MyCardLayout cardlayout = new MyCardLayout();
     JPanel cards = new JPanel(cardlayout);
     ImageIcon plusIcon = new ImageIcon("Images/PlusButton.png");
@@ -31,30 +34,26 @@ public class MenuFrame extends JFrame{
     ImageIcon menuIcon = new ImageIcon("Images/MenuButton.png");
     ImageIcon onOffIcon = new ImageIcon("Images/OnOffButton.png");
     MenuEnum menuEnum;
-    
-    
 
     Win7Ublox7 win7u7 = new Win7Ublox7();
     Thread thread = new Thread(this.win7u7);
 
     OnOffModel onOffModel = new OnOffModel(this);
     MenuModel menuModel = new MenuModel(this);
-    SpeechModeModel speechModel = new SpeechModeModel(this);
+    SpeechModel speechModel = new SpeechModel(this);
     WhereToFrameModel whereToModel = new WhereToFrameModel(this, speechModel);
     SatelliteModel satModel = new SatelliteModel(this);
 	TripComputerModel tripModel = new TripComputerModel(this);
     MapModel mapModel = new MapModel(this, speechModel, satModel);
     
-    
     Controller controller = new Controller(onOffModel);
     JPanel onOffView = new OnOffView(controller, onOffModel);
     JPanel menuView = new MenuView(controller, menuModel);
-    JPanel speechView = new SpeechModeView(controller, speechModel);
+    JPanel speechView = new SpeechView(controller, speechModel);
     JPanel whereToView = new WhereToFrameView(controller, whereToModel);
 	JPanel tripView = new TripComputerView(controller, tripModel);
     JPanel mapView = new MapView(controller, mapModel);
     JPanel satView = new SatelliteView(controller, satModel);
-    
     
     JButton PlusButton = new JButton();
     JButton MinusButton = new JButton();
@@ -63,7 +62,8 @@ public class MenuFrame extends JFrame{
     JButton OnOffButton = new JButton();
 
     Navigator nav = new Navigator(speechModel,satModel,whereToModel);
-    
+     Language language = new Language("en");
+    Speaker speaker = new Speaker("Speaker", language);
     
   /* Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
   */
@@ -100,6 +100,7 @@ SelectButton.setName("SelectButton");
 MenuButton.setName("MenuButton");
 OnOffButton.setName("OnOffButton");
 
+       nav.setOrigin("Exeter");
       
       //thread.start();
     
@@ -151,14 +152,19 @@ OnOffButton.setName("OnOffButton");
     SelectButton.addMouseListener(controller);
     MenuButton.addMouseListener(controller);
     OnOffButton.addMouseListener(controller);
+      
+   
   }
   public void setMenu(MenuEnum menu){
       //MenuEnum menu;
       switch(menu){
               case SPEECH:
+                saySomething(this.speaker, "Speech");
                 controller.setModel(speechModel);
               break;
               case MENU:
+	        //nav.refreshDirections();
+             // nav.printOut();
                 controller.setModel(menuModel);
               break;
               case WHERETO:
@@ -181,6 +187,9 @@ OnOffButton.setName("OnOffButton");
       }
       cardlayout.show(cards, menu);
       setVisible(true);
+  }
+  public void saySomething(Speaker speaker, String speech){
+      speaker.saySomething(speech);
   }
   public static void main( String[] argv ) {    
     MenuFrame menuFrame = new MenuFrame();
