@@ -33,13 +33,19 @@ public class Speaker implements Observer
 	float time;
 
 	/* Constructor */
-	public Speaker(String text, Language language, SpeechModel speechModel)
+	public Speaker(String text,Language language, SpeechModel speechModel)
 	{
-		this.text	= text;
-		this.language	= language;
+		this.language = language;
 		speechModel.addObserver(this);
-		// TODO Renew
-		token  = Speech.renewAccessToken( KEY1 );
+		// TODO Renew every 10 minutes
+		token = Speech.renewAccessToken( KEY1 );
+	}
+	public Speaker(Language language, SpeechModel speechModel)
+	{
+		this.language = language;
+		speechModel.addObserver(this);
+		// TODO Renew every 10 minutes
+		token = Speech.renewAccessToken( KEY1 );
 	}
 	//public Speaker()
 	//{
