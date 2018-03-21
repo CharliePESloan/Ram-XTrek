@@ -62,11 +62,11 @@ public class WhereToFrameModel extends Observable implements Model, Observer {
             setChanged(); notifyObservers(true);
         }
 		else if (letters == "DEL") {
-			mainFrame.saySomething(delete);
             try {
+				mainFrame.saySomething(delete);
 				textDisplay = removeChar(textDisplay, textDisplay.length()-1);
 				setChanged(); notifyObservers(textDisplay);
-			} catch (java.lang.StringIndexOutOfBoundsException e) {mainFrame.saySomething("naaaa Fam");}
+			} catch (java.lang.StringIndexOutOfBoundsException e) {}
         }
         else {
             textDisplay += letters;

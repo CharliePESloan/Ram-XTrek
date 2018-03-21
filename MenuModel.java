@@ -48,6 +48,7 @@ public class MenuModel extends Observable implements Model {
 				break;
 			case "SatelliteButton":
 				mainFrame.setMenu(MenuEnum.SATELLITE);
+				break;
 			case "TripCompButton":
                 mainFrame.setMenu(MenuEnum.TRIP);
 				break;

@@ -289,7 +289,7 @@ public class Navigator implements Observer
 			Direction d = checkNextDir( (Coordinate)obj );
 			if (d != null)
 			{
-				mainFrame.saySomething(d.getText(),language);
+				mainFrame.saySomething(d.getText());
 				
 			}
 		}

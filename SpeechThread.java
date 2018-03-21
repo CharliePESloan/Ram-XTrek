@@ -28,41 +28,35 @@ public class SpeechThread implements Runnable
 	}
 	
 	public void run() {
-		try 
+		System.out.println("Starting speech");
+		// Get raw audio
+		final byte[] speech =
+			Speech.generateSpeech( token,
+					       text,
+					       language.getBingCode(),
+					       GENDER,
+					       language.getArtist(),
+					       FORMAT );
+	
+		InputStream myInputStream =
+			new ByteArrayInputStream(speech);
+		//System.out.println(r + "got audio");
+	
+		// Try to play the audio
+		try
 		{
-			// Get raw audio
-			final byte[] speech =
-				Speech.generateSpeech( token,
-						       text,
-						       language.getBingCode(),
-						       GENDER,
-						       language.getArtist(),
-						       FORMAT );
-		
-			InputStream myInputStream =
-				new ByteArrayInputStream(speech);
-			//System.out.println(r + "got audio");
-		
-			// Try to play the audio
-			try
-			{
-				AudioInputStream myAudio =
-					AudioSystem.getAudioInputStream(myInputStream);
-				//System.out.println(r + "Converted");
-				Sound.playStream( myAudio,
-					Sound.readStream( myAudio ) );
-				//System.out.println(r + "Played");
-			}
-			catch ( UnsupportedAudioFileException e )
-			{
-				//System.out.println(r + "Inner error");
-				System.out.println(e);
-			}
+			AudioInputStream myAudio =
+				AudioSystem.getAudioInputStream(myInputStream);
+			//System.out.println(r + "Converted");
+			Sound.playStream( myAudio,
+				Sound.readStream( myAudio ) );
+			//System.out.println(r + "Played");
 		}
-		catch ( IOException e )
+		catch ( IOException | UnsupportedAudioFileException e )
 		{
-			//System.out.println(r + "Outer error");
+			//System.out.println(r + "Inner error");
 			System.out.println(e);
 		}
+		System.out.println("Finished speech speech");
 	}
 }
