@@ -63,7 +63,7 @@ public class MenuFrame extends JFrame {
 
     Navigator nav = new Navigator(speechModel,satModel,whereToModel);
      Language language = new Language("en");
-    Speaker speaker = new Speaker("Speaker", language);
+    Speaker speaker = new Speaker(language, speechModel);
     String currentView = "OnOff";
     
   /* Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
