@@ -12,7 +12,7 @@ import java.util.Observer;
  * a usable format
  */
 
-public class Navigator implements Observer
+public class Navigator extends Observable implements Observer
 {
 	/* Constant Values */
 	final static String URLBASE =
@@ -176,6 +176,8 @@ public class Navigator implements Observer
 				directions[i] =
 					new Direction(step,language);
 			}
+			setChanged();
+			notifyObservers(directions[directions.length - 1].getCoordinateEnd());
 		}
 		catch (JSONException e)
 		{
@@ -262,7 +264,7 @@ public class Navigator implements Observer
 	 */
 	public void update(Observable obs, Object obj)
 	{
-		if (obs == satellite && obj instanceof Coordinate)
+		if (obs instanceof Win7Ublox7 && obj instanceof Coordinate)
 		{
 			// Get coordinate
 			Coordinate c = (Coordinate)obj;
@@ -280,11 +282,11 @@ public class Navigator implements Observer
 				mainFrame.saySomething(d.getText());
 			}
 		}
-		else if (obs == speech && obj instanceof Language)
+		else if (obs instanceof SpeechModel && obj instanceof Language)
 		{
 			language = (Language)obj;
 		}
-		else if (obs == whereTo && obj instanceof String)
+		else if (obs instanceof WhereToFrameModel && obj instanceof String)
 		{
 			setDest((String)obj);
 		}
