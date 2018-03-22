@@ -172,7 +172,8 @@ public class Navigator implements Observer
 		}
 		catch (JSONException e)
 		{
-			System.out.println(e);
+			directions = null;
+			System.out.println("Could not get directions");
 		}
 	}
 
@@ -182,21 +183,23 @@ public class Navigator implements Observer
 	 */
 	public Direction getDirection()
 	{
-		if (currentDirection<directions.length)
+		if (directions != null &&
+			currentDirection<directions.length)
 		{
 			return directions[currentDirection++];
-		} else {
+		}
+		else {
 			return null;
 		}
 	}
 	public Direction getDirection(int i)
 	{
-		if (i<directions.length && i>=0)
+		if (directions != null &&
+			i<directions.length && i>=0)
 		{
 			return directions[i];
 		} else {
 			return null;
-			//return language.getDestinationText();
 		}
 	}
 
@@ -260,6 +263,8 @@ public class Navigator implements Observer
 	 */
 	public Direction checkNextDir(Coordinate c)
 	{
+		if (directions == null)
+		{ return null; }
 		double smallest = SEARCHDISTANCE;
 		Direction closest = null;
 		for (int i=0; i<directions.length; i++)
