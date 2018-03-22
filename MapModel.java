@@ -9,24 +9,28 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 /*
- * @author Devash Patel  
+ * MapModel.
+ * @author Devash Patel
+ * Class that controls the funtionaliy of the map menu, sets all 
+ * the requiremments for the map ready to be produced by the map view.
+ *
  */
 public class MapModel extends Observable implements Model, Observer {
 
     MenuFrame mainFrame;
-	private String latitude = "50.5039";     /* latitude  */
-	private String longitude  = "4.4699";     /* longitude */
+	private String latitude = "50.5039";     /*  default latitude  */
+	private String longitude  = "4.4699";     /* default longitude */
 	
-	final static String SIZE      = "558x640";     /* Size */
-	final static String KEY       = "AIzaSyBDqXQupiOoXyFBQMu7cju5AozteVS8agU"; 
-    private int zoomVal = 10; 					   /* zoom Value */	
-	private int maxZoom = 21;                      /* maximum zoom value */
-	private int minZoom = 2;                       /* minimum zoom value */ 
+	private final static String SIZE      = "558x640";     /* Size */
+	private final static String KEY       = "AIzaSyBDqXQupiOoXyFBQMu7cju5AozteVS8agU";  /* Api key */
+    private static int zoomVal = 10; 					   /* zoom Value */	
+	private final static int MAXZOOM = 21;                      /* maximum zoom value */
+	private final static int MINZOOM = 2;                       /* minimum zoom value */ 
 	private int counter = 1; 					   /* incrementor */
 	private int rotation = 0; 				       /* rotation value */
 	private String maptype;						   /* map type */ 
-	private Language language = new Language ("en"); 
-	
+	private Language language = new Language ("en");  /* default language */
+	 
 	byte[] mapImage; 
 	
 	BufferedImage img; 
@@ -34,12 +38,11 @@ public class MapModel extends Observable implements Model, Observer {
     public MapModel(MenuFrame XTrek, SpeechModel speechModel, SatelliteModel satModel) {
 		/* 
 		* Constructor that sets up the map
-		*
 		*/
         mainFrame = XTrek;
 		imageLoader();
 		XTrek.getWin7Ublox7().addObserver(this); 
-		satModel.addObserver(this); 
+		satModel.addObserver(this);
 		speechModel.addObserver(this);
 	
     }
@@ -63,7 +66,6 @@ public class MapModel extends Observable implements Model, Observer {
 		imageLoader();
 	}
 	
-
 	public void imageLoader () {   // Loads the map image
 		
 		try {
@@ -78,15 +80,15 @@ public class MapModel extends Observable implements Model, Observer {
   
     public void pressedPlus() {  //Zoom in method
 		zoomVal ++;  
-		if (zoomVal >= maxZoom){
-			zoomVal = maxZoom;
+		if (zoomVal >= MAXZOOM){
+			zoomVal = MAXZOOM;
 		}
 		imageLoader(); 
     }
     public void pressedMinus() { //Zoom out method
 		zoomVal --; 
-		if (zoomVal <= minZoom){
-			zoomVal = minZoom; 
+		if (zoomVal <= MINZOOM){
+			zoomVal = MINZOOM; 
 		}
 		imageLoader();
     }
@@ -95,20 +97,20 @@ public class MapModel extends Observable implements Model, Observer {
     }
     public void pressedSelect() { 
 	
-	/*Select button changes the map type (extra functionality)
-	*
+	/*
+	*Select button changes the map type (extra functionality)
 	*/
-	
 		counter++; 
 		switch(counter){
 			case 1: maptype = "roadmap";
-					
 					break; 
+					
 			case 2: maptype = "terrain"; 
-					
 					break; 
+					
 			case 3: maptype = "hybrid";
 					break; 
+					
 			default: counter = 1; 
 					 maptype = "roadmap";
 					 break; 		
@@ -121,7 +123,8 @@ public class MapModel extends Observable implements Model, Observer {
 		reset();
 	}
 	public void reset () {
-		zoomVal = zoomVal; 
+		zoomVal = 10; 
+		maptype = "roadmap";
 		imageLoader();
 	}
 	
