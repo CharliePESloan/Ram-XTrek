@@ -65,8 +65,8 @@ public class MenuFrame extends JFrame {
     JButton MenuButton = new JButton();
     JButton OnOffButton = new JButton();
 
-     //Language language = new Language("en");
-    Speaker speaker = new Speaker(null, speechModel);
+    Language language = new Language("en");
+    Speaker speaker = new Speaker(language, speechModel);
     String currentView = "OnOff";
     
   /* Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
