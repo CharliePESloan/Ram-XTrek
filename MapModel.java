@@ -14,8 +14,8 @@ import java.awt.Graphics2D;
 public class MapModel extends Observable implements Model, Observer {
 
     MenuFrame mainFrame;
-	private String latitude = "50.738382";     /* latitude  */
-	private String longitude  = "-3.532915";     /* longitude */
+	private String latitude = "50.5039";     /* latitude  */
+	private String longitude  = "4.4699";     /* longitude */
 	
 	final static String SIZE      = "558x640";     /* Size */
 	final static String KEY       = "AIzaSyBDqXQupiOoXyFBQMu7cju5AozteVS8agU"; 
