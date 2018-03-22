@@ -19,9 +19,9 @@ public class MapModel extends Observable implements Model, Observer {
 
     MenuFrame mainFrame;
 	private String latitude = "50.5039";     /*  default latitude  */
-	private String longitude  = "3.4699";     /* default longitude */
-	private String goingToLatitude; 
-	private String goingToLongitutde; 
+	private String longitude  = "-3.4699";     /* default longitude */
+	private String goingToLatitude = "50.5039"; 
+	private String goingToLongitude = "-3.4699";
 	
 	private final static String SIZE      = "558x640";     /* Size */
 	private final static String KEY       = "AIzaSyBDqXQupiOoXyFBQMu7cju5AozteVS8agU";  /* Api key */
@@ -66,11 +66,10 @@ public class MapModel extends Observable implements Model, Observer {
 			
 			if (obs instanceof Navigator){
 				goingToLatitude = a.getLatStr();
-				goingToLongitutde = a.getLonStr();
+				goingToLongitude = a.getLonStr();
 				
 			}else{
-				
-			
+
 			rotation = a.getRotation(); 
 			latitude = a.getLatStr(); 
 			longitude = a.getLonStr(); 
@@ -82,7 +81,7 @@ public class MapModel extends Observable implements Model, Observer {
 	public void imageLoader () {   // Loads the map image
 		
 		try {
-		mapImage = Maps.readData(latitude, longitude, Integer.toString(zoomVal), SIZE, KEY, language.getBingCode(), maptype, "colour:blue|weight:5|"+latitude +"," +longitude + "|"+goingToLatitude+ "," + goingToLongitutde); 
+		mapImage = Maps.readData(latitude, longitude, Integer.toString(zoomVal), SIZE, KEY, language.getBingCode(), maptype, "color:red|weight:5|"+latitude +"," +longitude + "|"+goingToLatitude+ "," + goingToLongitude ); 
 		img = ImageIO.read(new ByteArrayInputStream(mapImage));
 		}
         catch (Exception e){
