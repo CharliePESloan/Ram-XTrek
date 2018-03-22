@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class Direction
 {
 	/* Variables */
-	private final String text;
+	private String text;
 	private final double latStart;
 	private final double lngStart;
 	private final double latEnd;
