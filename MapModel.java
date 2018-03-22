@@ -14,8 +14,8 @@ import java.awt.Graphics2D;
 public class MapModel extends Observable implements Model, Observer {
 
     MenuFrame mainFrame;
-	private String latitude = "50.7184";     /* latitude  */
-	private String longitude  = "-3.5339";     /* longitude */
+	private String latitude = "50.738382";     /* latitude  */
+	private String longitude  = "-3.532915";     /* longitude */
 	
 	final static String SIZE      = "558x640";     /* Size   254x292    */
 	final static String KEY       = "AIzaSyBDqXQupiOoXyFBQMu7cju5AozteVS8agU"; 
@@ -33,10 +33,11 @@ public class MapModel extends Observable implements Model, Observer {
 	
     public MapModel(MenuFrame XTrek, SpeechModel speechModel, SatelliteModel satModel) {
         mainFrame = XTrek;
+		imageLoader();
 		XTrek.getWin7Ublox7().addObserver(this); 
 		satModel.addObserver(this); 
 		speechModel.addObserver(this);
-		imageLoader();
+	
     }
 	
 	public void update(Observable obs, Object obj){
@@ -59,10 +60,8 @@ public class MapModel extends Observable implements Model, Observer {
 	public void imageLoader () {   // Loads the map image
 		
 		try {
-
 		mapImage = Maps.readData(latitude, longitude, Integer.toString(zoomVal), SIZE, KEY, language.getBingCode(), maptype); 
 		img = ImageIO.read(new ByteArrayInputStream(mapImage));
-		
 		}
         catch (Exception e){
 			System.out.println(e);
@@ -87,9 +86,9 @@ public class MapModel extends Observable implements Model, Observer {
     public void pressedMenu() { //Returns to the menu screen
         mainFrame.setMenu(MenuEnum.MENU);
     }
-    public void pressedSelect() { //Select button able to be pressed, but no functionality
+    public void pressedSelect() { //Select button changes the map type
+		
 		counter++; 
-		System.out.println(zoomVal);
 		switch(counter){
 			case 1: maptype = "roadmap";
 					break; 
@@ -101,8 +100,6 @@ public class MapModel extends Observable implements Model, Observer {
 					 maptype = "roadmap";
 					 break; 		
 		}
-		System.out.println(counter); 
-		System.out.println(latitude); 
 		imageLoader();
     }
 	public void pressedOnOff() { //Changes the XTrek's on/off state 

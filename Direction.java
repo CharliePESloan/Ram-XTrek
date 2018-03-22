@@ -14,6 +14,9 @@ import java.util.HashMap;
 
 public class Direction
 {
+	/* Constants */
+	private final static ONEKILOMETER = 1000;
+
 	/* Variables */
 	private String text;
 	private final double latStart;
@@ -42,6 +45,7 @@ public class Direction
 	/* Constructor */
 	public Direction(JSONObject direction, Language lang)
 	{
+		/* Temporary variables for navigating JSONObject */
 		JSONObject distance;
 		JSONObject location;
 		String	   distanceStr;
@@ -50,10 +54,8 @@ public class Direction
 		distance = direction.getJSONObject("distance");
 		distanceInt = distance.getInt("value");
 
-		//distanceStr = JObject.getString("text");
-
 		/* Read distances larger than 1000m in km */
-		if (distanceInt >= 1000)
+		if (distanceInt >= ONEKILOMETER)
 		{
 			distanceStr = String.format(lang.getKilometerText(),
 						    (float)distanceInt / 1000);
@@ -62,7 +64,8 @@ public class Direction
 			distanceStr = String.format(lang.getMeterText(),
 						    distanceInt);
 		}
-		
+	
+		/* Get start and end locations */
 		location = direction.getJSONObject("start_location");
 		latStart = location.getDouble("lat");
 		lngStart = location.getDouble("lng");
@@ -73,6 +76,7 @@ public class Direction
 		lngEnd	 = location.getDouble("lng");
 		cEnd	 = new Coordinate(latEnd,lngEnd);
 
+		/* Get direction text and format it */
 		String   html = direction.getString("html_instructions");
 		Document doc = Jsoup.parse(html);
 		text = distanceStr + " " + doc.text();
@@ -83,6 +87,16 @@ public class Direction
 		}
 	}
 
+	/* distanceTo
+	 * Get distance to the start of this direction from another
+	 * coordinate
+	 */
+	public double distanceTo(Coordinate c)
+	{
+		return cStart.distanceTo(c);
+	}
+
+	/* Getters */
 	public String getText()
 	{
 		return text;
@@ -104,6 +118,7 @@ public class Direction
 	{
 		return lngEnd;
 	}
+
 	public Coordinate getCoordinateStart()
 	{
 		return cStart;
@@ -120,20 +135,5 @@ public class Direction
 	public void setRead(boolean read)
 	{
 		this.read = read;
-	}
-
-	private float degreesToRadians(float degrees)
-	{
-		return (degrees * (float)Math.PI) / 180;
-	}
-
-	public double distanceTo(float latitude,float longitude)
-	{
-		return Distance.between(this.latStart,this.lngStart,
-					latitude,     longitude);
-	}
-	public double distanceTo(Coordinate c)
-	{
-		return cStart.distanceTo(c);
 	}
 }

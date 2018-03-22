@@ -4,18 +4,21 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+
+
 public class TripComputerView extends JPanel implements Observer {
-	
+	final TripComputerModel model;
 	GridLayout tripComp = new GridLayout(3,0);
-	JLabel tripD = new JLabel("test one");
-	JLabel tripS = new JLabel("test two");
-	JLabel tripMT = new JLabel("test three");
+	JLabel tripD = new JLabel();
+	JLabel tripS = new JLabel();
+	JLabel tripMT = new JLabel();
 	Border blackline = BorderFactory.createLineBorder(Color.black,5);
 	Font font = new Font("Trebuchet MS",Font.PLAIN, 50);
-
-
 	
-	public TripComputerView (Controller controller, TripComputerModel model) {
+	
+	public TripComputerView (Controller controller, MenuFrame XTrek, TripComputerModel model) {
+		this.model = model;
+		XTrek.getWin7Ublox7().addObserver(this);
 		setLayout(tripComp);
 		setBackground(Color.black);
 		tripD.setBorder(blackline);
@@ -34,6 +37,10 @@ public class TripComputerView extends JPanel implements Observer {
 		
 	}
 	public void update(Observable o, Object arg) {
+		//double[] test = (double[]) arg;
+		//tripD.setText(test[0]);
+		//tripS.setText(test[1]);
+		//tripMT.setText(test[2]);
 		
 	}
 }

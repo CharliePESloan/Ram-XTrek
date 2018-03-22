@@ -15,16 +15,16 @@ import java.util.Observer;
 public class Navigator implements Observer
 {
 	/* Constant Values */
-	final static int SEARCHDISTANCE = 10000;
-	final static float SPEECHDISTANCE = 0.01f;
 	final static String URLBASE =
 		"https://maps.googleapis.com/maps/api/directions/json";
 	final static String KEY	=
 		"AIzaSyB9Ky-AaEebyjqE7f8-kBmXEMJL69Cr_Yk";
 	final static String METHOD = "GET";
-	final static String REGION = "uk";
-	final static String MODE   = "TRANSIT";
-	final static String ENCODING = "UTF-8";
+	final static String REGION	   = "uk";
+	final static String MODE	   = "TRANSIT";
+	final static String ENCODING	   = "UTF-8";
+	final static int    SEARCHDISTANCE = 10000;
+	final static float  SPEECHDISTANCE = 0.01f;
 
 	/* Variables */
 	private MenuFrame mainFrame;
@@ -74,12 +74,13 @@ public class Navigator implements Observer
 	 * setOrigin
 	 * Sets the start of the route
 	 */
-	public void setOrigin(double latitude,double longitude)
+	public void setOrigin(String latitude,String longitude)
 	{
 		try
 		{
-			origin = String.valueOf(latitude)+","+String.valueOf(longitude);
+			origin = latitude+","+longitude;
 			encOrigin = URLEncoder.encode(origin,ENCODING);
+			// Debug
 			System.out.println(origin + " -> " + encOrigin);
 		} catch (UnsupportedEncodingException ex)
 		{
@@ -101,11 +102,11 @@ public class Navigator implements Observer
 	 * setDest
 	 * Sets the destination of the route
 	 */
-	public void setDest(float latitude,float longitude)
+	public void setDest(String latitude,String longitude)
 	{
 		try
 		{
-			destination = String.valueOf(latitude)+","+String.valueOf(longitude);
+			destination = latitude+","+longitude;
 			encDestination = URLEncoder.encode(destination,ENCODING);
 		} catch (UnsupportedEncodingException ex)
 		{
@@ -153,20 +154,28 @@ public class Navigator implements Observer
 
 		// Traverse directionsJSON to get array of steps
 		directionsJSON = new JSONObject(new String(directionsRaw));
-		routes = (JSONArray)directionsJSON.get("routes");
-		route  = routes.getJSONObject(0);
-		legs   = (JSONArray)route.get("legs");
-		leg    = legs.getJSONObject(0);
-		steps  = (JSONArray)leg.get("steps");
-
-		// Store steps in directions array
-		directions = new Direction[steps.length()];
-		for (int i=0; i<steps.length(); i++)
+		try
 		{
-			step = steps.getJSONObject(i);
-			directions[i] = new Direction(step,language);
-		}
+			routes = (JSONArray)directionsJSON.get("routes");
+			route  = routes.getJSONObject(0);
+			legs   = (JSONArray)route.get("legs");
+			leg    = legs.getJSONObject(0);
+			steps  = (JSONArray)leg.get("steps");
 
+			// Store steps in directions array
+			directions = new Direction[steps.length()];
+			for (int i=0; i<steps.length(); i++)
+			{
+				step = steps.getJSONObject(i);
+				directions[i] =
+					new Direction(step,language);
+			}
+		}
+		catch (JSONException e)
+		{
+			directions = null;
+			System.out.println("Could not get directions");
+		}
 	}
 
 	/* getDirection
@@ -175,21 +184,23 @@ public class Navigator implements Observer
 	 */
 	public Direction getDirection()
 	{
-		if (currentDirection<directions.length)
+		if (directions != null &&
+			currentDirection<directions.length)
 		{
 			return directions[currentDirection++];
-		} else {
+		}
+		else {
 			return null;
 		}
 	}
 	public Direction getDirection(int i)
 	{
-		if (i<directions.length && i>=0)
+		if (directions != null &&
+			i<directions.length && i>=0)
 		{
 			return directions[i];
 		} else {
 			return null;
-			//return language.getDestinationText();
 		}
 	}
 
@@ -199,6 +210,76 @@ public class Navigator implements Observer
 	public Direction[] getDirections()
 	{
 		return directions;
+	}
+
+	/* checkNextDir
+	 * Takes the current location as a coordinate object and
+	 * returns the closest direction (if it is within the
+	 * search distance.
+	 */
+	public Direction checkNextDir(Coordinate c)
+	{
+		// Return null if there are no directions
+		if (directions == null)
+		{ return null; }
+		
+		// Information about the current closest direction
+		double smallest = SEARCHDISTANCE;
+		Direction closest = null;
+		
+		// Loop through directions to find the closest
+		for (int i=0; i<directions.length; i++)
+		{
+			Direction dir = getDirection(i);
+			double dist =
+				c.distanceTo(dir.getCoordinateStart());
+			if (dist < smallest)
+			{
+				smallest = dist;
+				closest  = dir;
+			}
+		}
+
+		// Debug
+		if (closest != null)
+		{ System.out.println(closest.getText()); }
+		
+		// Only return directions within a certain radius
+		if (smallest > SPEECHDISTANCE)
+		{ return null; }
+		
+		return closest;
+	}
+
+	/* update
+	 * Updates location, language or destination
+	 */
+	public void update(Observable obs, Object obj)
+	{
+		if (obs == satellite && obj instanceof Coordinate)
+		{
+			// Get coordinate
+			Coordinate c = (Coordinate)obj;
+
+			// Set journey origin
+			setOrigin(c.getLatStr(),c.getLonStr());
+
+			// Check if next direction is ready to be spoken
+			Direction d = checkNextDir( c );
+			if (d != null && d.getRead())
+			{
+				d.setRead(true);
+				mainFrame.saySomething(d.getText());
+			}
+		}
+		else if (obs == speech && obj instanceof Language)
+		{
+			language = (Language)obj;
+		}
+		else if (obs == whereTo && obj instanceof String)
+		{
+			setDest((String)obj);
+		}
 	}
 
 	/* printRaw
@@ -225,105 +306,16 @@ public class Navigator implements Observer
 	 */
 	public void printOut()
 	{
-		printRaw();
+		// Print directions, origin and destination
+		
+		// Debug
+		//printRaw();
 
-		// Print origin, directions and destination
-		System.out.println("Origin="+origin);
 		for (int i=0; i<directions.length; i++)
 		{
 			System.out.println( getDirection(i).getText() );
 		}
+		System.out.println("Origin="+origin);
 		System.out.println("Destination="+destination);
 	}
-
-	// Not yet implemented
-	public void getClosestNode(float latitude, float longitude)
-	{
-		for (int i=0; i<directions.length; i++)
-		{
-			System.out.println( getDirection(i).getText() );
-
-		}
-	}
-
-	/* checkNextDir
-	 * Takes the current location as a coordinate object and
-	 * returns the closest direction (if it is within the
-	 * search distance.
-	 */
-	public Direction checkNextDir(Coordinate c)
-	{
-		double smallest = SEARCHDISTANCE;
-		Direction closest = null;
-		for (int i=0; i<directions.length; i++)
-		{
-			Direction dir = getDirection(i);
-			double dist =
-				c.distanceTo(dir.getCoordinateStart());
-			if (dist < smallest)
-			{
-				smallest = dist;
-				closest  = dir;
-			}
-		}
-		if (closest != null)
-		{ System.out.println(closest.getText()); }
-		if (smallest > SPEECHDISTANCE)
-		{
-			return null;
-		}
-		return closest;
-	}
-
-	public void update(Observable obs, Object obj)
-	{
-		if (obs == satellite && obj instanceof Coordinate)
-		{
-			// Get coordinate
-			Coordinate c = (Coordinate)obj;
-
-			// Set journey origin
-			setOrigin(c.getLat(),c.getLon());
-
-			// Check if next direction is ready to be spoken
-			Direction d = checkNextDir( c );
-			if (d != null && d.getRead())
-			{
-				d.setRead(true);
-				mainFrame.saySomething(d.getText());
-			}
-		}
-		else if (obs == speech && obj instanceof Language)
-		{
-			language = (Language)obj;
-		}
-		else if (obs == whereTo && obj instanceof String)
-		{
-			setDest((String)obj);
-		}
-	}
-
-	/*public static void main(String args[])
-	{
-		Navigator myDir = new Navigator();
-
-		//myDir.setOrigin	(50.729042f, -3.531057f);
-		//myDir.setDest	(50.742957f, -3.348418f);
-		
-		myDir.setOrigin("Exeter");
-		myDir.setDest("Glasgow");
-
-		Language lang = new Language("French","fr");
-		//Language lang = new Language("English","en");
-
-		myDir.setLang(lang);
-
-		myDir.refreshDirections();
-		myDir.printOut();
-
-		//myDir.getClosestNode(50.729042f,-3.531057f);
-
-		Speaker.saySomething(myDir.getDirection(24).getText(),
-				    		 lang);
-	}*/
 }

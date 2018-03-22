@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.*;
 import javax.swing.*;
+
 public class TripComputerModel extends Observable implements Model {
 	
 	CycleButton selected;
