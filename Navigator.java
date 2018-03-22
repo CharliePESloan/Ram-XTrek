@@ -28,9 +28,9 @@ public class Navigator extends Observable implements Observer
 
 	/* Variables */
 	private MenuFrame mainFrame;
-	private SpeechModel speech;
-	private SatelliteModel  satellite;
-	private WhereToFrameModel whereTo;
+	//private SpeechModel speech;
+	//private SatelliteModel  satellite;
+	//private WhereToFrameModel whereTo;
 	private Language	language = new Language("English", "en");
 
 	private	String		origin;
@@ -57,17 +57,18 @@ public class Navigator extends Observable implements Observer
 	/*
 	 * Constructor
 	 */
-	public Navigator(MenuFrame mainFrame, SpeechModel speechModel,SatelliteModel satModel,WhereToFrameModel whereModel)
+	public Navigator(MenuFrame mainFrame, SpeechModel speechModel,Win7Ublox7 ublox7,WhereToFrameModel whereModel)
 	{
 		currentDirection=0;
 
 		this.mainFrame = mainFrame;
-		speech = speechModel;
-		whereTo = whereModel;
-		satellite = satModel;
-		speech.addObserver(this);
-		whereTo.addObserver(this);
-		satellite.addObserver(this);
+		//speech = speechModel;
+		//whereTo = whereModel;
+		//satellite = satModel;
+		speechModel.addObserver(this);
+		whereModel.addObserver(this);
+		ublox7.addObserver(this);
+		//satellite.addObserver(this);
 	}
 
 	/*
