@@ -47,7 +47,7 @@ public class SpeechThread implements Runnable
 		{
 			AudioInputStream myAudio =
 				AudioSystem.getAudioInputStream(myInputStream);
-			//System.out.println(r + "Converted");
+			//System.outeprintln(r + "Converted");
 			Sound.playStream( myAudio,
 				Sound.readStream( myAudio ) );
 			//System.out.println(r + "Played");

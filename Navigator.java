@@ -272,25 +272,12 @@ public class Navigator implements Observer
 
 	public void update(Observable obs, Object obj)
 	{
-		/* if (obj instanceof String[])
-		{
-			String[] arr = (String[])obj;
-			System.out.println((arr));
-			float lat =
-				(arr[1]=="N" ? 1 : -1) * (float)arr[0];
-			float lon =
-				(arr[3]=="N" ? 1 : -1) * (float)arr[2];
-			System.out.println(lat);
-			System.out.println(lon);
-		}
-		else */
 		if (obs == satellite && obj instanceof Coordinate)
 		{
 			Direction d = checkNextDir( (Coordinate)obj );
 			if (d != null)
 			{
 				mainFrame.saySomething(d.getText());
-				
 			}
 		}
 		else if (obs == speech && obj instanceof Language)
