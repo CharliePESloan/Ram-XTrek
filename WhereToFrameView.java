@@ -73,14 +73,14 @@ public class WhereToFrameView extends JPanel implements Observer {
 				buttons[i] = new CycleButton(Character.toString(alphabet.charAt(i)), letter[i], hLetter[i]); //Creates the buttons for the letter keyboard
 				textPanel.add(buttons[i]);
 			}
-		buttonSpace = new CycleButton("SPACE", letterSpace, letterHSpace);
-		buttonRight = new CycleButton("RIGHT", letterRight, letterHRight);
+		buttonSpace = new CycleButton(WhereToEnum.SPACE, letterSpace, letterHSpace);
+		buttonRight = new CycleButton(WhereToEnum.RIGHT, letterRight, letterHRight);
 		textPanel.add(buttonSpace);
 		textPanel.add(buttonRight);
 			
 	   
-		buttonDel = new CycleButton("DEL",letterDel, letterHDel);
-		buttonLeft = new CycleButton("LEFT",letterLeft, letterHLeft);
+		buttonDel = new CycleButton(WhereToEnum.DEL,letterDel, letterHDel);
+		buttonLeft = new CycleButton(WhereToEnum.LEFT,letterLeft, letterHLeft);
 		
 		for (int i=1; i<25;i++) {
 				buttons[i].setPrevNext(buttons[i-1],buttons[i+1]);
