@@ -6,6 +6,11 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.lang.Runnable;
 
+/* SpeechThread
+ * Charlie Sloan (2018)
+ *
+ * A Runnable which speaks a line
+ */
 public class SpeechThread implements Runnable
 {
 	// Constant values
@@ -28,7 +33,6 @@ public class SpeechThread implements Runnable
 	}
 	
 	public void run() {
-		System.out.println("Starting speech");
 		// Get raw audio
 		final byte[] speech =
 			Speech.generateSpeech( token,
@@ -45,16 +49,12 @@ public class SpeechThread implements Runnable
 				new ByteArrayInputStream(speech);
 			AudioInputStream myAudio =
 				AudioSystem.getAudioInputStream(myInputStream);
-			//System.outeprintln(r + "Converted");
 			Sound.playStream( myAudio,
 				Sound.readStream( myAudio ) );
-			//System.out.println(r + "Played");
 		}
 		catch ( IOException | UnsupportedAudioFileException e )
 		{
-			//System.out.println(r + "Inner error");
 			System.out.println(e);
 		}
-		System.out.println("Finished speech speech");
 	}
 }

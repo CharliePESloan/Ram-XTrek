@@ -153,20 +153,27 @@ public class Navigator implements Observer
 
 		// Traverse directionsJSON to get array of steps
 		directionsJSON = new JSONObject(new String(directionsRaw));
-		routes = (JSONArray)directionsJSON.get("routes");
-		route  = routes.getJSONObject(0);
-		legs   = (JSONArray)route.get("legs");
-		leg    = legs.getJSONObject(0);
-		steps  = (JSONArray)leg.get("steps");
-
-		// Store steps in directions array
-		directions = new Direction[steps.length()];
-		for (int i=0; i<steps.length(); i++)
+		try
 		{
-			step = steps.getJSONObject(i);
-			directions[i] = new Direction(step,language);
-		}
+			routes = (JSONArray)directionsJSON.get("routes");
+			route  = routes.getJSONObject(0);
+			legs   = (JSONArray)route.get("legs");
+			leg    = legs.getJSONObject(0);
+			steps  = (JSONArray)leg.get("steps");
 
+			// Store steps in directions array
+			directions = new Direction[steps.length()];
+			for (int i=0; i<steps.length(); i++)
+			{
+				step = steps.getJSONObject(i);
+				directions[i] =
+					new Direction(step,language);
+			}
+		}
+		catch (JSONException e)
+		{
+			System.out.println(e);
+		}
 	}
 
 	/* getDirection
@@ -302,28 +309,4 @@ public class Navigator implements Observer
 			setDest((String)obj);
 		}
 	}
-
-	/*public static void main(String args[])
-	{
-		Navigator myDir = new Navigator();
-
-		//myDir.setOrigin	(50.729042f, -3.531057f);
-		//myDir.setDest	(50.742957f, -3.348418f);
-		
-		myDir.setOrigin("Exeter");
-		myDir.setDest("Glasgow");
-
-		Language lang = new Language("French","fr");
-		//Language lang = new Language("English","en");
-
-		myDir.setLang(lang);
-
-		myDir.refreshDirections();
-		myDir.printOut();
-
-		//myDir.getClosestNode(50.729042f,-3.531057f);
-
-		Speaker.saySomething(myDir.getDirection(24).getText(),
-				    		 lang);
-	}*/
 }
