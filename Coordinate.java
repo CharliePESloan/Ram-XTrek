@@ -10,13 +10,14 @@ public class Coordinate {
 	double lon = 0.0;
 	double velocity = 0.0;
 	double[] coord;
+	int rotation;
 	
 	public Coordinate(double lat, double lon){
 		this.lat = lat;
 		this.lon = lon;
 	}
 		
-	public Coordinate(String[] coordinates, String[] trips){
+	public Coordinate(String[] coordinates, String[] trips, String[] bearings){
 		double latitude = mapFormat(coordinates[0]);
 		if(coordinates[1].equals("S")){lat = -latitude;}
 		else{lat = latitude;}
@@ -25,7 +26,9 @@ public class Coordinate {
 		if(coordinates[3].equals("W")){lon = -longitude;}
 		else{lon = longitude;}
 		
-		double speed = tripFormat(trips[6]);
+		velocity = tripFormat(trips[6]);
+		
+		rotation = bearingFormat(bearings[5]);
 		
 		coord = new double[] {lat, lon};
 	}
@@ -38,6 +41,11 @@ public class Coordinate {
 	
 	public double tripFormat(String mySpeed){
 		double finalValue = Double.parseDouble(mySpeed);
+		return finalValue;
+	}
+	
+	public int bearingFormat(String myBearing){
+		int finalValue = Integer.parseInt(myBearing);
 		return finalValue;
 	}
 	
