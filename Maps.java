@@ -17,6 +17,7 @@ public class Maps {
                         , String size
 						, String key
 						, String language
+						, String maptype
                         ) {
     final String method = "GET";
     final String url
@@ -26,6 +27,7 @@ public class Maps {
         + "&" + "size"   + "=" + size
         + "&" + "key"    + "=" + key
 		+ "&" + "language" + "=" + language
+		+ "&" + "maptype"  + "=" + maptype
 		);
     final byte[] body
         = {};

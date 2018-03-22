@@ -25,33 +25,19 @@ class MapView extends JPanel implements Observer {
  
   BufferedImage mapImage; 
   
-  private int rotation = 0; 
+  private int rotation = 45; 
   private int centreCoord = 0;  
   private int xCentreCoord = 127; 
   private int yCentreCoord = 145; 
-  private int circleSize = 15; 
+  private int circleSize = 8; 
   private int HYP; 
   
-  
-  
-  public int getScreenPositionX() {
-	  float x  = (-1/2)*(mapImage.getWidth() - getWidth()); 
-	  return (int) x; 
-  }
-  
-  public int getScreenPositionY (){
-	  float y = (-1/2)*(mapImage.getHeight() - getHeight()); 
-	  return (int) y; 
-  }
  
-  
-  
   public MapView( Controller controller, MapModel model ) {
     model.addObserver(this);
 	model.imageLoader();
-	
   }
-
+  
   public void update( Observable obs, Object obj ) {
 	if (obj instanceof BufferedImage){
 		mapImage = (BufferedImage) obj; 
@@ -66,18 +52,15 @@ class MapView extends JPanel implements Observer {
   public  void paintComponent( Graphics g  ) {
 	super.paintComponent(g); 
 	Graphics2D g2d = (Graphics2D) g; 
-	g2d.rotate(Math.toRadians(rotation), mapImage.getWidth()/2,mapImage.getHeight()/2 );
-	g2d.drawImage(mapImage, (-HYP-getWidth())/8, (-HYP-getHeight())/8, null);
-	g.setColor(Color.red);
-	g.fillOval(getWidth()/2,getHeight()/2, 15, 15);
-	System.out.println(HYP); 
-	System.out.println(mapImage.getWidth());
-	System.out.println("height"+mapImage.getHeight()); 
 	
+	int xPosition = (-HYP-getWidth())/4;
+	int yPosition = (-HYP-getHeight())/4;
+	
+	g2d.rotate(Math.toRadians(rotation), getWidth()/2,getHeight()/2 );
+	g2d.drawImage(mapImage, xPosition, yPosition, null);
+	g.setColor(Color.red);
+	g.fillOval(getWidth()/2-circleSize/2,getHeight()/2-circleSize/2, circleSize, circleSize);
   }
   
-  public Dimension getPreferredSize() {
-    return new Dimension( mapImage.getWidth(), mapImage.getHeight() );
-  }
 
 }

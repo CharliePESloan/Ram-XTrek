@@ -22,6 +22,8 @@ public class MapModel extends Observable implements Model, Observer {
     private int zoomVal = 10; 					   /* zoom Value */	
 	private int maxZoom = 21;                      /* maximum zoom value */
 	private int minZoom = 2;                       /* minimum zoom value */ 
+	private int counter = 1; 
+	private String maptype;
 	private Language language = new Language ("en"); 
 	
 	byte[] mapImage; 
@@ -55,7 +57,7 @@ public class MapModel extends Observable implements Model, Observer {
 		
 		try {
 
-		mapImage = Maps.readData(latitude, longitude, Integer.toString(zoomVal), SIZE, KEY, language.getBingCode()); 
+		mapImage = Maps.readData(latitude, longitude, Integer.toString(zoomVal), SIZE, KEY, language.getBingCode(), maptype); 
 		img = ImageIO.read(new ByteArrayInputStream(mapImage));
 		
 		}
@@ -83,6 +85,22 @@ public class MapModel extends Observable implements Model, Observer {
         mainFrame.setMenu(MenuEnum.MENU);
     }
     public void pressedSelect() { //Select button able to be pressed, but no functionality
+		counter++; 
+		System.out.println(zoomVal);
+		switch(counter){
+			case 1: maptype = "roadmap";
+					break; 
+			case 2: maptype = "terrain"; 
+					break; 
+			case 3: maptype = "hybrid";
+					break; 
+			default: counter = 1; 
+					 maptype = "roadmap";
+					 break; 		
+		}
+		System.out.println(counter); 
+		System.out.println(latitude); 
+		imageLoader();
     }
 	public void pressedOnOff() { //Changes the XTrek's on/off state 
 		mainFrame.setMenu(MenuEnum.ONOFF);	
