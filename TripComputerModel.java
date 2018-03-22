@@ -7,9 +7,16 @@ public class TripComputerModel extends Observable implements Model {
 	
 	CycleButton selected;
 	MenuFrame mainFrame;
+	long time;
+
+public long getTimer (){
+return System.currentTimeMillis() - time;
+}	
 	
 	public TripComputerModel (MenuFrame mainFrame) {
 		this.mainFrame = mainFrame;
+		time = System.currentTimeMillis();
+		
 	}
 	public void setSelected(CycleButton newSelected) {
 		

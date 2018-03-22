@@ -13,7 +13,7 @@ public class TripComputerView extends JPanel implements Observer {
 	JLabel tripS = new JLabel();
 	JLabel tripMT = new JLabel();
 	Border blackline = BorderFactory.createLineBorder(Color.black,5);
-	Font font = new Font("Trebuchet MS",Font.PLAIN, 50);
+	Font font = new Font("Trebuchet MS",Font.PLAIN, 20);
 	
 	
 	public TripComputerView (Controller controller, MenuFrame XTrek, TripComputerModel model) {
@@ -38,10 +38,13 @@ public class TripComputerView extends JPanel implements Observer {
 		
 	}
 	public void update(Observable o, Object arg) {
+		long timeValue = model.getTimer();
+		long seconds = (long) (timeValue/1000);
+		long minutes = (long) (seconds/60);
 		//Coordinate coord[] = (Coordinate) arg;
 		//tripD.setText("Trip odem" + Double.toString(coord.get) + "KM";
 		//tripS.setText("Speed" + Double.toString(coord.get);
-		//tripMT.setText("Moving time" + Double.toString(coord.get);
+		tripMT.setText(String.format("Moving time %dm %ds",minutes,seconds));
 		
 	}
 }
