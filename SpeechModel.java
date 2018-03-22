@@ -82,5 +82,6 @@ public class SpeechModel extends Observable implements Model
 		language = null;
 		
 		setChanged(); notifyObservers(selected);
+		setChanged(); notifyObservers(language);
 	}
 }
