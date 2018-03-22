@@ -45,6 +45,7 @@ public class MenuFrame extends JFrame {
     SatelliteModel satModel = new SatelliteModel(this);
 	TripComputerModel tripModel = new TripComputerModel(this);
 	AboutModel aboutModel = new AboutModel(this);
+    Navigator nav = new Navigator(this,speechModel,win7u7,whereToModel);
     MapModel mapModel = new MapModel(this, speechModel, satModel, nav);
     
     Controller controller = new Controller(onOffModel);
@@ -63,7 +64,6 @@ public class MenuFrame extends JFrame {
     JButton MenuButton = new JButton();
     JButton OnOffButton = new JButton();
 
-    Navigator nav = new Navigator(this,speechModel,win7u7,whereToModel);
      //Language language = new Language("en");
     Speaker speaker = new Speaker(null, speechModel);
     String currentView = "OnOff";
