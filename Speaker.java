@@ -48,18 +48,18 @@ public class Speaker implements Observer
 		{
 			renew();
 		}
-		if (token != null)
-		{
-			/* Start speaking a different thread */
-			ExecutorService executor =
-				Executors.newSingleThreadExecutor();
-			
-			executor.execute( new SpeechThread(text,
-							   language,
-							   token) );
+
+		if (language == null || token == null) { return; }
+
+		/* Start speaking a different thread */
+		ExecutorService executor =
+			Executors.newSingleThreadExecutor();
+		
+		executor.execute( new SpeechThread(text,
+						   language,
+						   token) );
 	
-			executor.shutdown();
-		}
+		executor.shutdown();
 	}
 	public void saySomething(String text)
 	{ saySomething(text,this.language); }

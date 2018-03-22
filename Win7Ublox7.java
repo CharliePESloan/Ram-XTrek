@@ -63,6 +63,7 @@ public class Win7Ublox7 extends Observable implements Runnable{
 		
 					mapLatLon = mySat.getGLL(s); //updating our array to contain new values
 
+<<<<<<< HEAD
 					tripVelocity = new String[] {"0", "0", "0", "0", "0", "0", "9.78"};
 					System.out.println("Test 0");
 					
@@ -85,6 +86,27 @@ public class Win7Ublox7 extends Observable implements Runnable{
 			notifyObservers("Cannot display location");
 			ex.printStackTrace(); 
 			System.out.println( ex );
+=======
+				tripVelocity = new String[] {"0", "0", "0", "0", "0", "0", "9.78"};
+	
+				tripRotation = mySat.getGSV(s);
+				System.out.println("\n");
+				System.out.println("Start1");
+				System.out.println(mapLatLon);
+				System.out.println(tripVelocity);
+				System.out.println(tripRotation);
+				if(mapLatLon == null || tripRotation == null)
+				{continue;} 
+				Coordinate c = new Coordinate(mapLatLon, tripVelocity, tripRotation);
+				setChanged(); //Notifying the observer that a change has occurred
+				notifyObservers(c);//Passing on our values to the observer for further use	
+			}
+		}else {
+			System.out.println( "not a serial port" ); System.exit( 1 );
+		}
+	}catch ( Exception ex ) {
+		ex.printStackTrace(); System.out.println( ex ); 
+>>>>>>> c1746ef88bb1b464433b9210283b9bf5a247397f
 		}
 	}
 		//Dongle Reader ends here, modified version.//
