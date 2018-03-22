@@ -19,7 +19,9 @@ public class MapModel extends Observable implements Model, Observer {
 
     MenuFrame mainFrame;
 	private String latitude = "50.5039";     /*  default latitude  */
-	private String longitude  = "4.4699";     /* default longitude */
+	private String longitude  = "3.4699";     /* default longitude */
+	private String goingToLatitude; 
+	private String goingToLongitutde; 
 	
 	private final static String SIZE      = "558x640";     /* Size */
 	private final static String KEY       = "AIzaSyBDqXQupiOoXyFBQMu7cju5AozteVS8agU";  /* Api key */
@@ -30,12 +32,13 @@ public class MapModel extends Observable implements Model, Observer {
 	private int rotation = 0; 				       /* rotation value */
 	private String maptype;						   /* map type */ 
 	private Language language = new Language ("en");  /* default language */
+	
 	 
 	byte[] mapImage; 
 	
 	BufferedImage img; 
 	
-    public MapModel(MenuFrame XTrek, SpeechModel speechModel, SatelliteModel satModel) {
+    public MapModel(MenuFrame XTrek, SpeechModel speechModel, SatelliteModel satModel, Navigator navigator) {
 		/* 
 		* Constructor that sets up the map
 		*/
@@ -44,6 +47,7 @@ public class MapModel extends Observable implements Model, Observer {
 		XTrek.getWin7Ublox7().addObserver(this); 
 		satModel.addObserver(this);
 		speechModel.addObserver(this);
+		navigator.addObserver(this); 
 	
     }
 	
@@ -57,11 +61,20 @@ public class MapModel extends Observable implements Model, Observer {
 			language = (Language) obj; 
 		}
 		else if (obj instanceof Coordinate)
-		{
+		{	
 			Coordinate a = (Coordinate) obj;
+			
+			if (obs instanceof Navigator){
+				goingToLatitude = a.getLatStr();
+				goingToLongitutde = a.getLonStr();
+				
+			}else{
+				
+			
 			rotation = a.getRotation(); 
 			latitude = a.getLatStr(); 
 			longitude = a.getLonStr(); 
+			}
 		}
 		imageLoader();
 	}
@@ -69,7 +82,7 @@ public class MapModel extends Observable implements Model, Observer {
 	public void imageLoader () {   // Loads the map image
 		
 		try {
-		mapImage = Maps.readData(latitude, longitude, Integer.toString(zoomVal), SIZE, KEY, language.getBingCode(), maptype); 
+		mapImage = Maps.readData(latitude, longitude, Integer.toString(zoomVal), SIZE, KEY, language.getBingCode(), maptype, "colour:blue|weight:5|"+latitude +"," +longitude + "|"+goingToLatitude+ "," + goingToLongitutde); 
 		img = ImageIO.read(new ByteArrayInputStream(mapImage));
 		}
         catch (Exception e){
@@ -82,6 +95,7 @@ public class MapModel extends Observable implements Model, Observer {
 		zoomVal ++;  
 		if (zoomVal >= MAXZOOM){
 			zoomVal = MAXZOOM;
+			mainFrame.saySomething("maximum zoom!"); //warns user that the maximum zoom value has been reached.
 		}
 		imageLoader(); 
     }
@@ -89,6 +103,7 @@ public class MapModel extends Observable implements Model, Observer {
 		zoomVal --; 
 		if (zoomVal <= MINZOOM){
 			zoomVal = MINZOOM; 
+			mainFrame.saySomething("minimum zoom!"); //warns user that the minimum zoom value has been reached.
 		}
 		imageLoader();
     }
