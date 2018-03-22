@@ -29,19 +29,20 @@ class MapView extends JPanel implements Observer {
   private int xCentreCoord = 127; 
   private int yCentreCoord = 145; 
   private int circleSize = 8; 
-  private int HYP; 
+  private int  HYP; 
   private int rotation;
   
  
   public MapView( Controller controller, MapModel model ) {
     model.addObserver(this);
 	model.imageLoader();
+
   }
   
   public void update( Observable obs, Object obj ) {
 	if (obj instanceof BufferedImage){
 		mapImage = (BufferedImage) obj; 
-		HYP = (int) Math.sqrt(getWidth()*getWidth() + getHeight()*getHeight() ); 
+		
 	}
     else if (obj instanceof Integer){
 		rotation = (int) obj;
@@ -52,12 +53,9 @@ class MapView extends JPanel implements Observer {
   public  void paintComponent( Graphics g  ) {
 	super.paintComponent(g); 
 	Graphics2D g2d = (Graphics2D) g; 
-	
-	int xPosition = (-HYP-getWidth())/4;
-	int yPosition = (-HYP-getHeight())/4;
-	
+	HYP = (int) Math.sqrt(getWidth()*getWidth() + getHeight()*getHeight() ); 
 	g2d.rotate(Math.toRadians(rotation), getWidth()/2,getHeight()/2 );
-	g2d.drawImage(mapImage, xPosition, yPosition, null);
+	g2d.drawImage(mapImage, (-HYP-getWidth())/4, (-HYP-getHeight())/4, null);
 	g.setColor(Color.red);
 	g.fillOval(getWidth()/2-circleSize/2,getHeight()/2-circleSize/2, circleSize, circleSize);
   }
