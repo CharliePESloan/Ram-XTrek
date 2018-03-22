@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  */
 class RotateView extends JPanel implements Observer {
   private BufferedImage mapImage;
-  private int rotation;
+  private int rotation =10;
 
   public RotateView( Controller controller, MapModel model ) {
     model.addObserver( this );

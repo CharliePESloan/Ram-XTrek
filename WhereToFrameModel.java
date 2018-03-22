@@ -12,7 +12,7 @@ public class WhereToFrameModel extends Observable implements Model, Observer {
     }
     CycleButton selected;
     MenuFrame mainFrame;
-    String letters;
+    Object letters;
 	String delete = "Delete";
 	String text = "Text Keyboard";
 	String number = "Number Keyboard";
@@ -45,32 +45,33 @@ public class WhereToFrameModel extends Observable implements Model, Observer {
         mainFrame.setMenu(MenuEnum.MENU);
     }
     public void pressedSelect() {
-        letters =  (String) selected.getData();
-        if (letters == "SPACE") {
+        letters = selected.getData();
+		if (letters instanceof WhereToEnum) {
+        if (letters == WhereToEnum.SPACE) {
             textDisplay += " ";
-			mainFrame.saySomething(letters);
+			mainFrame.saySomething(letters.toString());
             setChanged(); notifyObservers(textDisplay);
         }
-        else if (letters == "RIGHT") {
+        else if (letters == WhereToEnum.RIGHT) {
 			selected.deselect();
 			mainFrame.saySomething(number);
             setChanged(); notifyObservers(false);
         }
-		else if (letters == "LEFT") {
+		else if (letters == WhereToEnum.LEFT) {
 			selected.deselect();
 			mainFrame.saySomething(text);
             setChanged(); notifyObservers(true);
         }
-		else if (letters == "DEL") {
-			mainFrame.saySomething(delete);
+		else if (letters == WhereToEnum.DEL) {
             try {
+				mainFrame.saySomething(delete);
 				textDisplay = removeChar(textDisplay, textDisplay.length()-1);
 				setChanged(); notifyObservers(textDisplay);
-			} catch (java.lang.StringIndexOutOfBoundsException e) {mainFrame.saySomething("naaaa Fam");}
-        }
+			} catch (java.lang.StringIndexOutOfBoundsException e) {}
+        }}
         else {
             textDisplay += letters;
-			mainFrame.saySomething(letters);
+			mainFrame.saySomething((String)letters);
             setChanged(); notifyObservers(textDisplay);
         }
     }

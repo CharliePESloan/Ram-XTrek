@@ -22,22 +22,19 @@ public class Speaker implements Observer
 	// Constant values
 	final static String KEY1 = "b43e10841e0448dd96fda3fbd3110ff8";
 	final static String KEY2 = "1be7b3ec099d461582bb194df5bd03de";
+	final static int EIGHTMINUTES = 48000;
 
 	// Variables
-	//final String lang;
-	//final String artist;
-
 	Language language;
 	String token;
-	float time;
+	long time;
 
 	/* Constructor */
 	public Speaker(Language language, SpeechModel speechModel)
 	{
 		this.language = language;
 		speechModel.addObserver(this);
-		// TODO Renew every 10 minutes
-		token = Speech.renewAccessToken( KEY1 );
+		renew();
 	}
 
 	/* saySomething
@@ -46,35 +43,34 @@ public class Speaker implements Observer
 	 */
 	public void saySomething(String text,Language language)
 	{
-		//try
-		//{
+		/* Renew token if needed */
+		if (System.currentTimeMillis() - time > EIGHTMINUTES)
+		{
+			renew();
+		}
+
+		if (language == null || token == null) { return; }
+
 		/* Start speaking a different thread */
 		ExecutorService executor =
 			Executors.newSingleThreadExecutor();
 		
 		executor.execute( new SpeechThread(text,
-						   this.language,
+						   language,
 						   token) );
-
+	
 		executor.shutdown();
-		//}
-		//catch (Exception e)
-		//{
-		//	System.out.println(e);
-		//}
 	}
 	public void saySomething(String text)
-	{
-		//Language language = new Language("en");
-		/* Start speaking a different thread */
-		ExecutorService executor =
-			Executors.newSingleThreadExecutor();
-		
-		executor.execute( new SpeechThread(text,
-						   this.language,
-						   token) );
+	{ saySomething(text,this.language); }
 
-		executor.shutdown();
+	/* renew
+	 * Method which renews the access token
+	 */
+	private void renew()
+	{
+		time = System.currentTimeMillis();
+		token = Speech.renewAccessToken( KEY1 );
 	}
 
 	public void update(Observable obs, Object obj)

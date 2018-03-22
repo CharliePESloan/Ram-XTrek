@@ -1,74 +1,119 @@
-//5043.94335,N,00330.91606,W
-
 /* Coordinate
- * Charlie Sloan (2018)
+ * Clyde Udunna 2018
  */
 
 public class Coordinate {
 	
 	final static int EARTHRADIUSKM = 6371;
-
-	long	lat;
-	long	lon;
-	long[]	coord;
-		
-	public Coordinate(String[] coordinates)
-	{
-		lat = Long.parseLong(coordinates[0]);
-		if( coordinates[1].equals("S") )
-		{
-			lat = -lat;
-		}
-
-		lon = Long.parseLong(coordinates[2]);
-		if( coordinates[3].equals("W") )
-		{
-			lon = -lon;
-		}
-
-		coord = new long[]{lat, lon};
+	
+	String strLat;
+	String strLon;
+	double lat = 0.0;
+	double lon = 0.0;
+	double velocity = 0.0;
+	double[] coord;
+	int rotation;
+	double LATITUDE_FIX = 0.297812;
+	double LONGITUDE_FIX = 0.2193674;
+	
+	public Coordinate(double lat, double lon){
+		this.lat = lat;
+		this.lon = lon;
 	}
 		
-	private static float degreesToRadians(float degrees)
-	{
-		return (degrees * (float)Math.PI) / 180;
+	public Coordinate(String[] coordinates, String[] trips, String[] bearings){
+		double latitude = mapFormat(coordinates[0]) + LATITUDE_FIX;
+		if(coordinates[1].equals("S")){lat = -latitude;}
+		else{lat = latitude;}
+		
+		double longitude = mapFormat(coordinates[2]) + LONGITUDE_FIX;
+		if(coordinates[3].equals("W")){lon = -longitude;}
+		else{lon = longitude;}
+		
+		strLat = gpsData(coordinates[0]);
+		if(coordinates[1].equals("S")){strLat = "-" + strLat;}
+		
+		strLon = gpsData(coordinates[2]);
+		if(coordinates[3].equals("W")){strLon = "-" + strLon;}
+		velocity = tripFormat(trips[6]);
+		
+		rotation = bearingFormat(bearings[5]);
+		
+		coord = new double[] {lat, lon};
+	}
+
+	public String gpsData(String nmea){
+		String[] part = nmea.split("\\.");
+		String degrees;
+		String minutes;
+		String seconds = part[1];
+		
+		if(part[0].length() == 5){
+			degrees = part[0].substring(0, 3);
+			minutes = part[0].substring(3);	
+		}else{
+			degrees = part[0].substring(0, 2);
+			minutes = part[0].substring(2);
+		}
+		
+		String location = degrees + "." + minutes + seconds;
+		return location;
+	}
+	
+	public double mapFormat(String coordinate){
+		double number = Double.parseDouble(coordinate);
+		double finalValue = number/100.0;
+		return finalValue;
+	}
+	
+	public double tripFormat(String mySpeed){
+		double finalValue = Double.parseDouble(mySpeed);
+		return finalValue;
+	}
+	
+	public int bearingFormat(String myBearing){
+		int finalValue = Integer.parseInt(myBearing);
+		return finalValue;
+	}
+	
+	private static double degreesToRadians(double degrees){
+		return (degrees * (double)Math.PI) / 180;
 	}
 
 	public static double between(double latitude1,
-				     double longitude1,
-				     double latitude2,
-				     double longitude2)
-	{	
-		float		lat1 = (float)latitude1;
-		final float	lon1 = (float)longitude1;
-		float		lat2 = (float)latitude2;
-		final float	lon2 = (float)longitude2;
+				    double longitude1,
+				    double latitude2,
+				    double longitude2){
+						
+		double		lat1 = (double)latitude1;
+		final double	lon1 = (double)longitude1;
+		double		lat2 = (double)latitude2;
+		final double	lon2 = (double)longitude2;
 
-		float latD = degreesToRadians(lat2-lat1);
-		float lonD = degreesToRadians(lon2-lon1);
+		double latD = degreesToRadians(lat2-lat1);
+		double lonD = degreesToRadians(lon2-lon1);
 
 		lat1 = degreesToRadians(lat1);
 		lat2 = degreesToRadians(lat2);
 
 		double a = Math.sin(latD/2) * Math.sin(latD/2) +
-			  Math.sin(lonD/2) * Math.sin(lonD/2) *
-			  Math.cos(lat1)   * Math.cos(lat2);
+			 Math.sin(lonD/2) * Math.sin(lonD/2) *
+			 Math.cos(lat1)   * Math.cos(lat2);
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
 		return (double)EARTHRADIUSKM * c;
 	}
 
-	public double distanceTo(Coordinate coordinate)
-	{
+	public double distanceTo(Coordinate coordinate){
 		final int	EARTHRADIUSKM = 6371;
 		
-		float		lat1 = lat;
-		final float	lon1 = lon;
-		float		lat2 = coordinate.getLat();
-		final float	lon2 = coordinate.getLon();
+		double	lat1 = lat;
+		final double lon1 = lon;
+		double		lat2 = coordinate.getLat();
+		final double	lon2 = coordinate.getLon();
 
-		float latD = degreesToRadians(lat2-lat1);
-		float lonD = degreesToRadians(lon2-lon1);
+		double latD = degreesToRadians(lat2-lat1);
+		double lonD = degreesToRadians(lon2-lon1);
 
 		lat1 = degreesToRadians(lat1);
 		lat2 = degreesToRadians(lat2);
@@ -81,26 +126,27 @@ public class Coordinate {
 		return (double)EARTHRADIUSKM * c;
 	}
 	
-	public long[] getPos()
-	{
+	public double[] getPos(){
 		return coord;
 	}
 
-	public long getLat()
-	{
+	public double getLat(){
 		return lat;
 	}
-	public long getLon()
-	{
+	
+	public double getLon(){
 		return lon;
 	}
 
-	public String getLatStr()
-	{
-		return Long.toString(lat);
+	public String getLatStr(){
+		return Double.toString(lat);
 	}
-	public String getLonStr()
-	{
-		return Long.toString(lon);
+	
+	public String getLonStr(){
+		return Double.toString(lon);
+	}
+	
+	public int getRotation(){
+		return rotation;
 	}
 }

@@ -7,7 +7,7 @@ import java.net.URL;
  *
  * See https://developers.google.com/maps/documentation/static-maps/intro
  *  
- * Produced by Devash Patel 2018.
+ * @author Devash Patel 2018.
  * Code used is adpated from that written by David Wakeling 2018. 
  */
 public class Maps {
@@ -17,6 +17,7 @@ public class Maps {
                         , String size
 						, String key
 						, String language
+						, String maptype
                         ) {
     final String method = "GET";
     final String url
@@ -26,7 +27,8 @@ public class Maps {
         + "&" + "size"   + "=" + size
         + "&" + "key"    + "=" + key
 		+ "&" + "language" + "=" + language
-		);
+		+ "&" + "maptype"  + "=" + maptype
+ 		);
     final byte[] body
         = {};
     final String[][] headers

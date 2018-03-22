@@ -44,6 +44,7 @@ public class MenuFrame extends JFrame {
     WhereToFrameModel whereToModel = new WhereToFrameModel(this, speechModel);
     SatelliteModel satModel = new SatelliteModel(this);
 	TripComputerModel tripModel = new TripComputerModel(this);
+	AboutModel aboutModel = new AboutModel(this);
     MapModel mapModel = new MapModel(this, speechModel, satModel);
     
     Controller controller = new Controller(onOffModel);
@@ -51,9 +52,12 @@ public class MenuFrame extends JFrame {
     JPanel menuView = new MenuView(controller, menuModel);
     JPanel speechView = new SpeechView(controller, speechModel);
     JPanel whereToView = new WhereToFrameView(controller, whereToModel);
-	JPanel tripView = new TripComputerView(controller, tripModel);
+	JPanel tripView = new TripComputerView(controller,this, tripModel);
     JPanel mapView = new MapView(controller, mapModel);
     JPanel satView = new SatelliteView(controller, satModel);
+    JPanel aboutView = new AboutView(controller, aboutModel);
+
+    Navigator nav = new Navigator(this,speechModel,win7u7,whereToModel);
     
     JButton PlusButton = new JButton();
     JButton MinusButton = new JButton();
@@ -61,9 +65,8 @@ public class MenuFrame extends JFrame {
     JButton MenuButton = new JButton();
     JButton OnOffButton = new JButton();
 
-    Navigator nav = new Navigator(this,speechModel,satModel,whereToModel);
-     Language language = new Language("en");
-    Speaker speaker = new Speaker(language, speechModel);
+     //Language language = new Language("en");
+    Speaker speaker = new Speaker(null, speechModel);
     String currentView = "OnOff";
     
   /* Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
@@ -101,7 +104,7 @@ SelectButton.setName("SelectButton");
 MenuButton.setName("MenuButton");
 OnOffButton.setName("OnOffButton");
 
-       nav.setOrigin("Exeter");
+       nav.setOrigin("50.722845","-3.5250755");
       
       thread.start();
     
@@ -132,6 +135,7 @@ OnOffButton.setName("OnOffButton");
 	cards.add(tripView, MenuEnum.TRIP);
     cards.add(mapView, MenuEnum.MAPS);
     cards.add(satView, MenuEnum.SATELLITE);
+	cards.add(aboutView, MenuEnum.ABOUT);
     
     //this.menuEnum = ONOFF;
     //menuFrame.add(menuView);
@@ -165,11 +169,11 @@ OnOffButton.setName("OnOffButton");
                 controller.setModel(speechModel);
               break;
               case MENU:
-	           // nav.refreshDirections();
-               // nav.printOut();
+				nav.refreshDirections();
+                //nav.printOut();
                 if(controller.getModel() == onOffModel){
                 saySomething("Turning On");}
-                else {
+                else if (controller.getModel() != whereToModel) {
                 saySomething("Back to main menu");}
                 controller.setModel(menuModel);
               break;
@@ -184,6 +188,10 @@ OnOffButton.setName("OnOffButton");
               case MAPS:
                 saySomething("Maps");
                 controller.setModel(mapModel);
+              break;
+			  case ABOUT:
+                saySomething("About");
+                controller.setModel(aboutModel);
               break;
               case ONOFF:
                 if(controller.getModel() == menuModel){

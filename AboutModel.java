@@ -3,41 +3,28 @@ import java.awt.event.ActionEvent;
 import java.util.*;
 import javax.swing.*;
 
-public class TripComputerModel extends Observable implements Model {
-	
-	CycleButton selected;
+public class AboutModel extends Observable implements Model {
 	MenuFrame mainFrame;
-	long time;
-
-public long getTimer (){
-return System.currentTimeMillis() - time;
-}	
+	CycleButton selected;
 	
-	public TripComputerModel (MenuFrame mainFrame) {
+	public AboutModel (MenuFrame mainFrame) {
 		this.mainFrame = mainFrame;
-		time = System.currentTimeMillis();
-		
 	}
 	public void setSelected(CycleButton newSelected) {
-		
 	}
 	public void pressedPlus() {
-		
 	}
 	public void pressedMinus() {
-		
 	}
 	public void pressedMenu() {
 		mainFrame.setMenu(MenuEnum.MENU);
 	}
-	public void pressedSelect() {
-		
+	public void pressedSelect()  {
 	}
 	public void pressedOnOff() {
 		mainFrame.setMenu(MenuEnum.ONOFF);
 		reset();
 	}
 	public void reset() {
-		
 	}
 }

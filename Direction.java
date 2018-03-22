@@ -14,14 +14,19 @@ import java.util.HashMap;
 
 public class Direction
 {
+	/* Constants */
+	private final static short ONEKILOMETER = 1000;
+
 	/* Variables */
 	private String text;
-	private float latStart;
-	private float lonStart;
-	private float latEnd;
-	private float lonEnd;
-	private Coordinate cStart;
-	private Coordinate cEnd;
+	private final double latStart;
+	private final double lngStart;
+	private final double latEnd;
+	private final double lngEnd;
+	private final Coordinate cStart;
+	private final Coordinate cEnd;
+
+	private boolean read;
 
 	/* Set up word replacements */
 	private static final Map<String, String> REPLACERS =
@@ -37,8 +42,10 @@ public class Direction
 		return map;
 	}
 
+	/* Constructor */
 	public Direction(JSONObject direction, Language lang)
 	{
+		/* Temporary variables for navigating JSONObject */
 		JSONObject distance;
 		JSONObject location;
 		String	   distanceStr;
@@ -47,10 +54,8 @@ public class Direction
 		distance = direction.getJSONObject("distance");
 		distanceInt = distance.getInt("value");
 
-		//distanceStr = JObject.getString("text");
-
 		/* Read distances larger than 1000m in km */
-		if (distanceInt >= 1000)
+		if (distanceInt >= ONEKILOMETER)
 		{
 			distanceStr = String.format(lang.getKilometerText(),
 						    (float)distanceInt / 1000);
@@ -59,9 +64,19 @@ public class Direction
 			distanceStr = String.format(lang.getMeterText(),
 						    distanceInt);
 		}
-		
+	
+		/* Get start and end locations */
 		location = direction.getJSONObject("start_location");
+		latStart = location.getDouble("lat");
+		lngStart = location.getDouble("lng");
+		cStart	 = new Coordinate(latStart,lngStart);
 
+		location = direction.getJSONObject("end_location");
+		latEnd	 = location.getDouble("lat");
+		lngEnd	 = location.getDouble("lng");
+		cEnd	 = new Coordinate(latEnd,lngEnd);
+
+		/* Get direction text and format it */
 		String   html = direction.getString("html_instructions");
 		Document doc = Jsoup.parse(html);
 		text = distanceStr + " " + doc.text();
@@ -72,27 +87,44 @@ public class Direction
 		}
 	}
 
+	/* distanceTo
+	 * Get distance to the start of this direction from another
+	 * coordinate
+	 */
+	public double distanceTo(Coordinate c)
+	{
+		return cStart.distanceTo(c);
+	}
+
+	/* Setters */
+	public void setRead(boolean read)
+	{
+		this.read = read;
+	}
+
+	/* Getters */
 	public String getText()
 	{
 		return text;
 	}
 
-	public float getLat1()
+	public double getLat1()
 	{
 		return latStart;
 	}
-	public float getLon1()
+	public double getLon1()
 	{
-		return lonStart;
+		return lngStart;
 	}
-	public float getLat2()
+	public double getLat2()
 	{
 		return latEnd;
 	}
-	public float getLon2()
+	public double getLon2()
 	{
-		return lonEnd;
+		return lngEnd;
 	}
+
 	public Coordinate getCoordinateStart()
 	{
 		return cStart;
@@ -102,18 +134,8 @@ public class Direction
 		return cEnd;
 	}
 
-	private float degreesToRadians(float degrees)
+	public boolean getRead()
 	{
-		return (degrees * (float)Math.PI) / 180;
-	}
-
-	public double distanceTo(float latitude,float longitude)
-	{
-		return Distance.between(this.latStart,this.lonStart,
-					latitude,     longitude);
-	}
-	public double distanceTo(Coordinate c)
-	{
-		return cStart.distanceTo(c);
+		return read;
 	}
 }
