@@ -37,7 +37,7 @@ public class Satellite{
 		String[] ifvalid;
 		for(int i = 0; i< lines.length; i++){
 			ifvalid = getPosition(lines[i]);
-			if(ifvalid == null){continue;}
+			if(ifvalid == null || ifvalid[0].equals("")){continue;}
 			return ifvalid;
 		}
 	return null;
@@ -60,7 +60,7 @@ public class Satellite{
 		String[] ifvalid;
 		for(int i = 0; i< lines.length; i++){
 			ifvalid = getSpeedDistance(lines[i]);
-			if(ifvalid == null){continue;}
+			if(ifvalid == null){break;}
 			return ifvalid;
 		}
 	return null;

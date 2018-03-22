@@ -5,7 +5,9 @@
 public class Coordinate {
 	
 	final static int EARTHRADIUSKM = 6371;
-
+	
+	String strLat;
+	String strLon;
 	double lat = 0.0;
 	double lon = 0.0;
 	double velocity = 0.0;
@@ -26,11 +28,34 @@ public class Coordinate {
 		if(coordinates[3].equals("W")){lon = -longitude;}
 		else{lon = longitude;}
 		
+		strLat = gpsData(coordinates[0]);
+		if(coordinates[1].equals("S")){strLat = "-" + strLat;}
+		
+		strLon = gpsData(coordinates[2]);
+		if(coordinates[3].equals("W")){strLon = "-" + strLon;}
 		velocity = tripFormat(trips[6]);
 		
 		rotation = bearingFormat(bearings[5]);
 		
 		coord = new double[] {lat, lon};
+	}
+
+	public String gpsData(String nmea){
+		String[] part = nmea.split("\\.");
+		String degrees;
+		String minutes;
+		String seconds = part[1];
+		
+		if(part[1].length() == 5){
+			degrees = part[0].substring(0, 3);
+			minutes = part[0].substring(3);	
+		}else{
+			degrees = part[0].substring(0, 2);
+			minutes = part[0].substring(2);
+		}
+		
+		String location = degrees + "." + minutes + seconds;
+		return location;
 	}
 	
 	public double mapFormat(String coordinate){
@@ -112,11 +137,11 @@ public class Coordinate {
 	}
 
 	public String getLatStr(){
-		return Double.toString(lat);
+		return strLat;
 	}
 	
 	public String getLonStr(){
-		return Double.toString(lon);
+		return strLon;
 	}
 	
 	public int getRotation(){
