@@ -15,16 +15,16 @@ import java.util.Observer;
 public class Navigator implements Observer
 {
 	/* Constant Values */
-	final static int SEARCHDISTANCE = 10000;
-	final static float SPEECHDISTANCE = 0.01f;
 	final static String URLBASE =
 		"https://maps.googleapis.com/maps/api/directions/json";
 	final static String KEY	=
 		"AIzaSyB9Ky-AaEebyjqE7f8-kBmXEMJL69Cr_Yk";
 	final static String METHOD = "GET";
-	final static String REGION = "uk";
-	final static String MODE   = "TRANSIT";
-	final static String ENCODING = "UTF-8";
+	final static String REGION	   = "uk";
+	final static String MODE	   = "TRANSIT";
+	final static String ENCODING	   = "UTF-8";
+	final static int    SEARCHDISTANCE = 10000;
+	final static float  SPEECHDISTANCE = 0.01f;
 
 	/* Variables */
 	private MenuFrame mainFrame;
@@ -212,43 +212,6 @@ public class Navigator implements Observer
 		return directions;
 	}
 
-	/* printRaw
-	 * Print full JSON structure for directions
-	 */
-	public void printRaw()
-	{
-		System.out.println("Full directions:");
-		if (directionsRaw.length == 0)
-		{
-			System.out.println("No directions");
-		} else
-		{
-			// Print JSON character-by-character
-			for (int i=0; i<directionsRaw.length; i++)
-			{
-				System.out.print( (char) directionsRaw[i]);
-			}
-		}
-	}
-
-	/* printOut
-	 * Output directions
-	 */
-	public void printOut()
-	{
-		// Print directions, origin and destination
-		
-		// Debug
-		//printRaw();
-
-		for (int i=0; i<directions.length; i++)
-		{
-			System.out.println( getDirection(i).getText() );
-		}
-		System.out.println("Origin="+origin);
-		System.out.println("Destination="+destination);
-	}
-
 	/* checkNextDir
 	 * Takes the current location as a coordinate object and
 	 * returns the closest direction (if it is within the
@@ -317,5 +280,42 @@ public class Navigator implements Observer
 		{
 			setDest((String)obj);
 		}
+	}
+
+	/* printRaw
+	 * Print full JSON structure for directions
+	 */
+	public void printRaw()
+	{
+		System.out.println("Full directions:");
+		if (directionsRaw.length == 0)
+		{
+			System.out.println("No directions");
+		} else
+		{
+			// Print JSON character-by-character
+			for (int i=0; i<directionsRaw.length; i++)
+			{
+				System.out.print( (char) directionsRaw[i]);
+			}
+		}
+	}
+
+	/* printOut
+	 * Output directions
+	 */
+	public void printOut()
+	{
+		// Print directions, origin and destination
+		
+		// Debug
+		//printRaw();
+
+		for (int i=0; i<directions.length; i++)
+		{
+			System.out.println( getDirection(i).getText() );
+		}
+		System.out.println("Origin="+origin);
+		System.out.println("Destination="+destination);
 	}
 }
