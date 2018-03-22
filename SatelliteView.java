@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.*;
+import java.awt.*;
 import java.util.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,8 +37,10 @@ public class SatelliteView extends JPanel implements Observer {
     Controller controller;
     SatelliteModel satelliteModel;
 	//Labels which will display longitude and latitude
-	JLabel longitude = new JLabel("ahah");
-	JLabel latitude = new JLabel("hahah");
+	JLabel latitude = new JLabel("Initialising Latitude...");
+	JLabel longitude = new JLabel("Initialising Longitude...");
+	Font font = new Font("Verdana", Font.PLAIN, 15);
+	
     
 	public SatelliteView(Controller controller, SatelliteModel satelliteModel){
 		this.controller = controller;
@@ -51,8 +54,10 @@ public class SatelliteView extends JPanel implements Observer {
 		setSize(width, height);
 		//setLocation(x_loc,y_loc);  
 		//setLocation(x_loc,y_loc);
-		longitude.setBounds(20, 20, 200, 80);
-		latitude.setBounds(20, 40, 200, 80);
+		longitude.setBounds(40, 80, 200, 80);
+		latitude.setBounds(40, 160, 200, 80);
+		latitude.setFont(font);
+		longitude.setFont(font);
 		add(longitude);
 		add(latitude);
 	}
@@ -63,8 +68,11 @@ public class SatelliteView extends JPanel implements Observer {
 		if(obj instanceof Coordinate){
 			System.out.print(obj);
 			Coordinate a = (Coordinate) obj;
-			longitude.setText(a.getLatStr()); // to fix
-			latitude.setText(a.getLonStr());
+			latitude.setText(a.getLatStr()); // to fix
+			longitude.setText(a.getLonStr());
+		}else if(obj instanceof String){
+			latitude.setText((String) obj);
+			longitude.setText((String) obj);
 		}
   }
 }
