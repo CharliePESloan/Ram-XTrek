@@ -74,7 +74,7 @@ public class Navigator implements Observer
 	 * setOrigin
 	 * Sets the start of the route
 	 */
-	public void setOrigin(float latitude,float longitude)
+	public void setOrigin(double latitude,double longitude)
 	{
 		try
 		{
@@ -165,7 +165,6 @@ public class Navigator implements Observer
 		{
 			step = steps.getJSONObject(i);
 			directions[i] = new Direction(step,language);
-
 		}
 
 	}
@@ -226,7 +225,7 @@ public class Navigator implements Observer
 	 */
 	public void printOut()
 	{
-		//printRaw();
+		printRaw();
 
 		// Print origin, directions and destination
 		System.out.println("Origin="+origin);
@@ -246,7 +245,12 @@ public class Navigator implements Observer
 
 		}
 	}
-	// Not yet implemented
+
+	/* checkNextDir
+	 * Takes the current location as a coordinate object and
+	 * returns the closest direction (if it is within the
+	 * search distance.
+	 */
 	public Direction checkNextDir(Coordinate c)
 	{
 		double smallest = SEARCHDISTANCE;
@@ -262,7 +266,8 @@ public class Navigator implements Observer
 				closest  = dir;
 			}
 		}
-
+		if (closest != null)
+		{ System.out.println(closest.text); }
 		if (smallest > SPEECHDISTANCE)
 		{
 			return null;
@@ -274,9 +279,17 @@ public class Navigator implements Observer
 	{
 		if (obs == satellite && obj instanceof Coordinate)
 		{
-			Direction d = checkNextDir( (Coordinate)obj );
-			if (d != null)
+			// Get coordinate
+			Coordinate c = (Coordinate)obj;
+
+			// Set journey origin
+			setOrigin(c.getLat(),c.getLon());
+
+			// Check if next direction is ready to be spoken
+			Direction d = checkNextDir( c );
+			if (d != null && d.getRead())
 			{
+				d.setRead(true);
 				mainFrame.saySomething(d.getText());
 			}
 		}
