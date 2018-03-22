@@ -18,6 +18,7 @@ public class Maps {
 						, String key
 						, String language
 						, String maptype
+						, String path
                         ) {
     final String method = "GET";
     final String url
@@ -28,7 +29,8 @@ public class Maps {
         + "&" + "key"    + "=" + key
 		+ "&" + "language" + "=" + language
 		+ "&" + "maptype"  + "=" + maptype
-		);
+		+ "&" + "path"     + "=" + path
+ 		);
     final byte[] body
         = {};
     final String[][] headers
