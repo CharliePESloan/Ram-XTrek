@@ -82,8 +82,7 @@ class Controller implements MouseListener
                     b.setIcon(new ImageIcon("Images/MinusButtonSelected.png"));}
 					break;
 				case "SelectButton":
-                    if(!((this.model instanceof TripComputerModel) || (this.model instanceof SatelliteModel)
-                       || (this.model instanceof MapModel))){
+                    if(!((this.model instanceof TripComputerModel) || (this.model instanceof SatelliteModel))){
                     b.setIcon(new ImageIcon("Images/SelectButtonSelected.png"));}
 					break;
 				case "MenuButton":
