@@ -39,29 +39,31 @@ public class SatelliteView extends JPanel implements Observer {
 	JLabel longitude = new JLabel("ahah");
 	JLabel latitude = new JLabel("hahah");
     
-  public SatelliteView(Controller controller, SatelliteModel satelliteModel){
-     this.controller = controller;
-     this.satelliteModel =  satelliteModel;
+	public SatelliteView(Controller controller, SatelliteModel satelliteModel){
+		this.controller = controller;
+		this.satelliteModel =  satelliteModel;
 	 
-	 //Added Observer to this instance in order to pass on any changes
-	satelliteModel.getMainFrame().getWin7Ublox7().addObserver(this); 
+		//Added Observer to this instance in order to pass on any changes
+		satelliteModel.getMainFrame().getWin7Ublox7().addObserver(this); 
       
-     setLayout(null);
-      setBackground(Color.white);
-    setSize(width, height);
-    //setLocation(x_loc,y_loc);  
-    //setLocation(x_loc,y_loc);
-	longitude.setBounds(20, 20, 200, 80);
-	latitude.setBounds(20, 40, 200, 80);
-	add(longitude);
-	add(latitude);
-  }
-  /*This method takes the values passed by the thread in the modified version
-  *of Win7Ublox7 and uses them to continuously display the user's realtime location
-  *at RunTime*/
-  public void update(Observable obs, Object obj){
-	  String[] a = (String[]) obj;
-	  longitude.setText(a[0] + " " + a[1]);
-	  latitude.setText(a[2] + " " + a[3]);
+		setLayout(null);
+		setBackground(Color.white);
+		setSize(width, height);
+		//setLocation(x_loc,y_loc);  
+		//setLocation(x_loc,y_loc);
+		longitude.setBounds(20, 20, 200, 80);
+		latitude.setBounds(20, 40, 200, 80);
+		add(longitude);
+		add(latitude);
+	}
+	/*This method takes the values passed by the thread in the modified version
+	*of Win7Ublox7 and uses them to continuously display the user's realtime location
+	*at RunTime*/
+	public void update(Observable obs, Object obj){
+		if(obj instanceof Coordinate){
+			Coordinate a = (Coordinate) obj;
+			longitude.setText(a.getLatStr()); // to fix
+			latitude.setText(a.getLonStr());
+		}
   }
 }

@@ -42,11 +42,51 @@ public class Satellite{
 		}
 	return null;
 	}
-		
-	public static void main(String[] args){
-		Win7Ublox7 uBlox = new Win7Ublox7();
-		Thread thread1 = new Thread(uBlox);
-		thread1.start();
+	
+	public String[] getSpeedDistance(String line){
+		String[] logistics;
+		if(line.startsWith("$GPVTG")){
+			String message = line.substring(7);
+			logistics = message.split(",");
+			if(logistics.length != 0){
+				return logistics;
+			}else{return null;}
+		}
+	return null;
+	}
+	
+	public String[] getVTG(String text){
+		String[] lines = text.split("\n");
+		String[] ifvalid;
+		for(int i = 0; i< lines.length; i++){
+			ifvalid = getSpeedDistance(lines[i]);
+			if(ifvalid == null){continue;}
+			return ifvalid;
+		}
+	return null;
+	}
+	
+	public String[] getAzimuth(String line){
+		String[] bearings;
+		if(line.startsWith("$GPGSV")){
+			String message = line.substring(7);
+			bearings = message.split(",");
+			if(bearings.length != 0){
+				return bearings;
+			}else{return null;}
+		}
+	return null;
+	}
+	
+	public String[] getGSV(String text){
+		String[] lines = text.split("\n");
+		String[] ifvalid;
+		for(int i = 0; i<lines.length; i++){
+			ifvalid = getAzimuth(lines[i]);
+			if(ifvalid == null){continue;}
+			return ifvalid;
+		}
+	return null;
 	}
 }
 
