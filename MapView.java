@@ -55,7 +55,7 @@ class MapView extends JPanel implements Observer {
   public void update( Observable obs, Object obj ) {
 	if (obj instanceof BufferedImage){
 		mapImage = (BufferedImage) obj; 
-		HYP = (int) Math.sqrt(mapImage.getWidth()*mapImage.getWidth() + mapImage.getHeight()*mapImage.getHeight() ); 
+		HYP = (int) Math.sqrt(getWidth()*getWidth() + getHeight()*getHeight() ); 
 	}
     else if (obj instanceof BufferedImage){
 		rotation = (int) obj;
@@ -66,11 +66,13 @@ class MapView extends JPanel implements Observer {
   public  void paintComponent( Graphics g  ) {
 	super.paintComponent(g); 
 	Graphics2D g2d = (Graphics2D) g; 
-	g2d.rotate(Math.toRadians(rotation), getWidth()/2,getHeight()/2 );
-	g2d.drawImage(mapImage, -(HYP-getWidth())/2, -(HYP-getHeight())/2, null);
+	g2d.rotate(Math.toRadians(rotation), mapImage.getWidth()/2,mapImage.getHeight()/2 );
+	g2d.drawImage(mapImage, (-HYP-getWidth())/8, (-HYP-getHeight())/8, null);
+	g.setColor(Color.red);
+	g.fillOval(getWidth()/2,getHeight()/2, 15, 15);
 	System.out.println(HYP); 
-	System.out.println(getWidth());
-	System.out.println(getHeight()); 
+	System.out.println(mapImage.getWidth());
+	System.out.println("height"+mapImage.getHeight()); 
 	
   }
   
