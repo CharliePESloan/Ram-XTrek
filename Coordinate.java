@@ -119,4 +119,7 @@ public class Coordinate {
 		return Double.toString(lon);
 	}
 	
+	public int getRotation(){
+		return rotation;
+	}
 }
