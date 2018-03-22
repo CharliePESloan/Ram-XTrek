@@ -169,7 +169,7 @@ OnOffButton.setName("OnOffButton");
                 //nav.printOut();
                 if(controller.getModel() == onOffModel){
                 saySomething("Turning On");}
-                else {
+                else if (controller.getModel() != whereToModel) {
                 saySomething("Back to main menu");}
                 controller.setModel(menuModel);
               break;

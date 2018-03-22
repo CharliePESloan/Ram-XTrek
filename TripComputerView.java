@@ -18,6 +18,7 @@ public class TripComputerView extends JPanel implements Observer {
 	
 	public TripComputerView (Controller controller, MenuFrame XTrek, TripComputerModel model) {
 		this.model = model;
+		model.addObserver(this);
 		XTrek.getWin7Ublox7().addObserver(this);
 		setLayout(tripComp);
 		setBackground(Color.black);
@@ -37,10 +38,10 @@ public class TripComputerView extends JPanel implements Observer {
 		
 	}
 	public void update(Observable o, Object arg) {
-		//double[] test = (double[]) arg;
-		//tripD.setText(test[0]);
-		//tripS.setText(test[1]);
-		//tripMT.setText(test[2]);
+		Coordinate coord[] = (Coordinate) arg;
+		tripD.setText("Trip odem" + Double.toString(coord.get) + "KM";
+		tripS.setText("Speed" + Double.toString(coord.get);
+		tripMT.setText("Moving time" + Double.toString(coord.get);
 		
 	}
 }
