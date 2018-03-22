@@ -74,7 +74,7 @@ public class Navigator implements Observer
 	 * setOrigin
 	 * Sets the start of the route
 	 */
-	public void setOrigin(float latitude,float longitude)
+	public void setOrigin(double latitude,double longitude)
 	{
 		try
 		{
@@ -279,9 +279,17 @@ public class Navigator implements Observer
 	{
 		if (obs == satellite && obj instanceof Coordinate)
 		{
-			Direction d = checkNextDir( (Coordinate)obj );
-			if (d != null)
+			// Get coordinate
+			Coordinate c = (Coordinate)obj;
+
+			// Set journey origin
+			setOrigin(c.getLat(),c.getLon());
+
+			// Check if next direction is ready to be spoken
+			Direction d = checkNextDir( c );
+			if (d != null && d.getRead())
 			{
+				d.setRead(true);
 				mainFrame.saySomething(d.getText());
 			}
 		}

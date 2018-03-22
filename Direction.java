@@ -17,11 +17,13 @@ public class Direction
 	/* Variables */
 	private final String text;
 	private final double latStart;
-	private final double lonStart;
+	private final double lngStart;
 	private final double latEnd;
-	private final double lonEnd;
+	private final double lngEnd;
 	private final Coordinate cStart;
 	private final Coordinate cEnd;
+
+	private boolean read;
 
 	/* Set up word replacements */
 	private static final Map<String, String> REPLACERS =
@@ -109,6 +111,15 @@ public class Direction
 	public Coordinate getCoordinateEnd()
 	{
 		return cEnd;
+	}
+
+	public boolean getRead()
+	{
+		return read;
+	}
+	public void setRead(boolean read)
+	{
+		this.read = read;
 	}
 
 	private float degreesToRadians(float degrees)
