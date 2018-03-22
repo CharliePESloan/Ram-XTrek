@@ -79,7 +79,9 @@ public class Navigator implements Observer
 		try
 		{
 			origin = latitude+","+longitude;
-			encOrigin = URLEncoder.encode(origin,ENCODING);
+			//encOrigin =
+			URLEncoder.encode(origin,ENCODING);
+			encOrigin = origin;
 			// Debug
 			System.out.println(origin + " -> " + encOrigin);
 		} catch (UnsupportedEncodingException ex)
@@ -107,7 +109,9 @@ public class Navigator implements Observer
 		try
 		{
 			destination = latitude+","+longitude;
-			encDestination = URLEncoder.encode(destination,ENCODING);
+			//encDestination =
+			URLEncoder.encode(destination,ENCODING);
+			encDestination = destination;
 		} catch (UnsupportedEncodingException ex)
 		{
 			System.out.println( ex ); System.exit( 1 );
@@ -151,6 +155,8 @@ public class Navigator implements Observer
 		final byte[] body = {};
 		final String[][] headers = {};
 		directionsRaw = HttpConnect.httpConnect( METHOD, url, headers, body );
+		System.out.println(url);
+		printRaw();
 
 		// Traverse directionsJSON to get array of steps
 		directionsJSON = new JSONObject(new String(directionsRaw));
@@ -261,6 +267,8 @@ public class Navigator implements Observer
 			// Get coordinate
 			Coordinate c = (Coordinate)obj;
 
+			System.out.println("Coordinates " + c.getLatStr() + ", " + c.getLonStr());
+
 			// Set journey origin
 			setOrigin(c.getLatStr(),c.getLonStr());
 
@@ -311,11 +319,18 @@ public class Navigator implements Observer
 		// Debug
 		//printRaw();
 
-		for (int i=0; i<directions.length; i++)
+		if (directions != null)
 		{
-			System.out.println( getDirection(i).getText() );
+			for (int i=0; i<directions.length; i++)
+			{
+				System.out.println(
+					getDirection(i).getText() );
+			}
 		}
+
 		System.out.println("Origin="+origin);
 		System.out.println("Destination="+destination);
+		System.out.println("Origin="+encOrigin);
+		System.out.println("Destination="+encDestination);
 	}
 }

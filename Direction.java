@@ -96,6 +96,12 @@ public class Direction
 		return cStart.distanceTo(c);
 	}
 
+	/* Setters */
+	public void setRead(boolean read)
+	{
+		this.read = read;
+	}
+
 	/* Getters */
 	public String getText()
 	{
@@ -131,9 +137,5 @@ public class Direction
 	public boolean getRead()
 	{
 		return read;
-	}
-	public void setRead(boolean read)
-	{
-		this.read = read;
 	}
 }
