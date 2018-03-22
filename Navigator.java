@@ -267,7 +267,7 @@ public class Navigator implements Observer
 			}
 		}
 		if (closest != null)
-		{ System.out.println(closest.text); }
+		{ System.out.println(closest.getText()); }
 		if (smallest > SPEECHDISTANCE)
 		{
 			return null;
