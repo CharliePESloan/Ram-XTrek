@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class Direction
 {
 	/* Constants */
-	private final static ONEKILOMETER = 1000;
+	private final static short ONEKILOMETER = 1000;
 
 	/* Variables */
 	private String text;
