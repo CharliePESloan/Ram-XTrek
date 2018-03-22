@@ -19,9 +19,9 @@ public class Win7Ublox7 extends Observable implements Runnable{
   final static int    BAUD_RATE =  9600;  /* bps */
   final static int    TIMEOUT   =  2000;  /* ms  */
   final static int    BUFF_SIZE =  1024;
-  String[] a;
-  String[] b;
-  String[] c;
+  String[] mapLatLon;
+  String[] tripVelocity;
+  String[] tripRotation;
   SatelliteView myView;
 
 	//Dongle Reader starts here//
@@ -60,10 +60,11 @@ public class Win7Ublox7 extends Observable implements Runnable{
 			while ( ( n = in.read( buffer ) ) > -1 ) {
 				s = new String( buffer, 0, n );     
 				/*System.out.print( s );*/
-				a = mySat.getGLL(s); //updating our array to contain new values
-				b = mySat.getVTG(s);
-				c = mySat.getGSV(s);
-				if(a == null){continue;} 
+				mapLatLon = mySat.getGLL(s); //updating our array to contain new values
+				tripVelocity = mySat.getVTG(s);
+				tripRotation = mySat.getGSV(s);
+				if(mapLatLon == null && tripVelocity == null && tripRotation == null)
+				{continue;} 
 				Coordinate c = new Coordinate(a, b, c);
 				setChanged(); //Notifying the observer that a change has occurred
 				notifyObservers(a);//Passing on our values to the observer for further use	
