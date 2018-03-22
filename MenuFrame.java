@@ -44,6 +44,7 @@ public class MenuFrame extends JFrame {
     WhereToFrameModel whereToModel = new WhereToFrameModel(this, speechModel);
     SatelliteModel satModel = new SatelliteModel(this);
 	TripComputerModel tripModel = new TripComputerModel(this);
+	AboutModel aboutModel = new AboutModel(this);
     MapModel mapModel = new MapModel(this, speechModel, satModel);
     
     Controller controller = new Controller(onOffModel);
@@ -54,6 +55,7 @@ public class MenuFrame extends JFrame {
 	JPanel tripView = new TripComputerView(controller,this, tripModel);
     JPanel mapView = new MapView(controller, mapModel);
     JPanel satView = new SatelliteView(controller, satModel);
+	JPanel aboutView = new AboutView(controller, aboutModel);
     
     JButton PlusButton = new JButton();
     JButton MinusButton = new JButton();
@@ -132,6 +134,7 @@ OnOffButton.setName("OnOffButton");
 	cards.add(tripView, MenuEnum.TRIP);
     cards.add(mapView, MenuEnum.MAPS);
     cards.add(satView, MenuEnum.SATELLITE);
+	cards.add(aboutView, MenuEnum.ABOUT);
     
     //this.menuEnum = ONOFF;
     //menuFrame.add(menuView);
@@ -166,7 +169,7 @@ OnOffButton.setName("OnOffButton");
               break;
               case MENU:
 				nav.refreshDirections();
-                //nav.printOut();
+                nav.printOut();
                 if(controller.getModel() == onOffModel){
                 saySomething("Turning On");}
                 else if (controller.getModel() != whereToModel) {
@@ -184,6 +187,10 @@ OnOffButton.setName("OnOffButton");
               case MAPS:
                 saySomething("Maps");
                 controller.setModel(mapModel);
+              break;
+			  case ABOUT:
+                saySomething("About");
+                controller.setModel(aboutModel);
               break;
               case ONOFF:
                 if(controller.getModel() == menuModel){
