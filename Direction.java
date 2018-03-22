@@ -15,13 +15,13 @@ import java.util.HashMap;
 public class Direction
 {
 	/* Variables */
-	private String text;
-	private float latStart;
-	private float lonStart;
-	private float latEnd;
-	private float lonEnd;
-	private Coordinate cStart;
-	private Coordinate cEnd;
+	private final String text;
+	private final double latStart;
+	private final double lonStart;
+	private final double latEnd;
+	private final double lonEnd;
+	private final Coordinate cStart;
+	private final Coordinate cEnd;
 
 	/* Set up word replacements */
 	private static final Map<String, String> REPLACERS =
@@ -37,6 +37,7 @@ public class Direction
 		return map;
 	}
 
+	/* Constructor */
 	public Direction(JSONObject direction, Language lang)
 	{
 		JSONObject distance;
@@ -61,6 +62,14 @@ public class Direction
 		}
 		
 		location = direction.getJSONObject("start_location");
+		latStart = location.getDouble("lat");
+		lngStart = location.getDouble("lng");
+		cStart	 = new Coordinate(latStart,lngStart);
+
+		location = direction.getJSONObject("end_location");
+		latEnd	 = location.getDouble("lat");
+		lngEnd	 = location.getDouble("lng");
+		cEnd	 = new Coordinate(latEnd,lngEnd);
 
 		String   html = direction.getString("html_instructions");
 		Document doc = Jsoup.parse(html);
@@ -77,21 +86,21 @@ public class Direction
 		return text;
 	}
 
-	public float getLat1()
+	public double getLat1()
 	{
 		return latStart;
 	}
-	public float getLon1()
+	public double getLon1()
 	{
-		return lonStart;
+		return lngStart;
 	}
-	public float getLat2()
+	public double getLat2()
 	{
 		return latEnd;
 	}
-	public float getLon2()
+	public double getLon2()
 	{
-		return lonEnd;
+		return lngEnd;
 	}
 	public Coordinate getCoordinateStart()
 	{
@@ -109,7 +118,7 @@ public class Direction
 
 	public double distanceTo(float latitude,float longitude)
 	{
-		return Distance.between(this.latStart,this.lonStart,
+		return Distance.between(this.latStart,this.lngStart,
 					latitude,     longitude);
 	}
 	public double distanceTo(Coordinate c)
