@@ -84,7 +84,7 @@ public class Navigator extends Observable implements Observer
 			URLEncoder.encode(origin,ENCODING);
 			encOrigin = origin;
 			// Debug
-			System.out.println(origin + " -> " + encOrigin);
+			//System.out.println(origin + " -> " + encOrigin);
 		} catch (UnsupportedEncodingException ex)
 		{
 			System.out.println( ex ); System.exit( 1 );
@@ -242,6 +242,7 @@ public class Navigator extends Observable implements Observer
 			Direction dir = getDirection(i);
 			double dist =
 				c.distanceTo(dir.getCoordinateStart());
+			System.out.println(dist);
 			if (dist < smallest)
 			{
 				smallest = dist;

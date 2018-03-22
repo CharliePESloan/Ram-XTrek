@@ -45,8 +45,7 @@ public class MenuFrame extends JFrame {
     SatelliteModel satModel = new SatelliteModel(this);
 	TripComputerModel tripModel = new TripComputerModel(this);
 	AboutModel aboutModel = new AboutModel(this);
-    Navigator nav = new Navigator(this,speechModel,win7u7,whereToModel);
-    MapModel mapModel = new MapModel(this, speechModel, satModel, nav);
+    MapModel mapModel = new MapModel(this, speechModel, satModel);
     
     Controller controller = new Controller(onOffModel);
     JPanel onOffView = new OnOffView(controller, onOffModel);
@@ -56,7 +55,9 @@ public class MenuFrame extends JFrame {
 	JPanel tripView = new TripComputerView(controller,this, tripModel);
     JPanel mapView = new MapView(controller, mapModel);
     JPanel satView = new SatelliteView(controller, satModel);
-	JPanel aboutView = new AboutView(controller, aboutModel);
+    JPanel aboutView = new AboutView(controller, aboutModel);
+
+    Navigator nav = new Navigator(this,speechModel,win7u7,whereToModel);
     
     JButton PlusButton = new JButton();
     JButton MinusButton = new JButton();
