@@ -23,6 +23,7 @@ public class MapModel extends Observable implements Model, Observer {
 	private int maxZoom = 21;                      /* maximum zoom value */
 	private int minZoom = 2;                       /* minimum zoom value */ 
 	private int counter = 1; 
+	private int rotation = 0; 
 	private String maptype;
 	private Language language = new Language ("en"); 
 	
@@ -39,17 +40,19 @@ public class MapModel extends Observable implements Model, Observer {
     }
 	
 	public void update(Observable obs, Object obj){
+		
 		if (obj instanceof Language)
 		{ 
 			language = (Language) obj; 
-			imageLoader();
 		}
 		else if (obj instanceof Coordinate)
 		{
 			Coordinate a = (Coordinate) obj;
+			rotation = a.getRotation(); 
 			latitude = a.getLatStr(); 
 			longitude = a.getLonStr(); 
 		}
+		imageLoader();
 	}
 	
 
@@ -64,7 +67,7 @@ public class MapModel extends Observable implements Model, Observer {
         catch (Exception e){
 			System.out.println(e);
 		} 
-		setChanged(); notifyObservers (img);
+		setChanged(); notifyObservers (img); setChanged(); notifyObservers(rotation); 
 	}
   
     public void pressedPlus() {  //Zoom in method

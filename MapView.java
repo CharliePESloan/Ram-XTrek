@@ -25,12 +25,12 @@ class MapView extends JPanel implements Observer {
  
   BufferedImage mapImage; 
   
-  private int rotation = 45; 
   private int centreCoord = 0;  
   private int xCentreCoord = 127; 
   private int yCentreCoord = 145; 
   private int circleSize = 8; 
   private int HYP; 
+  private int rotation;
   
  
   public MapView( Controller controller, MapModel model ) {
@@ -43,7 +43,7 @@ class MapView extends JPanel implements Observer {
 		mapImage = (BufferedImage) obj; 
 		HYP = (int) Math.sqrt(getWidth()*getWidth() + getHeight()*getHeight() ); 
 	}
-    else if (obj instanceof BufferedImage){
+    else if (obj instanceof Integer){
 		rotation = (int) obj;
 	}
     repaint(); // image updated when zoomed in or out
