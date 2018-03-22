@@ -74,12 +74,13 @@ public class Navigator implements Observer
 	 * setOrigin
 	 * Sets the start of the route
 	 */
-	public void setOrigin(double latitude,double longitude)
+	public void setOrigin(String latitude,String longitude)
 	{
 		try
 		{
-			origin = String.valueOf(latitude)+","+String.valueOf(longitude);
+			origin = latitude+","+longitude;
 			encOrigin = URLEncoder.encode(origin,ENCODING);
+			// Debug
 			System.out.println(origin + " -> " + encOrigin);
 		} catch (UnsupportedEncodingException ex)
 		{
@@ -101,11 +102,11 @@ public class Navigator implements Observer
 	 * setDest
 	 * Sets the destination of the route
 	 */
-	public void setDest(float latitude,float longitude)
+	public void setDest(String latitude,String longitude)
 	{
 		try
 		{
-			destination = String.valueOf(latitude)+","+String.valueOf(longitude);
+			destination = latitude+","+longitude;
 			encDestination = URLEncoder.encode(destination,ENCODING);
 		} catch (UnsupportedEncodingException ex)
 		{
@@ -235,25 +236,17 @@ public class Navigator implements Observer
 	 */
 	public void printOut()
 	{
-		printRaw();
+		// Print directions, origin and destination
+		
+		// Debug
+		//printRaw();
 
-		// Print origin, directions and destination
+		for (int i=0; i<directions.length; i++)
+		{
+			System.out.println( getDirection(i).getText() );
+		}
 		System.out.println("Origin="+origin);
-		for (int i=0; i<directions.length; i++)
-		{
-			System.out.println( getDirection(i).getText() );
-		}
 		System.out.println("Destination="+destination);
-	}
-
-	// Not yet implemented
-	public void getClosestNode(float latitude, float longitude)
-	{
-		for (int i=0; i<directions.length; i++)
-		{
-			System.out.println( getDirection(i).getText() );
-
-		}
 	}
 
 	/* checkNextDir
@@ -263,10 +256,15 @@ public class Navigator implements Observer
 	 */
 	public Direction checkNextDir(Coordinate c)
 	{
+		// Return null if there are no directions
 		if (directions == null)
 		{ return null; }
+		
+		// Information about the current closest direction
 		double smallest = SEARCHDISTANCE;
 		Direction closest = null;
+		
+		// Loop through directions to find the closest
 		for (int i=0; i<directions.length; i++)
 		{
 			Direction dir = getDirection(i);
@@ -278,15 +276,21 @@ public class Navigator implements Observer
 				closest  = dir;
 			}
 		}
+
+		// Debug
 		if (closest != null)
 		{ System.out.println(closest.getText()); }
+		
+		// Only return directions within a certain radius
 		if (smallest > SPEECHDISTANCE)
-		{
-			return null;
-		}
+		{ return null; }
+		
 		return closest;
 	}
 
+	/* update
+	 * Updates location, language or destination
+	 */
 	public void update(Observable obs, Object obj)
 	{
 		if (obs == satellite && obj instanceof Coordinate)
@@ -295,7 +299,7 @@ public class Navigator implements Observer
 			Coordinate c = (Coordinate)obj;
 
 			// Set journey origin
-			setOrigin(c.getLat(),c.getLon());
+			setOrigin(c.getLatStr(),c.getLonStr());
 
 			// Check if next direction is ready to be spoken
 			Direction d = checkNextDir( c );
