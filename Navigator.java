@@ -157,7 +157,7 @@ public class Navigator extends Observable implements Observer
 		final String[][] headers = {};
 		directionsRaw = HttpConnect.httpConnect( METHOD, url, headers, body );
 		System.out.println(url);
-		printRaw();
+		//printRaw();
 
 		// Traverse directionsJSON to get array of steps
 		directionsJSON = new JSONObject(new String(directionsRaw));
