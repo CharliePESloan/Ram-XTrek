@@ -65,9 +65,9 @@ public class Win7Ublox7 extends Observable implements Runnable{
 				tripRotation = mySat.getGSV(s);
 				if(mapLatLon == null && tripVelocity == null && tripRotation == null)
 				{continue;} 
-				Coordinate c = new Coordinate(a, b, c);
+				Coordinate c = new Coordinate(mapLatLon, tripVelocity, tripRotation);
 				setChanged(); //Notifying the observer that a change has occurred
-				notifyObservers(a);//Passing on our values to the observer for further use	
+				notifyObservers(mapLatLon);//Passing on our values to the observer for further use	
 			}
 		}else {
 			System.out.println( "not a serial port" ); System.exit( 1 );
@@ -82,6 +82,6 @@ public class Win7Ublox7 extends Observable implements Runnable{
 	*of our position. Created for the use of other team-mates to further
 	*develop their work packages*/
 	public String[] getCoordinates(){
-		return a;
+		return mapLatLon;
 	}
 }
