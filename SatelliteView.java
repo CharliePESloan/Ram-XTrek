@@ -61,6 +61,7 @@ public class SatelliteView extends JPanel implements Observer {
 	*at RunTime*/
 	public void update(Observable obs, Object obj){
 		if(obj instanceof Coordinate){
+			System.out.print(obj);
 			Coordinate a = (Coordinate) obj;
 			longitude.setText(a.getLatStr()); // to fix
 			latitude.setText(a.getLonStr());

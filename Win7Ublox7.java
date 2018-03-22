@@ -28,7 +28,7 @@ public class Win7Ublox7 extends Observable implements Runnable{
   public Win7Ublox7(){};
 	
 	//Code inserted into run method to enable thread to run code segment
-	public void run() {
+	public void run(){
 	Satellite mySat = new Satellite(){};
 	try {
 		String s;
@@ -59,21 +59,29 @@ public class Win7Ublox7 extends Observable implements Runnable{
 					
 			while ( ( n = in.read( buffer ) ) > -1 ) {
 				s = new String( buffer, 0, n );     
-				/*System.out.print( s );*/
+				//System.out.print( s );
+	
 				mapLatLon = mySat.getGLL(s); //updating our array to contain new values
-				tripVelocity = mySat.getVTG(s);
+
+				tripVelocity = new String[] {"0", "0", "0", "0", "0", "0", "9.78"};
+	
 				tripRotation = mySat.getGSV(s);
-				if(mapLatLon == null && tripVelocity == null && tripRotation == null)
+				System.out.println("\n");
+				System.out.println("Start1");
+				System.out.println(mapLatLon);
+				System.out.println(tripVelocity);
+				System.out.println(tripRotation);
+				if(mapLatLon == null || tripRotation == null)
 				{continue;} 
 				Coordinate c = new Coordinate(mapLatLon, tripVelocity, tripRotation);
 				setChanged(); //Notifying the observer that a change has occurred
-				notifyObservers(mapLatLon);//Passing on our values to the observer for further use	
+				notifyObservers(c);//Passing on our values to the observer for further use	
 			}
 		}else {
 			System.out.println( "not a serial port" ); System.exit( 1 );
 		}
 	}catch ( Exception ex ) {
-		System.out.println( ex ); System.exit( 1 );
+		ex.printStackTrace(); System.out.println( ex ); System.exit( 1 );
 		}
 	}
 		//Dongle Reader ends here, modified version.//
