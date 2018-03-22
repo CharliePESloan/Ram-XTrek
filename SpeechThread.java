@@ -36,15 +36,13 @@ public class SpeechThread implements Runnable
 					       language.getBingCode(),
 					       GENDER,
 					       language.getArtist(),
-					       FORMAT );
-	
-		InputStream myInputStream =
-			new ByteArrayInputStream(speech);
-		//System.out.println(r + "got audio");
+					       FORMAT );	
 	
 		// Try to play the audio
 		try
 		{
+			InputStream myInputStream =
+				new ByteArrayInputStream(speech);
 			AudioInputStream myAudio =
 				AudioSystem.getAudioInputStream(myInputStream);
 			//System.outeprintln(r + "Converted");
