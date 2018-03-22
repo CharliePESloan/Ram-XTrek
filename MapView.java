@@ -15,7 +15,7 @@ import java.awt.geom.AffineTransform;
 import java.lang.Math; 
 
 /*
- * View.
+ * MapView.
  * Class controls what is displayed on the screen. 
  *
  * @ author Devash Patel 2018.
@@ -25,24 +25,18 @@ class MapView extends JPanel implements Observer {
  
   BufferedImage mapImage; 
   
-  private int centreCoord = 0;  
-  private int xCentreCoord = 127; 
-  private int yCentreCoord = 145; 
-  private int circleSize = 8; 
+  private final static  int CIRCLESIZE = 8; 
   private int  HYP; 
   private int rotation;
   
- 
   public MapView( Controller controller, MapModel model ) {
     model.addObserver(this);
 	model.imageLoader();
-
   }
   
   public void update( Observable obs, Object obj ) {
 	if (obj instanceof BufferedImage){
 		mapImage = (BufferedImage) obj; 
-		
 	}
     else if (obj instanceof Integer){
 		rotation = (int) obj;
@@ -54,11 +48,10 @@ class MapView extends JPanel implements Observer {
 	super.paintComponent(g); 
 	Graphics2D g2d = (Graphics2D) g; 
 	HYP = (int) Math.sqrt(getWidth()*getWidth() + getHeight()*getHeight() ); 
-	g2d.rotate(Math.toRadians(rotation), getWidth()/2,getHeight()/2 );
-	g2d.drawImage(mapImage, (-HYP-getWidth())/4, (-HYP-getHeight())/4, null);
+	g2d.rotate(Math.toRadians(rotation), getWidth()/2,getHeight()/2 );              //rotates the map at the center of the panel 
+	g2d.drawImage(mapImage, (-HYP-getWidth())/4, (-HYP-getHeight())/4, null);       //draws map centered  
 	g.setColor(Color.red);
-	g.fillOval(getWidth()/2-circleSize/2,getHeight()/2-circleSize/2, circleSize, circleSize);
+	g.fillOval(getWidth()/2-CIRCLESIZE/2,getHeight()/2-CIRCLESIZE/2, CIRCLESIZE, CIRCLESIZE);
   }
-  
-
+ 
 }
