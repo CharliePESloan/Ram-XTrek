@@ -165,11 +165,7 @@ OnOffButton.setName("OnOffButton");
                 controller.setModel(speechModel);
               break;
               case MENU:
-<<<<<<< HEAD
 				nav.refreshDirections();
-=======
-	        nav.refreshDirections();
->>>>>>> 7426f9688deef5df59482f08a55532f0ac52ac91
                 //nav.printOut();
                 if(controller.getModel() == onOffModel){
                 saySomething("Turning On");}
