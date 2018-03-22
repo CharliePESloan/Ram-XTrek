@@ -45,7 +45,7 @@ public class MenuFrame extends JFrame {
     SatelliteModel satModel = new SatelliteModel(this);
 	TripComputerModel tripModel = new TripComputerModel(this);
 	AboutModel aboutModel = new AboutModel(this);
-    MapModel mapModel = new MapModel(this, speechModel, satModel);
+    MapModel mapModel = new MapModel(this, speechModel, satModel, nav);
     
     Controller controller = new Controller(onOffModel);
     JPanel onOffView = new OnOffView(controller, onOffModel);
