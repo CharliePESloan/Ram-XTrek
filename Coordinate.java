@@ -6,38 +6,50 @@ public class Coordinate {
 	
 	final static int EARTHRADIUSKM = 6371;
 
-	double	lat = 0.0;
-	double	lon = 0.0;
+	double lat = 0.0;
+	double lon = 0.0;
+	double velocity = 0.0;
 	double[] coord;
+	
+	public Coordinate(double lat, double lon){
+		this.lat = lat;
+		this.lon = lon;
+	}
 		
-	public Coordinate(String[] coordinates){
-		double latitude = changeFormat(coordinates[0]);
+	public Coordinate(String[] coordinates, String[] trips){
+		double latitude = mapFormat(coordinates[0]);
 		if(coordinates[1].equals("S")){lat = -latitude;}
 		else{lat = latitude;}
 		
-		double longitude = changeFormat(coordinates[2]);
+		double longitude = mapFormat(coordinates[2]);
 		if(coordinates[3].equals("W")){lon = -longitude;}
 		else{lon = longitude;}
+		
+		double speed = tripFormat(trips[6]);
 		
 		coord = new double[] {lat, lon};
 	}
 	
-	public double changeFormat(String coordinate){
+	public double mapFormat(String coordinate){
 		double number = Double.parseDouble(coordinate);
-		number = number/100.0;
-		double finalValue = Math.round(number*10000.0) / 10000.0;
+		double finalValue = number/100.0;
 		return finalValue;
 	}
-		
+	
+	public double tripFormat(String mySpeed){
+		double finalValue = Double.parseDouble(mySpeed);
+		return finalValue;
+	}
+	
 	private static double degreesToRadians(double degrees){
 		return (degrees * (double)Math.PI) / 180;
 	}
 
 	public static double between(double latitude1,
-				     double longitude1,
-				     double latitude2,
-				     double longitude2)
-	{	
+				    double longitude1,
+				    double latitude2,
+				    double longitude2){
+						
 		double		lat1 = (double)latitude1;
 		final double	lon1 = (double)longitude1;
 		double		lat2 = (double)latitude2;
@@ -50,15 +62,14 @@ public class Coordinate {
 		lat2 = degreesToRadians(lat2);
 
 		double a = Math.sin(latD/2) * Math.sin(latD/2) +
-			  Math.sin(lonD/2) * Math.sin(lonD/2) *
-			  Math.cos(lat1)   * Math.cos(lat2);
+			 Math.sin(lonD/2) * Math.sin(lonD/2) *
+			 Math.cos(lat1)   * Math.cos(lat2);
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
 		return (double)EARTHRADIUSKM * c;
 	}
 
-	public double distanceTo(Coordinate coordinate)
-	{
+	public double distanceTo(Coordinate coordinate){
 		final int	EARTHRADIUSKM = 6371;
 		
 		double	lat1 = lat;
