@@ -13,6 +13,8 @@ public class Coordinate {
 	double velocity = 0.0;
 	double[] coord;
 	int rotation;
+	double LATITUDE_FIX = 0.297812;
+	double LONGITUDE_FIX = 0.2193674;
 	
 	public Coordinate(double lat, double lon){
 		this.lat = lat;
@@ -20,11 +22,11 @@ public class Coordinate {
 	}
 		
 	public Coordinate(String[] coordinates, String[] trips, String[] bearings){
-		double latitude = mapFormat(coordinates[0]);
+		double latitude = mapFormat(coordinates[0]) + LATITUDE_FIX;
 		if(coordinates[1].equals("S")){lat = -latitude;}
 		else{lat = latitude;}
 		
-		double longitude = mapFormat(coordinates[2]);
+		double longitude = mapFormat(coordinates[2]) + LONGITUDE_FIX;
 		if(coordinates[3].equals("W")){lon = -longitude;}
 		else{lon = longitude;}
 		
@@ -46,7 +48,7 @@ public class Coordinate {
 		String minutes;
 		String seconds = part[1];
 		
-		if(part[1].length() == 5){
+		if(part[0].length() == 5){
 			degrees = part[0].substring(0, 3);
 			minutes = part[0].substring(3);	
 		}else{
@@ -137,11 +139,11 @@ public class Coordinate {
 	}
 
 	public String getLatStr(){
-		return strLat;
+		return Double.toString(lat);
 	}
 	
 	public String getLonStr(){
-		return strLon;
+		return Double.toString(lon);
 	}
 	
 	public int getRotation(){
