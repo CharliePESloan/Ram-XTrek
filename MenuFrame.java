@@ -51,7 +51,7 @@ public class MenuFrame extends JFrame {
     JPanel menuView = new MenuView(controller, menuModel);
     JPanel speechView = new SpeechView(controller, speechModel);
     JPanel whereToView = new WhereToFrameView(controller, whereToModel);
-	JPanel tripView = new TripComputerView(controller, tripModel);
+	JPanel tripView = new TripComputerView(controller,this, tripModel);
     JPanel mapView = new MapView(controller, mapModel);
     JPanel satView = new SatelliteView(controller, satModel);
     
@@ -166,7 +166,7 @@ OnOffButton.setName("OnOffButton");
               break;
               case MENU:
 	        nav.refreshDirections();
-                nav.printOut();
+                //nav.printOut();
                 if(controller.getModel() == onOffModel){
                 saySomething("Turning On");}
                 else {
