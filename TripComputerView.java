@@ -38,10 +38,10 @@ public class TripComputerView extends JPanel implements Observer {
 		
 	}
 	public void update(Observable o, Object arg) {
-		Coordinate coord[] = (Coordinate) arg;
-		tripD.setText("Trip odem" + Double.toString(coord.get) + "KM";
-		tripS.setText("Speed" + Double.toString(coord.get);
-		tripMT.setText("Moving time" + Double.toString(coord.get);
+		//Coordinate coord[] = (Coordinate) arg;
+		//tripD.setText("Trip odem" + Double.toString(coord.get) + "KM";
+		//tripS.setText("Speed" + Double.toString(coord.get);
+		//tripMT.setText("Moving time" + Double.toString(coord.get);
 		
 	}
 }
