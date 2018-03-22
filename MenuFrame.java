@@ -64,8 +64,8 @@ public class MenuFrame extends JFrame {
     JButton OnOffButton = new JButton();
 
     Navigator nav = new Navigator(this,speechModel,satModel,whereToModel);
-     Language language = new Language("en");
-    Speaker speaker = new Speaker(language, speechModel);
+     //Language language = new Language("en");
+    Speaker speaker = new Speaker(null, speechModel);
     String currentView = "OnOff";
     
   /* Taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm
@@ -103,7 +103,7 @@ SelectButton.setName("SelectButton");
 MenuButton.setName("MenuButton");
 OnOffButton.setName("OnOffButton");
 
-       nav.setOrigin("Exeter");
+       nav.setOrigin("50.722845","-3.5250755");
       
       thread.start();
     
