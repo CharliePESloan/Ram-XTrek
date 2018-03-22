@@ -93,11 +93,11 @@ public class Coordinate {
 	}
 
 	public String getLatStr(){
-		return Long.toString(lat);
+		return Double.toString(lat);
 	}
 	
 	public String getLonStr(){
-		return Long.toString(lon);
+		return Double.toString(lon);
 	}
 	
 }
