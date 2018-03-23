@@ -8,7 +8,7 @@ public class Timer extends Observable implements Runnable
 	
 	public Timer()
 	{
-		reset();
+		time = System.currentTimeMillis();
 	}
 
 	public void run()
@@ -27,9 +27,12 @@ public class Timer extends Observable implements Runnable
 			}
 		}
 	}
+<<<<<<< HEAD
 
 	public void reset()
 	{
 		time = System.currentTimeMillis();
 	}
+=======
+>>>>>>> parent of b5ebd89... Added reset timer
 }
