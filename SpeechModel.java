@@ -80,7 +80,7 @@ public class SpeechModel extends Observable implements Model
 	public void reset()
 	{
 		selected = DEFAULT_BUTTON;
-		language = null;
+		language = languages[0];
 		
 		setChanged(); notifyObservers(selected);
 		setChanged(); notifyObservers(language);

@@ -24,7 +24,7 @@ public class Navigator extends Observable implements Observer
 	final static String MODE	   = "TRANSIT";
 	final static String ENCODING	   = "UTF-8";
 	final static int    SEARCHDISTANCE = 10000;
-	final static float  SPEECHDISTANCE = 0.01f;
+	final static float  SPEECHDISTANCE = 0.2f;
 
 	/* Variables */
 	private MenuFrame mainFrame;
@@ -156,7 +156,6 @@ public class Navigator extends Observable implements Observer
 		final byte[] body = {};
 		final String[][] headers = {};
 		directionsRaw = HttpConnect.httpConnect( METHOD, url, headers, body );
-		System.out.println(url);
 		//printRaw();
 
 		// Traverse directionsJSON to get array of steps
@@ -242,17 +241,12 @@ public class Navigator extends Observable implements Observer
 			Direction dir = getDirection(i);
 			double dist =
 				c.distanceTo(dir.getCoordinateStart());
-			System.out.println(dist);
 			if (dist < smallest)
 			{
 				smallest = dist;
 				closest  = dir;
 			}
 		}
-
-		// Debug
-		if (closest != null)
-		{ System.out.println(closest.getText()); }
 		
 		// Only return directions within a certain radius
 		if (smallest > SPEECHDISTANCE)
@@ -271,14 +265,12 @@ public class Navigator extends Observable implements Observer
 			// Get coordinate
 			Coordinate c = (Coordinate)obj;
 
-			System.out.println("Coordinates " + c.getLatStr() + ", " + c.getLonStr());
-
 			// Set journey origin
 			setOrigin(c.getLatStr(),c.getLonStr());
 
 			// Check if next direction is ready to be spoken
 			Direction d = checkNextDir( c );
-			if (d != null && d.getRead())
+			if (d != null && !d.getRead())
 			{
 				d.setRead(true);
 				mainFrame.saySomething(d.getText());

@@ -108,7 +108,7 @@ SelectButton.setName("SelectButton");
 MenuButton.setName("MenuButton");
 OnOffButton.setName("OnOffButton");
 
-       nav.setOrigin("50.722845","-3.5250755");
+
       
       thread.start();
 	  

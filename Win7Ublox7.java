@@ -22,7 +22,12 @@ public class Win7Ublox7 extends Observable implements Runnable{
 	String[] mapLatLon;
 	String[] tripVelocity;
 	String[] tripRotation;
+	String[] savedMapLatLon;
+	String[] savedTripVelocity;
+	String[] savedTripRotation;
 	SatelliteView myView;
+	double distance = 0.0;
+	Coordinate previousCoordinate;
 
 	//Dongle Reader starts here//
 	public Win7Ublox7(){};
@@ -40,8 +45,8 @@ public class Win7Ublox7 extends Observable implements Runnable{
 			}
 				
 			System.err.close();
-			CommPort commPort = portId.open( "whatever", TIMEOUT );
-					
+			CommPort commPort = portId.open("whatever", TIMEOUT );
+			
 			if ( commPort instanceof SerialPort ) {
 				SerialPort serialPort = (SerialPort) commPort;
 				serialPort.setSerialPortParams( BAUD_RATE
@@ -56,33 +61,51 @@ public class Win7Ublox7 extends Observable implements Runnable{
 				InputStream in = serialPort.getInputStream();
 				byte[] buffer  = new byte[ BUFF_SIZE ];
 				int n;
-						
+			
 				while ( ( n = in.read( buffer ) ) > -1 ) {
 					s = new String( buffer, 0, n );     
-					//System.out.print( s );
-		
 					mapLatLon = mySat.getGLL(s); //updating our array to contain new value
-					tripVelocity = new String[] {"0", "0", "0", "0", "0", "0", "9.78"};
-					System.out.println("Test 0");
-					
+					//tripVelocity = new String[] {"0", "0", "0", "0", "0", "0", "9.78"};
+					tripVelocity = mySat.getVTG(s);
 					tripRotation = mySat.getGSV(s);
-					if(mapLatLon == null || tripRotation == null)
-					{continue;} 
-					System.out.println(mapLatLon[0]);
-					System.out.println("Test 1");
-					System.out.println(mapLatLon[2]);
-					System.out.println("Test 2");
-					Coordinate c = new Coordinate(mapLatLon, tripVelocity, tripRotation);
+					if(mapLatLon != null)
+					{
+						savedMapLatLon = mapLatLon;
+					}
+					if (tripRotation != null)
+					{
+						savedTripRotation = tripRotation;
+					}
+					if (tripVelocity != null)
+					{
+						savedTripVelocity = tripVelocity;
+					}
+					if (savedMapLatLon == null || savedTripRotation == null || savedTripVelocity == null)
+					{
+						continue;
+					}
+					
+					Coordinate c =
+						new Coordinate(savedMapLatLon,
+									   savedTripVelocity,
+									   savedTripRotation, distance);	
+					
+					if (previousCoordinate != null)
+					{
+						distance += c.distanceTo(previousCoordinate);
+					}	
+					
+					previousCoordinate = c;
+					
 					setChanged(); //Notifying the observer that a change has occurred
 					notifyObservers(c);//Passing on our values to the observer for further use	
 				}
-				
 			}else {System.out.println( "not a serial port" );}
 			
-		}catch ( Exception ex ) {
+		} catch ( Exception ex ) {
 			setChanged();
 			notifyObservers("Cannot display location");
-			ex.printStackTrace(); 
+			ex.printStackTrace();
 			System.out.println( ex );
 	
 		}
@@ -97,4 +120,4 @@ public class Win7Ublox7 extends Observable implements Runnable{
 	public String[] getCoordinates(){
 		return mapLatLon;
 	}
-} 
+}

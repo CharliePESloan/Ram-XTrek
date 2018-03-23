@@ -11,17 +11,18 @@ public class Coordinate {
 	double lat = 0.0;
 	double lon = 0.0;
 	double velocity = 0.0;
+	double distance = 0.0;
 	double[] coord;
 	int rotation;
-	double LATITUDE_FIX = 0.297812;
-	double LONGITUDE_FIX = 0.2193674;
+	double LATITUDE_FIX = 0.297812-0.003550;
+	double LONGITUDE_FIX = 0.2193674-0.0058824;
 	
 	public Coordinate(double lat, double lon){
 		this.lat = lat;
 		this.lon = lon;
 	}
 		
-	public Coordinate(String[] coordinates, String[] trips, String[] bearings){
+	public Coordinate(String[] coordinates, String[] trips, String[] bearings, double distance){
 		double latitude = mapFormat(coordinates[0]) + LATITUDE_FIX;
 		if(coordinates[1].equals("S")){lat = -latitude;}
 		else{lat = latitude;}
@@ -38,6 +39,8 @@ public class Coordinate {
 		velocity = tripFormat(trips[6]);
 		
 		rotation = bearingFormat(bearings[5]);
+		
+		this.distance = distance;
 		
 		coord = new double[] {lat, lon};
 	}
@@ -76,40 +79,12 @@ public class Coordinate {
 		return finalValue;
 	}
 	
-	private static double degreesToRadians(double degrees){
-		return (degrees * (double)Math.PI) / 180;
-	}
-
-	public static double between(double latitude1,
-				    double longitude1,
-				    double latitude2,
-				    double longitude2){
-						
-		double		lat1 = (double)latitude1;
-		final double	lon1 = (double)longitude1;
-		double		lat2 = (double)latitude2;
-		final double	lon2 = (double)longitude2;
-
-		double latD = degreesToRadians(lat2-lat1);
-		double lonD = degreesToRadians(lon2-lon1);
-
-		lat1 = degreesToRadians(lat1);
-		lat2 = degreesToRadians(lat2);
-
-		double a = Math.sin(latD/2) * Math.sin(latD/2) +
-			 Math.sin(lonD/2) * Math.sin(lonD/2) *
-			 Math.cos(lat1)   * Math.cos(lat2);
-		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-		return (double)EARTHRADIUSKM * c;
-	}
-
 	public double distanceTo(Coordinate coordinate){
 		final int	EARTHRADIUSKM = 6371;
 		
 		double	lat1 = lat;
 		final double lon1 = lon;
-		double		lat2 = coordinate.getLat();
+		double	lat2 = coordinate.getLat();
 		final double	lon2 = coordinate.getLon();
 
 		double latD = degreesToRadians(lat2-lat1);
@@ -124,6 +99,10 @@ public class Coordinate {
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
 		return (double)EARTHRADIUSKM * c;
+	}
+	
+	private static double degreesToRadians(double degrees){
+		return (degrees * (double)Math.PI) / 180;
 	}
 	
 	public double[] getPos(){
@@ -148,5 +127,13 @@ public class Coordinate {
 	
 	public int getRotation(){
 		return rotation;
+	}
+	
+	public double getSpeed(){
+		return velocity;
+	}
+	
+	public double getDistance() {
+		return distance;
 	}
 }

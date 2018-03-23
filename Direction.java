@@ -45,6 +45,7 @@ public class Direction
 	/* Constructor */
 	public Direction(JSONObject direction, Language lang)
 	{
+		read = false;
 		/* Temporary variables for navigating JSONObject */
 		JSONObject distance;
 		JSONObject location;
