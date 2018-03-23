@@ -44,7 +44,7 @@ public class WhereToFrameModel extends Observable implements Model, Observer {
 		mainFrame.saySomething(textDisplay);
         mainFrame.setMenu(MenuEnum.MENU);
     }
-    public void pressedSelect() {
+    public void pressedSelect() { //checkes which button is selected
         letters = selected.getData();
 		if (letters instanceof WhereToEnum) {
         if (letters == WhereToEnum.SPACE) {

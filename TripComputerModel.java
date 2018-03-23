@@ -16,12 +16,12 @@ public class TripComputerModel extends Observable implements Model {
 	long time;
 
 public long getTimer (){
-return System.currentTimeMillis() - time;
+return System.currentTimeMillis() - time; //calculates the time for trip computer
 }	
 	
 	public TripComputerModel (MenuFrame mainFrame) {
 		this.mainFrame = mainFrame;
-		time = System.currentTimeMillis();
+		time = System.currentTimeMillis();  //gets current time
 		
 	}
 	public void setSelected(CycleButton newSelected) {
@@ -40,6 +40,6 @@ return System.currentTimeMillis() - time;
 		reset();
 	}
 	public void reset() {
-		mainFrame.time.reset();
+		mainFrame.time.reset(); //resets the time
 	}
 }
