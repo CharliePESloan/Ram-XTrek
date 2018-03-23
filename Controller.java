@@ -86,8 +86,7 @@ class Controller implements MouseListener
                     b.setIcon(new ImageIcon("Images/SelectButtonSelected.png"));}
 					break;
 				case "MenuButton":
-                    if(!(this.model instanceof MenuModel)){
-                    b.setIcon(new ImageIcon("Images/MenuButtonSelected.png"));}
+                    b.setIcon(new ImageIcon("Images/MenuButtonSelected.png"));
                     break;
                 case "OnOffButton":
                     break;
