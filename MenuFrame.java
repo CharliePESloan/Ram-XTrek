@@ -232,11 +232,11 @@ public class MenuFrame extends JFrame {
       cardlayout.show(cards, menu);
       setVisible(true);
   }
+  /* Method to play some text out loud using this frame's instance of the Speaker class */
   public void saySomething(String speech){
       this.speaker.saySomething(speech);
   }
   public static void main( String[] argv ) {    
-    MenuFrame menuFrame = new MenuFrame();
-      
+    MenuFrame menuFrame = new MenuFrame();      
   }
 }
