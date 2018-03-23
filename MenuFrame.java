@@ -128,36 +128,18 @@ public class MenuFrame extends JFrame {
 	    ExecutorService executor = Executors.newSingleThreadExecutor();
 		executor.execute(time);
 		executor.shutdown();
-    
-	
-        // Placing the navigation buttons
-    PlusButton.setBounds(7, 96, 32, 72);add(PlusButton);
-      PlusButton.setIcon(plusIcon);
-      PlusButton.setBorder(null);
-    MinusButton.setBounds(4, 167, 32, 75);add(MinusButton);
-      MinusButton.setIcon(minusIcon);
-      MinusButton.setBorder(null);
-    SelectButton.setBounds(8, 260, 25, 97); add(SelectButton);
-      SelectButton.setIcon(selectIcon);
-      SelectButton.setBorder(null);
-    MenuButton.setBounds(408, 110, 30,84); add(MenuButton);
-      MenuButton.setIcon(menuIcon);
-      MenuButton.setBorder(null);
-    OnOffButton.setBounds(270,185,75,75); add(OnOffButton);
-      OnOffButton.setIcon(onOffIcon);
-      OnOffButton.setBorder(null);
       
-    add(cards);
-    cards.setSize(255, 293);
-    cards.setLocation(90,300);
-    cards.add(onOffView, MenuEnum.ONOFF);
-    cards.add(menuView, MenuEnum.MENU);
-    cards.add(speechView, MenuEnum.SPEECH);
-    cards.add(whereToView, MenuEnum.WHERETO);
-	cards.add(tripView, MenuEnum.TRIP);
-    cards.add(mapView, MenuEnum.MAPS);
-    cards.add(satView, MenuEnum.SATELLITE);
-	cards.add(aboutView, MenuEnum.ABOUT);
+        add(cards);
+        cards.setSize(255, 293);
+        cards.setLocation(90,300);
+        cards.add(onOffView, MenuEnum.ONOFF);
+        cards.add(menuView, MenuEnum.MENU);
+        cards.add(speechView, MenuEnum.SPEECH);
+        cards.add(whereToView, MenuEnum.WHERETO);
+	    cards.add(tripView, MenuEnum.TRIP);
+        cards.add(mapView, MenuEnum.MAPS);
+        cards.add(satView, MenuEnum.SATELLITE);
+	    cards.add(aboutView, MenuEnum.ABOUT);
     
         /* Placing the navigation buttons and setting the icons */
         PlusButton.setBounds(7, 96, 32, 72);add(PlusButton);
@@ -196,7 +178,7 @@ public class MenuFrame extends JFrame {
         int SCREENHEIGHT = screenSize.height;
         int SCREENWIDTH = screenSize.width;*/
 
-      
+        /* Adding mouse listeners to the utility buttons, all of which are controller by Controller */
         PlusButton.addMouseListener(controller);
         MinusButton.addMouseListener(controller);
         SelectButton.addMouseListener(controller);
