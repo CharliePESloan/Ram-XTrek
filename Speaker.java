@@ -78,6 +78,9 @@ public class Speaker implements Observer
 		if (obs instanceof SpeechModel && obj instanceof Language)
 		{
 			language = (Language)obj;
+		} else if (obj == null)
+		{
+			language = null;
 		}
 	}
 }

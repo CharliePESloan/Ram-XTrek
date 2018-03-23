@@ -22,6 +22,7 @@ public class SpeechView extends JPanel implements Observer
 	/* Static Variables */
 	//final static int NUM_BUTTONS = 6;
 	final static int FONT_SIZE = 32;
+	final static int DEFAULT_BUTTON = 1;
 
 	/* ModelViewController Objects */
 	final Controller	controller;
@@ -37,7 +38,7 @@ public class SpeechView extends JPanel implements Observer
 			new CycleButton("Italiano"),
 			new CycleButton("Espanol")
 		};
-	int selected = 0;
+	int selected = DEFAULT_BUTTON;
 
 	/* Constructor */
 	public SpeechView( Controller controller,
@@ -56,7 +57,7 @@ public class SpeechView extends JPanel implements Observer
 		setBackground(Color.black);
 
 		/* Setup buttons */
-		buttons[0].select();
+		buttons[DEFAULT_BUTTON].select();
 		Font myFont = new Font("Trebuchet MS",Font.PLAIN, FONT_SIZE);
 		for (CycleButton cb : buttons)
 		{

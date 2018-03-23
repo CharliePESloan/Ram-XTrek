@@ -19,7 +19,7 @@ public class WhereToFrameModel extends Observable implements Model, Observer {
     String textDisplay ="";
 	Language language = new Language ("en");
     public void update(Observable obs, Object obj){
-		if (obj instanceof Language)
+		if (obj instanceof Language) //checking insstance of 
 		{
 			language = (Language) obj; 
 		}
@@ -63,11 +63,11 @@ public class WhereToFrameModel extends Observable implements Model, Observer {
             setChanged(); notifyObservers(true);
         }
 		else if (letters == WhereToEnum.DEL) {
-            try {
+            try { 
 				mainFrame.saySomething(delete);
-				textDisplay = removeChar(textDisplay, textDisplay.length()-1);
+				textDisplay = removeChar(textDisplay, textDisplay.length()-1);//checks if there is a character or number to delete
 				setChanged(); notifyObservers(textDisplay);
-			} catch (java.lang.StringIndexOutOfBoundsException e) {}
+			} catch (java.lang.StringIndexOutOfBoundsException e) {} 
         }}
         else {
             textDisplay += letters;

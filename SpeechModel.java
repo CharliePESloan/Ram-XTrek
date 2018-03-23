@@ -10,8 +10,9 @@ import java.util.Observable;
 public class SpeechModel extends Observable implements Model
 {
 	/* Constants */
-	final int NUM_BUTTONS = 5;
-	final Language[] languages = new Language[]
+	final static int DEFAULT_BUTTON = 1;
+	final static int NUM_BUTTONS = 5;
+	final static Language[] languages = new Language[]
 		{
 			new Language("English","en"),
                         new Language("Francais","fr"),
@@ -22,8 +23,8 @@ public class SpeechModel extends Observable implements Model
 
 	/* Declare variables */
 	MenuFrame mainFrame;
-	Language  language = null;
-	int	  selected = 0;
+	Language  language = languages[0];
+	int	  selected = DEFAULT_BUTTON;
 
 
 	/* Constructor */
@@ -78,7 +79,7 @@ public class SpeechModel extends Observable implements Model
 
 	public void reset()
 	{
-		selected = 0;
+		selected = DEFAULT_BUTTON;
 		language = null;
 		
 		setChanged(); notifyObservers(selected);

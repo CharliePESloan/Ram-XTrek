@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 /*
  * Controller
  *
- * Charlie Sloan (2018)
+ * Charlie Sloan (2018) and Nathan Painter 
  */
 class Controller implements MouseListener
 {
@@ -74,15 +74,15 @@ class Controller implements MouseListener
 			switch (b.getName())
 			{
 				case "PlusButton":
-                    if(!(this.model instanceof TripComputerModel) || (this.model instanceof SatelliteModel)){
+                    if(!((this.model instanceof TripComputerModel) || (this.model instanceof SatelliteModel) || (this.model instanceof AboutModel))){
                     b.setIcon(new ImageIcon("Images/PlusButtonSelected.png"));}
 					break;
 				case "MinusButton":
-                    if(!(this.model instanceof TripComputerModel) || (this.model instanceof SatelliteModel)){
+                    if(!((this.model instanceof TripComputerModel) || (this.model instanceof SatelliteModel) || (this.model instanceof AboutModel))){
                     b.setIcon(new ImageIcon("Images/MinusButtonSelected.png"));}
 					break;
 				case "SelectButton":
-                    if(!((this.model instanceof TripComputerModel) || (this.model instanceof SatelliteModel))){
+                    if(!((this.model instanceof TripComputerModel) || (this.model instanceof SatelliteModel)|| (this.model instanceof AboutModel))){
                     b.setIcon(new ImageIcon("Images/SelectButtonSelected.png"));}
 					break;
 				case "MenuButton":
