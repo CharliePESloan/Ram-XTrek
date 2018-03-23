@@ -40,5 +40,6 @@ return System.currentTimeMillis() - time;
 		reset();
 	}
 	public void reset() {
+		mainFrame.time.reset();
 	}
 }

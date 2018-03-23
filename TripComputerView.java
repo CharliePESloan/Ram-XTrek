@@ -50,11 +50,12 @@ public class TripComputerView extends JPanel implements Observer {
 		long timeValue = (long) arg;
 		long minutes = (long) (timeValue/60000);
 		long seconds = (long) (timeValue/1000);
-		seconds -= minutes;
+		seconds -= minutes * 60;
+		
 		//Coordinate coord[] = (Coordinate) arg;
 		//tripD.setText("Trip odem" + Double.toString(coord.get) + "KM";
 		//tripS.setText("Speed" + Double.toString(coord.get);
-		tripMT.setText(String.format("Moving time %dm %ds",minutes,seconds));
+		tripMT.setText(String.format("Moving time %dM %dS",minutes,seconds));
 		}
 	}
 }

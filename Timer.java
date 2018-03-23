@@ -35,6 +35,7 @@ public class Timer extends Observable implements Runnable
 
 	public void reset()
 	{
-		time = System.currentTime.Millis();
+		time = System.currentTimeMillis();
+		System.out.print(time);
 	}
 }
