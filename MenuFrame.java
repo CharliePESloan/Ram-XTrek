@@ -87,7 +87,7 @@ public class MenuFrame extends JFrame {
     Navigator nav = new Navigator(this,speechModel,win7u7,whereToModel);
 
     /* Creating the speaker for the simulation */
-    Speaker speaker = new Speaker(null, speechModel);
+    //Speaker speaker = new Speaker(null, speechModel);
 
     Language language = new Language("en");
     Speaker speaker = new Speaker(language, speechModel);
@@ -130,7 +130,7 @@ public class MenuFrame extends JFrame {
 		executor.shutdown();
     
 	
-    // Placing the navigation buttons
+        // Placing the navigation buttons
     PlusButton.setBounds(7, 96, 32, 72);add(PlusButton);
       PlusButton.setIcon(plusIcon);
       PlusButton.setBorder(null);
