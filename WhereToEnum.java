@@ -1,3 +1,9 @@
+/**
+ *
+ * @author Nathan Painter
+ *
+ * 
+ */
 public enum WhereToEnum {
 	SPACE, RIGHT, LEFT, DEL;
 	@Override

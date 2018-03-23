@@ -16,6 +16,8 @@ import java.awt.Dimension;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
 /*
 * Darya Shyroka, 2018.
 * 
@@ -47,12 +49,14 @@ public class MenuFrame extends JFrame {
 	AboutModel aboutModel = new AboutModel(this);
     MapModel mapModel = new MapModel(this, speechModel, satModel);
     
+	Timer time = new Timer();
+	
     Controller controller = new Controller(onOffModel);
     JPanel onOffView = new OnOffView(controller, onOffModel);
     JPanel menuView = new MenuView(controller, menuModel);
     JPanel speechView = new SpeechView(controller, speechModel);
     JPanel whereToView = new WhereToFrameView(controller, whereToModel);
-	JPanel tripView = new TripComputerView(controller,this, tripModel);
+	JPanel tripView = new TripComputerView(controller,this, tripModel, time);
     JPanel mapView = new MapView(controller, mapModel);
     JPanel satView = new SatelliteView(controller, satModel);
     JPanel aboutView = new AboutView(controller, aboutModel);
@@ -107,7 +111,15 @@ OnOffButton.setName("OnOffButton");
        nav.setOrigin("50.722845","-3.5250755");
       
       thread.start();
+	  
+	  ExecutorService executor =
+			Executors.newSingleThreadExecutor();
+		
+		executor.execute(time);
+	
+		executor.shutdown();
     
+	
     // Placing the navigation buttons
     PlusButton.setBounds(7, 96, 32, 72);add(PlusButton);
       PlusButton.setIcon(plusIcon);
