@@ -5,6 +5,11 @@ import java.lang.Thread;
 public class Timer extends Observable implements Runnable
 {
 	long time;
+
+	/*public long getTimer ()
+	{
+		return System.currentTimeMillis() - time;
+	}*/	
 	
 	public Timer()
 	{
@@ -31,5 +36,6 @@ public class Timer extends Observable implements Runnable
 	public void reset()
 	{
 		time = System.currentTimeMillis();
+		System.out.print(time);
 	}
 }
