@@ -68,13 +68,9 @@ public class MenuFrame extends JFrame {
 	TripComputerModel tripModel = new TripComputerModel(this);
 	AboutModel aboutModel = new AboutModel(this);
     MapModel mapModel = new MapModel(this, speechModel, satModel);
-    
-<<<<<<< HEAD
+
+    Timer time = new Timer();
     /* Setting the controller for the entire simulation */
-=======
-	Timer time = new Timer();
-	
->>>>>>> b5ebd8993e0c1739c897e1de7ca63110935fb6aa
     Controller controller = new Controller(onOffModel);
     
     /* Creating the views for all of the modes of the XTrel simulation */
@@ -89,21 +85,13 @@ public class MenuFrame extends JFrame {
 
     /* Creating the navigation for the simulation */
     Navigator nav = new Navigator(this,speechModel,win7u7,whereToModel);
-    
-<<<<<<< HEAD
+
     /* Creating the speaker for the simulation */
     Speaker speaker = new Speaker(null, speechModel);
-=======
-    JButton PlusButton = new JButton();
-    JButton MinusButton = new JButton();
-    JButton SelectButton = new JButton();
-    JButton MenuButton = new JButton();
-    JButton OnOffButton = new JButton();
 
     Language language = new Language("en");
     Speaker speaker = new Speaker(language, speechModel);
     String currentView = "OnOff";
->>>>>>> b5ebd8993e0c1739c897e1de7ca63110935fb6aa
     
     /* Toolkit taken from http://www.java2s.com/Code/JavaAPI/javax.swing/JFramesetLocationintxinty.htm */
     /* Used to get the screensize */
@@ -132,21 +120,13 @@ public class MenuFrame extends JFrame {
         MenuButton.setName("MenuButton");
         OnOffButton.setName("OnOffButton");
 
-<<<<<<< HEAD
         /* We set the start/default coordinates */
         nav.setOrigin("50.722845","-3.5250755");
         /* We start the thread for the dongle */
         thread.start();
-=======
-       nav.setOrigin("50.722845","-3.5250755");
-      
-      thread.start();
-	  
-	  ExecutorService executor =
-			Executors.newSingleThreadExecutor();
-		
+ 
+	    ExecutorService executor = Executors.newSingleThreadExecutor();
 		executor.execute(time);
-	
 		executor.shutdown();
     
 	
@@ -178,7 +158,6 @@ public class MenuFrame extends JFrame {
     cards.add(mapView, MenuEnum.MAPS);
     cards.add(satView, MenuEnum.SATELLITE);
 	cards.add(aboutView, MenuEnum.ABOUT);
->>>>>>> b5ebd8993e0c1739c897e1de7ca63110935fb6aa
     
         /* Placing the navigation buttons and setting the icons */
         PlusButton.setBounds(7, 96, 32, 72);add(PlusButton);
@@ -225,8 +204,6 @@ public class MenuFrame extends JFrame {
         OnOffButton.addMouseListener(controller);
   }
   public void setMenu(MenuEnum menu){
-      //MenuEnum menu;
-      //if(controller.getModel() == menuModel){
       switch(menu){
               case SPEECH:
                 saySomething("Speech");
@@ -259,7 +236,7 @@ public class MenuFrame extends JFrame {
               break;
               case ONOFF:
                 if(controller.getModel() == menuModel){
-                System.out.println("We are in menu model and we clicked OnOff");
+                //System.out.println("We are in menu model and we clicked OnOff");
                 saySomething("Turning off");}
                 controller.setModel(onOffModel);
               break;
@@ -269,7 +246,7 @@ public class MenuFrame extends JFrame {
               break;
               default:
               break;
-      }//}
+      }
       cardlayout.show(cards, menu);
       setVisible(true);
   }
