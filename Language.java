@@ -1,5 +1,9 @@
+/* Language
+ * Represents a language
+ */
 public class Language
 {
+	/* Variables */
 	String name;
 	String googleCode;
 	String bingCode;
@@ -8,6 +12,7 @@ public class Language
 	final String kilometerText;
 	final String meterText;
 
+	/* Constructor */
 	public Language(String googleCode)
 	{
 		this.googleCode = googleCode;
@@ -45,7 +50,7 @@ public class Language
 				break;
 		}
 		bingCode = artist.substring(1,6);
-		name = "This is a bug";
+		name = "Unknown";
 	}
 	public Language(String name, String googleCode)
 	{
@@ -53,6 +58,7 @@ public class Language
 		this.name  = name;
 	}
 
+	/* Getters */
 	public String getName()
 	{
 		return name;

@@ -1,21 +1,19 @@
 import java.util.Observable;
 import java.lang.Thread;
-//import java.lang.Runnable;
 
+/* Timer
+ * Keeps track of how long journey has been going on
+ */
 public class Timer extends Observable implements Runnable
 {
 	long time;
 
-	/*public long getTimer ()
-	{
-		return System.currentTimeMillis() - time;
-	}*/	
-	
 	public Timer()
 	{
 		reset();
 	}
 
+	// Thread
 	public void run()
 	{
 		while (true)
@@ -33,6 +31,7 @@ public class Timer extends Observable implements Runnable
 		}
 	}
 
+	// Reset timer
 	public void reset()
 	{
 		time = System.currentTimeMillis();

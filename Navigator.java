@@ -278,10 +278,12 @@ public class Navigator extends Observable implements Observer
 		}
 		else if (obs instanceof SpeechModel && obj instanceof Language)
 		{
+			// Set the language
 			language = (Language)obj;
 		}
 		else if (obs instanceof WhereToFrameModel && obj instanceof String)
 		{
+			// Set the destination
 			setDest((String)obj);
 		}
 	}
@@ -311,9 +313,6 @@ public class Navigator extends Observable implements Observer
 	public void printOut()
 	{
 		// Print directions, origin and destination
-		
-		// Debug
-		//printRaw();
 
 		if (directions != null)
 		{

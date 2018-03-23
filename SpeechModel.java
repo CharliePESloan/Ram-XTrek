@@ -33,7 +33,7 @@ public class SpeechModel extends Observable implements Model
 		mainFrame = XTrek;
 	}
 
-	/* Side buttons */
+	/* Move between languages */
 	public void pressedPlus()
 	{
 		selected--;
@@ -50,7 +50,8 @@ public class SpeechModel extends Observable implements Model
 
 		setChanged(); notifyObservers(selected);
 	}
-	// Set language and read out which button was pressed
+
+	/* Set language and read out which button was pressed */
 	public void pressedSelect()
 	{
 		String text;
@@ -58,15 +59,16 @@ public class SpeechModel extends Observable implements Model
 		{
 			language = null;
 			text     = "Off";
-			mainFrame.saySomething(text);
 		} else
 		{
 			language = languages[selected-1];
 			text     = language.getName();
-			mainFrame.saySomething(text);
 		}
 		setChanged(); notifyObservers(language);
+		mainFrame.saySomething(text);
 	}
+
+	/* Go to menu or onoff modes */
 	public void pressedMenu()
 	{
 		mainFrame.setMenu(MenuEnum.MENU);
@@ -79,9 +81,11 @@ public class SpeechModel extends Observable implements Model
 
 	public void reset()
 	{
+		// Reset language to default
 		selected = DEFAULT_BUTTON;
 		language = languages[0];
 		
+		// Notify other parts of the program
 		setChanged(); notifyObservers(selected);
 		setChanged(); notifyObservers(language);
 	}

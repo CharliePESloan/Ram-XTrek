@@ -17,112 +17,118 @@ import java.awt.Graphics2D;
  */
 public class MapModel extends Observable implements Model, Observer {
 
-    MenuFrame mainFrame;
+	MenuFrame mainFrame;
 	private String latitude = "50.5039";     /*  default latitude  */
 	private String longitude  = "-3.4699";     /* default longitude */
-	
+
 	private final static String SIZE      = "558x640";     /* Size */
 	private final static String KEY       = "AIzaSyBDqXQupiOoXyFBQMu7cju5AozteVS8agU";  /* Api key */
-    private static int zoomVal = 10; 					   /* zoom Value */	
+	private static int zoomVal = 10; 					   /* zoom Value */	
 	private final static int MAXZOOM = 21;                      /* maximum zoom value */
 	private final static int MINZOOM = 2;                       /* minimum zoom value */ 
 	private int counter = 1; 					   /* incrementor */
 	private int rotation = 0; 				       /* rotation value */
 	private String maptype;						   /* map type */ 
 	private Language language = new Language ("en");  /* default language */
-	
-	 
-	byte[] mapImage; 
-	
-	BufferedImage img; 
-	
-    public MapModel(MenuFrame XTrek, SpeechModel speechModel, SatelliteModel satModel) {
-		/* 
-		* Constructor that sets up the map
-		*/
-        mainFrame = XTrek;
-		imageLoader();
-		XTrek.getWin7Ublox7().addObserver(this); 
-		satModel.addObserver(this);
-		speechModel.addObserver(this);
-	
-    }
-	
-	public void update(Observable obs, Object obj){
-		/*
-		*Method that updates the map based on location and observers the to see if the language has been changed
-		*/
-		
-		if (obj instanceof Language)
-		{ 
-			language = (Language) obj; 
-		}
-		else if (obj instanceof Coordinate)
-		{	
-			Coordinate a = (Coordinate) obj;
 
-			rotation = a.getRotation(); 
-			latitude = a.getLatStr(); 
-			longitude = a.getLonStr(); 
-			}
+ 
+	byte[] mapImage; 
+
+	BufferedImage img; 
+
+	public MapModel(MenuFrame XTrek, SpeechModel speechModel, SatelliteModel satModel)
+	{
+    		/* 
+    		* Constructor that sets up the map
+    		*/
+		mainFrame = XTrek;
+    		imageLoader();
+    		XTrek.getWin7Ublox7().addObserver(this); 
+    		satModel.addObserver(this);
+		speechModel.addObserver(this);
+	}
+    
+	public void update(Observable obs, Object obj)
+	{
+    		/*
+    		*Method that updates the map based on location and observers the to see if the language has been changed
+    		*/
+    	
+    		if (obj instanceof Language)
+    		{ 
+    			language = (Language) obj; 
+    		}
+    		else if (obj instanceof Coordinate)
+    		{	
+    			Coordinate a = (Coordinate) obj;
+
+    			rotation = a.getRotation(); 
+    			latitude = a.getLatStr(); 
+    			longitude = a.getLonStr(); 
+    		}
 		imageLoader();
 	}
-	
-	public void imageLoader () {   // Loads the map image
-		
-		try {
-		mapImage = Maps.readData(latitude, longitude, Integer.toString(zoomVal), SIZE, KEY, language.getBingCode(), maptype);
-		img = ImageIO.read(new ByteArrayInputStream(mapImage));
-		}
-        catch (Exception e){
-			System.out.println(e);
-		} 
-		setChanged(); notifyObservers (img); setChanged(); notifyObservers(rotation); 
+    
+	public void imageLoader ()
+	{   // Loads the map image
+    	
+    		try {
+    			mapImage = Maps.readData(latitude, longitude, Integer.toString(zoomVal), SIZE, KEY, language.getBingCode(), maptype);
+    			img = ImageIO.read(new ByteArrayInputStream(mapImage));
+    		}
+		catch (Exception e){
+    			System.out.println(e);
+    		} 
+		setChanged(); notifyObservers(img);
+		setChanged(); notifyObservers(rotation); 
 	}
-  
-    public void pressedPlus() {  //Zoom in method
-		zoomVal ++;  
-		if (zoomVal >= MAXZOOM){
-			zoomVal = MAXZOOM;
-			mainFrame.saySomething("maximum zoom!"); //warns user that the maximum zoom value has been reached.
+
+	public void pressedPlus() {  //Zoom in method
+	    	zoomVal ++;  
+	    	if (zoomVal >= MAXZOOM){
+	    		zoomVal = MAXZOOM;
+	    		mainFrame.saySomething("maximum zoom!"); //warns user that the maximum zoom value has been reached.
 		}
 		imageLoader(); 
-    }
-    public void pressedMinus() { //Zoom out method
-		zoomVal --; 
-		if (zoomVal <= MINZOOM){
-			zoomVal = MINZOOM; 
-			mainFrame.saySomething("minimum zoom!"); //warns user that the minimum zoom value has been reached.
-		}
+	}
+	public void pressedMinus() { //Zoom out method
+    		zoomVal --; 
+    		if (zoomVal <= MINZOOM){
+    			zoomVal = MINZOOM; 
+    			mainFrame.saySomething("minimum zoom!"); //warns user that the minimum zoom value has been reached.
+    		}
 		imageLoader();
-    }
-    public void pressedMenu() { //Returns to the menu screen
-        mainFrame.setMenu(MenuEnum.MENU);
-    }
-    public void pressedSelect() { 
-	
-	/*
-	*Select button changes the map type (extra functionality)
-	*/
+	}
+	public void pressedMenu() { //Returns to the menu screen
+		mainFrame.setMenu(MenuEnum.MENU);
+	}
+    	public void pressedSelect()
+	{
+		/*
+		*Select button changes the map type (extra functionality)
+		*/
 		counter++; 
 		switch(counter){
 			case 1: maptype = "roadmap";
-					break; 
+				break; 
 					
 			case 2: maptype = "terrain"; 
-					break; 
+				break; 
 					
 			case 3: maptype = "hybrid";
-					break; 
+				break; 
 					
 			default: counter = 1; 
-					 maptype = "roadmap";
-					 break; 		
+				 maptype = "roadmap";
+				 break; 		
 		}
 		mainFrame.saySomething(maptype);
 		imageLoader();
-    }
-	public void pressedOnOff() { //Changes the XTrek's on/off state 
+	}
+
+	public void pressedOnOff()
+	{
+		//Changes the XTrek's on/off state 
 		mainFrame.setMenu(MenuEnum.ONOFF);	
 		reset();
 	}

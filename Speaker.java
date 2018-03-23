@@ -75,6 +75,7 @@ public class Speaker implements Observer
 
 	public void update(Observable obs, Object obj)
 	{
+		// Set language
 		if (obs instanceof SpeechModel && obj instanceof Language)
 		{
 			language = (Language)obj;

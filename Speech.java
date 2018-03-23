@@ -7,6 +7,7 @@ import java.io.DataOutputStream;
  * See http://www.microsoft.com/cognitive-services/en-us/speech-api
  *
  * David Wakeling, 2018.
+ * Improvements by Charlie Sloan (2018)
  */
 public class Speech {
   final static String KEY1 = "0127b00c948440f38cd751ceee594c92";
@@ -16,9 +17,6 @@ public class Speech {
   final static String LANG   = "en-US";
   final static String GENDER = "Female";
   final static String ARTIST = "(en-GB, Susan, Apollo)";
-  // final static String ARTIST = "(en-AU, HayleyRUS)";
-  // final static String ARTIST = "(en-CA, Linda)";
-  // final static String ARTIST = "(en-US, ZiraRUS)";
   final static String OUTPUT = "output.wav";
   final static String FORMAT = "riff-16khz-16bit-mono-pcm";
 
