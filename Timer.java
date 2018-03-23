@@ -13,7 +13,7 @@ public class Timer extends Observable implements Runnable
 	
 	public Timer()
 	{
-		time = System.currentTimeMillis();
+		reset();
 	}
 
 	public void run()
@@ -31,5 +31,10 @@ public class Timer extends Observable implements Runnable
 				System.exit(1);
 			}
 		}
+	}
+
+	public void reset()
+	{
+		time = System.currentTime.Millis();
 	}
 }
