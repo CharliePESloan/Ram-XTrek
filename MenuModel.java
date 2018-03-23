@@ -68,7 +68,7 @@ public class MenuModel extends Observable implements Model {
         mainFrame.menuModel.reset();
         mainFrame.whereToModel.reset();
         mainFrame.mapModel.reset();
-        //mainFrame.tripModel.reset();
+        mainFrame.tripModel.reset();
         mainFrame.speechModel.reset();
         mainFrame.satModel.reset();
     }
