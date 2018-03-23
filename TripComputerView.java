@@ -52,9 +52,6 @@ public class TripComputerView extends JPanel implements Observer {
 		long seconds = (long) (timeValue/1000);
 		seconds -= minutes * 60;
 		
-		
-		
-		//
 		tripMT.setText(String.format("Moving time: %dM %dS",minutes,seconds));
 		}
 		else if (arg instanceof Coordinate)
