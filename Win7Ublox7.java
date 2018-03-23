@@ -29,10 +29,12 @@ public class Win7Ublox7 extends Observable implements Runnable{
 	double distance = 0.0;
 	Coordinate previousCoordinate;
 
-	//Dongle Reader starts here//
 	public Win7Ublox7(){};
 	
-	//Code inserted into run method to enable thread to run code segment
+	/*Threading, it collects data from the GPS and feeds the rest all the other modes
+	 *with the information they might require for example speed, distance or displaying 
+	 *latitude and longitude coordinates*/
+	 
 	public void run(){
 		Satellite mySat = new Satellite(){};
 		try {
@@ -63,35 +65,33 @@ public class Win7Ublox7 extends Observable implements Runnable{
 				int n;
 			
 				while ( ( n = in.read( buffer ) ) > -1 ) {
-					s = new String( buffer, 0, n );     
-					mapLatLon = mySat.getGLL(s); //updating our array to contain new value
-					//tripVelocity = new String[] {"0", "0", "0", "0", "0", "0", "9.78"};
+					s = new String( buffer, 0, n );
+					/*Get sentences to required to draw data*/
+					mapLatLon = mySat.getGLL(s);
 					tripVelocity = mySat.getVTG(s);
 					tripRotation = mySat.getGSV(s);
-					if(mapLatLon != null)
-					{
+					if(mapLatLon != null){
 						savedMapLatLon = mapLatLon;
 					}
-					if (tripRotation != null)
-					{
+					if (tripRotation != null){
 						savedTripRotation = tripRotation;
 					}
-					if (tripVelocity != null)
-					{
+					if (tripVelocity != null){
 						savedTripVelocity = tripVelocity;
 					}
-					if (savedMapLatLon == null || savedTripRotation == null || savedTripVelocity == null)
-					{
+					if (savedMapLatLon == null || savedTripRotation == null || savedTripVelocity == null){
 						continue;
 					}
 					
+					/*Making an instance of Coordinate to use by observers and 
+					 *pass through the program, take the required data under array forms*/
 					Coordinate c =
 						new Coordinate(savedMapLatLon,
 									   savedTripVelocity,
 									   savedTripRotation, distance);	
 					
-					if (previousCoordinate != null)
-					{
+					/*Distance calculator*/
+					if (previousCoordinate != null){
 						distance += c.distanceTo(previousCoordinate);
 					}	
 					
@@ -104,6 +104,7 @@ public class Win7Ublox7 extends Observable implements Runnable{
 			
 		} catch ( Exception ex ) {
 			setChanged();
+			//Information displayed if there is any issue with the dongle transmitting data
 			notifyObservers("Cannot display location");
 			ex.printStackTrace();
 			System.out.println( ex );

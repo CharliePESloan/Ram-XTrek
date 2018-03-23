@@ -43,6 +43,7 @@ public class Satellite{
 	return null;
 	}
 	
+	/*Method that returns the speed from the sentences displayed by the Satellite*/
 	public String[] getSpeedDistance(String line){
 		String[] logistics;
 		if(line.startsWith("$GPVTG")){
@@ -55,6 +56,7 @@ public class Satellite{
 	return null;
 	}
 	
+	/*Scan for sentence that contains speed*/
 	public String[] getVTG(String text){
 		String[] lines = text.split("\n");
 		String[] ifvalid;
@@ -66,6 +68,8 @@ public class Satellite{
 	return null;
 	}
 	
+	/*Method returns the Azimuth, the bearing from the Earth's 
+	 *true North, used to change the orientation of the Map*/
 	public String[] getAzimuth(String line){
 		String[] bearings;
 		if(line.startsWith("$GPGSV")){
@@ -78,6 +82,7 @@ public class Satellite{
 	return null;
 	}
 	
+	/*Scan for line that contains the bearing from the True North*/
 	public String[] getGSV(String text){
 		String[] lines = text.split("\n");
 		String[] ifvalid;

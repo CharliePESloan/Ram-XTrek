@@ -5,7 +5,6 @@
 public class Coordinate {
 	
 	final static int EARTHRADIUSKM = 6371;
-	
 	String strLat;
 	String strLon;
 	double lat = 0.0;
@@ -21,7 +20,9 @@ public class Coordinate {
 		this.lat = lat;
 		this.lon = lon;
 	}
-		
+	
+	/*Constructor which sets all the attributes for the instance to the values returned by the 
+	 *thread in Win7Ublox7, these will then be asked by observers to display values or make calculations*/
 	public Coordinate(String[] coordinates, String[] trips, String[] bearings, double distance){
 		double latitude = mapFormat(coordinates[0]) + LATITUDE_FIX;
 		if(coordinates[1].equals("S")){lat = -latitude;}
@@ -45,6 +46,8 @@ public class Coordinate {
 		coord = new double[] {lat, lon};
 	}
 
+	/*Method that returns converts the accuracy of the longitude and latitude 
+	 *whilst keeping them as strings*/
 	public String gpsData(String nmea){
 		String[] part = nmea.split("\\.");
 		String degrees;
@@ -63,6 +66,8 @@ public class Coordinate {
 		return location;
 	}
 	
+	/*Parsing the values to double to simplify use and calculations in other 
+	 *work packages for example when calculating the travelled distance or direction*/
 	public double mapFormat(String coordinate){
 		double number = Double.parseDouble(coordinate);
 		double finalValue = number/100.0;
@@ -79,6 +84,10 @@ public class Coordinate {
 		return finalValue;
 	}
 	
+	/*Credit to StackOverflow, this method calculates the distance between 
+	 *two different positions on the earth after having fed longitude and latitude.
+	 *The method takes an instance of the Coordinate object and automatically performs
+	 *the calculations*/
 	public double distanceTo(Coordinate coordinate){
 		final int	EARTHRADIUSKM = 6371;
 		
@@ -105,6 +114,8 @@ public class Coordinate {
 		return (degrees * (double)Math.PI) / 180;
 	}
 	
+	/*Methods to return class attributes set by the running thread, requested 
+	 *by Observers for further use*/ 
 	public double[] getPos(){
 		return coord;
 	}

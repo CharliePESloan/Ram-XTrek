@@ -3,7 +3,10 @@ import java.awt.event.ActionEvent;
 import java.util.*;
 import javax.swing.*;
 
-public class AboutModel extends Observable implements Model {
+/*Clyde 2018*/
+
+/*Controls the buttons on the about page*/
+public class AboutModel implements Model {
 	MenuFrame mainFrame;
 	CycleButton selected;
 	
@@ -23,7 +26,6 @@ public class AboutModel extends Observable implements Model {
 	}
 	public void pressedOnOff() {
 		mainFrame.setMenu(MenuEnum.ONOFF);
-		reset();
 	}
 	public void reset() {
 	}
